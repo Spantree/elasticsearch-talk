@@ -23,6 +23,7 @@
     "wikipedia_id": "Powers of Ten",
     "wikipedia_numeric_id": 2494557,
     "url": "http://en.wikipedia.org/wiki/Powers_of_Ten",
+    "id": "powers_of_ten",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "extended_properties": {
         "work.runtime": "9.0"

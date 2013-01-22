@@ -30,6 +30,7 @@
     "wikipedia_id": "WBBM-TV",
     "wikipedia_numeric_id": 4214328,
     "url": "http://en.wikipedia.org/wiki/WBBM-TV",
+    "id": "wbbm_tv",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "7d6485638a90a1648daf4e203a7f80cf",
     "relations": [

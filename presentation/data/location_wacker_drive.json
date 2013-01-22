@@ -11,6 +11,7 @@
     "wikipedia_id": "Wacker Drive",
     "wikipedia_numeric_id": 1536012,
     "url": "http://en.wikipedia.org/wiki/Wacker_Drive",
+    "id": "wacker_drive",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "extended_properties": {
         "infrastructure.length": "3.5405568"

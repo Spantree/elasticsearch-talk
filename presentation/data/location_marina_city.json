@@ -22,6 +22,7 @@
     "wikipedia_id": "Marina City",
     "wikipedia_numeric_id": 2243051,
     "url": "http://en.wikipedia.org/wiki/Marina_City",
+    "id": "marina_city",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "25cac420a8529d6009dd8c810e9b0457",
     "description": "Marina City is a mixed-use residential/commercial building complex occupying an entire city block on State Street in Chicago, Illinois. It lies on the north bank of the Chicago River, directly across from Chicago's Loop district.",

@@ -27,6 +27,7 @@
     "wikipedia_id": "International Amphitheatre",
     "wikipedia_numeric_id": 4700748,
     "url": "http://en.wikipedia.org/wiki/International_Amphitheatre",
+    "id": "international_amphitheatre",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "9d1def5125a084cd52d79589eccad027",
     "relations": [

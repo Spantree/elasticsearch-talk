@@ -24,6 +24,7 @@
     "wikipedia_id": "UIC Pavilion",
     "wikipedia_numeric_id": 4299189,
     "url": "http://en.wikipedia.org/wiki/UIC_Pavilion",
+    "id": "uic_pavilion",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "169ea895c19881fcca28fb97699c3421",
     "relations": [

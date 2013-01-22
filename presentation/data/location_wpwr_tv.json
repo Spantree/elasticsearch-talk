@@ -24,6 +24,7 @@
     "wikipedia_id": "WPWR-TV",
     "wikipedia_numeric_id": 2752218,
     "url": "http://en.wikipedia.org/wiki/WPWR-TV",
+    "id": "wpwr_tv",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "605009f440bb1df8a4514cf393616d53",
     "relations": [

@@ -13,6 +13,7 @@
     "wikipedia_id": "One South Dearborn",
     "wikipedia_numeric_id": 17482510,
     "url": "http://en.wikipedia.org/wiki/One_South_Dearborn",
+    "id": "one_south_dearborn",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "extended_properties": {
         "building.floor_area": "249326.0"

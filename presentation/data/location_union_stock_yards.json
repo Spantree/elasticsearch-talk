@@ -17,6 +17,7 @@
     "wikipedia_id": "Union Stock Yards",
     "wikipedia_numeric_id": 8130594,
     "url": "http://en.wikipedia.org/wiki/Union_Stock_Yards",
+    "id": "union_stock_yards",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "de8db010bebeece3ad0b7812eef85738",
     "relations": [

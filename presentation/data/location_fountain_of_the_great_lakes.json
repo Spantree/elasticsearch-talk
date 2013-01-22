@@ -16,6 +16,7 @@
     "wikipedia_id": "Fountain of the Great Lakes",
     "wikipedia_numeric_id": 11721566,
     "url": "http://en.wikipedia.org/wiki/Fountain_of_the_Great_Lakes",
+    "id": "fountain_of_the_great_lakes",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "ddf3e566975589e6c2b71894e2f9c031",
     "relations": [

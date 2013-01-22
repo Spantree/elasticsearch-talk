@@ -23,6 +23,7 @@
     "wikipedia_id": "West Side Park",
     "wikipedia_numeric_id": 7291721,
     "url": "http://en.wikipedia.org/wiki/West_Side_Park",
+    "id": "west_side_park",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
     "md5id": "4dcdd86836d5fad8291901664b78ee73",
     "relations": [

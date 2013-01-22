@@ -1,0 +1,34 @@
+{
+    "geo_geometry_type": "Point",
+    "keywords": [
+        "map",
+        "companies",
+        "united",
+        "states",
+        "gis",
+        "based",
+        "chicago,illinois"
+    ],
+    "external_links": [
+        "http://rdf.freebase.com/ns/m/09pmmc"
+    ],
+    "about": "Navteq is a Chicago, Illinois-based provider of Geographic Information Systems (GIS) data and is a dominant company in providing the base electronic navigable maps. The company is a wholly-owned subsidiary of Nokia but operates independently.",
+    "wikipedia_id": "Navteq",
+    "wikipedia_numeric_id": 6825810,
+    "url": "http://en.wikipedia.org/wiki/Navteq",
+    "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "md5id": "a5bf62be92d528433b4aa5f2ca1a7477",
+    "relations": [
+        {
+            "to": "wikipedia_id:United_States",
+            "rel": "geo_related"
+        }
+    ],
+    "description": "Navteq is a Chicago, Illinois-based provider of Geographic Information Systems (GIS) data and is a dominant company in providing the base electronic navigable maps. The company is a wholly owned subsidiary of Nokia but operates independently.",
+    "name": "Navteq",
+    "_domain_id": 6825810,
+    "coordinates": [
+        -87.63919,
+        41.88442
+    ]
+}

@@ -9,7 +9,7 @@ Vagrant::Config.run do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "elasticsearch-talk"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  config.vm.network :hostonly, "192.168.50.100"
+  config.vm.network :hostonly, "192.168.80.100"
   config.vm.customize ["modifyvm", :id, "--memory", 1536]
 
   config.vm.provision :puppet do |puppet|

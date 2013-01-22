@@ -16,8 +16,8 @@
     "wikipedia_id": "Navteq",
     "wikipedia_numeric_id": 6825810,
     "url": "http://en.wikipedia.org/wiki/Navteq",
-    "id": "navteq",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "navteq",
     "md5id": "a5bf62be92d528433b4aa5f2ca1a7477",
     "relations": [
         {

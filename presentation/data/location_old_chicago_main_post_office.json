@@ -16,8 +16,8 @@
     "wikipedia_id": "Old Chicago Main Post Office",
     "wikipedia_numeric_id": 10880268,
     "url": "http://en.wikipedia.org/wiki/Old_Chicago_Main_Post_Office",
-    "id": "old_chicago_main_post_office",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "old_chicago_main_post_office",
     "md5id": "e831cc03e3053228165b1e43362ab59a",
     "relations": [
         {

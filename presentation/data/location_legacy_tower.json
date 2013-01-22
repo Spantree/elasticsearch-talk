@@ -16,8 +16,8 @@
     "wikipedia_id": "Legacy Tower",
     "wikipedia_numeric_id": 9737168,
     "url": "http://en.wikipedia.org/wiki/Legacy_Tower",
-    "id": "legacy_tower",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "legacy_tower",
     "md5id": "135ecb5531f9eb096d35471212700fe9",
     "relations": [
         {

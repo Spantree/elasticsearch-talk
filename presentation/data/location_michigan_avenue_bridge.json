@@ -17,8 +17,8 @@
     "wikipedia_id": "Michigan Avenue Bridge",
     "wikipedia_numeric_id": 10078064,
     "url": "http://en.wikipedia.org/wiki/Michigan_Avenue_Bridge",
-    "id": "michigan_avenue_bridge",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "michigan_avenue_bridge",
     "extended_properties": {
         "infrastructure.length": "0.1216152"
     },

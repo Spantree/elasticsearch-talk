@@ -43,8 +43,8 @@
     "wikipedia_id": "Soldier Field",
     "wikipedia_numeric_id": 916599,
     "url": "http://en.wikipedia.org/wiki/Soldier_Field",
-    "id": "soldier_field",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "soldier_field",
     "md5id": "3b0e8b008f029fce5bd990ba832b92af",
     "relations": [
         {

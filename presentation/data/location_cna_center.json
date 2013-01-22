@@ -13,8 +13,8 @@
     "wikipedia_id": "CNA Center",
     "wikipedia_numeric_id": 8960512,
     "url": "http://en.wikipedia.org/wiki/CNA_Center",
-    "id": "cna_center",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "cna_center",
     "md5id": "e47a359cb43e8c7cbf52f687655c050a",
     "relations": [
         {

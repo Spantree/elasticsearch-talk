@@ -22,11 +22,11 @@ json.results.each { location ->
 	String slug = location.wikipedia_id.replaceAll(/\W+/, '_').toLowerCase()
 	// construct a filename using the slug
 	String filename = "location_${slug}.json"
-	location.id = slug
+	location._id = slug
 	// write the location json file to the calculated filename
 	def docBuilder = new JsonBuilder(location)
 	new File(filename) << docBuilder.toPrettyString()
-	
+
 	def commandBuilder = new JsonBuilder([index: [_id: slug]])
 	
 	bulkFile << commandBuilder.toString() << '\n'

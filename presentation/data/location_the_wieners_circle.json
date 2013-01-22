@@ -13,8 +13,8 @@
     "wikipedia_id": "The Wieners Circle",
     "wikipedia_numeric_id": 18451572,
     "url": "http://en.wikipedia.org/wiki/The_Wieners_Circle",
-    "id": "the_wieners_circle",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "the_wieners_circle",
     "md5id": "aa81909567c5c9587b9006108407bbe4",
     "relations": [
         {

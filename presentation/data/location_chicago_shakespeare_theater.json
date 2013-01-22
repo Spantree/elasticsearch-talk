@@ -14,8 +14,8 @@
     "wikipedia_id": "Chicago Shakespeare Theater",
     "wikipedia_numeric_id": 12575422,
     "url": "http://en.wikipedia.org/wiki/Chicago_Shakespeare_Theater",
-    "id": "chicago_shakespeare_theater",
     "_type": "encyclopedic.wikipedia.wikipedia_article",
+    "_id": "chicago_shakespeare_theater",
     "md5id": "3bbb15ec14c9ec83e584f5a018d007bf",
     "relations": [
         {

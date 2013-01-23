@@ -17,19 +17,21 @@ Chicago, IL 60607
 
 Buzz #9 at the door and take the elevator to the third floor.
 
-## Instructions for setting up this sample project
+### Instructions for setting up this sample project
 
 We ask that you run these before you stop by on Thursday since you'll need to download stuff
 and we don't want to crush our office bandwidth.  The project itself will likely evolve up until
 the time of the presentation, but the virtual machine stuff shouldn't change too much.
 
-### Tools You'll Need
+#### Tools You'll Need
+
+Install the following tools to bootstrap your environment
 
 * Install [Git](https://help.github.com/articles/set-up-git)
 * Install [VirtualBox](https://www.virtualbox.org/)
 * Install [Vagrant](http://www.vagrantup.com/)
 
-### Clone this repository
+#### Clone this repository
 
 * From the command line, clone this repository with:
 
@@ -37,7 +39,7 @@ the time of the presentation, but the virtual machine stuff shouldn't change too
 git clone --recursive git@github.com:Spantree/elasticsearch-talk.git
 ```
 
-### Set up your vagrant instance
+#### Set up your vagrant instance
 
 Then initialize your vagrant instance with:
 
@@ -49,7 +51,7 @@ vagrant up
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
 and install all the tools extra tools you'll need to play along.
 
-### Dance!
+#### Dance!
 
 That's it.  That's all there is to it!  You should now be able to access elasticsearch on your machine at
 `http://localhost:9200`.

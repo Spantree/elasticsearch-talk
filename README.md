@@ -33,7 +33,7 @@ Install the following tools to bootstrap your environment
 
 #### Clone this repository
 
-* From the command line, clone this repository with:
+From the command line, clone this repository with:
 
 ```bash
 git clone --recursive git@github.com:Spantree/elasticsearch-talk.git

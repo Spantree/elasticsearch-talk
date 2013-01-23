@@ -11,11 +11,11 @@ Thursday January 24, 2013 at 7:00PM
 
 ### Where
 
-Spantree Technology Group, LLC
-
-813 W Randolph St, Suite 301
-
+Spantree Technology Group, LLC  
+813 W Randolph St, Suite 301  
 Chicago, IL 60607
+
+We're the office building with the red hallway directly right of the entrance to Girl & The Goat.
 
 Buzz #9 at the door and take the elevator to the third floor.
 

@@ -36,6 +36,10 @@ http://howdoesvagrantwork.com/
 
 ### Wikipedia Location Searcher
 
+#### Infochimps
+
+> Show Screenshot of Data Extract
+
 #### Document Structure
 
 ```javascript
@@ -122,13 +126,11 @@ curl -XPUT 'http://192.168.50.100:9200/wikipedia/location/_bulk' --data-binary '
 {
   "query": {
     "bool": {
-      "must": [
-        {
-          "query_string": {
-            "query": "college"
-          }
+      "must": [{
+        "query_string": {
+          "query": "college"
         }
-      ]
+      }]
     }
   }
 }
@@ -139,13 +141,11 @@ curl -XPUT 'http://192.168.50.100:9200/wikipedia/location/_bulk' --data-binary '
 {
   "query": {
     "bool": {
-      "must": [
-        {
-          "query_string": {
-            "query": "lake shore"
-          }
+      "must": [{
+        "query_string": {
+          "query": "lake shore"
         }
-      ]
+      }]
     }
   }
 }
@@ -157,14 +157,12 @@ curl -XPUT 'http://192.168.50.100:9200/wikipedia/location/_bulk' --data-binary '
 {
   "query": {
     "bool": {
-      "must": [
-        {
-          "query_string": {
-            "query": "lake shore",
-            "minimum_should_match": "100%"
-          }
+      "must": [{
+        "query_string": {
+          "query": "lake shore",
+          "minimum_should_match": "100%"
         }
-      ]
+      }]
     }
   }
 }
@@ -237,8 +235,7 @@ curl -XPUT 'http://192.168.50.100:9200/wikipedia/location/_bulk' --data-binary '
       "must": [
         {
           "query_string": {
-            "fields": ["name^2", "keywords^1.5", "description", "about"],
-            "query": "theater OR theatre"
+            "query": "chicago"
           }
         }
       ]
@@ -262,13 +259,11 @@ curl -XPUT 'http://192.168.50.100:9200/wikipedia/location/_bulk' --data-binary '
 {
   "query": {
     "bool": {
-      "must": [
-        {
-          "query_string": {
-            "query": "chicago"
-          }
-        }
-      ]
+      "must": [{
+        "query_string": {
+	      "query": "chicago"
+	    }
+	  }]
     }
   },
   "size": 10

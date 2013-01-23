@@ -15,5 +15,7 @@ node default {
 	class { "java": }
 
 	# Middleware
-	class { "elasticsearch": }
+	class { "elasticsearch": 
+		version => "0.20.2"
+	}
 }

@@ -19,7 +19,7 @@ Buzz #9 at the door and take the elevator to the third floor.
 
 ### Instructions for setting up this sample project
 
-We ask that you run these before you stop by on Thursday since you'll need to download stuff
+We ask that you walk through these steps before you stop by on Thursday since you'll need to download stuff
 and we don't want to crush our office bandwidth.  The project itself will likely evolve up until
 the time of the presentation, but the virtual machine stuff shouldn't change too much.
 

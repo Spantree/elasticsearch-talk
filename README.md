@@ -45,8 +45,8 @@ cd elasticsearch-talk
 vagrant up
 ```
 
-This will download a base Ubuntu Lucid installation image, set it up as a VirtualBox VM,
-and install all the tools you'll need to play along.
+This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
+and install all the tools extra tools you'll need to play along.
 
 ### Dance!
 

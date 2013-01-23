@@ -63,7 +63,7 @@ and install all the tools extra tools you'll need to play along.
 
 #### Dance!
 
-That's it.  That's all there is to it
+That's it.  That's all there is to it.
 
 You should now be able to access elasticsearch on your machine from a web browser at `http://192.168.80.100:9200`:
 

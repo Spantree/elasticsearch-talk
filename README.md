@@ -41,6 +41,11 @@ From the command line, clone this repository with:
 git clone --recursive git@github.com:Spantree/elasticsearch-talk.git
 ```
 
+![src vagrant precise64_ _elasticsearch-talk bash IR_Black 238 55 1](https://f.cloud.github.com/assets/530343/91372/a8ba382e-659c-11e2-924e-1dec8536f9ad.png)
+
+If you're new to git and run into trouble with this step, it might be due to missing 
+[github keys](https://help.github.com/articles/generating-ssh-keys).
+
 #### Set up your vagrant instance
 
 Then initialize your vagrant instance with:
@@ -50,12 +55,24 @@ cd elasticsearch-talk
 vagrant up
 ```
 
+![elasticsearch-talk vagrant precise64_ _elasticsearch-talk bash IR_Black 212 52 1](https://f.cloud.github.com/assets/530343/91359/57051f12-659c-11e2-8a32-eca2d597691e.png)
+
+
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
 and install all the tools extra tools you'll need to play along.
 
 #### Dance!
 
-That's it.  That's all there is to it!  You should now be able to access elasticsearch on your machine at
-`http://localhost:9200`.
+That's it.  That's all there is to it
+
+You should now be able to access elasticsearch on your machine from a web browser at `http://localhost:9200`:
+
+![192 168 80 100_9200](https://f.cloud.github.com/assets/530343/91341/8be1b6b0-659b-11e2-8785-48713160a396.png)
+
+You should also be able to ssh into your virtual machine using the `vagrant ssh` command:
+
+![elasticsearch-talk vagrant precise64_ ssh IR_Black 238 55 1-1](https://f.cloud.github.com/assets/530343/91387/08a27828-659d-11e2-81bc-ea9facd46221.png)
+
+#### Show us some love
 
 Email info@spantree.net if you run into issues.  We'd be happy to help.

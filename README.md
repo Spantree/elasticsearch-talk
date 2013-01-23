@@ -12,7 +12,9 @@ Thursday January 24, 2013 at 7:00PM
 ### Where
 
 Spantree Technology Group, LLC
+
 813 W Randolph St, Suite 301
+
 Chicago, IL 60607
 
 Buzz #9 at the door and take the elevator to the third floor.

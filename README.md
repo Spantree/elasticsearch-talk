@@ -24,7 +24,7 @@ the time of the presentation, but the virtual machine stuff shouldn't change too
 
 ### Tools You'll Need
 
-* [Install Git](https://help.github.com/articles/set-up-git)
+* Install [Git](https://help.github.com/articles/set-up-git)
 * Install [VirtualBox](https://www.virtualbox.org/)
 * Install [Vagrant](http://www.vagrantup.com/)
 

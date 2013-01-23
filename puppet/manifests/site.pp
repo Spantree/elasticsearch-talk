@@ -9,11 +9,14 @@ node default {
 	class { "curl": stage => "first" }
 
 	# Virtual Machines
-	class { "java": stage => "first" }
+	class { "java": }
 
 	# Runtimes
-	class { "groovy": }
+	class { "groovy": stage => "last" }
 
 	# Hotness
-	class { "elasticsearch": version => "0.20.2" }
+	class { "elasticsearch":
+		version => "0.20.2",
+		stage => "last"
+	}
 }

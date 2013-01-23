@@ -65,9 +65,9 @@ and install all the tools extra tools you'll need to play along.
 
 That's it.  That's all there is to it.
 
-You should now be able to access elasticsearch on your machine from a web browser at `http://192.168.80.100:9200`:
+You should now be able to access elasticsearch on your machine from a web browser at `http://localhost:9200`:
 
-![192 168 80 100_9200](https://f.cloud.github.com/assets/530343/91341/8be1b6b0-659b-11e2-8785-48713160a396.png)
+![localhost_9200-1](https://f.cloud.github.com/assets/530343/91846/5535201a-65b0-11e2-9661-05801d1d4bbd.png)
 
 You should also be able to ssh into your virtual machine using the `vagrant ssh` command:
 

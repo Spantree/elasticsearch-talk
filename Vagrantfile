@@ -31,5 +31,5 @@ Vagrant::Config.run do |config|
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
   config.vm.share_folder "scripts", "/home/vagrant/scripts", "./scripts"
-  config.vm.share_folder "docs", "/home/vagrant/docs", "./docs"
+  config.vm.share_folder "data", "/home/vagrant/data", "./data"
 end

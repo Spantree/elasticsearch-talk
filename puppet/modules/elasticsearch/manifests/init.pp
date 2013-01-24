@@ -65,4 +65,9 @@ class elasticsearch(
 		command => "/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk",
 		require => Service["elasticsearch"]
 	}
+
+	exec { "install-skywalker-plugin":
+		command => "/usr/share/elasticsearch/bin/plugin -install jprante/elasticsearch-skywalker/1.1.0",
+		require => Service["elasticsearch"]
+	}
 }

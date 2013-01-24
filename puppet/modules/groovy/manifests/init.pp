@@ -1,5 +1,5 @@
 class groovy {
-        package { "groovy":
-                ensure => latest;
-        }
+	package { "groovy":
+		ensure => latest;
+	}
 }

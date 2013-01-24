@@ -1,0 +1,126 @@
+#!/usr/bin/env groovy
+
+@Grab('org.jyaml:jyaml:1.3')
+@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.6')
+
+import org.ho.yaml.Yaml
+import groovy.transform.ToString
+import jline.ConsoleReader
+import jline.ArgumentCompletor
+import jline.SimpleCompletor
+import jline.ANSIBuffer.ANSICodes
+
+@ToString(includeNames=true, includeFields=true)
+class Request {
+	String id
+	String longId
+	String title
+	String description
+	String method = "POST"
+	String url
+	URI uri
+	boolean useCursor = false
+	boolean deleteFirst = false
+
+	void setUrl(String url) {
+		this.@url = url
+		uri = new URI(url)
+	}
+
+	String withColor(String str, int colorCode) {
+		"${ANSICodes.attrib(colorCode)}${str}${ANSICodes.attrib(0)}"
+	}
+
+	String getHeading(int padChars) {
+		StringBuffer sb = new StringBuffer()
+		sb.append withColor("Executing Request: ${title}\n${'-'*padChars}\n", 34)
+		if(description) {
+			sb.append withColor("${description}\n\n", 36)
+		}
+		sb.append "HTTP ${method.toUpperCase()} ${uri}"
+	}
+}
+
+def userHome = System.getProperty('user.home')
+def requestDir = new File("${userHome}/requests")
+def cli = new CliBuilder(usage: 'start')
+def opts = cli.parse(args)
+def console = new ConsoleReader(defaultPrompt: 'elasticsearch> ')
+int padChars = 35
+
+
+String line = null
+
+def requests = [:]
+
+def completor = new SimpleCompletor()
+['list', 'exit', 'help'].each { cmd ->
+	completor.addCandidateString(cmd)
+}
+
+requestDir.eachFileMatch(~/.*\.yaml$/) { File yaml ->
+	Request request = Yaml.loadType(yaml, Request)
+	request.id = yaml.name.replaceAll(/-.*/, '')
+	request.longId = yaml.name.replaceAll(/\.yaml/, '')
+	requests[request.longId] = request
+	completor.addCandidateString(request.longId)
+}
+
+console.addCompletor(completor)
+
+def printlnWithAttr = { String message, int attr ->
+	print ANSICodes.attrib(attr)
+	println message
+	print ANSICodes.attrib(0)
+}
+
+def listRequests = {
+	printlnWithAttr "\nAvailable requests\n${'-'*padChars*2}", 34
+	requests.each { String id, Request r ->
+		println "${id.padRight(padChars)}${r.title}"
+	}
+	println ''
+}
+
+def help = {
+	printlnWithAttr "\nAvailable commands\n${'-'*padChars*2}", 34
+	println "${'help'.padRight(padChars)}View this message"
+	println "${'list'.padRight(padChars)}List available elasticsearch requests"
+	println "${'exit'.padRight(padChars)}Exit this REPL"
+	println ''
+	requests.each { String id, Request r ->
+		println "${id.padRight(padChars)}Perform Request: ${r.title}"
+	}
+	println ''
+}
+
+def doRequest = { String id ->
+	Request r = requests[id]
+	println ''
+	println r.getHeading(padChars)
+	println ''
+}
+
+println "Welcome to the Spantree Elasticsearch REPL!\n"
+while ((line = console.readLine().trim()) != null) {
+	switch(line) {
+		case 'exit':
+			System.exit(0)
+			break
+
+		case 'help':
+			help()
+			break
+
+		case 'list':
+			listRequests()
+			break
+
+		default:
+			if(requests[line]) {
+				doRequest(line)
+			} else {
+				printlnWithAttr "\nSorry, I didn't understand.  Type 'help' for help.\n", 35
+			}
+	}
+}

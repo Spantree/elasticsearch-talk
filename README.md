@@ -100,7 +100,7 @@ This will close the VM.
 #### Remove the virtual machine from disk
 
 If you want to conserve disk space, you can get rid of the disk images at `~/.vagrant.d` 
-and `~/VirtualBox VMs:
+and `~/VirtualBox VMs`:
 
 ![elasticsearch-talk](https://f.cloud.github.com/assets/530343/92637/39ba1012-65e6-11e2-873f-3e756b54cd70.png)
 

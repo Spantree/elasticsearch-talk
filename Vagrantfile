@@ -32,4 +32,5 @@ Vagrant::Config.run do |config|
   # folder, and the third is the path on the host to the actual folder.
   config.vm.share_folder "scripts", "/home/vagrant/scripts", "./scripts"
   config.vm.share_folder "data", "/home/vagrant/data", "./data"
+  config.vm.share_folder "requests", "/home/vagrant/requests", "./requests"
 end

@@ -72,16 +72,45 @@ You should also be able to ssh into your virtual machine using the `vagrant ssh`
 
 ![elasticsearch-talk vagrant precise64_ ssh IR_Black 238 55 1-1](https://f.cloud.github.com/assets/530343/91387/08a27828-659d-11e2-81bc-ea9facd46221.png)
 
-#### Show us some love
-
-Email info@spantree.net if you run into issues.  We'd be happy to help.
-
-### Updating to your vagrant configuration
+#### Stay to-to-date
 
 As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have 
 the latest changes by doing the following from your host terminal:
 
 ```
-git pull origin master
+git pull
 vagrant reload
 ```
+
+![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2](https://f.cloud.github.com/assets/530343/92644/d63de4a4-65e6-11e2-8c68-22d4db4ecf9c.png)
+
+
+#### Shut down vagrant
+
+When you're all done elasticsearching, you can gracefull shut down your vagrant instance by running:
+
+```
+vagrant halt
+```
+
+![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2-1](https://f.cloud.github.com/assets/530343/92646/fa12d092-65e6-11e2-9391-ffd039939874.png)
+
+This will close the VM.
+
+#### Remove the virtual machine from disk
+
+If you want to conserve disk space, you can get rid of the disk images at `~/.vagrant.d` 
+and `~/VirtualBox VMs:
+
+![elasticsearch-talk](https://f.cloud.github.com/assets/530343/92637/39ba1012-65e6-11e2-873f-3e756b54cd70.png)
+
+![elasticsearch-talk_1358999479](https://f.cloud.github.com/assets/530343/92638/4fdf39e4-65e6-11e2-81bd-9d281d9fa412.png)
+
+This repo will here for you should you need it again.
+
+#### Show us some love
+
+Email info@spantree.net if you run into issues.  We'd be happy to help.
+
+
+

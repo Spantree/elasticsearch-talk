@@ -113,7 +113,7 @@ done
 ### Push all location documents in bulk
 
 ```bash
-curl -XPUT 'http://192.168.50.100:9200/wikipedia/location/_bulk' --data-binary '@elasticsearch-talk/presentation/data/bulk.json'
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_bulk' --data-binary '@elasticsearch-talk/presentation/data/bulk.json'
 ```
 
 ### Querying
@@ -418,7 +418,7 @@ curl -XGET 'http://localhost:9200/wikipedia/location/_search/scroll?scroll=5m&sc
       ]
     }
   },
-  "sort": ["_name"],
+  "sort": [{"name":"desc"}],
   "size": 100
 }
 ```
@@ -458,36 +458,257 @@ curl -XGET 'http://localhost:9200/wikipedia/location/_search/scroll?scroll=5m&sc
 
 > DOH!
 
-### Mapping
+#### Mapping fields
 
-#### Mapping keyword fields
-
-* Dates types/formats
-* Store/No Store
-* Secondary fields
-	* Facet keyword fields
-	* EgdeNGrams
-
-
-
-
-
-#### Facet
-
-* Keywords
+* Types
+  * string, integer/long, float, double, boolean, null
+  * Array
+  * JSON Object
+  * geo_point, geo_shape
+  * Nested
+    * Nested docs that can be searched individually and easily joined to parent document
+  * Attachment - base64 type
+* Secondary fields (include_in_all: false)
+* Analyzers per field
+* Mapping changes try to be made automatically, but may require reindex 
 
 
+#### Defining a geo_point mapping
 
-* Distance
+* geo_point mapping can parse several different formats (array of two doubles here)
+* We'll just delete and reinsert our data...
 
-#### Range Filters
+```bash 
+curl -XDELETE 'http://192.168.80.100:9200/wikipedia/' 
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/' 
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_mapping' -d '{
+  "location" : {
+        "properties" : {
+            "coordinates" : {"type" : "geo_point"}
+        }
+    }
+}'
 
-* Distance
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_bulk' --data-binary '@elasticsearch-talk/presentation/data/bulk.json'
+```
+* Now we can run our distance query!
 
-### Updating/Versioning
+#### Defining a 'not analyzed' field
 
-* Partial updates
-* Go back in time
+```
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_mapping' -d '{
+  "location" : {
+        "properties" : {
+            "name" : {
+              "type" : "multi_field",
+              "fields" : {
+                "name":{"type":"string", "index":"analyzed"},
+                "name_not_analyzed":{"type":"string", "index":"not_analyzed"}
+              }
+            }
+        }
+    }
+}
+```
+
+### Running a sorted query against it
+
+```javascript
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "chicago"
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "name_not_analyzed": "asc"
+    }
+  ],
+  "size": 100
+}
+
+```
+
+#### Facets (Terms)
+
+```javascript
+{
+  "query": {
+    "query_string": {
+      "query": "college*"
+    }
+  },
+  "facets": {
+    "tags": {
+      "terms": {
+        "field": "name"
+      }
+    }
+  }
+}
+```
+
+#### Facets (Distance)
+```javascript
+{
+  "query": {
+    "match_all": {}
+  },
+  "facets": {
+    "geo1": {
+      "geo_distance": {
+        "coordinates": [
+          41.884445,
+          -87.647901
+        ],
+        "ranges": [
+          {
+            "from": 14800,
+            "to": 14810
+          },
+          {
+            "from": 14810,
+            "to": 14820
+          },
+          {
+            "from": 14820,
+            "to": 14830
+          },
+          {
+            "from": 14830
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Filter (Distance and Query)
+
+```javascript
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "match_all": {}
+      },
+      "filter": {
+        "and": [
+          {
+            "query": {
+              "query_string": {
+                "query": "college OR school"
+              }
+            }
+          },
+          {
+            "geo_distance": {
+              "distance": "1495km",
+              "coordinates": {
+                "lat": 40,
+                "lon": -70
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+### Analysis (defining an analyzer)
+
+* Analyzers can be defined dynamically or via the configuration yaml
+
+```bash
+curl -XDELETE 'http://192.168.80.100:9200/wikipedia/'
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/' -d'{
+  "index": {
+      "analysis": {
+        "analyzer": {
+          "lower_keyword": {
+            "type": "custom",
+            "filter": "lowercase",
+            "tokenizer": "keyword"
+          }
+        }
+      }
+    }
+  }
+}'
+```
+
+### Analysis (specifying an analyzer in the mapping)
+* Re-map everything
+* Define a "name_lower" field that we can sort on
+
+```bash
+curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_mapping' -d'{
+    "location": {
+      "properties": {
+        "coordinates": {
+          "type": "geo_point"
+        },
+        "name": {
+          "type": "multi_field",
+          "fields": {
+            "name": {
+              "type": "string",
+              "index": "analyzed"
+            },
+            "name_lower": {
+              "type": "string",
+              "index_analyzer": "lower_keyword",
+              "search_analyzer": "standard"
+            },
+            "name_not_analyzed": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          }
+        }
+      }
+    }
+  
+}'
+```
+
+### Analysis (Using the field for sorting)
+
+```javascript
+{
+  "fields": [
+    "name"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "chicago"
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "name_lower": "desc"
+    }
+  ],
+  "size": 100
+}
+```
+
 
 ### Multi-Tenant
 
@@ -495,15 +716,6 @@ curl -XGET 'http://localhost:9200/wikipedia/location/_search/scroll?scroll=5m&sc
 * Search across them
 
 
-
-### Analysis
-
-* Keyword tokenizers
-* EgdeNGrams
-* Synonym filters
-* Regex replacement
-
-#### Modify Mapping
 
 ### Scaling
 

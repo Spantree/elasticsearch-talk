@@ -39,6 +39,8 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+
+				<!--INTRODUCTION-->
 				<section  data-markdown>
 					<script type="text/template">
 					Hey guys!
@@ -57,16 +59,436 @@
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						## SPANTREE!
+						## Cool stuff
 
-						Elasticsearch presentation!
-
-						```Groovy
-							10.times{
-								println "Hello world"
-							}
-						```
+						* RESTful interface
+						* Uses JSON
+						* Based on Lucene
+						* Wicked fast
+						* Wicked configurable
+						* Wicked scalable
+						* Open Source
 					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						## Not so cool stuff
+
+						* Documentation a "work in progress"
+						* No field collapsing (yet)
+						* Nested facets not (yet) supported
+						* No built-in spellchecker
+					</script>
+				</section>
+
+				<!--SET UP-->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# Demo time!
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## What we will need
+
+							* VirtualBox
+							* Vagrant 
+								* ["How does vagrant work?"](http://howdoesvagrantwork.com)
+							* A text editor
+							* A web browser
+							* Curl
+							* Sacrificial offering to the search gods (optional)
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Our data
+
+							* Wikipedia articles by location data from Infochimps
+							* Looks a little like this:
+
+							```javascript
+							{
+								"url": "http://en.wikipedia.org/wiki/Frontera_Grill",
+								...
+								"keywords": ["restaurants", "chicago,illinois"],
+								"about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois..",
+								"description": "Frontera Grill is a Mexican restaurant in Chicago, Illinois...",
+								"wikipedia_id": "Frontera Grill",
+								"wikipedia_numeric_id": 7353370,
+								"name": "Frontera Grill",
+								"coordinates": [-87.630806, 41.890575],
+								"external_links": ["http://rdf.freebase.com/ns/m/06x4q7"]
+							}
+							```
+						</script>
+					</section>
+				</section>
+
+				<!--INDEXING-->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# Indexing
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Indexing a single document
+
+							```bash
+							curl -XPOST http://localhost:9200/wikipedia/locations -d '{
+							    "geo_geometry_type": "Point",
+							    "keywords": [
+							        "restaurants",
+							        "chicago,illinois"
+							    ],
+							    "external_links": [
+							        "http://rdf.freebase.com/ns/m/06x4q7"
+							    ],
+							    "about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 1994, Frontera Grill was ranked Chicago's third-best casual restaurant by the International Herald Tribune. In 2007, Frontera Grill won the James Beard Foundation's Outstanding Restaurant award, designating it the best restaurant in the U.S.",
+							    "lastUpdated": "2012-04-30T02:14:41+0000",
+							    "wikipedia_id": "Frontera Grill",
+							    "wikipedia_numeric_id": 7353370,
+							    "url": "http://en.wikipedia.org/wiki/Frontera_Grill",
+							    "_type": "encyclopedic.wikipedia.wikipedia_article",
+							    "_id": "frontera_grill",
+							    "md5id": "63709e0df3dbb92057d9d96e118f3045",
+							    "description": "Frontera Grill is a Mexican restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 2007, Frontera Grill won the James Beard Foundation's Outstanding Restaurant award, designating it the best restaurant in the U.S.",
+							    "name": "Frontera Grill",
+							    "_domain_id": 7353370,
+							    "contained_in": {
+							        "core_based_stat_areas": "16980",
+							        "combined_stat_areas": "176",
+							        "cities": "1714000",
+							        "counties": "17031",
+							        "census_tracts": "17031081700",
+							        "postal_codes": "60654",
+							        "states": "il",
+							        "sen_legislative_dist_uppers": "17003",
+							        "countries": "us"
+							    },
+							    "coordinates": [
+							        -87.630806,
+							        41.890575
+							    ]
+							}'
+							```
+
+							* Can't show much with a single document...
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## We can push them in one by one...
+
+							```bash
+							for f in elasticsearch-talk/presentation/data/location_*
+							do
+								echo "Posting ${f}"
+								curl -XPOST curl -XPOST http://localhost:9200/wikipedia/locations -d @${f}
+							done
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## ...but let's use the bulk API instead
+
+							```bash
+							curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_bulk' --data-binary '@elasticsearch-talk/presentation/data/bulk.json'
+							```
+						</script>
+					</section>
+				</section>
+
+				<!--QUERYING-->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# Querying
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Full-text
+
+							### Search for "college"
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [{
+							        "query_string": {
+							          "query": "college"
+							        }
+							      }]
+							    }
+							  }
+							}
+							```
+
+							### Search for "lake shore" (strict)
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [{
+							        "query_string": {
+							          "query": "lake shore",
+							          "minimum_should_match": "100%"
+							        }
+							      }]
+							    }
+							  }
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## More full-text
+
+							### Search for "theater" (boost name and keywords)
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "fields": ["name^2", "keywords^1.5", "description", "about"],
+							            "query": "theater",
+							            "minimum_should_match": "100%"
+							          }
+							        }
+							      ]
+							    }
+							  }
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Even more full-text
+
+							### Search for "theater" (boolean query string)
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "fields": ["name^2", "keywords^1.5", "description", "about"],
+							            "query": "theater OR theatre"
+							          }
+							        }
+							      ]
+							    }
+							  }
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Highlighting
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "query": "chicago"
+							          }
+							        }
+							      ]
+							    }
+							  },
+							  "highlight": {
+							  	"fields": {
+							  		"name": {},
+							  		"description": {}
+							  	}
+							  }
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Size
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "query": "chicago"
+							          }
+							        }
+							      ]
+							    }
+							  },
+							  "size": 50
+							}
+							```
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## From
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "query": "chicago"
+							          }
+							        }
+							      ]
+							    }
+							  },
+							  "size": 50,
+							  "from": 10
+							}
+							```
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Scrolling
+
+							```bash
+							curl -XGET 'http://localhost:9200/wikipedia/location/_search?scroll=5m' -d ...
+							```
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "query": "chicago"
+							          }
+							        }
+							      ]
+							    }
+							  },
+							  "size": 10,
+							  "from": 0
+							}
+							```
+
+							```bash
+							curl -XGET 'http://localhost:9200/wikipedia/location/_search/scroll?scroll=5m&scroll_id=cXVlcnlUaGVuRmV0Y2g7NTs0MzE6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzI6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzQ6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzM6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzU6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTswOw==
+							```
+						</script>
+					</section>
+				</section>
+
+				<!--SORTING-->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# Sorting
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## By date
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [{
+							        "query_string": {"query": "chicago"}
+							      }]
+							    }
+							  },
+							  "sort": ["lastUpdated"]
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## By text
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "query": "chicago"
+							          }
+							        }
+							      ]
+							    }
+							  },
+							  "sort": [{"name":"desc"}],
+							  "size": 100
+							}
+							```
+
+							> DOH! How do we make this work?
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## By distance
+
+							```javascript
+							{
+							  "query": {
+							    "bool": {
+							      "must": [
+							        {
+							          "query_string": {
+							            "query": "chicago"
+							          }
+							        }
+							      ]
+							    }
+							  },
+							  "sort": [
+							    {
+							      "_geo_distance": {
+							        "coordinates": [
+							          41.884445,
+							          -87.647901
+							        ],
+							        "order": "asc",
+							        "unit": "mi"
+							      }
+							    }
+							  ],
+							  "size": 100
+							}
+							```
+
+							> DOH! And how do we make **this** work?
+						</script>
+					</section>
 				</section>
 			</div>
 

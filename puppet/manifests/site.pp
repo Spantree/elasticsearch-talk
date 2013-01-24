@@ -6,13 +6,14 @@ node default {
 
     # Linuxy Stuff
 	class { "aptupdate": stage => "first" }
-	class { "curl": stage => "first" }
-
-	# Virtual Machines
-	class { "java": }
 
 	# Runtimes
+	class { "java": }
 	class { "groovy": stage => "last" }
+
+	# Tools
+	class { "curl": stage => "first" }
+	class { "pygments": }
 
 	# Hotness
 	class { "elasticsearch":

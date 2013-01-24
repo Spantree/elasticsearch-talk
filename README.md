@@ -1,9 +1,8 @@
 ## ElasticSearch Talk
 
 ### Speakers
-**Cedric Hurst.** Principal & Lead Software Engineer at Spantree
-
-**Gary Turovsky.** Senior Software Engineer at Spantree & Smartypants Ph.D. Candidate at UIC
+**Cedric Hurst:** Principal & Lead Software Engineer at Spantree  
+**Gary Turovsky:** Senior Software Engineer at Spantree & Smartypants Ph.D. Candidate at UIC
 
 ### When
 
@@ -76,3 +75,13 @@ You should also be able to ssh into your virtual machine using the `vagrant ssh`
 #### Show us some love
 
 Email info@spantree.net if you run into issues.  We'd be happy to help.
+
+### Updating to your vagrant configuration
+
+As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have 
+the latest changes by doing the following from your host terminal:
+
+```
+git pull origin master
+vagrant reload
+```

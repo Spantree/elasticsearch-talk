@@ -1,8 +1,7 @@
 title: Term Facets
 method: GET
 url: http://localhost:9200/wikipedia/locations/_search
-description: |
-  Now that we're sorting 
+description: lorem ipsum
 
 {
   "fields": ["name", "about", "coordinates"],

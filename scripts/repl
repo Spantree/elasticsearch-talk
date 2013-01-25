@@ -234,27 +234,31 @@ def completor = new SimpleCompletor()
 }
 
 requestDir.eachFile { File f ->
-	StringBuffer yaml = new StringBuffer()
-	StringBuffer json = new StringBuffer()
-	boolean isItJsonYet = false
-	f.eachLine { l ->
-		if(l.startsWith('{')) {
-			isItJsonYet = true
+	try {
+		StringBuffer yaml = new StringBuffer()
+		StringBuffer json = new StringBuffer()
+		boolean isItJsonYet = false
+		f.eachLine { l ->
+			if(l.startsWith('{')) {
+				isItJsonYet = true
+			}
+			if(!isItJsonYet) {
+				yaml.append "${l}\n"
+			} else {
+				json.append "${l}\n"
+			}
 		}
-		if(!isItJsonYet) {
-			yaml.append "${l}\n"
-		} else {
-			json.append "${l}\n"
+		Request request = Yaml.loadType(yaml.toString().trim(), Request)
+		request.id = f.name.replaceAll(/-.*/, '')
+		request.longId = f.name.replaceAll(/\.yaml/, '')
+		requests[request.longId] = request
+		if(json) {
+			request.json = json
 		}
+		completor.addCandidateString(request.longId)
+	} catch(Exception e) {
+		println "${f.name} failed"
 	}
-	Request request = Yaml.loadType(yaml.toString().trim(), Request)
-	request.id = f.name.replaceAll(/-.*/, '')
-	request.longId = f.name.replaceAll(/\.yaml/, '')
-	requests[request.longId] = request
-	if(json) {
-		request.json = json
-	}
-	completor.addCandidateString(request.longId)
 }
 
 console.addCompletor(completor)

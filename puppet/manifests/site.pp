@@ -14,6 +14,7 @@ node default {
 	# Tools
 	class { "curl": stage => "first" }
 	class { "pygments": }
+	class { "elasticsearch_talk": }
 
 	# Hotness
 	class { "elasticsearch":

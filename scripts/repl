@@ -9,45 +9,220 @@ import jline.ConsoleReader
 import jline.ArgumentCompletor
 import jline.SimpleCompletor
 import jline.ANSIBuffer.ANSICodes
+import groovy.json.JsonSlurper
+import groovy.json.JsonBuilder
+import java.security.MessageDigest
 
-@ToString(includeNames=true, includeFields=true)
-class Request {
-	String id
-	String longId
-	String title
-	String description
-	String method = "POST"
-	String url
-	URI uri
-	boolean useCursor = false
-	boolean deleteFirst = false
-
-	void setUrl(String url) {
-		this.@url = url
-		uri = new URI(url)
-	}
-
-	String withColor(String str, int colorCode) {
-		"${ANSICodes.attrib(colorCode)}${str}${ANSICodes.attrib(0)}"
-	}
-
-	String getHeading(int padChars) {
-		StringBuffer sb = new StringBuffer()
-		sb.append withColor("Executing Request: ${title}\n${'-'*padChars}\n", 34)
-		if(description) {
-			sb.append withColor("${description}\n\n", 36)
-		}
-		sb.append "HTTP ${method.toUpperCase()} ${uri}"
-	}
-}
 
 def userHome = System.getProperty('user.home')
 def requestDir = new File("${userHome}/requests")
 def cli = new CliBuilder(usage: 'start')
 def opts = cli.parse(args)
 def console = new ConsoleReader(defaultPrompt: 'elasticsearch> ')
-int padChars = 35
+int padChars = 45
 
+class TempFileMaker {
+	static void withTempFile(String contents, Closure closure) {
+		if(!contents) {
+			closure.call(null)
+		} else {
+			def digest = MessageDigest.getInstance("SHA1")
+			digest.update(contents.getBytes() );
+			def hash = new BigInteger(1, digest.digest()).toString(16).padLeft( 40, '0')
+			File tmpFile = new File("${System.properties['java.io.tmpdir']}/${hash}")
+			if(!tmpFile.exists()) {
+				tmpFile.write(contents, "UTF-8")
+			}
+			closure.call(tmpFile)
+			tmpFile.deleteOnExit()
+		}
+	}
+}
+
+class JsonPrettifier {
+	static String prettify(String original) {
+		if(!original) return null
+		if(original.size() > 50000) {
+			return original
+		}
+		def obj = new JsonSlurper().parseText(original)
+		return prettify(new JsonBuilder(obj))
+	}
+
+	static String prettify(JsonBuilder builder) {
+		String jsonStr = builder.toPrettyString()
+		return highlight(jsonStr)
+	}
+
+	static String highlight(String jsonStr) {
+		if(jsonStr.size() > 10000) {
+			return jsonStr
+		}
+		String highlighted = null
+		TempFileMaker.withTempFile(jsonStr) { File tmpFile ->
+			def process = "pygmentize -l json ${tmpFile.absolutePath}".execute()
+			process.waitFor()
+			highlighted = process.in.text
+		}
+		return highlighted
+	}
+}
+
+class CurlResponse {
+	StringBuffer json = new StringBuffer()
+	StringBuffer headers = new StringBuffer()
+	String error = ''
+
+	void setOutput(String out) {
+		boolean isItJsonYet = false
+		out.eachLine { line ->
+			if(line.startsWith('{')) {
+				isItJsonYet = true
+			}
+			if(!isItJsonYet) {
+				headers.append "${line}\n"
+			} else {
+				json.append "${line}\n"
+			}
+		}
+	}
+
+	String toString() {
+		StringBuffer sb = new StringBuffer()
+		sb.append "${ANSICodes.attrib(33)}${headers.toString()}${ANSICodes.attrib(0)}"
+		sb.append JsonPrettifier.prettify(json.toString())
+		return sb.toString()
+	}
+}
+
+@ToString(includeNames=true, includeFields=true)
+class Request {
+	static String userHome = System.getProperty('user.home')
+
+	String id
+	String longId
+	String title
+	String description
+	String method = 'POST'
+	String url
+
+	URI uri
+	boolean useCursor = false
+	boolean deleteFirst = false
+
+	String doc
+	String bulk
+	String json
+
+	void setUrl(String url) {
+		this.@url = url
+		uri = new URI(url)
+	}
+
+	File getFile() {
+		File f = null
+		if(doc) {
+			f = new File("${userHome}/data/docs/${doc}")
+		} else if(bulk) {
+			f = new File("${userHome}/data/bulk/${bulk}")
+		} else {
+			f = new File("${userHome}/requests/${longId}.json")
+		}
+		return (f && f.exists() ? f : null)
+	}
+
+	String getJson() {
+		return this.@json ?: getFile()?.text ?: null
+	}
+
+	JsonBuilder getJsonBuilder() {
+		String original = getJson()
+		if(!original) return null
+		def obj = new JsonSlurper().parseText(original)
+		return new JsonBuilder(obj)
+	}
+
+	String getPrettyJson() {
+		return JsonPrettifier.highlight(getJson())
+	}
+
+	String getUglyJson() {
+		return getJsonBuilder().toString()
+	}
+
+	String withColor(String str, int colorCode) {
+		"${ANSICodes.attrib(colorCode)}${str}${ANSICodes.attrib(0)}"
+	}
+
+	static String ellipsize(String input, int maxLength) {
+		if (input == null || input.length() < maxLength) {
+			return input;
+		}
+		return input.substring(0, maxLength) + "...";
+	}
+
+	String getHeading(int padChars) {
+		StringBuffer sb = new StringBuffer()
+		sb.append withColor("Executing Request: ${title}\n${'-'*padChars*2}\n", 34)
+		if(description) {
+			sb.append withColor("${description}\n", 36)
+		}
+		sb.append "${'-'*padChars*2}\n\n"
+		sb.append withColor(curlCommand, 33)
+		if(getJson()) {
+			if(bulk) {
+				int i = 0
+				file.eachLine { line ->
+					if(i++ < 10) {
+						sb.append "\n${JsonPrettifier.prettify(line)}"
+					}
+				}
+				if(i > 10) {
+					sb.append("...\n")
+				}
+			} else {
+				sb.append "\n${prettyJson.trim()}"
+			}
+		}
+		return sb.toString()
+	}
+
+	String getCurlCommand() {
+		String cmd = null
+		String payload = bulk ? getFile().text : uglyJson
+		TempFileMaker.withTempFile(payload) { File tmpFile ->
+			StringBuffer sb = new StringBuffer()
+			sb.append "curl -v -i -X${method.toUpperCase()} ${uri}"
+			if(tmpFile) {
+				sb.append " --data-binary @${tmpFile.absolutePath}"
+			}
+			cmd = sb.toString()
+		}
+		return cmd
+	}
+
+	String getResponse() {
+		if(deleteFirst) {
+			List commands = [
+				"curl -XDELETE http://localhost:9200/wikipedia",
+				"curl -XPUT http://localhost:9200/wikipedia"
+			]
+			commands.each { String cmd ->
+				println cmd
+				println withColor(cmd, 33)
+				def subprocess = cmd.execute()
+				subprocess.waitFor()
+				def resp = new CurlResponse(output: subprocess.in.text, error: subprocess.err.text)
+				println resp.toString()
+			}
+		}
+		def process = curlCommand.execute()
+		process.waitFor()
+
+		def resp = new CurlResponse(output: process.in.text, error: process.err.text)
+		return resp.toString()
+	}
+}
 
 String line = null
 
@@ -58,11 +233,27 @@ def completor = new SimpleCompletor()
 	completor.addCandidateString(cmd)
 }
 
-requestDir.eachFileMatch(~/.*\.yaml$/) { File yaml ->
-	Request request = Yaml.loadType(yaml, Request)
-	request.id = yaml.name.replaceAll(/-.*/, '')
-	request.longId = yaml.name.replaceAll(/\.yaml/, '')
+requestDir.eachFile { File f ->
+	StringBuffer yaml = new StringBuffer()
+	StringBuffer json = new StringBuffer()
+	boolean isItJsonYet = false
+	f.eachLine { l ->
+		if(l.startsWith('{')) {
+			isItJsonYet = true
+		}
+		if(!isItJsonYet) {
+			yaml.append "${l}\n"
+		} else {
+			json.append "${l}\n"
+		}
+	}
+	Request request = Yaml.loadType(yaml.toString().trim(), Request)
+	request.id = f.name.replaceAll(/-.*/, '')
+	request.longId = f.name.replaceAll(/\.yaml/, '')
 	requests[request.longId] = request
+	if(json) {
+		request.json = json
+	}
 	completor.addCandidateString(request.longId)
 }
 
@@ -94,11 +285,25 @@ def help = {
 	println ''
 }
 
+def clear = {
+	console.flushConsole()
+	console.cursorBuffer.clearBuffer()
+	console.clearScreen()
+	console.killLine()
+}
+
 def doRequest = { String id ->
+	clear()
 	Request r = requests[id]
 	println ''
 	println r.getHeading(padChars)
-	println ''
+	println "${'-'*padChars*2}"
+	println "Press enter to continue"
+	println "${'-'*padChars*2}\n"
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
+	br.readLine()
+	clear()
+	println r.getResponse()
 }
 
 println "Welcome to the Spantree Elasticsearch REPL!\n"

@@ -1,0 +1,17 @@
+title: Term Facets
+method: GET
+url: http://localhost:9200/wikipedia/locations/_search
+description: |
+  Now that we're sorting 
+
+{
+  "fields": ["name", "about", "coordinates"],
+  "query": {
+    "bool": {
+      "must": [{
+        "query_string": {"query": "chicago"}
+      }]
+    }
+  },
+  "sort": [{"name_not_analyzed": "asc"}]
+}

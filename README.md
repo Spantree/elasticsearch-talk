@@ -84,6 +84,20 @@ vagrant reload
 
 ![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2](https://f.cloud.github.com/assets/530343/92644/d63de4a4-65e6-11e2-8c68-22d4db4ecf9c.png)
 
+#### Load the Elasticsearch REPL
+
+To work through all the interactions we show off in our talk, we create a REPL (read-evaluate-print-loop) which will 
+execute preconfigured HTTP interactions with Elasticsearch and then display their output.  To load the repl, first ssh 
+into vagrant and run:
+
+```bash
+~/es-repl
+```
+
+This REPL provides tab completion of commands along with a guided request/response walkthrough.  For a full list of 
+available commands, type `help` and hit enter. To view the list of request modules to execute, type `list` and view 
+enter.  You can run each of the commands by typing their index, hitting tab to complete the command name, and then 
+hitting enter.
 
 #### Shut down vagrant
 

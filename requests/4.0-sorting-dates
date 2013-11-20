@@ -8,9 +8,9 @@ description: |
   "fields": ["name", "lastUpdated"],
   "query": {
     "bool": {
-      "must": [{
-        "query_string": {"query": "chicago"}
-      }]
+      "must": [
+        {"query_string": {"query": "chicago"}}
+      ]
     }
   },
   "sort": ["lastUpdated"]

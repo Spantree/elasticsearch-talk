@@ -109,6 +109,7 @@ class Request {
 	URI uri
 	boolean useCursor = false
 	boolean deleteFirst = false
+	boolean closeFirst = false
 
 	String doc
 	String bulk
@@ -202,22 +203,31 @@ class Request {
 	}
 
 	String getResponse() {
+		List preCommands = []
+		List postCommands = []
 		if(deleteFirst) {
-			List commands = [
-				"curl -XDELETE http://localhost:9200/wikipedia",
-				"curl -XPUT http://localhost:9200/wikipedia"
-			]
-			commands.each { String cmd ->
-				println cmd
-				println withColor(cmd, 33)
-				def subprocess = cmd.execute()
-				subprocess.waitFor()
-				def resp = new CurlResponse(output: subprocess.in.text, error: subprocess.err.text)
-				println resp.toString()
-			}
+			preCommands << "curl -XDELETE http://localhost:9200/wikipedia"
+			preCommands << "curl -XPUT http://localhost:9200/wikipedia"
 		}
+		if(closeFirst) {
+			preCommands << "curl -XPOST http://localhost:9200/wikipedia/_close"
+			postCommands << "curl -XPOST http://localhost:9200/wikipedia/_open"
+		}
+
+		def doCommand = { String cmd ->
+			println cmd
+			println withColor(cmd, 33)
+			def subprocess = cmd.execute()
+			subprocess.waitFor()
+			def resp = new CurlResponse(output: subprocess.in.text, error: subprocess.err.text)
+			println resp.toString()
+		}
+
+		preCommands.each doCommand
 		def process = curlCommand.execute()
 		process.waitFor()
+
+		postCommands.each doCommand
 
 		def resp = new CurlResponse(output: process.in.text, error: process.err.text)
 		return resp.toString()

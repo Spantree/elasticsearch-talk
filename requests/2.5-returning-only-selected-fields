@@ -11,7 +11,7 @@ description: |
       "must": [
         {
           "query_string": {
-            "fields": ["name^2", "keywords^1.5""],
+            "fields": ["name^2", "keywords^1.5"],
             "query": "theater OR theatre"
           }
         }

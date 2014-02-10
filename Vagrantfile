@@ -17,6 +17,7 @@ Vagrant::Config.run do |config|
     puppet.module_path    = "puppet/modules"
     puppet.manifest_file  = "site.pp"
     puppet.facter = { "productname" => "Vagrant"}
+    puppet.options = ["--verbose --debug"]
   end
 
 

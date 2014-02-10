@@ -44,6 +44,8 @@ description: |
         "text_delimited": {
             "type": "custom",
             "filter": [
+                "standard",
+                "asciifolding",
                 "lowercase",
                 "text_delimiter"
             ],
@@ -95,7 +97,7 @@ description: |
         },
         "text_delimiter": {
             "type": "word_delimiter",
-            "generate_word_parts": false,
+            "generate_word_parts": true,
             "catenate_all": true,
             "preserve_original": true,
             "stem_english_possessive": true

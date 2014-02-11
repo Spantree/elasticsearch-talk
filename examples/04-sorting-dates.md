@@ -42,7 +42,7 @@ Specify a search result start/from value
 
 ```json
 {
-  fields": ["name", "about", "coordinates"],
+  "fields": ["name", "about", "coordinates"],
   "query": {
     "bool": {
       "must": [{

@@ -1,11 +1,6 @@
 class elasticsearch_talk {
-	file { "/home/vagrant/es-repl":
-		ensure => "link",
-		target => "/home/vagrant/scripts/repl"
-	}
-
-	file { "/home/vagrant/split-data":
-		ensure => "link",
-		target => "/home/vagrant/scripts/split-data"
-	}
+	exec {'Create sense scripts':
+    command => "/opt/groovy-2.2.1/bin/groovy TransformExamples.groovy",
+    cwd     => "/usr/src/elasticsearch-talk/scripts"
+  }
 }

@@ -21,4 +21,8 @@ node default {
   elasticsearch::plugin { 'elasticsearch/marvel/latest':
     module_dir => 'marvel'
   }
+
+  class {'elasticsearch_talk' :
+    require      => Class['groovy']
+  }
 }

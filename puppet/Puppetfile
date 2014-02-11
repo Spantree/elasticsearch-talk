@@ -1,0 +1,5 @@
+forge 'http://forge.puppetlabs.com'
+
+mod 'java7', :git => 'https://github.com/Spantree/puppet-java7.git'
+mod 'elasticsearch/elasticsearch', '0.2.3'
+mod 'groovy', :git => 'https://github.com/Spantree/puppet-groovy.git'

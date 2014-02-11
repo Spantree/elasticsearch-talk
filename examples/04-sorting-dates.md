@@ -4,7 +4,7 @@ Sorting documents matching "chicago" by last update time
 
 `GET /wikipedia/locations/_search`
 
-```
+```json
 {
   "fields": ["name", "lastUpdated"],
   "query": {
@@ -23,7 +23,7 @@ Sorting documents matching "chicago" by last updated time
 
 `GET /wikipedia/locations/_search`
 
-```
+```json
 {	
   "fields": ["name", "lastUpdated"],
   "query": {
@@ -40,7 +40,7 @@ Specify a search result start/form value
 
 `GET /wikipedia/locations/_search`
 
-```
+```json
 {
   fields": ["name", "about", "coordinates"],
   "query": {
@@ -60,7 +60,7 @@ Find locations matching "chicago" sorted by distance from the Spantree offices.
 
 `GET /wikipedia/locations/_search`
 
-```
+```json
 {
   "fields": ["name", "about", "coordinates"],
   "query": {

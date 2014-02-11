@@ -7,7 +7,7 @@ Elasticsearch supports 'geopoint' types for latitude and longitude values. After
 
 
 ```json
-
+{
   "location" : {
         "properties" : {
             "coordinates" : {"type" : "geo_point"}

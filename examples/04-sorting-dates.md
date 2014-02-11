@@ -36,7 +36,7 @@ Sorting documents matching "chicago" by last updated time
 ```
 ## Sorting Strings
 
-Specify a search result start/form value
+Specify a search result start/from value
 
 `GET /wikipedia/locations/_search`
 

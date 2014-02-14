@@ -47,5 +47,12 @@
 }
 ```
 
-## Find our document
+## Retrieve our document
 
+We can retrieve our document by ID with a simple GET request
+
+`GET /wikipedia/locations/frontera_grill`
+
+## Search for our document
+
+We can also search for our document using a full-text search query

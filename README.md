@@ -7,7 +7,7 @@
 
 **Kevin Greene:** Senior Software Engineer and Patent Holder 
 
-**Gary Turovsky:** Senior Software Engineer 
+**Gary Turovsky:** Senior Software Engineer and Not a Patent Holder
 
 ### When
 

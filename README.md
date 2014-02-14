@@ -56,7 +56,7 @@ vagrant plugin install vagrant-hostmanager
 vagrant up
 ```
 
-![elasticsearch-talk vagrant precise64_ _elasticsearch-talk bash IR_Black 212 52 1](https://f.cloud.github.com/assets/530343/91359/57051f12-659c-11e2-8a32-eca2d597691e.png)
+![vagrant up](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantup.png?raw=true)
 
 
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
@@ -68,11 +68,11 @@ That's it.  That's all there is to it.
 
 You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo:9200`:
 
-![localhost_9200-1](https://f.cloud.github.com/assets/530343/91846/5535201a-65b0-11e2-9661-05801d1d4bbd.png)
+![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/esbrowser.png?raw=true)
 
 You should also be able to ssh into your virtual machine using the `vagrant ssh` command:
 
-![elasticsearch-talk vagrant precise64_ ssh IR_Black 238 55 1-1](https://f.cloud.github.com/assets/530343/91387/08a27828-659d-11e2-81bc-ea9facd46221.png)
+![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantssh.png?raw=true)
 
 #### Stay up-to-date
 
@@ -84,8 +84,6 @@ git pull
 vagrant reload
 vagrant provision
 ```
-
-![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2](https://f.cloud.github.com/assets/530343/92644/d63de4a4-65e6-11e2-8c68-22d4db4ecf9c.png)
 
 #### Shut down vagrant
 

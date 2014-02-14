@@ -93,7 +93,7 @@ When you're all done elasticsearching, you can gracefull shut down your vagrant 
 vagrant halt
 ```
 
-[![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2-1](https://f.cloud.github.com/assets/530343/92646/fa12d092-65e6-11e2-9391-ffd039939874.png)]]
+![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2-1](https://f.cloud.github.com/assets/530343/92646/fa12d092-65e6-11e2-9391-ffd039939874.png)]
 
 This will close the VM.
 

@@ -32,6 +32,10 @@ Elasticsearch:
   }
 }```
 
+## What happens when you use a relational database for search?
+
+
+
 ## Relational Databases with Full Text Search
 
 * [List of relational databases with full-text search]

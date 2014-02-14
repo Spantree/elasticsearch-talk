@@ -56,7 +56,7 @@ vagrant plugin install vagrant-hostmanager
 vagrant up
 ```
 
-![elasticsearch-talk vagrant precise64_ _elasticsearch-talk bash IR_Black 212 52 1](https://f.cloud.github.com/assets/530343/91359/57051f12-659c-11e2-8a32-eca2d597691e.png)
+![vagrant up](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantup.png?raw=true)
 
 
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,

@@ -45,7 +45,7 @@ Elasticsearch provides a multi_field type, which allows you to map the same fiel
               "type" : "multi_field",
               "fields" : {
                 "name":{"type":"string", "index":"analyzed"},
-                "name_not_analyzed":{"type":"string", "index":"not_analyzed"}
+                "not_analyzed":{"type":"string", "index":"not_analyzed"}
               }
             }
         }
@@ -69,15 +69,15 @@ Sorting using our new unanalyzed field
       }]
     }
   },
-  "sort": [{"name_not_analyzed": "asc"}]
+  "sort": [{"name.not_analyzed": "asc"}]
 }
 ```
 
-##Define all Mappings
+## Define all Mappings
 
- Now, let's define all the mappings we'll use for this demo
+Now, let's define all the mappings we'll use for this demo
 
- `PUT /wikipedia_define_mappings/locations/_mapping`
+`PUT /wikipedia_define_mappings/locations/_mapping`
 
 ```
 {
@@ -89,7 +89,7 @@ Sorting using our new unanalyzed field
               "type" : "multi_field",
               "fields" : {
                 "name":{"type":"string", "index":"analyzed"},
-                "name_not_analyzed":{"type":"string", "index":"not_analyzed"}
+                "name.not_analyzed":{"type":"string", "index":"not_analyzed"}
               }
             }
         }

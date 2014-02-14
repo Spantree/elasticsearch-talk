@@ -68,11 +68,11 @@ That's it.  That's all there is to it.
 
 You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo:9200`:
 
-![localhost_9200-1](https://f.cloud.github.com/assets/530343/91846/5535201a-65b0-11e2-9661-05801d1d4bbd.png)
+![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/esbrowser.png?raw=true)
 
 You should also be able to ssh into your virtual machine using the `vagrant ssh` command:
 
-![elasticsearch-talk vagrant precise64_ ssh IR_Black 238 55 1-1](https://f.cloud.github.com/assets/530343/91387/08a27828-659d-11e2-81bc-ea9facd46221.png)
+![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantssh.png?raw=true)
 
 #### Stay up-to-date
 

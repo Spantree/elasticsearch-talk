@@ -85,8 +85,6 @@ vagrant reload
 vagrant provision
 ```
 
-![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2](https://f.cloud.github.com/assets/530343/92644/d63de4a4-65e6-11e2-8c68-22d4db4ecf9c.png)
-
 #### Shut down vagrant
 
 When you're all done elasticsearching, you can gracefull shut down your vagrant instance by running:

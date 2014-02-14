@@ -2,21 +2,20 @@
 
 ### Speakers
 **Cedric Hurst:** Principal & Lead Software Engineer at Spantree  
-**Gary Turovsky:** Senior Software Engineer at Spantree & Smartypants Ph.D. Candidate at UIC
+**Malynda Chizek Frouard** Junior Software Engineer and PhD in Astrophysics
+**Kevin Greene:** Senior Software Engineer and Patent Holder
+**Gary Turovsky:** Senior Software Engineer
+
 
 ### When
 
-Thursday January 24, 2013 at 7:00PM
+Thursday February 18th, 2014
 
 ### Where
 
 Spantree Technology Group, LLC  
-813 W Randolph St, Suite 301  
+1144 W Fulton Market, Suite 120
 Chicago, IL 60607
-
-We're the office building with the red hallway directly right of the entrance to Girl & The Goat.
-
-Buzz #9 at the door and take the elevator to the third floor.
 
 ### Instructions for setting up this sample project
 
@@ -29,8 +28,8 @@ the time of the presentation, but the virtual machine stuff shouldn't change too
 Install the following tools to bootstrap your environment
 
 * Install [Git](https://help.github.com/articles/set-up-git)
-* Install [VirtualBox](https://www.virtualbox.org/)
-* Install [Vagrant](http://www.vagrantup.com/)
+* Install [VirtualBox](https://www.virtualbox.org/) (we used version 4.3)
+* Install [Vagrant](http://www.vagrantup.com/) (we used version 1.3.5)
 
 #### Clone this repository
 
@@ -51,6 +50,7 @@ Then initialize your vagrant instance with:
 
 ```bash
 cd elasticsearch-talk
+vagrant plugin install vagrant-hostmanager
 vagrant up
 ```
 
@@ -58,13 +58,13 @@ vagrant up
 
 
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
-and install all the tools extra tools you'll need to play along.
+and install all the tools extra tools you'll need to play along.  You may be required to enter your password at some point so that hostmanager can add an entry for "esdemo.local" to your /etc/hosts file.
 
 #### Dance!
 
 That's it.  That's all there is to it.
 
-You should now be able to access elasticsearch on your machine from a web browser at `http://localhost:9200`:
+You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo:9200`:
 
 ![localhost_9200-1](https://f.cloud.github.com/assets/530343/91846/5535201a-65b0-11e2-9661-05801d1d4bbd.png)
 
@@ -72,7 +72,7 @@ You should also be able to ssh into your virtual machine using the `vagrant ssh`
 
 ![elasticsearch-talk vagrant precise64_ ssh IR_Black 238 55 1-1](https://f.cloud.github.com/assets/530343/91387/08a27828-659d-11e2-81bc-ea9facd46221.png)
 
-#### Stay to-to-date
+#### Stay up-to-date
 
 As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have 
 the latest changes by doing the following from your host terminal:
@@ -80,24 +80,10 @@ the latest changes by doing the following from your host terminal:
 ```
 git pull
 vagrant reload
+vagrant provision
 ```
 
 ![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2](https://f.cloud.github.com/assets/530343/92644/d63de4a4-65e6-11e2-8c68-22d4db4ecf9c.png)
-
-#### Load the Elasticsearch REPL
-
-To work through all the interactions we show off in our talk, we create a REPL (read-evaluate-print-loop) which will 
-execute preconfigured HTTP interactions with Elasticsearch and then display their output.  To load the repl, first ssh 
-into vagrant and run:
-
-```bash
-~/es-repl
-```
-
-This REPL provides tab completion of commands along with a guided request/response walkthrough.  For a full list of 
-available commands, type `help` and hit enter. To view the list of request modules to execute, type `list` and view 
-enter.  You can run each of the commands by typing their index, hitting tab to complete the command name, and then 
-hitting enter.
 
 #### Shut down vagrant
 
@@ -107,7 +93,7 @@ When you're all done elasticsearching, you can gracefull shut down your vagrant 
 vagrant halt
 ```
 
-![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2-1](https://f.cloud.github.com/assets/530343/92646/fa12d092-65e6-11e2-9391-ffd039939874.png)
+[![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2-1](https://f.cloud.github.com/assets/530343/92646/fa12d092-65e6-11e2-9391-ffd039939874.png)]]
 
 This will close the VM.
 

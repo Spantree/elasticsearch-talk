@@ -2,14 +2,16 @@
 
 ### Speakers
 **Cedric Hurst:** Principal & Lead Software Engineer at Spantree  
-**Malynda Chizek Frouard** Junior Software Engineer and PhD in Astrophysics
-**Kevin Greene:** Senior Software Engineer and Patent Holder
-**Gary Turovsky:** Senior Software Engineer
 
+**Malynda Chizek Frouard** Junior Software Engineer and PhD in Astrophysics 
+
+**Kevin Greene:** Senior Software Engineer and Patent Holder 
+
+**Gary Turovsky:** Senior Software Engineer 
 
 ### When
 
-Thursday February 18th, 2014
+Tuesday February 18th, 2014
 
 ### Where
 
@@ -19,7 +21,7 @@ Chicago, IL 60607
 
 ### Instructions for setting up this sample project
 
-We ask that you walk through these steps before you stop by on Thursday since you'll need to download stuff
+We ask that you walk through these steps before you stop by since you'll need to download stuff
 and we don't want to crush our office bandwidth.  The project itself will likely evolve up until
 the time of the presentation, but the virtual machine stuff shouldn't change too much.
 

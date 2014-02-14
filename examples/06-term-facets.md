@@ -4,7 +4,7 @@ lorem ipsum
 
 `GET /wikipedia_term_facets/locations/_search`
 
-```
+```json
 {
   "fields": ["name", "about", "coordinates"],
   "query": {

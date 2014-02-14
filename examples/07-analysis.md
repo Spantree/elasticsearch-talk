@@ -4,7 +4,7 @@ Add several analyzers to the wikipedia index
 
 `PUT /wikipedia_additional_analysis/_settings `
 
-```
+```json
 {
   "analysis" : {
     "analyzer": {

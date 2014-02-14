@@ -1,7 +1,7 @@
 ## ElasticSearch Talk
 
 ### Speakers
-**Cedric Hurst:** Principal & Lead Software Engineer at Spantree  
+**Cedric Hurst:** Principal and Lead Software Engineer at Spantree  
 
 **Malynda Chizek Frouard** Junior Software Engineer and PhD in Astrophysics 
 

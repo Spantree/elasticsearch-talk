@@ -79,9 +79,8 @@ You should also be able to ssh into your virtual machine using the `vagrant ssh`
 As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have 
 the latest changes by doing the following from your host terminal:
 
-```
+```bash
 git pull
-vagrant reload
 vagrant provision
 ```
 
@@ -89,7 +88,7 @@ vagrant provision
 
 When you're all done elasticsearching, you can gracefull shut down your vagrant instance by running:
 
-```
+```bash
 vagrant halt
 ```
 
@@ -110,7 +109,6 @@ This repo will here for you should you need it again.
 
 #### Show us some love
 
-Email info@spantree.net if you run into issues.  We'd be happy to help.
-
+Email info@spantree.net if you run into issues.  We're happy to help.
 
 

@@ -1,17 +1,17 @@
 ## ElasticSearch Talk
 
 ### Speakers
-**Cedric Hurst:** Principal and I Won A Composition Competition In High School
+**Cedric Hurst:** Principal and Load Software Architect
+
+**Kevin Greene:** Senior Software Engineer
+
+**Gary Turovsky:** Senior Software Engineer
 
 **Malynda Chizek Frouard** Junior Software Engineer and PhD in Astrophysics 
 
-**Kevin Greene:** Senior Software Engineer and Patent Holder 
-
-**Gary Turovsky:** Senior Software Engineer and Not a Patent Holder
-
 ### When
 
-Tuesday February 18th, 2014
+Tuesday, February 18th, 2014
 
 ### Where
 

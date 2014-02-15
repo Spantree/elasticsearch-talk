@@ -1,4 +1,4 @@
-## ElasticSearch Talk
+## Elasticsearch Talk
 
 ### Speakers
 **Cedric Hurst:** Principal and Load Software Architect

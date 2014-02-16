@@ -2,19 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
-
-  # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "estalk-precise-vbox"
+
+  # Use this if connecting locally from the Spantree network
+  # config.vm.box_url = "http://10.0.1.54/estalk-precise-vbox-x86_64.box"
+
+  # Use this if connecting from the outside internet
   config.vm.box_url = "http://spantree-vagrant.s3.amazonaws.com/estalk-precise-vbox-x86_64.box"
 
-  # config.vm.synced_folder "scripts", "/home/vagrant/scripts"
-  # config.vm.synced_folder "data", "/home/vagrant/data"
-  # config.vm.synced_folder "requests", "/home/vagrant/requests"
   config.vm.synced_folder ".", "/usr/src/elasticsearch-talk", :create => "true"
-  config.vm.synced_folder "puppet/modules", "/etc/puppet/modules_host", :create => "true"
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
@@ -34,13 +30,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
-    # puppet.module_path    = "puppet/modules"
-    puppet.facter = {
-      "productname" => "Vagrant"
-    }
     puppet.options = [
-      "--verbose --debug",
-      "--modulepath=/etc/puppet/modules:/etc/puppet/modules_host"
+      "--verbose",
+      "--debug",
+      "--modulepath=/etc/puppet/modules:/usr/src/elasticsearch-talk/puppet/modules"
     ]
   end
 end

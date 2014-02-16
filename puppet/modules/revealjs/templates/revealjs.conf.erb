@@ -1,0 +1,29 @@
+#/etc/init/revealjs.conf
+description "A reveal.js runtime"
+
+env GRUNT_EXEC=<%= @node_home %>/bin/grunt
+env APP_DIR='<%= @src_dir %>'
+env NODE_PATH=$NODE_PATH:<%= @src_dir %>/node_modules
+env PID_FILE=/var/run/revealjs.pid
+env LOG_FILE=/var/log/revealjs.log
+
+start on (local-filesystems and net-device-up IFACE=eth0) or stopped
+stop on shutdown
+
+pre-start script
+	cd $APP_DIR
+    $GRUNT_EXEC serve 1>$LOG_FILE 2>&1 &
+	echo $! > $PID_FILE;
+end script
+
+post-stop script
+	if [ -f $PID_FILE ]
+	then
+		echo "Stopping revealjs..."
+        echo "Killing `cat $PID_FILE`"
+        kill `cat $PID_FILE`;
+        rm -f $PID_FILE;
+        echo "Node stopped"
+    fi
+    sleep 10
+end script

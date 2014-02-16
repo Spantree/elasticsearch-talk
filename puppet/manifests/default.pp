@@ -1,4 +1,7 @@
 node default {
+  $node_version = 'v0.10.25'
+  $elasticsearch_version = '1.0.0'
+
 	# Virtual Machines
 	class { 'java7': }
 
@@ -24,9 +27,26 @@ node default {
     notify      => Service['nginx']
   }
 
+  class { 'nodejs':
+    version => $node_version,
+  }
+
+  package { 'grunt-cli':
+    provider => npm,
+    require => Class['nodejs']
+  }
+
+  # Presentation
+
+  class { 'revealjs':
+    presentation_dir => '/usr/src/elasticsearch-talk/presentation',
+    node_home        => "/usr/local/node/node-${node_version}",
+    require          => Package['grunt-cli']
+  }
+
   # Hotness
   class { 'elasticsearch':
-    package_url => 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.deb',
+    package_url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${elasticsearch_version}.deb",
     require     => Class['java7']
 	}
 

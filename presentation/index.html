@@ -12,20 +12,20 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		
-		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="custom_css/sublime_monokai.css">
 
 		<!-- Spantree customizations -->
-		<link rel="stylesheet" href="css/spantree.css">
+		<link rel="stylesheet" href="custom_css/spantree.css">
 		
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		</script>
 
 		<!--[if lt IE 9]>
@@ -108,7 +108,7 @@
 							* Wikipedia articles by location data from Infochimps
 							* Looks a little like this:
 
-							```javascript
+							```json
 							{
 								"url": "http://en.wikipedia.org/wiki/Frontera_Grill",
 								...
@@ -202,333 +202,12 @@
 						</script>
 					</section>
 				</section>
-
-				<!--QUERYING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Querying
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Full-text
-
-							### Search for "college"
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [{
-							        "query_string": {
-							          "query": "college"
-							        }
-							      }]
-							    }
-							  }
-							}
-							```
-
-							### Search for "lake shore" (strict)
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [{
-							        "query_string": {
-							          "query": "lake shore",
-							          "minimum_should_match": "100%"
-							        }
-							      }]
-							    }
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## More full-text
-
-							### Search for "theater" (boost name and keywords)
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "fields": ["name^2", "keywords^1.5", "description", "about"],
-							            "query": "theater",
-							            "minimum_should_match": "100%"
-							          }
-							        }
-							      ]
-							    }
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Even more full-text
-
-							### Search for "theater" (boolean query string)
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "fields": ["name^2", "keywords^1.5", "description", "about"],
-							            "query": "theater OR theatre"
-							          }
-							        }
-							      ]
-							    }
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Highlighting
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "highlight": {
-							  	"fields": {
-							  		"name": {},
-							  		"description": {}
-							  	}
-							  }
-							}
-							```
-						</script>
-					</section>
-				</section>
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Paging
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Size
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "size": 50
-							}
-							```
-						</script>
-					</section>
-
-					<section data-markdown>
-						<script type="text/template">
-							## From
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "size": 50,
-							  "from": 10
-							}
-							```
-						</script>
-					</section>
-
-					<section data-markdown>
-						<script type="text/template">
-							## Scrolling
-
-							```bash
-							curl -XGET 'http://localhost:9200/wikipedia/location/_search?scroll=5m' -d ...
-							```
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "size": 10,
-							  "from": 0
-							}
-							```
-
-							```bash
-							curl -XGET 'http://localhost:9200/wikipedia/location/_search/scroll?scroll=5m&scroll_id=cXVlcnlUaGVuRmV0Y2g7NTs0MzE6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzI6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzQ6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzM6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzU6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTswOw==
-							```
-						</script>
-					</section>
-				</section>
-
-				<!--SORTING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Sorting
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Sorting dates
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [{
-							        "query_string": {"query": "chicago"}
-							      }]
-							    }
-							  },
-							  "sort": ["lastUpdated"]
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Sorting strings
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "sort": [{"name":"desc"}],
-							  "size": 100
-							}
-							```
-
-							> DOH! How do we make this work?
-						</script>
-					</section>
-
-					<section data-markdown>
-						<script type="text/template">
-							## Sorting by distance
-
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "sort": [
-							    {
-							      "_geo_distance": {
-							        "coordinates": [
-							          41.884445,
-							          -87.647901
-							        ],
-							        "order": "asc",
-							        "unit": "mi"
-							      }
-							    }
-							  ],
-							  "size": 100
-							}
-							```
-
-							> DOH! And how do we make **this** work?
-						</script>
-					</section>
-				</section>
-
-				<!--MAPPING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Mapping
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Mapping fields
-
-							* Types
-							  * string, integer/long, float, double, boolean, null
-							  * Array
-							  * JSON Object
-							  * geo\_point, geo\_shape
-							  * Nested
-							    	* Nested docs can be searched individually and easily joined to parent document
-							  * Attachment - base64 type
-							* Secondary fields (multifield, include\_in\_all: false)
-							* Analyzers per field
-							* Note: Best attempt made at updating mapping automatically, but may require reindex 
-						</script>
-					</section>
-				</section>
 			</div>
 
 		</div>
 
-		<script src="reveal.js/lib/js/head.min.js"></script>
-		<script src="reveal.js/js/reveal.min.js"></script>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
 
 		<script>
 
@@ -544,12 +223,33 @@
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{
+						src: 'lib/js/classList.js',
+						condition: function() { return !document.body.classList; }
+					},
+					{
+						src: 'plugin/markdown/marked.js',
+						condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+					},
+					{
+						src: 'plugin/markdown/markdown.js',
+						condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+					},
+					{
+						src: 'plugin/highlight/highlight.js',
+						async: true,
+						callback: function() { hljs.initHighlightingOnLoad(); }
+					},
+					{
+						src: 'plugin/zoom-js/zoom.js',
+						async: true,
+						condition: function() { return !!document.body.classList; }
+					},
+					{
+						src: 'plugin/notes/notes.js',
+						async: true,
+						condition: function() { return !!document.body.classList; }
+					}
 				]
 			});
 

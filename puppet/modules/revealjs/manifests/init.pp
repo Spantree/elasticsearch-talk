@@ -45,4 +45,9 @@ class revealjs(
     require    => File["/etc/init/revealjs.conf"]
   }
 
+  exec { 'restart-revealjs':
+    command => 'service revealjs restart',
+    require => Service['revealjs'],
+    returns => [0, 1]
+  }
 }

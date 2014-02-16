@@ -38,7 +38,7 @@ Install the following tools to bootstrap your environment
 From the command line, clone this repository with:
 
 ```bash
-git clone --recursive git@github.com:Spantree/elasticsearch-talk.git
+git clone --recursive --depth 1 git@github.com:Spantree/elasticsearch-talk.git
 ```
 
 ![src vagrant precise64_ _elasticsearch-talk bash IR_Black 238 55 1](https://f.cloud.github.com/assets/530343/91372/a8ba382e-659c-11e2-924e-1dec8536f9ad.png)

@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Spantree Elasticsearch Talk</title>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.1.0/css/bootstrap-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/flat-ui/2.0/css/flat-ui.css"/>
+    </head>
+    <body>
+        <h1>Spantree Elasticsearch Talk</h1>
+
+        <h2>Useful Endpoints</h2>
+        <ul>
+            <li>
+                <a href="{{esRoot}}" target="_blank">REST Interface</a>
+            </li>
+            <li>
+                <a href="{{esRoot}}/_plugin/marvel/" target="_blank">Marvel Plugin</a>
+            </li>
+            <li>
+                <a href="{{esRoot}}/_plugin/head/" target="_blank">Head Plugin</a>
+            </li>
+            <li>
+                <a href="{{esRoot}}/_plugin/marvel/sense/" target="_blank">Sense API Explorer</a>
+            </li>
+        </ul>
+
+        <h2>Example REST Calls</h2>
+        <ul>
+            {{#each chapters}}
+                <li>
+                    <a href="{{esRoot}}/_plugin/marvel/sense/#{{this}}" target="_blank">{{@key}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    </body>
+</html>

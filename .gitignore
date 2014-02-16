@@ -4,3 +4,8 @@
 .name
 .idea
 *.iml
+*.sense
+transform/build
+transform/.gradle
+estalk-precise-vbox-x86_64.box
+transform/www

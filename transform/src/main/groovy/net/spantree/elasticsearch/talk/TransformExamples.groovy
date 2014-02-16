@@ -9,6 +9,7 @@ import static net.spantree.elasticsearch.talk.ExampleParts.*
 
 class TransformExamples {
     static void writeExampleOut(Writer out, Map parts, Integer chapter, Integer exampleNumber) {
+        println parts
         def title = parts.title.replaceAll(/^##/, '').trim()
         def description = WordUtils.wrap(parts.description?.replaceAll(/\s+/, ' '), 40)
         def request = parts.request?.replaceAll(/`/, '')?.trim()
@@ -118,6 +119,9 @@ class TransformExamples {
                     } else if(currentPart == PAYLOAD) {
                         parts.payload = "${parts.payload}${line}\n"
                     }
+                }
+                if(parts) {
+                    writeExampleOut(out, parts, chapter, exampleNumber++)
                 }
             }
         }

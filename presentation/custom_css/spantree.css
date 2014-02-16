@@ -1,13 +1,32 @@
 body {
 	background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #61ae24 100%);
+	font-family: "Helvetica Neue";
 }
 
 .reveal section {
 	
 }
 
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	margin-bottom: 30px;
+	font-family: "Helvetica Neue";
+	letter-spacing: normal;
+}
+
 .reveal section img {
 	max-width: 90%;
 	border: 0px solid black;
 	box-shadow: none;
+}
+
+#stuff-we-use img {
+	max-width: 220px;
+	max-height: 70px;
+	margin: 0px 10px;
+}
+
+#title img {
+	max-width: 600px;
+	margin-bottom: 25px;
+/*	margin: 0px 10px;*/
 }

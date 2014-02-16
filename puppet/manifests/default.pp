@@ -19,7 +19,7 @@ node default {
   class { 'nginx': }
 
   file { '/etc/nginx/conf.d/default.conf':
-    source      => 'puppet:///modules/elasticsearch_talk/default.conf',
+    source      => 'puppet:///modules/elasticsearch_talk/etc/nginx/default.conf',
     require     => Class['nginx::package'],
     notify      => Service['nginx']
   }
@@ -39,6 +39,9 @@ node default {
   }
 
   class {'elasticsearch_talk' :
-    require     => Class['groovy']
+    require     => [
+      Class['groovy'],
+      Elasticsearch::Plugin['elasticsearch/marvel/latest']
+    ]
   }
 }

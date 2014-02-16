@@ -1,13 +1,14 @@
 ## ElasticSearch Talk
 
 ### Speakers
-**Cedric Hurst:** Principal & Lead Software Engineer at Spantree  
 
-**Malynda Chizek Frouard** Junior Software Engineer and PhD in Astrophysics 
+**Cedric Hurst:** Principal &amp; Lead Software Engineer  
 
-**Kevin Greene:** Senior Software Engineer and Patent Holder 
+**Kevin Greene:** Senior Software Engineer
 
-**Gary Turovsky:** Senior Software Engineer 
+**Gary Turovsky:** Senior Software Engineer
+
+**Malynda Chizek Frouard** Junior Software Engineer
 
 ### When
 

@@ -7,12 +7,20 @@ body {
 	
 }
 
+.reveal pre code {
+	margin-bottom: 30px;
+	padding: 15px;
+}
+
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
 	margin-bottom: 30px;
 	font-family: "Helvetica Neue";
 	letter-spacing: normal;
 }
 
+.reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	text-transform: none;
+}
 .reveal section img {
 	max-width: 90%;
 	border: 0px solid black;
@@ -29,4 +37,22 @@ body {
 	max-width: 600px;
 	margin-bottom: 25px;
 /*	margin: 0px 10px;*/
+}
+
+.screenshot p img {
+	max-height: 600px;
+	border: 10px solid white;
+}
+
+table.examples {
+	text-align: center;
+	width: 100%;
+}
+
+table.examples td, table.examples th {
+	padding: 5px 10px;
+}
+
+table.examples th {
+	text-wrap: suppress;
 }

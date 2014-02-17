@@ -1,0 +1,19 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://jcenter.bintray.com'
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.2.1'
+    compile 'uk.co.cacoethes:groovy-handlebars-engine:0.2'
+    compile 'commons-lang:commons-lang:2.6'
+}
+
+task transform(dependsOn: 'classes', type: JavaExec) {
+    main = 'net.spantree.elasticsearch.talk.TransformExamples'
+    classpath = sourceSets.main.runtimeClasspath
+}

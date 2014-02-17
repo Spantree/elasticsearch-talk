@@ -2,50 +2,54 @@
 
 ## Get Server Status
 
+Executing an HTTP GET request to the root of the Elasticsearch
+web server will give you a server status as JSON.
+
 `GET /`
 
 ## Index a single document
 
-`PUT /wikipedia/locations/frontera_grill`
+Now, we will insert a single document into Elasticsearch. Note that
+we don't need to create an index or type, it gets created automatically if it doesn't already exist.  Elasticsearch will also try to guess the types for document fields based on the initial JSON payload.
+
+`PUT /wikipedia-01/locations/frontera_grill`
 
 ```json
 {
-    "geo_geometry_type": "Point",
+    "name": "Frontera Grill",
+    "description": "Frontera Grill is a Mexican restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 2007, Frontera Grill won the James Beard Foundation's \"Outstanding Restaurant\" award, designating it the best restaurant in the U.S.",
+    "url": "http://en.wikipedia.org/wiki/Frontera_Grill",
     "keywords": [
         "restaurants",
         "chicago,illinois"
     ],
-    "external_links": [
-        "http://rdf.freebase.com/ns/m/06x4q7"
-    ],
-    "about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 1994, Frontera Grill was ranked Chicago's third-best casual restaurant by the International Herald Tribune. In 2007, Frontera Grill won the James Beard Foundation's \"Outstanding Restaurant\" award, designating it the best restaurant in the U.S.",
-    "lastUpdated": "2012-07-12T10:37:44+0000",
-    "wikipedia_id": "Frontera Grill",
     "wikipedia_numeric_id": 7353370,
-    "url": "http://en.wikipedia.org/wiki/Frontera_Grill",
-    "_type": "encyclopedic.wikipedia.wikipedia_article",
-    "_id": "frontera_grill",
-    "md5id": "63709e0df3dbb92057d9d96e118f3045",
-    "description": "Frontera Grill is a Mexican restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 2007, Frontera Grill won the James Beard Foundation's \"Outstanding Restaurant\" award, designating it the best restaurant in the U.S.",
-    "name": "Frontera Grill",
-    "_domain_id": 7353370,
-    "contained_in": {
-        "core_based_stat_areas": "16980",
-        "combined_stat_areas": "176",
-        "cities": "1714000",
-        "counties": "17031",
-        "census_tracts": "17031081700",
-        "postal_codes": "60654",
-        "states": "il",
-        "sen_legislative_dist_uppers": "17003",
-        "countries": "us"
-    },
-    "coordinates": [
-        -87.630806,
-        41.890575
-    ]
+    "lastUpdated": "2012-07-12T10:37:44+0000"
 }
 ```
 
-## Find our document
+## Find all documents
 
+Now, we can execute a request to get all documents in this index.  There should only be one.
+
+`GET /wikipedia-01/_search`
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+    	    "match_all" : { }
+        }
+      ]
+    }
+  }
+}
+```
+
+## Review mappings
+
+We can also peek at the mappings Elasticsearch created for the location document type.
+
+`GET /wikipedia-01/locations/_mapping`

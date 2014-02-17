@@ -53,7 +53,7 @@ Elasticsearch provides a multi_field type, which allows you to map the same fiel
 }
 ```
 
-##Sorting Multifield Strings
+## Sorting Multifield Strings
 
 Sorting using our new unanalyzed field
 
@@ -73,11 +73,11 @@ Sorting using our new unanalyzed field
 }
 ```
 
-##Define all Mappings
+## Define all Mappings
 
- Now, let's define all the mappings we'll use for this demo
+Now, let's define all the mappings we'll use for this demo
 
- `PUT /wikipedia_define_mappings/locations/_mapping`
+`PUT /wikipedia_define_mappings/locations/_mapping`
 
 ```json
 {

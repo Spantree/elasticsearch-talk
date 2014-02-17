@@ -1,0 +1,102 @@
+body {
+	background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #61ae24 100%);
+	font-family: "Helvetica Neue";
+}
+
+.reveal section {
+	
+}
+
+.reveal pre {
+	border: 15px solid rgba(63, 63, 63, 1);
+	margin-bottom: 30px;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	margin-bottom: 30px;
+	font-family: "Helvetica Neue";
+	letter-spacing: normal;
+}
+
+.reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	text-transform: none;
+}
+.reveal section img {
+	max-width: 90%;
+	border: 0px solid black;
+	box-shadow: none;
+}
+
+section.logos img {
+	max-width: 220px;
+	max-height: 70px;
+	margin: 0px 10px;
+}
+
+section.logos-big img {
+	max-width: 440px;
+	max-height: 300px;
+	margin: 0px 10px;
+}
+
+#title img {
+	max-width: 600px;
+	margin-bottom: 25px;
+/*	margin: 0px 10px;*/
+}
+
+.reveal section.screenshot p img {
+	max-height: 550px;
+	border: 10px solid rgba(255, 255, 255, 0.8);
+}
+
+.reveal section.screenshot-dark p img {
+	max-height: 550px;
+	border: 10px solid rgba(60, 60, 60, 0.8);
+}
+
+table.examples {
+	text-align: center;
+	width: 100%;
+}
+
+table.examples td, table.examples th {
+	padding: 5px 10px;
+}
+
+table.examples th {
+	text-wrap: suppress;
+}
+
+table.documents {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: "Helvetica Neue";
+	/*border: 1px solid #333;*/
+}
+
+table.documents th, table.documents td {
+	background-color: #fff;
+	font-size: 0.5em;
+	padding: 30px;
+	text-align: center;
+	margin: 0px;
+	line-height: 1.5;
+}
+
+table.documents th {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+	border-bottom: none;
+	margin-right: 10px;
+	padding-bottom: 0px;
+}
+
+table.documents td {
+	padding-top: 0px;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: none;
+	border-bottom: 1px solid #000;
+}

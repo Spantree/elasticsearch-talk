@@ -1,559 +1,644 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>Spantree - Elasticsearch</title>
+    <title>Spantree - Elasticsearch</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		
-		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="custom_css/sublime_monokai.css">
 
-		<!-- Spantree customizations -->
-		<link rel="stylesheet" href="css/spantree.css">
-		
+    <!-- Spantree customizations -->
+    <link rel="stylesheet" href="custom_css/spantree.css">
+    
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="reveal.js/lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
-				<!--INTRODUCTION-->
-				<section  data-markdown>
-					<script type="text/template">
-					Hey guys!
+        <!--INTRODUCTION-->
+        <section>
+          <section data-markdown id="title">
+            <script type="text/template">
+            Hey guys!
 
-					![Spantree logo](images/logo_bw.png)
+            ![Spantree logo](images/spantree.svg)
 
-					is talking about...
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						![Elasticsearch logo](images/elasticsearch_logo.png)
+            is talking about
 
-						<p><img src="images/kimchy.jpeg" style="width:50px;vertical-align:text-top"> "You know, for Search!"</p>
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## Cool stuff
+            ![Elasticsearch](images/elasticsearch.png)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Who We Are
 
-						* RESTful interface
-						* Uses JSON
-						* Based on Lucene
-						* Wicked fast
-						* Wicked configurable
-						* Wicked scalable
-						* Open Source
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## Not so cool stuff
+              <!-- TODO: Fill in with names, pictures, titles -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## What We Work On
 
-						* Documentation a "work in progress"
-						* No field collapsing (yet)
-						* Nested facets not (yet) supported
-						* No built-in spellchecker
-					</script>
-				</section>
+              <!-- TODO: Fill in with project screenshots and client logos -->
+            </script>
+          </section>
+          <section data-markdown class="logos">
+            ## Stuff We Use
 
-				<!--SET UP-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Demo time!
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## What we will need
+            ![Amazon Web Services](images/aws.svg)
+            ![Github](images/github.svg)
+            ![Vagrant](images/vagrant.png)
+            ![Puppet](images/puppet.svg)
 
-							* VirtualBox
-							* Vagrant 
-								* ["How does vagrant work?"](http://howdoesvagrantwork.com)
-							* A text editor
-							* A web browser
-							* Curl
-							* Sacrificial offering to the search gods (optional)
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Our data
+            ![PostgreSQL](images/postgres.svg)
+            ![MongoDB](images/mongodb.png)
+            ![Neo4J](images/neo4j.svg)
+            ![Elasticsearch](images/elasticsearch.png)
 
-							* Wikipedia articles by location data from Infochimps
-							* Looks a little like this:
+            ![Java](images/java.svg)
+            ![Groovy](images/groovy.svg)
+            ![Grails](images/grails.svg)
 
-							```javascript
-							{
-								"url": "http://en.wikipedia.org/wiki/Frontera_Grill",
-								...
-								"keywords": ["restaurants", "chicago,illinois"],
-								"about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois..",
-								"description": "Frontera Grill is a Mexican restaurant in Chicago, Illinois...",
-								"wikipedia_id": "Frontera Grill",
-								"wikipedia_numeric_id": 7353370,
-								"name": "Frontera Grill",
-								"coordinates": [-87.630806, 41.890575],
-								"external_links": ["http://rdf.freebase.com/ns/m/06x4q7"]
-							}
-							```
-						</script>
-					</section>
-				</section>
+            ![Dojo](images/dojo.svg)
+            ![Coffeescript](images/coffeescript.svg)
+            ![Backbone.js](images/backbone.png)
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ![Elasticsearch logo](images/elasticsearch.png)
 
-				<!--INDEXING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Indexing
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Indexing a single document
+              <p><img src="images/kimchy.jpeg" style="width:50px;vertical-align:text-top"> "You know, for Search!"</p>
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ![Cote Tweet](images/cote-tweet.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ## The Challenge
 
-							```bash
-							curl -XPOST http://localhost:9200/wikipedia/locations -d '{
-							    "geo_geometry_type": "Point",
-							    "keywords": [
-							        "restaurants",
-							        "chicago,illinois"
-							    ],
-							    "external_links": [
-							        "http://rdf.freebase.com/ns/m/06x4q7"
-							    ],
-							    "about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 1994, Frontera Grill was ranked Chicago's third-best casual restaurant by the International Herald Tribune. In 2007, Frontera Grill won the James Beard Foundation's Outstanding Restaurant award, designating it the best restaurant in the U.S.",
-							    "lastUpdated": "2012-04-30T02:14:41+0000",
-							    "wikipedia_id": "Frontera Grill",
-							    "wikipedia_numeric_id": 7353370,
-							    "url": "http://en.wikipedia.org/wiki/Frontera_Grill",
-							    "_type": "encyclopedic.wikipedia.wikipedia_article",
-							    "_id": "frontera_grill",
-							    "md5id": "63709e0df3dbb92057d9d96e118f3045",
-							    "description": "Frontera Grill is a Mexican restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood. In 2007, Frontera Grill won the James Beard Foundation's Outstanding Restaurant award, designating it the best restaurant in the U.S.",
-							    "name": "Frontera Grill",
-							    "_domain_id": 7353370,
-							    "contained_in": {
-							        "core_based_stat_areas": "16980",
-							        "combined_stat_areas": "176",
-							        "cities": "1714000",
-							        "counties": "17031",
-							        "census_tracts": "17031081700",
-							        "postal_codes": "60654",
-							        "states": "il",
-							        "sen_legislative_dist_uppers": "17003",
-							        "countries": "us"
-							    },
-							    "coordinates": [
-							        -87.630806,
-							        41.890575
-							    ]
-							}'
-							```
+              ![Simplicity](images/simplicity.png)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### How We Query
 
-							* Can't show much with a single document...
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## We can push them in one by one...
+              #### SQL Database
 
-							```bash
-							for f in elasticsearch-talk/presentation/data/location_*
-							do
-								echo "Posting ${f}"
-								curl -XPOST http://localhost:9200/wikipedia/locations -d @${f}
-							done
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## ...but let's use the bulk API instead
+              ```sql
+              SELECT *
+              FROM Person INNER JOIN Scientist ON Person.ID = Scientist.ID
+              WHERE FirstName = "Edgar" And LastName = "Codd";
+              ```
 
-							```bash
-							curl -XPUT 'http://192.168.80.100:9200/wikipedia/location/_bulk' --data-binary '@elasticsearch-talk/presentation/data/bulk.json'
-							```
-						</script>
-					</section>
-				</section>
+              #### MongoDB
 
-				<!--QUERYING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Querying
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Full-text
+              ```javascript
+              db.spantree.find({name: "Eric", lastName: "Evans"});
+              ```
 
-							### Search for "college"
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [{
-							        "query_string": {
-							          "query": "college"
-							        }
-							      }]
-							    }
-							  }
-							}
-							```
+              #### Elasticsearch
 
-							### Search for "lake shore" (strict)
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [{
-							        "query_string": {
-							          "query": "lake shore",
-							          "minimum_should_match": "100%"
-							        }
-							      }]
-							    }
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## More full-text
+              ```json
+              GET /spantree/_search
 
-							### Search for "theater" (boost name and keywords)
+              {"query": { "bool": {"must": [
+                {"query_string": {"query": "vannevar bush"}}
+              ]}}}
+              ```
+            </script>
+          </section>
+          
+          <section data-markdown>
+            <script type="text/template">
+              ### What People Expect
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "fields": ["name^2", "keywords^1.5", "description", "about"],
-							            "query": "theater",
-							            "minimum_should_match": "100%"
-							          }
-							        }
-							      ]
-							    }
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Even more full-text
+              <table class="examples">
+                <tbody>
+                  <tr>
+                    <th>Lowercase</th>
+                    <td>iPhone</td>
+                    <td>&#8781;</td>
+                    <td>iphone</td>
+                  </tr>
+                  <tr>
+                    <th>Stemming</th>
+                    <td>Runner</td>
+                    <td>&#8781;</td>
+                    <td>Running</td>
+                  </tr>
+                  <tr>
+                    <th>Synonyms</th>
+                    <td>Car</td>
+                    <td>&#8781;</td>
+                    <td>Automobile</td>
+                  </tr>
+                  <tr>
+                    <th>Word delimiters</th>
+                    <td>Show-off</td>
+                    <td>&#8781;</td>
+                    <td>Show off</td>
+                  </tr>
+                  <tr>
+                    <th>ASCII Folding</th>
+                    <td>Nestlé</td>
+                    <td>&#8781;</td>
+                    <td>Nestle</td>
+                  </tr>
+                  <tr>
+                    <th>Pattern Replace</th>
+                    <td>(888) 386-5501</td>
+                    <td>&#8781;</td>
+                    <td>888.386.5501</td>
+                  </tr>
+                  <tr>
+                    <th>Edge NGram</th>
+                    <td>ela</td>
+                    <td>&#8781;</td>
+                    <td>elasticsearch</td>
+                  </tr>
+                </tbody>
+              </table>
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### What People Expect
+              #### Searching Across Fields
 
-							### Search for "theater" (boolean query string)
+              
+              ```
+              {
+                "product": {
+                  "name": "nifty doodad",
+                  "description": "this is an example"
+                }
+              }
+              ```
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "fields": ["name^2", "keywords^1.5", "description", "about"],
-							            "query": "theater OR theatre"
-							          }
-							        }
-							      ]
-							    }
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Highlighting
+              This document should match <em>example doodad</em>
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "highlight": {
-							  	"fields": {
-							  		"name": {},
-							  		"description": {}
-							  	}
-							  }
-							}
-							```
-						</script>
-					</section>
-				</section>
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Paging
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Size
+              
+              <!-- TODO: Fill in with multi-match example -->
+            </script>
+          </section>
+        </section>
+        <section class="screenshots">
+          <section data-markdown>
+            <script type="text/template">
+              ## Elasticsearch Is...
+            </script>
+          </section>
+          <section data-markdown class="screenshot-dark">
+            <script type="text/template">
+              ### Wicked Fast
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "size": 50
-							}
-							```
-						</script>
-					</section>
+              ![ApacheBench Results](images/ab-results.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### Highly Configurable
 
-					<section data-markdown>
-						<script type="text/template">
-							## From
+              ![HEAD Configuration](images/es-configurable.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### Free and Open Source
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "size": 50,
-							  "from": 10
-							}
-							```
-						</script>
-					</section>
+              ![ES Github Repo](images/es-github.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### Distributed and Fault Tolerant
 
-					<section data-markdown>
-						<script type="text/template">
-							## Scrolling
+              ![ES Github Repo](images/es-karmi.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### Good at Handling Lots of Data
 
-							```bash
-							curl -XGET 'http://localhost:9200/wikipedia/location/_search?scroll=5m' -d ...
-							```
+              ![ES Github Big Data](images/es-big-data-github.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### ...Also Works With Unstructured Data
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "size": 10,
-							  "from": 0
-							}
-							```
+              ![ES Hamlet](images/es-shakespeare-json.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot-dark">
+            <script type="text/template">
+              ### ...And Real-Time Analytics
 
-							```bash
-							curl -XGET 'http://localhost:9200/wikipedia/location/_search/scroll?scroll=5m&scroll_id=cXVlcnlUaGVuRmV0Y2g7NTs0MzE6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzI6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzQ6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzM6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTs0MzU6UFFrSDR6WjJRS09qcnk4c0R1UkZmUTswOw==
-							```
-						</script>
-					</section>
-				</section>
+              ![ES Hamlet](images/logstash-search-screenshot.png)
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Elasticsearch Isn&#39;t...
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### A Relational Database
 
-				<!--SORTING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Sorting
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Sorting dates
+              ![PostgreSQL](images/postgres.svg)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### A Crawler
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [{
-							        "query_string": {"query": "chicago"}
-							      }]
-							    }
-							  },
-							  "sort": ["lastUpdated"]
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Sorting strings
+              ![Apache Nutch](images/nutch.png)
+            </script>
+          </section>
+          <section data-markdown class="logos-big">
+            <script type="text/template">
+              ### A Machine Learner
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "sort": [{"name":"desc"}],
-							  "size": 100
-							}
-							```
+              ![Apache Mahout](images/mahout.svg)
+              ![Carrot2](images/carrot2.png)
+            </script>
+          </section>
+          <section data-markdown class="logos-big">
+            <script type="text/template">
+              ### A User-Facing Search Experience
 
-							> DOH! How do we make this work?
-						</script>
-					</section>
+              ![Do It Yourself](images/do-it-yourself.svg)
+            </script>
+          </section>
+          <section data-markdown class="logos-big">
+            <script type="text/template">
+              ### Secure
 
-					<section data-markdown>
-						<script type="text/template">
-							## Sorting by distance
+              ![Vault](images/safe.svg)
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## How It Works
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Indexes
 
-							```javascript
-							{
-							  "query": {
-							    "bool": {
-							      "must": [
-							        {
-							          "query_string": {
-							            "query": "chicago"
-							          }
-							        }
-							      ]
-							    }
-							  },
-							  "sort": [
-							    {
-							      "_geo_distance": {
-							        "coordinates": [
-							          41.884445,
-							          -87.647901
-							        ],
-							        "order": "asc",
-							        "unit": "mi"
-							      }
-							    }
-							  ],
-							  "size": 100
-							}
-							```
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Documents
 
-							> DOH! And how do we make **this** work?
-						</script>
-					</section>
-				</section>
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Mappings
 
-				<!--MAPPING-->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# Mapping
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							## Mapping fields
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Types
 
-							* Types
-							  * string, integer/long, float, double, boolean, null
-							  * Array
-							  * JSON Object
-							  * geo\_point, geo\_shape
-							  * Nested
-							    	* Nested docs can be searched individually and easily joined to parent document
-							  * Attachment - base64 type
-							* Secondary fields (multifield, include\_in\_all: false)
-							* Analyzers per field
-							* Note: Best attempt made at updating mapping automatically, but may require reindex 
-						</script>
-					</section>
-				</section>
-			</div>
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### IDs
 
-		</div>
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Nodes
 
-		<script src="reveal.js/lib/js/head.min.js"></script>
-		<script src="reveal.js/js/reveal.min.js"></script>
+              <!-- TODO: Fill in with nodes and types (data/master) -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Clusters
 
-		<script>
+              <!-- TODO: Fill in with discovery multicast, unicast, screenshot of cluster setup -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Shards
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Replicas
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Inverted Index
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+              <!-- TODO: Fill in with concordance example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Daft Punk, Inverted
 
-		</script>
+              <table class="documents">
+                <tr>
+                  <th>id: line_1</th>
+                  <th>id: line_2</th>
+                  <th>id: line_3</th>
+                  <th>id: line_4</th>
+                </tr>
+                <tr>
+                  <td>
+                    Work it, Make it,<br/>
+                    Do it, Makes us<br/>
+                    Harder, Better,<br/>
+                    Faster, Stronger
+                  </td>
+                  <td>
+                    More than, Hour,<br/>
+                    Hour, Never<br/>
+                    Ever, After,<br/>
+                    Work is, Over
+                  </td>
+                  <td>
+                    Work it harder,<br/>
+                    Make it better<br/>
+                    Do it faster,<br/>
+                    Makes us stronger
+                  </td>
+                  <td>
+                    More than ever,<br/>
+                    Hour after hour<br/>
+                    Work is never over!
+                  </td>
+                </tr>
+              </table>
 
-	</body>
+              <!-- TODO: Fill in with row your boat example or daft punk -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Tokenizers and Analyzers
+
+              <table class="examples">
+                <tr>
+                  <th>Char Filter</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+                <tr>
+                  <th>Tokenizer</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+                <tr>
+                  <th>Token Filter</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+              </table>
+
+              <!-- TODO: Add image of term chain -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Data Types
+
+              <!-- TODO: Fill in with string, numeric (trie), arrays, nested objects, etc -->
+            </script>
+          </section>
+          <section>
+            <script type="text/template">
+              ### TF/IDF
+
+              <!-- TODO: Fill in term frequency/inverse document frequency -->
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Indexing
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Anatomy of a Request
+
+              <!-- TODO: Fill in with curl example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Automatic Mappings
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Create or Update Document
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Update API
+
+              <!-- TODO: Fill in with partial and scripted examples -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Bulk API
+
+              <!-- TODO: Fill in with bulk example -->
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Querying
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Search API
+
+              <!-- TODO: Simple Example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Types of Queries
+
+              <!-- TODO: Fill in with table for query_string, term, etc -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Scoring
+
+              <!-- TODO: Fill in  -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Queries vs Filters
+
+              <!-- TODO: Fill in  -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Facets
+
+              <!-- TODO: Fill in  -->
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Java API
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Installing
+
+              <!-- TODO: Fill in with Maven or Gradle import -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Connecting
+
+              <!-- TODO: Fill in with ES Client setup boilerplate for Java  -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Indexing
+
+              <!-- TODO: Fill in with simple index code sample in Java -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Querying
+
+              <!-- TODO: Fill in with simple bool query example in Java -->
+            </script>
+          </section>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+              ## Demo Time
+            </script>
+          </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          {
+            src: 'lib/js/classList.js',
+            condition: function() { return !document.body.classList; }
+          },
+          {
+            src: 'plugin/markdown/marked.js',
+            condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+          },
+          {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+          },
+          {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function() { hljs.initHighlightingOnLoad(); }
+          },
+          {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() { return !!document.body.classList; }
+          },
+          {
+            src: 'plugin/notes/notes.js',
+            async: true,
+            condition: function() { return !!document.body.classList; }
+          }
+        ]
+      });
+
+    </script>
+
+  </body>
 </html>

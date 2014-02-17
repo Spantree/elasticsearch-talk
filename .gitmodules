@@ -1,3 +1,0 @@
-[submodule "presentation/reveal.js"]
-	path = presentation/reveal.js
-	url = git://github.com/hakimel/reveal.js.git

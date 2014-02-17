@@ -7,6 +7,10 @@ CODENAME=$(/bin/bash $PWD/os-detect.sh CODENAME)
 if [[ ! -d /var/puppet-init/ ]]; then
     mkdir /var/puppet-init
     echo "Created directory /var/puppet-init"
+
+    if [ "$OS" == 'debian' ] || [ "$OS" == 'ubuntu' ]; then
+        sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
+    fi
 fi
 
 if [[ ! -f /var/puppet-init/initial-setup-repo-update ]]; then

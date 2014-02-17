@@ -48,8 +48,8 @@
           "type": "string"
         },
         "birth_year": {
-          "type": "int"
-        },
+          "type": "integer"
+        }
       }
     }
   }

@@ -1,0 +1,9 @@
+{
+  "station" : {
+    "properties": {
+      "name" : {"type": "string"},
+      "capacity": {"type": "integer"},
+      "location": {"type": "geo_point"}
+    }
+  }
+}

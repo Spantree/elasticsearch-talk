@@ -54,7 +54,7 @@ Get min / max / avg trip duration
 
 Get buckets based on Spantree's office
 
-`GET /divvy/trip/_search`
+`GET /divvy/station/_search`
 
 ```json
 {

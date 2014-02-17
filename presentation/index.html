@@ -385,9 +385,12 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Mappings
-
-              * Define fields that a type should have
+              ### Types and Mappings
+              * The fields a document should have
+              * The data type of each field
+              * Analysis
+                * How to generate tokens from document (indexing)
+                * How to generate tokens from query string (searching)
             </script>
           </section>
           <section data-markdown>
@@ -399,14 +402,72 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Creating a mapping
+              ### Each analyzer has three phases
+
+              ![Analysis phases](images/analysis-chain.svg)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Example analysis configuration
+
+              ```
+              {
+                "analysis" : {
+                  "analyzer" : {
+                    "predefined_index_analyzer" : {
+                      "type" : "custom",
+                      "tokenizer" : "standard",
+                      "filter" : [
+                          "lowercase",
+                          "asciifolding",
+                          "shingle_filter"
+                      ]
+                    },
+                    "predefined_search_analyzer" : {
+                      "type" : "custom",
+                      "tokenizer" : "standard",
+                      "filter" : [
+                          "lowercase",
+                          "asciifolding"
+                      ]
+                    }
+                  },
+                  "tokenizer" : {
+                      "ngram_tokenizer" : {
+                          "type" : "nGram",
+                          "min_gram" : "1",
+                          "max_gram" : "10",
+                          "token_chars" : [ "letter" ]
+                      }
+                  },
+                  "filter" : {
+                      "shingle_filter" : {
+                          "type" : "shingle",
+                          "min_shingle_size" : "2",
+                          "max_shingle_size" : "3",
+                          "output_unigrams" : false
+                      }
+                  }
+                }
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Possible mapping
 
               ```
                 {
-                  "type1": {
+                  "doodad": {
                     "properties": {
-
+                      "description": {
+                        "type": "string",
+                        "index_analyzer": "predefined_index_analyzer",
+                        "search_analyzer": "predefine_search_analyzer"
                     }
+                  }
                 }
               ```
             </script>

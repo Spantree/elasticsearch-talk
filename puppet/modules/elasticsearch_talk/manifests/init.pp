@@ -47,7 +47,7 @@ class elasticsearch_talk(
     logoutput => on_failure
   }
 
-  elasticsearch_talk::index { "wikipedia-02":
+  elasticsearch_talk::index { "wikipedia":
     bulk_file => 'wikipedia.locations.json.bulk',
     mapping_file => 'wikipedia.locations.mappings.json'
   }

@@ -10,19 +10,19 @@
         <h2>Resources</h2>
         <ul>
             <li>
-                <a href="/slides" target="_blank">Slides</a>
+                <a href="/slides" target="es_slides">Slides</a>
             </li>
             <li>
-                <a href="{{esRoot}}" target="_blank">Elasticsearch REST Interface</a>
+                <a href="{{esRoot}}" target="es_rest">Elasticsearch REST Interface</a>
             </li>
             <li>
-                <a href="{{esRoot}}/_plugin/marvel/" target="_blank">Marvel Plugin</a>
+                <a href="{{esRoot}}/_plugin/marvel/" target="es_marvel">Marvel Plugin</a>
             </li>
             <li>
-                <a href="{{esRoot}}/_plugin/head/" target="_blank">Head Plugin</a>
+                <a href="{{esRoot}}/_plugin/head/" target="es_head">Head Plugin</a>
             </li>
             <li>
-                <a href="{{esRoot}}/_plugin/marvel/sense/" target="_blank">Sense API Explorer</a>
+                <a href="{{esRoot}}/_plugin/marvel/sense/" target="es_sense">Sense API Explorer</a>
             </li>
         </ul>
 
@@ -30,7 +30,7 @@
         <ul>
             {{#each chapters}}
                 <li>
-                    <a href="{{esRoot}}/_plugin/marvel/sense/#{{this}}" target="_blank">{{@key}}</a>
+                    <a href="{{esRoot}}/_plugin/marvel/sense/#{{this}}" target="es_sense_{{this}}">{{@key}}</a>
                 </li>
             {{/each}}
         </ul>

@@ -20,25 +20,25 @@ define elasticsearch_talk::index(
   $restart_payload = '{"index": {"refresh_interval": "1s"}}'
 
   exec { "create-index-${name}":
-    command => "curl -s -S -XPOST --data-binary \"@${mapping_file}\" http://localhost:9200/${name}",
+    command => "curl -f -s -S -XPOST --data-binary \"@${mapping_file}\" http://localhost:9200/${name}",
     cwd => $mapping_file_dir,
     require => Exec["delete-index-${name}"]
   }
 
   exec { "pause-refresh-interval-${name}":
-    command => "curl -s -S -XPUT http://localhost:9200/${name}/_settings -d '${pause_payload}'",
+    command => "curl -f -s -S -XPUT http://localhost:9200/${name}/_settings -d '${pause_payload}'",
     require => Exec["create-index-${name}"]
   }
 
   exec { "bulk-insert-${name}":
-    command => "curl -s -S -XPOST --data-binary \"@${bulk_file}\" http://localhost:9200/${name}/_bulk",
+    command => "curl -f -s -S -XPOST --data-binary \"@${bulk_file}\" http://localhost:9200/${name}/_bulk",
     cwd => $bulk_file_dir,
     require => Exec["pause-refresh-interval-${name}"],
     logoutput => on_failure
   }
 
   exec { "restart-refresh-interval-${name}":
-    command => "curl -s -S -XPUT http://localhost:9200/${name}/_settings -d '${restart_payload}'",
+    command => "curl -f -s -S -XPUT http://localhost:9200/${name}/_settings -d '${restart_payload}'",
     require => Exec["bulk-insert-${name}"]
   }
 }

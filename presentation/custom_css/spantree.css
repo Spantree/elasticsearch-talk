@@ -7,9 +7,9 @@ body {
 	
 }
 
-.reveal pre code {
+.reveal pre {
+	border: 15px solid rgba(63, 63, 63, 1);
 	margin-bottom: 30px;
-	padding: 15px;
 }
 
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
@@ -27,9 +27,15 @@ body {
 	box-shadow: none;
 }
 
-#stuff-we-use img {
+section.logos img {
 	max-width: 220px;
 	max-height: 70px;
+	margin: 0px 10px;
+}
+
+section.logos-big img {
+	max-width: 440px;
+	max-height: 300px;
 	margin: 0px 10px;
 }
 
@@ -39,9 +45,14 @@ body {
 /*	margin: 0px 10px;*/
 }
 
-.screenshot p img {
-	max-height: 600px;
-	border: 10px solid white;
+.reveal section.screenshot p img {
+	max-height: 550px;
+	border: 10px solid rgba(255, 255, 255, 0.8);
+}
+
+.reveal section.screenshot-dark p img {
+	max-height: 550px;
+	border: 10px solid rgba(60, 60, 60, 0.8);
 }
 
 table.examples {

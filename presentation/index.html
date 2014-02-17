@@ -56,14 +56,18 @@
           <section data-markdown>
             <script type="text/template">
               ## Who We Are
+
+              <!-- TODO: Fill in with names, pictures, titles -->
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ## What We Work On
+
+              <!-- TODO: Fill in with project screenshots and client logos -->
             </script>
           </section>
-          <section data-markdown id="stuff-we-use">
+          <section data-markdown class="logos">
             ## Stuff We Use
 
             ![Amazon Web Services](images/aws.svg)
@@ -93,7 +97,7 @@
               <p><img src="images/kimchy.jpeg" style="width:50px;vertical-align:text-top"> "You know, for Search!"</p>
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown class="screenshot">
             <script type="text/template">
               ![Cote Tweet](images/cote-tweet.png)
             </script>
@@ -135,50 +139,53 @@
           <section data-markdown>
             <script type="text/template">
               ### Searching Across Fields
+
+              <!-- TODO: Fill in with multi-match example -->
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Word variations
+              ### Word Derivatives
 
               <table class="examples">
                 <tbody>
                   <tr>
                     <th>Lowercase</th>
                     <td>iPhone</td>
-                    <td>&rarr;</td>
+                    <td>&#8781;</td>
                     <td>iphone</td>
                   </tr>
                   <tr>
                     <th>Stemming</th>
                     <td>Runner</td>
-                    <td>&rarr;</td>
+                    <td>&#8781;</td>
                     <td>Running</td>
                   </tr>
                   <tr>
                     <th>Synonyms</th>
                     <td>Car</td>
-                    <td>&rarr;</td>
+                    <td>&#8781;</td>
                     <td>Automobile</td>
                   </tr>
                   <tr>
                     <th>Word delimiters</th>
                     <td>Show-off</td>
-                    <td>&rarr;</td>
-                    <td>Show-off</td>
+                    <td>&#8781;</td>
+                    <td>Show off</td>
                   </tr>
                   <tr>
                     <th>ASCII Folding</th>
                     <td>Nestlé</td>
-                    <td>&rarr;</td>
+                    <td>&#8781;</td>
                     <td>Nestle</td>
                   </tr>
                   <tr>
                     <th>Pattern Replace</th>
                     <td>(888) 386-5501</td>
-                    <td>&rarr;</td>
+                    <td>&#8781;</td>
                     <td>888.386.5501</td>
-                </tbody
+                  </tr>
+                </tbody>
               </table>
             </script>
           </section>
@@ -186,57 +193,318 @@
         <section class="screenshots">
           <section data-markdown>
             <script type="text/template">
-              ## What Is Elasticsearch
+              ## Elasticsearch Is...
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown class="screenshot-dark">
             <script type="text/template">
-              ### Elasticsearch is Wicked Fast.
+              ### Wicked Fast.
 
               ![ApacheBench Results](images/ab-results.png)
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Elasticsearch is Highly Configurable.
+              ### Highly Configurable.
 
               ![HEAD Configuration](images/es-configurable.png)
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Elasticsearch is Free and Open Source.
+              ### Free and Open Source.
 
               ![ES Github Repo](images/es-github.png)
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Elasticsearch is Distributed and Fault Tolerant.
+              ### Distributed and Fault Tolerant.
 
               ![ES Github Repo](images/es-karmi.png)
             </script>
           </section>
-          <!-- TODO: Fill in the rest from Keynote -->
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### Good at Handling Lots of Data.
+
+              ![ES Github Big Data](images/es-big-data-github.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### ...Also good at Unstructured Data.
+
+              ![ES Hamlet](images/es-shakespeare-json.png)
+            </script>
+          </section>
+          <section data-markdown class="screenshot-dark">
+            <script type="text/template">
+              ### ...And Real-Time Analytics.
+
+              ![ES Hamlet](images/logstash-search-screenshot.png)
+            </script>
+          </section>
         </section>
         <section>
-          <section class="screenshots">
           <section data-markdown>
             <script type="text/template">
-              ## What Elasticsearch Is Not
+              ## Elasticsearch Isn&#39;t...
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### A Relational Database
+
+              ![PostgreSQL](images/postgres.svg)
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### A Crawler
+
+              ![Apache Nutch](images/nutch.png)
+            </script>
+          </section>
+          <section data-markdown class="logos-big">
+            <script type="text/template">
+              ### A Machine Learner
+
+              ![Apache Mahout](images/mahout.svg)
+              ![Carrot2](images/carrot2.png)
+            </script>
+          </section>
+          <section data-markdown class="logos-big">
+            <script type="text/template">
+              ### A User-Facing Search Experience
+
+              ![Do It Yourself](images/do-it-yourself.svg)
             </script>
           </section>
           <!-- TODO: Fill in the rest from Keynote -->
         </section>
         <section>
-          <section class="screenshots">
           <section data-markdown>
             <script type="text/template">
               ## How It Works
             </script>
           </section>
-          <!-- TODO: Fill in the rest from Keynote -->
+          <section data-markdown>
+            <script type="text/template">
+              ### REST API
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Transport Protocol
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Indexes &amp; Types
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### IDs
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Nodes
+
+              <!-- TODO: Fill in with nodes and types (data/master) -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Shards
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Discovery
+
+              <!-- TODO: Fill in with multicast, unicast -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Inverted Index
+
+              <!-- TODO: Fill in with concordance example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Example of an Inverted Index
+
+              <!-- TODO: Fill in with row your boat example or daft punk -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Tokenizers and Analyzers
+
+              <table class="examples">
+                <tr>
+                  <th>Char Filter</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+                <tr>
+                  <th>Tokenizer</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+                <tr>
+                  <th>Token Filter</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+              </table>
+
+              <!-- TODO: Add image of term chain -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Types
+
+              <!-- TODO: Fill in with string, numeric (trie), arrays, nested objects, etc -->
+            </script>
+          </section>
         </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Indexing
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Anatomy of a Request
+
+              <!-- TODO: Fill in with curl example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Automatic Mappings
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Create or Update Document
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Update API
+
+              <!-- TODO: Fill in with partial and scripted examples -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Bulk API
+
+              <!-- TODO: Fill in with bulk example -->
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Querying
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Search API
+
+              <!-- TODO: Simple Example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Types of Queries
+
+              <!-- TODO: Fill in with table for query_string, term, etc -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Scoring
+
+              <!-- TODO: Fill in  -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Queries vs Filters
+
+              <!-- TODO: Fill in  -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Facets
+
+              <!-- TODO: Fill in  -->
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Java API
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Installing
+
+              <!-- TODO: Fill in with Maven or Gradle import -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Connecting
+
+              <!-- TODO: Fill in with ES Client setup boilerplate for Java  -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Indexing
+
+              <!-- TODO: Fill in with simple index code sample in Java -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Querying
+
+              <!-- TODO: Fill in with simple bool query example in Java -->
+            </script>
+          </section>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+              ## Demo Time
+            </script>
+          </section>
       </div>
 
     </div>

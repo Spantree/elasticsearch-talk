@@ -67,3 +67,36 @@ table.examples td, table.examples th {
 table.examples th {
 	text-wrap: suppress;
 }
+
+table.documents {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: "Helvetica Neue";
+	/*border: 1px solid #333;*/
+}
+
+table.documents th, table.documents td {
+	background-color: #fff;
+	font-size: 0.5em;
+	padding: 30px;
+	text-align: center;
+	margin: 0px;
+	line-height: 1.5;
+}
+
+table.documents th {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+	border-bottom: none;
+	margin-right: 10px;
+	padding-bottom: 0px;
+}
+
+table.documents td {
+	padding-top: 0px;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: none;
+	border-bottom: 1px solid #000;
+}

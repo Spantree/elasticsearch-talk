@@ -4,8 +4,6 @@ Elasticsearch supports 'geopoint' types for latitude and longitude values. After
 
 `PUT /wikipedia_mapping/locations/_mapping`
 
-
-
 ```json
 {
   "location" : {
@@ -22,9 +20,7 @@ Elasticsearch provides a multi_field type, which allows you to map the same fiel
 
 `PUT /wikipedia_multifield/locations/_mapping`
 
-
-
-  ```json
+```json
   {
   "location" : {
         "properties" : {
@@ -35,7 +31,8 @@ Elasticsearch provides a multi_field type, which allows you to map the same fiel
 ```
 
 ## Mapping a Multifield pt. 2
- Elasticsearch provides a multi_field type, which allows you to map the same field value to several core types. In this case, we're mapping the name field to a tokenized value (for text searching), as well a not analyzed field (for faceting and sorting).
+
+Elasticsearch provides a multi_field type, which allows you to map the same field value to several core types. In this case, we're mapping the name field to a tokenized value (for text searching), as well a not analyzed field (for faceting and sorting).
 
 ```json
 {

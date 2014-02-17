@@ -319,7 +319,63 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Overview
+              ### Magic of the Inverted Index
+
+              * Find position of any word in constant time
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Daft Punk, Inverted
+
+              <table class="documents">
+                <tr>
+                  <th>id: line_1</th>
+                  <th>id: line_2</th>
+                  <th>id: line_3</th>
+                  <th>id: line_4</th>
+                </tr>
+                <tr>
+                  <td>
+                    Work it, Make it,<br/>
+                    Do it, Makes us<br/>
+                    Harder, Better,<br/>
+                    Faster, Stronger
+                  </td>
+                  <td>
+                    More than, Hour,<br/>
+                    Hour, Never<br/>
+                    Ever, After,<br/>
+                    Work is, Over
+                  </td>
+                  <td>
+                    Work it harder,<br/>
+                    Make it better<br/>
+                    Do it faster,<br/>
+                    Makes us stronger
+                  </td>
+                  <td>
+                    More than ever,<br/>
+                    Hour after hour<br/>
+                    Work is never over!
+                  </td>
+                </tr>
+              </table>
+
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### TF-IDF Scoring Of Documents
+              * <em>term frequency (tf)</em> number of times a term occurs in a particular document
+              * <em>document frequency (df)</em> number of documents a term occurs in
+              * <em>TF-IDF</em> is term frequency divided by document frequency
+                  * usually expressed as term frequency times inverse document frequency
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Terminology Overview
 
               ![Index Structure](images/index-structure.svg)
             </script>
@@ -329,7 +385,7 @@
               ### Indexes
 
               <ul>
-                <li>Lucene indexes</li>
+                <li>One or more Lucene indexes</li>
                 <ul>
                   <li>composed of segments</li>
                 </ul>
@@ -340,7 +396,6 @@
             <script type="text/template">
               ### Lucene segement merging in action
               <iframe width="560" height="315" src="//www.youtube.com/embed/YW0bOvLp72E?rel=0" frameborder="0" allowfullscreen></iframe>
-              
             </script>
           </section>
           <section data-markdown>
@@ -387,6 +442,13 @@
               * Analysis
                 * How to generate tokens from document (indexing)
                 * How to generate tokens from query string (searching)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Data Types
+
+              <!-- TODO: Fill in with string, numeric (trie), arrays, nested objects, etc -->
             </script>
           </section>
           <section data-markdown>
@@ -470,121 +532,31 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### IDs
+              ### Sharding and Replication
 
-              <!-- TODO: Fill in -->
+              * <em>Shard</em> - Single Lucene index (portion of Elasticsearch index)
+                * More shards means better write performance
+              * <em>Replica</em> - Copy of a shard
+                * More replicas means faster queries
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Nodes
+              ### Example
 
-              <!-- TODO: Fill in with nodes and types (data/master) -->
+              ![Analysis phases](images/sharding-replica.svg)
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Clusters
+              ### More About Sharding and Replication
 
-              <!-- TODO: Fill in with discovery multicast, unicast, screenshot of cluster setup -->
+              * <em>Routing</em> - By default, "_id" is hashed to balance documents among shards
+              * <em>Tribes</em> - Single node need not belong to a single cluster 
             </script>
           </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Shards
-
-              <!-- TODO: Fill in -->
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Replicas
-
-              <!-- TODO: Fill in -->
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Inverted Index
-
-              <!-- TODO: Fill in with concordance example -->
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Daft Punk, Inverted
-
-              <table class="documents">
-                <tr>
-                  <th>id: line_1</th>
-                  <th>id: line_2</th>
-                  <th>id: line_3</th>
-                  <th>id: line_4</th>
-                </tr>
-                <tr>
-                  <td>
-                    Work it, Make it,<br/>
-                    Do it, Makes us<br/>
-                    Harder, Better,<br/>
-                    Faster, Stronger
-                  </td>
-                  <td>
-                    More than, Hour,<br/>
-                    Hour, Never<br/>
-                    Ever, After,<br/>
-                    Work is, Over
-                  </td>
-                  <td>
-                    Work it harder,<br/>
-                    Make it better<br/>
-                    Do it faster,<br/>
-                    Makes us stronger
-                  </td>
-                  <td>
-                    More than ever,<br/>
-                    Hour after hour<br/>
-                    Work is never over!
-                  </td>
-                </tr>
-              </table>
-
-              <!-- TODO: Fill in with row your boat example or daft punk -->
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Tokenizers and Analyzers
-
-              <table class="examples">
-                <tr>
-                  <th>Char Filter</th>
-                  <td>...<!-- TODO: Fill in --></td>
-                </tr>
-                <tr>
-                  <th>Tokenizer</th>
-                  <td>...<!-- TODO: Fill in --></td>
-                </tr>
-                <tr>
-                  <th>Token Filter</th>
-                  <td>...<!-- TODO: Fill in --></td>
-                </tr>
-              </table>
-
-              <!-- TODO: Add image of term chain -->
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Data Types
-
-              <!-- TODO: Fill in with string, numeric (trie), arrays, nested objects, etc -->
-            </script>
-          </section>
-          <section>
-            <script type="text/template">
-              ### TF/IDF
-
-              <!-- TODO: Fill in term frequency/inverse document frequency -->
+          
+          
         </section>
         <section>
           <section data-markdown>

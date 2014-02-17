@@ -51,4 +51,12 @@ class elasticsearch_talk(
     bulk_file => 'wikipedia.locations.json.bulk',
     mapping_file => 'wikipedia.locations.mappings.json'
   }
+
+  class{ 'elasticsearch_talk::divvy': }
+
+  elasticsearch_talk::index { "divvy":
+    bulk_file     => 'divvy_bulk_update.json',
+    mapping_file  => 'divvy_mappings.json',
+    require       => Class['elasticsearch_talk::divvy']
+  }
 }

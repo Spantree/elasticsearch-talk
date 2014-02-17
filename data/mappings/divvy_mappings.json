@@ -16,10 +16,12 @@
     "trip": {
       "properties": {
         "start_time": {
-          "type": "long"
+          "type": "date",
+          "format" : "MM/dd/YYYY H:mm"
         },
         "end_time": {
-          "type": "long"
+          "type": "date",
+          "format" : "MM/dd/YYYY H:mm"
         },
         "bike_id": {
           "type": "integer"

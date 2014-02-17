@@ -47,7 +47,12 @@ node default {
   # Hotness
   class { 'elasticsearch':
     package_url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${elasticsearch_version}.deb",
-    require     => Class['java7']
+    require     => Class['java7'],
+    config      => {
+      'http' => {
+        'max_content_length'=> '500mb'
+      }
+    }
 	}
 
   elasticsearch::plugin{'mobz/elasticsearch-head':

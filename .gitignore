@@ -4,6 +4,8 @@
 .name
 .idea
 *.iml
+data/divvy/trips.in
+data/divvy/divvy_bulk_update.json
 *.sense
 transform/build
 transform/.gradle

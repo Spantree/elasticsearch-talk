@@ -45,7 +45,8 @@ section.logos-big img {
 /*	margin: 0px 10px;*/
 }
 
-.reveal section.screenshot p img {
+.reveal section.screenshot p img,
+.reveal section.screenshot iframe {
 	max-height: 550px;
 	border: 10px solid rgba(255, 255, 255, 0.8);
 }

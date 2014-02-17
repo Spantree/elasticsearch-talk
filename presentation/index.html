@@ -85,6 +85,7 @@
             ![Grails](images/grails.svg)
 
             ![Dojo](images/dojo.svg)
+            ![jQuery](images/jquery.svg)
             ![Coffeescript](images/coffeescript.svg)
             ![Backbone.js](images/backbone.png)
           </section>
@@ -316,34 +317,100 @@
           <section data-markdown>
             <script type="text/template">
               ## How It Works
+
+
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Overview
+
+              ![Index Structure](images/index-structure.svg)
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Indexes
 
-              <!-- TODO: Fill in -->
+              <ul>
+                <li>Lucene indexes</li>
+                <ul>
+                  <li>composed of segments</li>
+                </ul>
+              </ul>
+            </script>
+          </section>
+          <section data-markdown class="screenshot">
+            <script type="text/template">
+              ### Lucene segement merging in action
+              <iframe width="560" height="315" src="//www.youtube.com/embed/YW0bOvLp72E?rel=0" frameborder="0" allowfullscreen></iframe>
+              
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Index configurations describe...
+
+              * Sharding/replication
+              * Analyzers (globally too)
+              * Warmers
+              * Snapshot interval (new)
+              * Refresh interval
+              * Opened/closed/read-only
+              
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Documents
 
-              <!-- TODO: Fill in -->
+              ```
+              {
+                "_index": "index_name",
+                "_type": "document_type",
+                "_id": 1337,
+                "_source": {
+                  "field0": 777,
+                  "field1": "value",
+                  "field2": ["value1","value2","value3"],
+                  "field3": {
+                    "subfield0":"value1",
+                    "subfield1":"value2"
+                  } //*            
+                }
+              }
+              ```
+
+              ###### * <em>Embedded objects are more elasticsearch magic!</em>
+              
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Mappings
 
-              <!-- TODO: Fill in -->
+              * Define fields that a type should have
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Types
+              ### Mappings and analysis
 
-              <!-- TODO: Fill in -->
+              ![Mapping and analysis](images/mapping-analysis.svg)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Creating a mapping
+
+              ```
+                {
+                  "type1": {
+                    "properties": {
+
+                    }
+                }
+              ```
             </script>
           </section>
           <section data-markdown>

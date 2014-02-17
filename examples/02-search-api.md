@@ -4,7 +4,7 @@
 
 Find the term "college" anywhere in the documents
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -24,7 +24,7 @@ Find the term "college" anywhere in the documents
 
 Find the terms "lake" and "shore" anywhere in the documents.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -44,7 +44,7 @@ Find the terms "lake" and "shore" anywhere in the documents.
 
 Find the terms "lake" and "shore" anywhere in the documents.  Both the terms should be present.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -67,7 +67,7 @@ Find the term "theater" anywhere in the documents,
 boosting matches on name higher than matches on
 description or about.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -91,7 +91,7 @@ description or about.
 
 Find the term "theater" *or* "theatre" anywhere in the documents, boosting matches on name higher than matches on description or about.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -114,7 +114,7 @@ Find the term "theater" *or* "theatre" anywhere in the documents, boosting match
 
 Find the term "theater" *and* "theatre" anywhere in the documents, boosting matches on name higher than matches on description or about. This should be a smaller set.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -137,7 +137,7 @@ Find the term "theater" *and* "theatre" anywhere in the documents, boosting matc
 
 Return only the name and keywords fields.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -161,7 +161,7 @@ Return only the name and keywords fields.
 
 Search for the term "Chicago" and highlight matches.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {

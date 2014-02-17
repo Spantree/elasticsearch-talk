@@ -4,7 +4,7 @@
 
 Specify a search result page size.
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -28,7 +28,7 @@ Specify a search result page size.
 
 Specify a search result start/from value
 
-`GET /wikipedia/locations/_search`
+`GET /wikipedia/_search`
 
 ```json
 {
@@ -51,7 +51,7 @@ For frequently-changing data sets, it is often difficult to
 keep search results consistent across pages. For example, if 
 a user is sorting results by freshness, a search result once appeared in position 10 may be in position 11 by the time the second page is requested. Elasticsearch has the ability to retain a previously fetched result set via a "scan query".  This is similar to a JDBC cursor.
 
-`GET /wikipedia/locations/_search?search_type=scan&scroll=10m&size=10`
+`GET /wikipedia/_search?search_type=scan&scroll=10m&size=10`
 
 ```json
 {
@@ -68,4 +68,4 @@ a user is sorting results by freshness, a search result once appeared in positio
 
 ## Continuing a Scan Query
 
-`GET /wikipedia/locations/_search/scroll?scroll=10m&scroll_id={scroll_id}`
+`GET /_search/scroll?scroll=10m&scroll_id={scroll_id}`

@@ -1,4 +1,4 @@
-# Percolation: search, in reverse
+# Percolation
 
 ## Register a percolation query
 

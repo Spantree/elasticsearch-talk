@@ -1,6 +1,7 @@
 # Term Facets And Aggregations
 
 Get gender terms via aggregation
+
 `GET /divvy/trip/_search`
 
 ```json
@@ -32,7 +33,7 @@ Get gender terms via facet
 }
 ```
 
-Get min / max / avg trip duration
+Get min / max / avg trip duration. As a note, 85117 seconds is roughly 23.6 hours.
 
 `GET /divvy/trip/_search`
 
@@ -44,13 +45,28 @@ Get min / max / avg trip duration
         },
         "max_trip" : {
             "max" : { "field" : "trip_duration" }
-        }
+        },
         "avg_trip" : {
             "avg" : { "field" : "trip_duration" }
         }
     }
 }
 ```
+
+Get all stats
+
+`GET /divvy/trip/_search`
+
+```json
+{
+    "aggs" : {
+        "trip_duration_stats" : {
+            "stats" : { "field" : "trip_duration" }
+        }
+    }
+}
+```
+
 
 Get buckets based on Spantree's office
 
@@ -77,6 +93,23 @@ Get buckets based on Spantree's office
                 ]
             }
         }
+    }
+}
+```
+
+Get bike trips by quarter
+
+`GET /divvy/trip/_search`
+```json
+{
+    "aggs" : {
+        "trips_over_time" : {
+            "date_histogram" : {
+                "field" : "start_time",
+                "interval" : "quarter"
+            }
+        }
+
     }
 }
 ```

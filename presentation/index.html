@@ -111,7 +111,9 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### SQL Database
+              ### How We Query
+
+              #### SQL Database
 
               ```sql
               SELECT *
@@ -119,13 +121,13 @@
               WHERE FirstName = "Edgar" And LastName = "Codd";
               ```
 
-              ### MongoDB
+              #### MongoDB
 
               ```javascript
               db.spantree.find({name: "Eric", lastName: "Evans"});
               ```
 
-              ### Elasticsearch
+              #### Elasticsearch
 
               ```json
               GET /spantree/_search
@@ -136,16 +138,10 @@
               ```
             </script>
           </section>
+          
           <section data-markdown>
             <script type="text/template">
-              ### Searching Across Fields
-
-              <!-- TODO: Fill in with multi-match example -->
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Word Derivatives
+              ### What People Expect
 
               <table class="examples">
                 <tbody>
@@ -195,6 +191,27 @@
               </table>
             </script>
           </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### What People Expect
+              #### Searching Across Fields
+
+              
+              ```
+              {
+                "product": {
+                  "name": "nifty doodad",
+                  "description": "this is an example"
+                }
+              }
+              ```
+
+              This document should match <em>example doodad</em>
+
+              
+              <!-- TODO: Fill in with multi-match example -->
+            </script>
+          </section>
         </section>
         <section class="screenshots">
           <section data-markdown>
@@ -204,49 +221,49 @@
           </section>
           <section data-markdown class="screenshot-dark">
             <script type="text/template">
-              ### Wicked Fast.
+              ### Wicked Fast
 
               ![ApacheBench Results](images/ab-results.png)
             </script>
           </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Highly Configurable.
+              ### Highly Configurable
 
               ![HEAD Configuration](images/es-configurable.png)
             </script>
           </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Free and Open Source.
+              ### Free and Open Source
 
               ![ES Github Repo](images/es-github.png)
             </script>
           </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Distributed and Fault Tolerant.
+              ### Distributed and Fault Tolerant
 
               ![ES Github Repo](images/es-karmi.png)
             </script>
           </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
-              ### Good at Handling Lots of Data.
+              ### Good at Handling Lots of Data
 
               ![ES Github Big Data](images/es-big-data-github.png)
             </script>
           </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
-              ### ...Also good at Unstructured Data.
+              ### ...Also Works With Unstructured Data
 
               ![ES Hamlet](images/es-shakespeare-json.png)
             </script>
           </section>
           <section data-markdown class="screenshot-dark">
             <script type="text/template">
-              ### ...And Real-Time Analytics.
+              ### ...And Real-Time Analytics
 
               ![ES Hamlet](images/logstash-search-screenshot.png)
             </script>
@@ -294,7 +311,6 @@
               ![Vault](images/safe.svg)
             </script>
           </section>
-          <!-- TODO: Fill in the rest from Keynote -->
         </section>
         <section>
           <section data-markdown>

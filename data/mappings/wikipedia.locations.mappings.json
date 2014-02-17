@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "location": {
+      "properties": {
+        "keywords": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "coordinates": {
+          "type": "geo_point"
+        }
+      }
+    }
+  }
+}

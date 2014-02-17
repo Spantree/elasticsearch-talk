@@ -46,4 +46,9 @@ class elasticsearch_talk(
     require   => File["${sense_root}/app/${editor_replace_file}"],
     logoutput => on_failure
   }
+
+  elasticsearch_talk::index { "wikipedia-02":
+    bulk_file => 'wikipedia.locations.json.bulk',
+    mapping_file => 'wikipedia.locations.mappings.json'
+  }
 }

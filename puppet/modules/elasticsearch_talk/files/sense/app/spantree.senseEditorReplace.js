@@ -18,6 +18,8 @@ require(['require','ace'], function (require) { require(['app'], function() {
       var url = "http://" + window.location.hostname + "/" + hash.replace(/^#/, '') + ".sense";
       var req = $.get(url)
 
+      document.title = hash.replace(/^#/, '').replace(/-/, ' ');
+
       // if successful, replace the ace editor contents with the response
       // body
       req.done(replaceEditorContents);

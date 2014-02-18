@@ -179,13 +179,13 @@
               ```sql
               SELECT *
               FROM Person INNER JOIN Scientist ON Person.ID = Scientist.ID
-              WHERE FirstName = "Edgar" And LastName = "Codd";
+              WHERE FirstName LIKE "Edgar%" And LastName = "Codd";
               ```
 
               #### MongoDB
 
               ```javascript
-              db.spantree.find({name: "Eric", lastName: "Evans"});
+              db.spantree.find({firstName: "Eric", lastName: "Evans"});
               ```
 
               #### Elasticsearch
@@ -705,71 +705,6 @@
               ### Mappings and analysis
 
               ![Mapping and analysis](images/mapping-analysis.svg)
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Example analysis configuration
-
-              ```json
-              {
-                "analysis" : {
-                  "analyzer" : {
-                    "predefined_index_analyzer" : {
-                      "type" : "custom",
-                      "tokenizer" : "standard",
-                      "filter" : [
-                          "lowercase",
-                          "asciifolding",
-                          "shingle_filter"
-                      ]
-                    },
-                    "predefined_search_analyzer" : {
-                      "type" : "custom",
-                      "tokenizer" : "standard",
-                      "filter" : [
-                          "lowercase",
-                          "asciifolding"
-                      ]
-                    }
-                  },
-                  "tokenizer" : {
-                      "ngram_tokenizer" : {
-                          "type" : "nGram",
-                          "min_gram" : "1",
-                          "max_gram" : "10",
-                          "token_chars" : [ "letter" ]
-                      }
-                  },
-                  "filter" : {
-                      "shingle_filter" : {
-                          "type" : "shingle",
-                          "min_shingle_size" : "2",
-                          "max_shingle_size" : "3",
-                          "output_unigrams" : false
-                      }
-                  }
-                }
-              }
-              ```
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Possible mapping
-
-              ```json
-                {
-                  "doodad": {
-                    "properties": {
-                      "description": {
-                        "type": "string",
-                        "index_analyzer": "predefined_index_analyzer",
-                        "search_analyzer": "predefine_search_analyzer"
-                    }
-                  }
-                }
-              ```
             </script>
           </section>
           <section data-markdown>

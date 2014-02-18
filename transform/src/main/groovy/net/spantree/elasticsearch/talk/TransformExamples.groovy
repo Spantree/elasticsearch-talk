@@ -11,7 +11,7 @@ class TransformExamples {
     static void writeExampleOut(Writer out, Map parts, Integer chapter, Integer exampleNumber) {
         println parts
         def title = parts.title.replaceAll(/^##/, '').trim()
-        def description = WordUtils.wrap(parts.description?.replaceAll(/\s+/, ' '), 40)
+        def description = WordUtils.wrap(parts.description?.replaceAll(/\s+/, ' '), 40).trim()
         def request = parts.request?.replaceAll(/`/, '')?.trim()
         def payload = parts.payload?.replaceAll(/```\w*/, '')?.trim()
 

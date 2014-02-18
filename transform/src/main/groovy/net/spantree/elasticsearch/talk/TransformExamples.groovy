@@ -16,7 +16,7 @@ class TransformExamples {
         def payload = parts.payload?.replaceAll(/```\w*/, '')?.trim()
 
         if(payload) {
-            payload = request.endsWith('_bulk') ? payload : JsonOutput.prettyPrint(payload)
+            payload = request.endsWith('_bulk') ? payload : JsonOutput.prettyPrint(payload).replaceAll(/\{\s+\}/, '{}')
         }
 
         out.writeLine "# ${chapter}.${exampleNumber}: ${title}"

@@ -44,7 +44,7 @@
           ],
           "tokenizer": "standard"
         },
-        "sorted": {
+        "sortable": {
           "type": "custom",
           "filter": [
             "asciifolding",
@@ -52,15 +52,6 @@
             "alpha_space"
           ],
           "tokenizer": "keyword"
-        },
-        "alpha_space_only": {
-            "type": "custom",
-            "filter": [
-              "asciifolding",
-              "lowercase",
-              "alpha_space"
-            ],
-            "tokenizer": "keyword"
         },
         "text_delimited": {
           "type": "custom",
@@ -108,9 +99,9 @@
               "type": "string",
               "index": "analyzed"
             },
-            "alpha_space_only" : {
+            "sortable" : {
               "type" : "string",
-              "analyzer" : "alpha_space_only",
+              "analyzer" : "sortable",
               "include_in_all" : false
             },
             "edge" : {
@@ -137,9 +128,9 @@
               "type": "string",
               "index": "analyzed"
             },
-            "alpha_space_only" : {
+            "sortable" : {
               "type" : "string",
-              "analyzer" : "alpha_space_only",
+              "analyzer" : "sortable",
               "include_in_all" : false
             },
             "edge" : {

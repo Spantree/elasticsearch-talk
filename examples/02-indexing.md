@@ -14,20 +14,6 @@
 
 `GET /spantree/_search`
 
-```json
-{
-  "query": {
-    "bool": {
-      "must": [
-        {
-    	    "match_all" : { }
-        }
-      ]
-    }
-  }
-}
-```
-
 ## Indexing Cedric with a known ID
 
 `PUT /spantree/people/cedric`
@@ -100,17 +86,3 @@
 ## Reviewing the Whole List
 
 `GET /spantree/_search`
-
-```json
-{
-  "query": {
-    "bool": {
-      "must": [
-        {
-    	    "match_all" : { }
-        }
-      ]
-    }
-  }
-}
-```

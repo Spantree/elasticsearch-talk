@@ -55,6 +55,11 @@ class elasticsearch_talk(
     delete_only  => true
   }
 
+  elasticsearch_talk::index { 'wikipedia':
+    bulk_file    => 'wikipedia.locations.json.bulk',
+    mapping_file => 'wikipedia.locations.mappings.json'
+  }
+
   elasticsearch_talk::index { 'wikipedia-mappings-simple':
     delete_only  => true
   }
@@ -63,9 +68,20 @@ class elasticsearch_talk(
     delete_only  => true
   }
 
-  elasticsearch_talk::index { 'wikipedia':
-    bulk_file    => 'wikipedia.locations.json.bulk',
-    mapping_file => 'wikipedia.locations.mappings.json'
+  elasticsearch_talk::index { 'wikipedia-mappings-edgengrams':
+    delete_only  => true
+  }
+
+  elasticsearch_talk::index { 'wikipedia-mappings-multifield':
+    delete_only  => true
+  }
+
+  elasticsearch_talk::index { 'wikipedia-mappings-stemmed':
+    delete_only  => true
+  }
+
+  elasticsearch_talk::index { 'wikipedia-mappings-synonyms':
+    delete_only  => true
   }
 
   class { 'elasticsearch_talk::divvy': }

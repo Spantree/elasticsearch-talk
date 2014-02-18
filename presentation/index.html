@@ -616,37 +616,146 @@
             <script type="text/template">
               ### Search API
 
-              <!-- TODO: Simple Example -->
+              ```
+              curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
+              ```
+
+              or
+
+              ```
+              curl -XGET http://esdemo.local:9200/wikipedia/_search -d '{
+                "query" : {
+                  "term" : { "about" : "lake" }
+                }
+              }
+              ```
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Types of Queries
+              <h3>Types of Queries</h3>
 
-              <!-- TODO: Fill in with table for query_string, term, etc -->
+              <table>
+              <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
+
+              <tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr> 
+             <tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr> 
+             <tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr> 
+             <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
+           <tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
+             <tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
+             <tr><td>   prefix </td><td> query string   </td><td>  simple query </td><tr> 
+            <tr><td>    range</td><td> regexp   </td><td> span first </td><tr> 
+         <tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
+           <tr><td>     span or  </td><td> span term  </td><td> term </td><tr> 
+            <tr><td>   terms </td><td> top children  </td><td> wildcard</td><tr> 
+            <tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr> 
+              </table>
             </script>
           </section>
+          <section data-markdown>
+            <script type="text/template">
+              <h3>Types of Queries</h3>
+
+              <table>
+              <tr><td>match</td><td><b>multi match </b> </td><td> <b> bool </b></td><tr>                
+
+              <tr><td> <b>boosting </b>  </td><td> common terms </td><td nowrap> constant score </td><tr> 
+             <tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr> 
+             <tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr> 
+             <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
+           <tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
+             <tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
+             <tr><td>   prefix </td><td> query string   </td><td>  simple query </td><tr> 
+            <tr><td>   <b> range </b></td><td> regexp   </td><td> span first </td><tr> 
+         <tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
+           <tr><td>     span or  </td><td> span term  </td><td> <b>term </b> </td><tr> 
+            <tr><td>   terms </td><td> top children  </td><td> wildcard</td><tr> 
+            <tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr> 
+              </table>
+            </script>
+          </section>
+
           <section data-markdown>
             <script type="text/template">
               ### Scoring
 
-              <!-- TODO: Fill in  -->
+              * Defaults to TF/IDF
+              * Modified via boosting
+              * Can rewrite scoring engine
+
+              </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+            ### Queries vs Filters
+
+            <table>
+            <tr>
+              <th>Queries</th>
+              <th>Filters</th>
+            </tr>
+            <tr>
+              <td>Fuzzy</td>
+              <td>Boolean</td>
+            </tr>
+            <tr>
+              <td>Slower</td>
+              <td>Faster</td>
+            </tr>
+            <tr>
+              <td>Never cached</td>
+              <td>Cacheable</td>
+            </tr>
+            </table>
+
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Queries vs Filters
+              ### Filter on Red and Green
 
-              <!-- TODO: Fill in  -->
+              ![Ornaments](images/red-and-green-ornaments.jpg)
+              ![MM](images/red-green-m-m.jpg)
+              ![RedGreen](images/red_green.jpg)
+
+
+
             </script>
           </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Query on Red and Green - Also returns
+
+              ![Red](images/red.png)
+              ![Green](images/green.png)
+              ![Blue](images/blue.svg)
+
+
+            </script>
+          </section>
+
+
           <section data-markdown>
             <script type="text/template">
               ### Facets
 
-              <!-- TODO: Fill in  -->
-            </script>
+              ![Amazon](images/amazon-java.png)
+              ![Airbnb](images/airbnb.png)
+
+              </script>
           </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Aggregations
+
+              * The new facets
+              * Allow for hierarchical data analysis
+
+              </script>
+          </section>
+
         </section>
         <section>
           <section data-markdown>

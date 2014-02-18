@@ -803,7 +803,7 @@
               curl -XPUT 'http://esdemo.local:9200/wikipedia/location/1' -d '{
                 "name": "Spantree Technology Group, LLC",
                 "about" : "Spantree is a boutique, Chicago-based consultancy delivering intelligent, high quality software solutions for the web.",
-                "lastUpdated":"2012-04-30T02:14:41+0000",
+                "lastUpdated":"2013-12-30T02:14:41+0000",
                 "yearFounded":2009
               }'
               ```
@@ -821,15 +821,50 @@
             <script type="text/template">
               ### Create or Update Document
 
-              <!-- TODO: Fill in -->
+              ```bash
+              curl -XPUT 'http://esdemo.local:9200/wikipedia/location/1' -d '{
+                "name": "Spantree Technology Group, LLC",
+                "about" : "Spantree is a boutique, Chicago-based consultancy delivering intelligent, high quality software solutions for the web.",
+                "lastUpdated":"2013-12-30T02:14:41+0000",
+                "yearFounded":2009
+              }'
+              ```
+
+              ```bash
+
+              curl -XPOST 'http://esdemo.local:9200/wikipedia/location/' -d '{
+                "name": "Spantree Technology Group, LLC",
+                "about" : "Spantree is a boutique, Chicago-based consultancy delivering intelligent, high quality software solutions for the web.",
+                "lastUpdated":"2013-12-30T02:14:41+0000",
+                "yearFounded":2009
+              }'
+              ```
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Update API
+              
+              ```bash
+              curl -XPOST 'http://esdemo.local:9200/wikipedia/location/1/_update' -d '{
+                "script": "ctx._source.lastUpdated = date",
+                "params": {
+                  "date": "2014-02-18T02:14:41+0000"
+                }
+              }'
+              ```
 
-              <!-- TODO: Fill in with partial and scripted examples -->
-            </script>
+              ```bash
+              curl -XPOST 'http://esdemo.local:9200/wikipedia/location/1/_update' -d '{
+                "doc": {
+                  "date": "2014-02-18T02:14:41+0000"
+                }
+              }'
+              ```
+
+
+
+              </script>
           </section>
           <section data-markdown>
             <script type="text/template">
@@ -1036,6 +1071,7 @@
               ### Indexing
               ```java
               import static org.elasticsearch.common.xcontent.XContentFactory.*;
+              
 
               IndexResponse response = client.prepareIndex("wikipedia", "locations", "lake_point_tower")
                   .setSource(jsonBuilder()

@@ -977,6 +977,7 @@
               ### Indexing
               ```java
               import static org.elasticsearch.common.xcontent.XContentFactory.*;
+              
 
               IndexResponse response = client.prepareIndex("wikipedia", "locations", "lake_point_tower")
                   .setSource(jsonBuilder()

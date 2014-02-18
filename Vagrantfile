@@ -5,10 +5,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "estalk-precise-vbox"
 
   # Use this if connecting locally from the Spantree network
-  config.vm.box_url = "http://10.0.1.54/estalk-precise-vbox-x86_64.box"
+  # config.vm.box_url = "http://10.0.1.54/estalk-precise-vbox-x86_64.box"
 
   # Use this if connecting from the outside internet
-  # config.vm.box_url = "http://spantree-vagrant.s3.amazonaws.com/estalk-precise-vbox-x86_64.box"
+  config.vm.box_url = "http://spantree-vagrant.s3.amazonaws.com/estalk-precise-vbox-x86_64.box"
 
   config.vm.synced_folder ".", "/usr/src/elasticsearch-talk", :create => "true"
   config.vm.synced_folder "visualizations", "/var/www/visualizations", :create => "true"

@@ -1,6 +1,6 @@
 # Search API
 
-## Query String Search
+## Searching with Query String
 
 Find the term "college" anywhere in the documents
 
@@ -20,7 +20,7 @@ Find the term "college" anywhere in the documents
 }
 ```
 
-## Multiple Terms
+## Searcing for Multiple Terms
 
 Find the terms "lake" and "shore" anywhere in the documents.
 
@@ -40,7 +40,7 @@ Find the terms "lake" and "shore" anywhere in the documents.
 }
 ```
 
-## Minimum Should Match
+## Adding Minimum Should Match
 
 Find the terms "lake" and "shore" anywhere in the documents.  Both the terms should be present.
 
@@ -61,11 +61,7 @@ Find the terms "lake" and "shore" anywhere in the documents.  Both the terms sho
 }
 ```
 
-## Field Boosting
-
-Find the term "theater" anywhere in the documents,
-boosting matches on name higher than matches on
-description or about.
+## Searching a Subset of Fields
 
 `GET /wikipedia/_search`
 
@@ -76,31 +72,7 @@ description or about.
       "must": [
         {
           "query_string": {
-            "fields": ["name^2", "keywords^1.5", "description", "about"],
-            "query": "theater",
-            "minimum_should_match": "100%"
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-## Boolean OR Queries
-
-Find the term "theater" *or* "theatre" anywhere in the documents, boosting matches on name higher than matches on description or about.
-
-`GET /wikipedia/_search`
-
-```json
-{
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "fields": ["name^2", "keywords^1.5", "description", "about"],
+            "fields": ["name", "keywords"],
             "query": "theater OR theatre"
           }
         }
@@ -110,30 +82,7 @@ Find the term "theater" *or* "theatre" anywhere in the documents, boosting match
 }
 ```
 
-## Boolean AND Queries
-
-Find the term "theater" *and* "theatre" anywhere in the documents, boosting matches on name higher than matches on description or about. This should be a smaller set.
-
-`GET /wikipedia/_search`
-
-```json
-{
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "fields": ["name^2", "keywords^1.5", "description", "about"],
-            "query": "theater AND theatre"
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-## Return subset of fields
+## Returning subset of fields
 
 Return only the name and keywords fields.
 
@@ -147,7 +96,7 @@ Return only the name and keywords fields.
       "must": [
         {
           "query_string": {
-            "fields": ["name^2", "keywords^1.5"],
+            "fields": ["name", "keywords"],
             "query": "theater OR theatre"
           }
         }
@@ -157,15 +106,142 @@ Return only the name and keywords fields.
 }
 ```
 
-## TODO: Match Query
+## Field Boosting
 
-## TODO: Multimatch
+Find the term "theater" anywhere in the documents,
+boosting matches on name higher than matches on
+description or about.
 
-## TODO: Filters
+`GET /wikipedia/_search`
 
-## TODO: Explain
+```json
+{
+  "fields": ["name", "keywords"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["name^2", "keywords^1.5", "about"],
+            "query": "theater",
+            "minimum_should_match": "100%"
+          }
+        }
+      ]
+    }
+  }
+}
+```
 
-## Highlight Matches
+## Searching with Boolean Syntax
+
+Find the term "theater" and "theatre" anywhere in the documents.
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater AND theatre"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+## Excluding Results
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater OR theatre"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "query_string": {
+            "fields": ["name"],
+            "query": "theatre"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+## Narrowing Results
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater OR theatre"
+          }
+        },
+        {
+          "query_string": {
+            "query": "pier"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+## Using Should Clauses
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater OR theatre"
+          }
+        },
+        {
+          "query_string": {
+            "query": "pier"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+## Highlighting Matched Terms
 
 Search for the term "Chicago" and highlight matches.
 
@@ -190,6 +266,59 @@ Search for the term "Chicago" and highlight matches.
           "name": {},
           "description": {}
       }
+  }
+}
+```
+
+## Explaining Results
+
+`GET /wikipedia/locations/chicago_shakespeare_theater/_explain`
+
+```json
+{
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords", "description"],
+      "query": "navy pier"
+    }
+  }
+}
+```
+
+## Term Filtering
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "query": {
+    "match_all": {}
+  },
+  "filter": {
+    "term" : {
+      "name" : ["theater", "theatre"]
+    }
+  }
+}
+```
+
+## Geo-Distance Filtering
+
+`GET /divvy/station/_search`
+
+```json
+{
+  "query": {
+    "match_all": {}
+  },
+  "filter": {
+    "geo_distance" : {
+      "distance": "1mi",
+      "location" : {
+        "lat": 41.886732,
+        "lon": -87.655979
+      }
+    }
   }
 }
 ```

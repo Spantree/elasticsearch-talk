@@ -68,6 +68,33 @@
 }
 ```
 
+## Get gender terms / stats via facet
+
+`GET /divvy/trip/_search`
+
+```json
+{
+  "query" : {
+    "match_all" : {  }
+  },
+  "facets" : {
+    "gender" : {
+      "terms" : {
+        "field" : "gender",
+        "size" : 10
+      },
+      "aggs": {
+      "trip_duration_stats": {
+        "stats": {
+          "field": "trip_duration"
+        }
+      }
+    }
+  }
+}
+```
+
+
 
 ## Get buckets based on Spantree's office
 
@@ -98,7 +125,25 @@
 }
 ```
 
-## Get bike trips by quarter
+## Get bike trip duration histogram
+`GET /divvy/trip/_search`
+
+```json
+{
+    "aggs" : {
+        "trip_length" : {
+            "histogram" : {
+                "field" : "trip_duration",
+                "interval" : 300,
+                "min_doc_count" : 10
+            }
+        }
+    }
+}
+```
+
+
+## Get bike trips by week
 
 `GET /divvy/trip/_search`
 ```json
@@ -107,7 +152,7 @@
         "trips_over_time" : {
             "date_histogram" : {
                 "field" : "start_time",
-                "interval" : "quarter"
+                "interval" : "week"
             }
         }
 

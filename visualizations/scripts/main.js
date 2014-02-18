@@ -28,7 +28,7 @@ define(['scripts/d3.v3', 'scripts/elasticsearch'], function(d3, elasticsearch) {
             height = 300,
             radius = Math.min(width, height) / 2;
 
-        var color = ['#ff7f0e', '#d62728', '#2ca02c', '#1f77b4'];
+        var color = ['#00A9E0', '#D70060', '#61AE24'];
 
         var arc = d3.svg.arc()
             .outerRadius(radius - 60)
@@ -64,10 +64,9 @@ define(['scripts/d3.v3', 'scripts/elasticsearch'], function(d3, elasticsearch) {
             })
             .attr("dy", ".35em")
             .style("text-anchor", "middle")
-            .style("fill", "white")
+            .style("fill", "black")
             .text(function(d) {
                 return d.data.key;
             });
     });
-
 });

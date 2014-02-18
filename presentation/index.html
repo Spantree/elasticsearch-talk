@@ -338,8 +338,8 @@
               ### Finding matching documents
 
               * Query is a set of terms, Q
-              * Document has a set of terms, D
-              * Find all D that intersects Q
+              * Each document has a set of terms, D
+              * Find all D that intersect Q
               * We will need a special data structure
             </script>
           </section>
@@ -474,7 +474,7 @@
 
               * <em>term frequency ($tf$)</em> number of times a term occurs in a particular document
               * <em>document frequency ($df$)</em> number of all documents a term occurs in 
-              * <em>inverse document frequency (idf)</em> is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
+              * <em>inverse document frequency ($idf$)</em> is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
 
             </script>
           </section>
@@ -714,7 +714,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Sharding and Replication
+              ### Clustering: Sharding and Replication
 
               * <em>Shard</em> - Single Lucene index (portion of Elasticsearch index)
                 * More shards means better write performance

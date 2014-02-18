@@ -201,7 +201,7 @@
               #### Searching Across Fields
 
               
-              ```
+              ```json
               {
                 "product": {
                   "name": "nifty doodad",
@@ -421,7 +421,7 @@
             <script type="text/template">
               ### Documents
 
-              ```
+              ```json
               {
                 "_index": "index_name",
                 "_type": "document_type",
@@ -476,7 +476,7 @@
             <script type="text/template">
               ### Example analysis configuration
 
-              ```
+              ```json
               {
                 "analysis" : {
                   "analyzer" : {
@@ -523,7 +523,7 @@
             <script type="text/template">
               ### Possible mapping
 
-              ```
+              ```json
                 {
                   "doodad": {
                     "properties": {
@@ -575,19 +575,28 @@
             <script type="text/template">
               ### Anatomy of a Request
 
-              <!-- TODO: Fill in with curl example -->
-            </script>
+              ```bash
+              curl -XPUT 'http://esdemo.local:9200/wikipedia/location/1' -d '{
+                "name": "Spantree Technology Group, LLC",
+                "about" : "Spantree is a boutique, Chicago-based consultancy delivering intelligent, high quality software solutions for the web.",
+                "lastUpdated":"2012-04-30T02:14:41+0000",
+                "yearFounded":2009
+              }'
+              ```
+
+              </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Automatic Mappings
 
-              <!-- TODO: Fill in -->
-            </script>
+              ![AutomaticMapping](images/automatic-mapping.png)              
+              </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Create or Update Document
+
               <!-- TODO: Fill in -->
             </script>
           </section>
@@ -601,8 +610,19 @@
           <section data-markdown>
             <script type="text/template">
               ### Bulk API
+       
+              ```bash
+              $ cat divvy.json
 
-              <!-- TODO: Fill in with bulk example -->
+              {"index": {"_type": "station", "_id": "119"}}
+              {"capacity": 15, "name": "Lake Park Ave & 56th St", "location": {"lat": 41.793242, "lon": -87.587782}}
+              {"index": {"_type": "station", "_id": "353"}}
+              {"capacity": 15, "name": "Ada St & Washington Blvd", "location": {"lat": 41.88283, "lon": -87.661206}}
+              ```
+
+              ```bash
+              curl -f -s -S -XPOST --data-binary "@divvy.json" http://esdemo.local:9200/divvy/_bulk
+              ```
             </script>
           </section>
         </section>
@@ -616,13 +636,13 @@
             <script type="text/template">
               ### Search API
 
-              ```
+              ```bash
               curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
               ```
 
               or
 
-              ```
+              ```bash
               curl -XGET http://esdemo.local:9200/wikipedia/_search -d '{
                 "query" : {
                   "term" : { "about" : "lake" }

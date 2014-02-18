@@ -657,29 +657,84 @@
           <section data-markdown>
             <script type="text/template">
               ### Installing
-
-              <!-- TODO: Fill in with Maven or Gradle import -->
+              ![JavaApiInstall](images/JavaApiInstall.png)
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Connecting
+                ```
+                import static org.elasticsearch.node.NodeBuilder.*;
 
+                // on startup
+
+                Node node = nodeBuilder().node();
+                Client client = node.client();
+
+                // on shutdown
+
+                node.close();
+                ```
               <!-- TODO: Fill in with ES Client setup boilerplate for Java  -->
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Indexing
+              ```java
+              import static org.elasticsearch.common.xcontent.XContentFactory.*;
 
-              <!-- TODO: Fill in with simple index code sample in Java -->
+              IndexResponse response = client.prepareIndex("wikipedia", "locations", "lake_point_tower")
+                  .setSource(jsonBuilder()
+                    .startObject()
+                        .field("name", "Lake Point Tower")
+                        .field("external_links", "http://rdf.freebase.com/ns/m/07k2z6")
+                        .field("keywords", ["residential","skyscrapers"])
+                    .endObject()
+                  )
+                  .execute()
+                  .actionGet();
+              ```
+
+              ```bash
+              curl -XPUT 'http://localhost:9200/wikipedia/locations/lake_point_tower' -d '{
+                "locations" : {
+                    "properties" : {
+                      "name" : "Lake Point Tower",
+                      "external_links" : "http://rdf.freebase.com/ns/m/07k2z6",
+                      "keywords" : ["residential","skyscrapers"]
+                    }
+                }
+              }'
+              ```
+
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Querying
 
-              <!-- TODO: Fill in with simple bool query example in Java -->
+
+              ```java
+              import org.elasticsearch.action.search.SearchResponse;
+              import org.elasticsearch.action.search.SearchType;
+              import org.elasticsearch.index.query.QueryBuilders.*;
+              SearchResponse response = client.prepareSearch("wikipedia")
+                .setTypes("locations")
+                .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+                .setQuery(QueryBuilders.termQuery("name", "lake")) // Query
+                .execute()
+                .actionGet();
+              ```
+
+              ```bash
+              curl -XGET 'http:localhost:9200/wikipedia/locations/' -d '{
+                "query" : {  
+                   "term" : { "name" : "lake"}
+                  }
+              }'
+              ```
+
             </script>
           </section>
         </section>

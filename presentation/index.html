@@ -179,13 +179,13 @@
               ```sql
               SELECT *
               FROM Person INNER JOIN Scientist ON Person.ID = Scientist.ID
-              WHERE FirstName = "Edgar" And LastName = "Codd";
+              WHERE FirstName LIKE "Edgar%" And LastName = "Codd";
               ```
 
               #### MongoDB
 
               ```javascript
-              db.spantree.find({name: "Eric", lastName: "Evans"});
+              db.spantree.find({firstName: "Eric", lastName: "Evans"});
               ```
 
               #### Elasticsearch
@@ -612,7 +612,7 @@
             <script type="text/template">
               ### The Lucene Library
 
-              ![Lucene](images/lucene.svg)
+              ![Lucene](images/lucene.png)
             </script>
           </section>
           <section data-markdown>

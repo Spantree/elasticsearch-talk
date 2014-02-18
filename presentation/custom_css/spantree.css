@@ -101,3 +101,17 @@ table.documents td {
 	border-top: none;
 	border-bottom: 1px solid #000;
 }
+
+table.ourpictures {
+	margin: auto;
+}
+
+table.ourpictures td {
+	width: 200px;
+	font-size: 14pt;
+	line-height: 20pt;
+}
+
+table.ourpictures td img {
+	height: 220px;
+}

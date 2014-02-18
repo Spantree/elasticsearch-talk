@@ -562,8 +562,6 @@
               * <em>Tribes</em> - Single node need not belong to a single cluster 
             </script>
           </section>
-          
-          
         </section>
         <section>
           <section data-markdown>
@@ -575,7 +573,13 @@
             <script type="text/template">
               ### Anatomy of a Request
 
-              <!-- TODO: Fill in with curl example -->
+              ```bash
+              curl -XPUT http://localhost:9200/wikipedia/locations/lake_shore_drive -d '{
+                "name": "Lake Shore Drive",
+                "lastUpdated": "2012-04-14T18:22:42+0000",
+                "wikipedia_numeric_id": 890522
+              }'
+              ```
             </script>
           </section>
           <section data-markdown>
@@ -635,7 +639,7 @@
             <script type="text/template">
               <h3>Types of Queries</h3>
 
-              <table>
+              <table class="laundry-list">
               <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
 
               <tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr> 

@@ -101,3 +101,7 @@ table.documents td {
 	border-top: none;
 	border-bottom: 1px solid #000;
 }
+
+table.laundry-list td {
+	padding-right: 40px;
+}

@@ -1,97 +1,186 @@
 # Mapping & Analysis
 
-## Mapping a geopoint field
+## Creating a new index with explicit mappings
 
-Elasticsearch supports 'geopoint' types for latitude and longitude values. After this, we should be able to run our distance query.
-
-`PUT /wikipedia_mapping/locations/_mapping`
+`POST /wikipedia-mappings-simple/`
 
 ```json
 {
-  "location" : {
-        "properties" : {
-            "coordinates" : {"type" : "geo_point"}
+  "mappings": {
+    "locations": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "wikipedia_numeric_id": {
+          "type": "long"
+        },
+        "lastUpdated": {
+          "type": "date"
+        },
+        "coordinates": {
+          "type": "geo_point"
         }
+      }
     }
+  }
 }
 ```
 
-## Mapping a multifield (RETITLE/NEW DESCRIPTION)
+## Inserting a Few Documents
 
-Elasticsearch provides a multi_field type, which allows you to map the same field value to several core types. In this case, we're mapping the name field to a tokenized value (for text searching), as well a not analyzed field (for faceting and sorting).
-
-`PUT /wikipedia_multifield/locations/_mapping`
+`POST /wikipedia-mappings-simple/_bulk`
 
 ```json
-  {
-  "location" : {
-        "properties" : {
-            "keyword" : {"type":"string", "index": "not_analyzed"}
-        }
-    }
-}
+{"index":{"_id":"frontera_grill","_type": "locations"}}
+{"name": "Frontera Grill","keywords": ["restaurants","chicago,illinois"],"about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood.","wikipedia_numeric_id": 7353370,"lastUpdated": "2012-04-30T02:14:41+0000","coordinates": [-87.630806,41.890575]}
+{"index":{"_id":"allerton_hotel","_type": "locations"}}
+{"name": "Allerton Hotel","keywords": ["hotels","chicago,illinois","landmarks","skyscrapers"],"geo_geometry_type": "Point","about": "The Allerton Hotel is a 25-story 360 foot (110 m) hotel skyscraper along the Magnificent Mile in the Near North Side community area of Chicago, Illinois.","wikipedia_numeric_id": 11221483,"coordinates": [-87.6238,41.8952]}
+{"index":{"_id":"lane_technical_college_prep_high_school","_type": "locations"}}
+{"name": "Lane Technical College Prep High School","keywords": ["chicago","public","schools","magnet","illinois","educational","institutions","established","in1908","chicago,illinois"],"about": "Albert G. Lane Technical College Preparatory High School (also known as Lane Tech), is a public, four-year, magnet high school located on the northwest side of Chicago.","wikipedia_numeric_id": 3616501,"lastUpdated": "2012-08-14T07:09:31+0000"}
 ```
 
-## Mapping a Multifield pt. 2
+## Reviewing the Mappings
 
-Elasticsearch provides a multi_field type, which allows you to map the same field value to several core types. In this case, we're mapping the name field to a tokenized value (for text searching), as well a not analyzed field (for faceting and sorting).
+`GET /wikipedia-mappings-simple/_mapping`
+
+## Seeing How a Name Value Gets Analyzed
+
+`GET /wikipedia-mappings-simple/_analyze?field=name&text=Lane Tech: College Prep High School`
+
+## Updating the mappings
+
+`PUT /wikipedia-mappings-simple/locations/_mapping`
 
 ```json
 {
-  "location" : {
-        "properties" : {
-            "name" : {
-              "type" : "multi_field",
-              "fields" : {
-                "name":{"type":"string", "index":"analyzed"},
-                "name_not_analyzed":{"type":"string", "index":"not_analyzed"}
-              }
-            }
-        }
+  "locations": {
+    "properties": {
+      "phone_number": {
+        "type": "string"
+      }
     }
+  }
 }
 ```
 
-## Sorting Multifield Strings
+## Adding the Chicago History Museum
 
-Sorting using our new unanalyzed field
-
-`GET /wikipedia/locations/_search`
+`PUT /wikipedia-mappings-simple/locations/chicago_history_museum`
 
 ```json
 {
-  "fields": ["name", "about", "coordinates"],
+  "name": "Chicago History Museum",
+  "phone_number": "(312) 642-4600"
+}
+```
+
+## Trying to find the phone number in a different format
+
+`GET /wikipedia-mappings-simple/_search`
+
+```json
+{
   "query": {
     "bool": {
-      "must": [{
-        "query_string": {"query": "chicago"}
-      }]
+      "must": [
+        {
+          "match": {
+            "phone_number": "312.642.4600"
+          }
+        }
+      ]
     }
-  },
-  "sort": [{"name_not_analyzed": "asc"}]
+  }
 }
 ```
 
-## Define all Mappings
+## Adding a Proper Phone Number Mapping
 
-Now, let's define all the mappings we'll use for this demo
-
-`PUT /wikipedia_define_mappings/locations/_mapping`
+`POST /wikipedia-mappings-phone/`
 
 ```json
 {
-  "location" : {
-        "properties" : {
-            "coordinates" : {"type" : "geo_point"},
-            "keyword" : {"type":"string", "index":"not_analyzed"},
-            "name" : {
-              "type" : "multi_field",
-              "fields" : {
-                "name":{"type":"string", "index":"analyzed"},
-                "name_not_analyzed":{"type":"string", "index":"not_analyzed"}
-              }
-            }
+  "settings": {
+    "analysis": {
+      "filter": {
+        "digits_only": {
+          "type": "pattern_replace",
+          "pattern": "\\D",
+          "replacement": ""
         }
+      },
+      "analyzer": {
+        "phone_number": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": [
+            "digits_only"
+          ]
+        }
+      }
     }
+  },
+  "mappings": {
+    "locations": {
+      "properties": {
+        "phone_number": {
+          "type": "string",
+          "analyzer": "phone_number"
+        }
+      }
+    }
+  }
 }
 ```
+
+## Testing Our New Field Mapping
+
+`GET /wikipedia-mappings-phone/_analyze?field=phone_number&text=(312) 642-4600`
+
+## Indexing the Chicago History Museum Again
+
+`PUT /wikipedia-mappings-phone/locations/chicago_history_museum`
+
+```json
+{
+  "name": "Chicago History Museum",
+  "phone_number": "(312) 642-4600"
+}
+```
+
+## Searching for the History Museum Again
+
+`GET /wikipedia-mappings-phone/_search`
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "phone_number": "312.642.4600"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+## TODO: Not analyzed
+
+## TODO: Not stored
+
+## TODO: Snowball Stemming
+
+## TODO: Synonyms
+
+## TODO: Edge NGrams
+
+## TODO: Multi-Field
+

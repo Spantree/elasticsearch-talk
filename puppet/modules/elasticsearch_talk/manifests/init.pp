@@ -55,6 +55,14 @@ class elasticsearch_talk(
     delete_only  => true
   }
 
+  elasticsearch_talk::index { 'wikipedia-mappings-simple':
+    delete_only  => true
+  }
+
+  elasticsearch_talk::index { 'wikipedia-mappings-phone':
+    delete_only  => true
+  }
+
   elasticsearch_talk::index { 'wikipedia':
     bulk_file    => 'wikipedia.locations.json.bulk',
     mapping_file => 'wikipedia.locations.mappings.json'

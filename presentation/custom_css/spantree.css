@@ -119,3 +119,27 @@ table.ourpictures td {
 table.ourpictures td img {
 	height: 220px;
 }
+
+table.tf-idf { 
+	margin: auto;
+}
+
+table.tf-idf td {
+	padding-right: 40px;
+}
+
+table.scoring{
+	margin: auto;
+}
+
+table.scoring td {
+	padding-right: 40px
+}
+
+table.qvf{
+	margin: auto;
+}
+
+table.qvf td {
+	padding-right: 40px
+}

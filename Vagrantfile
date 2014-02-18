@@ -11,6 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://spantree-vagrant.s3.amazonaws.com/estalk-precise-vbox-x86_64.box"
 
   config.vm.synced_folder ".", "/usr/src/elasticsearch-talk", :create => "true"
+  config.vm.synced_folder "visualizations", "/var/www/visualizations", :create => "true"
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true

@@ -56,13 +56,11 @@
         "alpha_space_only": {
             "type": "custom",
             "filter": [
-              "standard",
               "asciifolding",
               "lowercase",
-              "stop",
               "alpha_space"
             ],
-            "tokenizer": "standard"
+            "tokenizer": "keyword"
         },
         "text_delimited": {
           "type": "custom",
@@ -103,6 +101,35 @@
   "mappings": {
     "location": {
       "properties": {
+        "name": {
+          "type": "multi_field",
+          "fields": {
+            "name": {
+              "type": "string",
+              "index": "analyzed"
+            },
+            "alpha_space_only" : {
+              "type" : "string",
+              "analyzer" : "alpha_space_only",
+              "include_in_all" : false
+            },
+            "edge" : {
+              "type" : "string",
+              "index_analyzer" : "edge_left",
+              "search_analyzer" : "standard",
+              "include_in_all" : false
+            },
+            "stemmed" : {
+              "type" : "string",
+              "analyzer" : "stemmed",
+              "include_in_all" : false
+            },
+            "synonyms": {
+              "type": "string",
+              "analyzer": "synonyms"
+            }
+          }
+        },
         "keywords": {
           "type" : "multi_field",
           "fields": {
@@ -110,7 +137,7 @@
               "type": "string",
               "index": "analyzed"
             },
-            "alphanum" : {
+            "alpha_space_only" : {
               "type" : "string",
               "analyzer" : "alpha_space_only",
               "include_in_all" : false

@@ -1,6 +1,6 @@
 # Sorting
 
-## Sorting Dates
+## Sorting Dates Chronologically
 
 Sorting documents matching "chicago" by last update time.
 
@@ -19,14 +19,14 @@ Sorting documents matching "chicago" by last update time.
   "sort": ["lastUpdated"]
 }
 ```
-## Sorting Dates Descending
+## Sorting Dates in Descending Order
 
 Sort documents matching "chicago" by last updated time, most recent first.
 
 `GET /wikipedia/_search`
 
 ```json
-{	
+{
   "fields": ["name", "lastUpdated"],
   "query": {
     "bool": {
@@ -36,23 +36,65 @@ Sort documents matching "chicago" by last updated time, most recent first.
   "sort": [{"lastUpdated": "desc"}]
 }
 ```
-## Sorting Strings
+## Sorting Strings The Wrong Way
 
-Specify a search result start/from value
+Sorting by strings is actually a bit trickier. In Lucene, sorts are based on individual terms in the inverted index. 
+Because our name field is tokenized, the first alphabetical token in the field value determines a field's ranking.
 
 `GET /wikipedia/_search`
 
 ```json
 {
-  "fields": ["name", "about", "coordinates"],
+  "fields": ["name"],
   "query": {
     "bool": {
       "must": [{
-        "query_string": {"query": "chicago"}
+        "query_string": {"query": "academy"}
       }]
     }
   },
   "sort": [{"name": "desc"}]
+}
+```
+
+## Configuring a Sortable String Analysis Chain
+
+To resolve this issue, we recommend setting up an analyzer specifically for string sorting. We've preconfigured an 
+'alpha_space_only' in the index which uses the 'keyword' tokenizer. This analyzer also lowercases and removes any 
+non-alphanumeric characters so punctuation symbols don't get sorted.
+
+`GET /wikipedia/_settings?name=*.alpha_space*.*`
+
+## Testing the Sortable String Analyzer
+
+When creating new analyzers, we recommend testing them out using the Analyze API to make sure they work as expected.
+
+`GET /wikipedia/_analyze?field=name.alpha_space_only&text=I wanna know what love is; I want you to show me!`
+
+## Storing the Sortable String in a Multi-Field
+
+For the name field, we want to do both full-text search and string sorting. So to make sure we can handle both, we 
+configure name to be a multi-field.
+
+`GET /wikipedia/location/_mapping`
+
+## Sorting Strings the Right Way
+
+Now that we've done all that, we simply swap out the sort field from the previous query to use `name.alpha_space_only`.
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name"],
+  "query": {
+    "bool": {
+      "must": [{
+        "query_string": {"query": "academy"}
+      }]
+    }
+  },
+  "sort": [{"name.alpha_space_only": "desc"}]
 }
 ```
 

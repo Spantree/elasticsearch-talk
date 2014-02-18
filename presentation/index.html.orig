@@ -81,14 +81,11 @@
             ![Java](images/java.svg)
             ![Groovy](images/groovy.svg)
             ![Grails](images/grails.svg)
-            ![Marionette.js](images/marionettejs.png)
-
 
             ![Dojo](images/dojo.svg)
             ![jQuery](images/jquery.svg)
             ![Coffeescript](images/coffeescript.svg)
             ![Backbone.js](images/backbone.png)
-
           </section>
         </section>
         <section>
@@ -138,8 +135,6 @@
                 {"query_string": {"query": "vannevar bush"}}
               ]}}}
               ```
-
-              <!--TODO: Add Elasticsearch family tree-->
             </script>
           </section>
           
@@ -201,7 +196,7 @@
               #### Searching Across Fields
 
               
-              ```json
+              ```
               {
                 "product": {
                   "name": "nifty doodad",
@@ -228,8 +223,6 @@
               ### Wicked Fast
 
               ![ApacheBench Results](images/ab-results.png)
-
-              <!--TODO: Annotate with what the screenshot actually says-->
             </script>
           </section>
           <section data-markdown class="screenshot">
@@ -326,247 +319,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### What does querying an index do?
-
-              * Find the documents that match the query
-              * Score the documents 
-
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Finding matching documents
-
-              * Query is a set of terms, Q
-              * Document has a set of terms, D
-              * Find all D that intersects Q
-              * We will need a special data structure
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Inverted index
-
-              ![Book Index](images/book-index.png)
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Inverted index
-
-              * Maps word to document or position
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Finding the right document
-
-              <table class="documents">
-                <tr>
-                  <th>0</th>
-                  <th>1</th>
-                  <th>2</th>
-                </tr>
-                <tr>
-                  <td>
-                    work it make it<br/>
-                    do it makes us<br/>
-                    harder better<br/>
-                    faster stronger
-                  </td>
-                  <td>
-                    more than hour,<br/>
-                    hour never<br/>
-                    ever after,<br/>
-                    work is over
-                  </td>
-                  <td>
-                    work it harder<br/>
-                    make it better<br/>
-                    do it faster<br/>
-                    makes us stronger
-                  </td>
-                </tr>
-              </table>
-              <br/>
-              <table style="margin: auto">
-                <tr>
-                  <td>work</td><td>&rarr;</td><td>0, 1, 2</td>
-                </tr>
-                <tr>
-                  <td>hour</td><td>&rarr;</td><td>1</td>
-                </tr>
-                <tr>
-                  <td>harder</td><td>&rarr;</td><td>0, 2</td>
-                </tr>
-              </table>
-
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Finding position in document
-
-              <table class="documents">
-                <tr>
-                  <th>0</th>
-                  <th>1</th>
-                  <th>2</th>
-                </tr>
-                <tr>
-                  <td>
-                    work it make it<br/>
-                    do it makes us<br/>
-                    harder better<br/>
-                    faster stronger
-                  </td>
-                  <td>
-                    more than hour,<br/>
-                    hour never<br/>
-                    ever after<br/>
-                    work is over
-                  </td>
-                  <td>
-                    work it harder<br/>
-                    make it better<br/>
-                    do it faster<br/>
-                    makes us stronger
-                  </td>
-                </tr>
-              </table>
-              <br/>
-              <table style="margin: auto">
-                <tr>
-                  <td rowspan="3">work</td><td rowspan="3">&rarr;</td><td>0:</td><td>{0}</td>
-                </tr>
-                <tr>
-                  <td>1:</td><td>{7}</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>{0}</td>
-                </tr>
-                <tr>
-                  <td>hour</td><td>&rarr;</td><td>1:</td><td>{2, 3}</td>
-                </tr>
-                <tr>
-                  <td rowspan="2">harder</td><td rowspan="2">&rarr;</td><td>0:</td><td>{8}</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>{2}</td>
-                </tr>
-                <tr>
-                  <td rowspan="3">it</td><td rowspan="3">&rarr;</td><td>0:</td><td>{1, 3, 5}</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>{1, 4, 7}</td>
-                </tr>
-              </table>
-              <br/>
-              Does "work it" occur in a document?
-            </script>
-          </section>
-          
-
-          <section data-markdown data-separator="^\n===\n$" data-vertical="^\n---\n$">
-            <script type="text/template">
-              ### TF-IDF Scoring Of Documents
-              $tf \times idf = tf \times \log{ \frac{N}{df} }$
-
-              * <em>term frequency ($tf$)</em> number of times a term occurs in a particular document
-              * <em>document frequency ($df$)</em> number of all documents a term occurs in 
-              * <em>inverse document frequency (idf)</em> is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
-
-            </script>
-          </section>
-          <section data-markdown data-separator="^\n===\n$" data-vertical="^\n---\n$">
-            <script type="text/template">
-              ### Scoring our example
-
-              <table style="margin: auto">
-                <tr>
-                  <td rowspan="3">work</td><td rowspan="3">&rarr;</td><td>0:</td><td>{0}</td>
-                </tr>
-                <tr>
-                  <td>1:</td><td>{7}</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>{0}</td>
-                </tr>
-                <tr>
-                  <td>hour</td><td>&rarr;</td><td>1:</td><td>{2, 3}</td>
-                </tr>
-                <tr>
-                  <td rowspan="2">harder</td><td rowspan="2">&rarr;</td><td>0:</td><td>{8}</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>{2}</td>
-                </tr>
-              </table>
-
-              <table style="margin:auto">
-                <tr>
-                  <th></th>
-                  <th>work</th>
-                  <th>hour</th>
-                  <th>harder</th>
-                </tr>
-                <tr>
-                  <td>0:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$0 \times \log{\frac{3}{1}}$</td><td>$1 \times \log{\frac{3}{2}}$</td>
-                </tr>
-                <tr>
-                  <td>1:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$2 \times \log{\frac{3}{1}}$</td><td>$0 \times \log{\frac{3}{2}}$</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$0 \times \log{\frac{3}{1}}$</td><td>$1 \times \log{\frac{3}{2}}$</td>
-                </tr>
-              <table>
-            </script>
-          </section>
-          <section data-markdown data-separator="^\n===\n$" data-vertical="^\n---\n$">
-            <script type="text/template">
-              ### Scoring our example
-              <table style="margin:auto">
-                <tr>
-                  <th></th>
-                  <th>work</th>
-                  <th>hour</th>
-                  <th>harder</th>
-                </tr>
-                <tr>
-                  <td>0:</td><td>0</td><td>0</td><td>.35</td>
-                </tr>
-                <tr>
-                  <td>1:</td><td>0</td><td>.95</td><td>0</td>
-                </tr>
-                <tr>
-                  <td>2:</td><td>0</td><td>0</td><td>.35</td>
-                </tr>
-              <table>
-              <br/>
-
-              * Create a vector for the query: $\[1,1,1\]$
-              * Take the cosine-similarity of the two vectors
-                * Gives the cosine of the angle between two vectors
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Let someone else handle that
-
-              ![Lucene](images/lucene.svg)
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### How it *really* works
-
-              * [http://lucene.apache.org/core/4_0_0/core/overview-summary.html](http://lucene.apache.org/core/4_0_0/core/overview-summary.html)
-              * [http://wiki.apache.org/lucene-java/LucenePapers](http://wiki.apache.org/lucene-java/LucenePapers)
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Terminology Overview
+              ### Overview
 
               ![Index Structure](images/index-structure.svg)
             </script>
@@ -575,21 +328,38 @@
             <script type="text/template">
               ### Indexes
 
-              One or more Lucene indexes, composed of segments
-
+              <ul>
+                <li>Lucene indexes</li>
+                <ul>
+                  <li>composed of segments</li>
+                </ul>
+              </ul>
             </script>
           </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
               ### Lucene segement merging in action
               <iframe width="560" height="315" src="//www.youtube.com/embed/YW0bOvLp72E?rel=0" frameborder="0" allowfullscreen></iframe>
+              
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Index configurations describe...
+
+              * Sharding/replication
+              * Analyzers (globally too)
+              * Warmers
+              * Snapshot interval (new)
+              * Refresh interval
+              * Opened/closed/read-only
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Documents
 
-              ```json
+              ```
               {
                 "_index": "index_name",
                 "_type": "document_type",
@@ -601,43 +371,28 @@
                   "field3": {
                     "subfield0":"value1",
                     "subfield1":"value2"
-                  } 
+                  } //*
                 }
               }
               ```
+
+              ###### * <em>Embedded objects are more elasticsearch magic!</em>
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
+<<<<<<< HEAD
               ### Types and Mappings
               * The fields a document should have
               * The data type of each field
               * Analysis
                 * How to generate tokens from document (indexing)
                 * How to generate tokens from query string (searching)
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Data Types
+=======
+              ### Mappings
 
-              * string
-              * integer/long
-              * float/double
-              * boolean
-              * object
-              * ip
-              * geo point
-              * geo shape
-              * attachment
-              * object
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Analyzer
-
-              ![Analysis phases](images/analysis-chain.svg)
+              Configures how fields are divided into tokens, stored and queried
+>>>>>>> efd76cde3fb25a373a1a13bf7016f20a6f11332a
             </script>
           </section>
           <section data-markdown>
@@ -649,9 +404,16 @@
           </section>
           <section data-markdown>
             <script type="text/template">
+              ### Each analyzer has three phases
+
+              ![Analysis phases](images/analysis-chain.svg)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
               ### Example analysis configuration
 
-              ```json
+              ```
               {
                 "analysis" : {
                   "analyzer" : {
@@ -698,7 +460,7 @@
             <script type="text/template">
               ### Possible mapping
 
-              ```json
+              ```
                 {
                   "doodad": {
                     "properties": {
@@ -714,21 +476,121 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Sharding and Replication
+              ### IDs
 
-              * <em>Shard</em> - Single Lucene index (portion of Elasticsearch index)
-                * More shards means better write performance
-              * <em>Replica</em> - Copy of a shard
-                * More replicas means faster queries
+              <!-- TODO: Fill in -->
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Example
+              ### Nodes
 
-              ![Analysis phases](images/sharding-replica.svg)
+              <!-- TODO: Fill in with nodes and types (data/master) -->
             </script>
           </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Clusters
+
+              <!-- TODO: Fill in with discovery multicast, unicast, screenshot of cluster setup -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Shards
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Replicas
+
+              <!-- TODO: Fill in -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Inverted Index
+
+              <!-- TODO: Fill in with concordance example -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Daft Punk, Inverted
+
+              <table class="documents">
+                <tr>
+                  <th>id: line_1</th>
+                  <th>id: line_2</th>
+                  <th>id: line_3</th>
+                  <th>id: line_4</th>
+                </tr>
+                <tr>
+                  <td>
+                    Work it, Make it,<br/>
+                    Do it, Makes us<br/>
+                    Harder, Better,<br/>
+                    Faster, Stronger
+                  </td>
+                  <td>
+                    More than, Hour,<br/>
+                    Hour, Never<br/>
+                    Ever, After,<br/>
+                    Work is, Over
+                  </td>
+                  <td>
+                    Work it harder,<br/>
+                    Make it better<br/>
+                    Do it faster,<br/>
+                    Makes us stronger
+                  </td>
+                  <td>
+                    More than ever,<br/>
+                    Hour after hour<br/>
+                    Work is never over!
+                  </td>
+                </tr>
+              </table>
+
+              <!-- TODO: Fill in with row your boat example or daft punk -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Tokenizers and Analyzers
+
+              <table class="examples">
+                <tr>
+                  <th>Char Filter</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+                <tr>
+                  <th>Tokenizer</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+                <tr>
+                  <th>Token Filter</th>
+                  <td>...<!-- TODO: Fill in --></td>
+                </tr>
+              </table>
+
+              <!-- TODO: Add image of term chain -->
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Data Types
+
+              <!-- TODO: Fill in with string, numeric (trie), arrays, nested objects, etc -->
+            </script>
+          </section>
+          <section>
+            <script type="text/template">
+              ### TF/IDF
+
+              <!-- TODO: Fill in term frequency/inverse document frequency -->
         </section>
         <section>
           <section data-markdown>
@@ -740,28 +602,19 @@
             <script type="text/template">
               ### Anatomy of a Request
 
-              ```bash
-              curl -XPUT 'http://esdemo.local:9200/wikipedia/location/1' -d '{
-                "name": "Spantree Technology Group, LLC",
-                "about" : "Spantree is a boutique, Chicago-based consultancy delivering intelligent, high quality software solutions for the web.",
-                "lastUpdated":"2012-04-30T02:14:41+0000",
-                "yearFounded":2009
-              }'
-              ```
-
-              </script>
+              <!-- TODO: Fill in with curl example -->
+            </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Automatic Mappings
 
-              ![AutomaticMapping](images/automatic-mapping.png)              
-              </script>
+              <!-- TODO: Fill in -->
+            </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               ### Create or Update Document
-
               <!-- TODO: Fill in -->
             </script>
           </section>
@@ -775,19 +628,8 @@
           <section data-markdown>
             <script type="text/template">
               ### Bulk API
-       
-              ```bash
-              $ cat divvy.json
 
-              {"index": {"_type": "station", "_id": "119"}}
-              {"capacity": 15, "name": "Lake Park Ave & 56th St", "location": {"lat": 41.793242, "lon": -87.587782}}
-              {"index": {"_type": "station", "_id": "353"}}
-              {"capacity": 15, "name": "Ada St & Washington Blvd", "location": {"lat": 41.88283, "lon": -87.661206}}
-              ```
-
-              ```bash
-              curl -f -s -S -XPOST --data-binary "@divvy.json" http://esdemo.local:9200/divvy/_bulk
-              ```
+              <!-- TODO: Fill in with bulk example -->
             </script>
           </section>
         </section>
@@ -801,146 +643,37 @@
             <script type="text/template">
               ### Search API
 
-              ```bash
-              curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
-              ```
-
-              or
-
-              ```bash
-              curl -XGET http://esdemo.local:9200/wikipedia/_search -d '{
-                "query" : {
-                  "term" : { "about" : "lake" }
-                }
-              }
-              ```
+              <!-- TODO: Simple Example -->
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              <h3>Types of Queries</h3>
+              ### Types of Queries
 
-              <table>
-              <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
-
-              <tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr> 
-             <tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr> 
-             <tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr> 
-             <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
-           <tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
-             <tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
-             <tr><td>   prefix </td><td> query string   </td><td>  simple query </td><tr> 
-            <tr><td>    range</td><td> regexp   </td><td> span first </td><tr> 
-         <tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
-           <tr><td>     span or  </td><td> span term  </td><td> term </td><tr> 
-            <tr><td>   terms </td><td> top children  </td><td> wildcard</td><tr> 
-            <tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr> 
-              </table>
+              <!-- TODO: Fill in with table for query_string, term, etc -->
             </script>
           </section>
-          <section data-markdown>
-            <script type="text/template">
-              <h3>Types of Queries</h3>
-
-              <table>
-              <tr><td>match</td><td><b>multi match </b> </td><td> <b> bool </b></td><tr>                
-
-              <tr><td> <b>boosting </b>  </td><td> common terms </td><td nowrap> constant score </td><tr> 
-             <tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr> 
-             <tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr> 
-             <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
-           <tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
-             <tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
-             <tr><td>   prefix </td><td> query string   </td><td>  simple query </td><tr> 
-            <tr><td>   <b> range </b></td><td> regexp   </td><td> span first </td><tr> 
-         <tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
-           <tr><td>     span or  </td><td> span term  </td><td> <b>term </b> </td><tr> 
-            <tr><td>   terms </td><td> top children  </td><td> wildcard</td><tr> 
-            <tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr> 
-              </table>
-            </script>
-          </section>
-
           <section data-markdown>
             <script type="text/template">
               ### Scoring
 
-              * Defaults to TF/IDF
-              * Modified via boosting
-              * Can rewrite scoring engine
-
-              </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-            ### Queries vs Filters
-
-            <table>
-            <tr>
-              <th>Queries</th>
-              <th>Filters</th>
-            </tr>
-            <tr>
-              <td>Fuzzy</td>
-              <td>Boolean</td>
-            </tr>
-            <tr>
-              <td>Slower</td>
-              <td>Faster</td>
-            </tr>
-            <tr>
-              <td>Never cached</td>
-              <td>Cacheable</td>
-            </tr>
-            </table>
-
+              <!-- TODO: Fill in  -->
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Filter on Red and Green
+              ### Queries vs Filters
 
-              ![Ornaments](images/red-and-green-ornaments.jpg)
-              ![MM](images/red-green-m-m.jpg)
-              ![RedGreen](images/red_green.jpg)
-
-
-
+              <!-- TODO: Fill in  -->
             </script>
           </section>
-
-          <section data-markdown>
-            <script type="text/template">
-              ### Query on Red and Green - Also returns
-
-              ![Red](images/red.png)
-              ![Green](images/green.png)
-              ![Blue](images/blue.svg)
-
-
-            </script>
-          </section>
-
-
           <section data-markdown>
             <script type="text/template">
               ### Facets
 
-              ![Amazon](images/amazon-java.png)
-              ![Airbnb](images/airbnb.png)
-
-              </script>
+              <!-- TODO: Fill in  -->
+            </script>
           </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Aggregations
-
-              * The new facets
-              * Allow for hierarchical data analysis
-
-              </script>
-          </section>
-
         </section>
         <section>
           <section data-markdown>
@@ -1029,10 +762,6 @@
             src: 'plugin/notes/notes.js',
             async: true,
             condition: function() { return !!document.body.classList; }
-          },
-          { 
-            src: 'plugin/math/math.js', 
-            async: true 
           }
         ]
       });

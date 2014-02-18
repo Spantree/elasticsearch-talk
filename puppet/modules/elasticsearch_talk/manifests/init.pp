@@ -47,12 +47,20 @@ class elasticsearch_talk(
     logoutput => on_failure
   }
 
-  elasticsearch_talk::index { "wikipedia":
-    bulk_file => 'wikipedia.locations.json.bulk',
+  elasticsearch_talk::index { 'getting-started':
+    delete_only  => true
+  }
+
+  elasticsearch_talk::index { 'spantree':
+    delete_only  => true
+  }
+
+  elasticsearch_talk::index { 'wikipedia':
+    bulk_file    => 'wikipedia.locations.json.bulk',
     mapping_file => 'wikipedia.locations.mappings.json'
   }
 
-  class{ 'elasticsearch_talk::divvy': }
+  class { 'elasticsearch_talk::divvy': }
 
   elasticsearch_talk::index { "divvy":
     bulk_file     => 'divvy_bulk_update.json',

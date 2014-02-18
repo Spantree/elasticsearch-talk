@@ -1,18 +1,18 @@
 # Getting Started
 
-## Get Server Status
+## Getting Server Status
 
 Executing an HTTP GET request to the root of the Elasticsearch
 web server will give you a server status as JSON.
 
 `GET /`
 
-## Index a single document
+## Indexing a single document
 
 Now, we will insert a single document into Elasticsearch. Note that
 we don't need to create an index or type, it gets created automatically if it doesn't already exist.  Elasticsearch will also try to guess the types for document fields based on the initial JSON payload.
 
-`PUT /wikipedia-01/locations/frontera_grill`
+`PUT /getting-started/locations/frontera_grill`
 
 ```json
 {
@@ -28,11 +28,17 @@ we don't need to create an index or type, it gets created automatically if it do
 }
 ```
 
-## Find all documents
+## Fetching our document
 
-Now, we can execute a request to get all documents in this index.  There should only be one.
+You can retrieve a single document by its ID with a simple HTTP GET request.
 
-`GET /wikipedia-01/_search`
+`GET /getting-started/locations/frontera_grill`
+
+## Finding all documents
+
+We can also execute a request to get all documents in this index.  At this point, there should only be one.
+
+`GET /getting-started/_search`
 
 ```json
 {
@@ -48,8 +54,8 @@ Now, we can execute a request to get all documents in this index.  There should 
 }
 ```
 
-## Review mappings
+## Reviewing the Mappings
 
-We can also peek at the mappings Elasticsearch created for the location document type.
+We can also peek at the mappings Elasticsearch automatically generated for the location document type.
 
-`GET /wikipedia-01/locations/_mapping`
+`GET /getting-started/locations/_mapping`

@@ -1,6 +1,6 @@
-# Term Facets And Aggregations
+# Facets And Aggregations
 
-Get gender terms via aggregation
+## Get gender terms via aggregation
 
 `GET /divvy/trip/_search`
 
@@ -14,7 +14,8 @@ Get gender terms via aggregation
 }
 ```
 
-Get gender terms via facet
+## Get gender terms via facet
+
 `GET /divvy/trip/_search`
 
 ```json
@@ -33,7 +34,7 @@ Get gender terms via facet
 }
 ```
 
-Get min / max / avg trip duration. As a note, 85117 seconds is roughly 23.6 hours.
+## Get min / max / avg trip duration. As a note, 85117 seconds is roughly 23.6 hours.
 
 `GET /divvy/trip/_search`
 
@@ -53,7 +54,7 @@ Get min / max / avg trip duration. As a note, 85117 seconds is roughly 23.6 hour
 }
 ```
 
-Get all stats
+## Get all stats
 
 `GET /divvy/trip/_search`
 
@@ -68,7 +69,7 @@ Get all stats
 ```
 
 
-Get buckets based on Spantree's office
+## Get buckets based on Spantree's office
 
 `GET /divvy/station/_search`
 
@@ -97,7 +98,7 @@ Get buckets based on Spantree's office
 }
 ```
 
-Get bike trips by quarter
+## Get bike trips by quarter
 
 `GET /divvy/trip/_search`
 ```json

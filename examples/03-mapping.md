@@ -1,3 +1,5 @@
+# Mapping & Analysis
+
 ## Mapping a geopoint field
 
 Elasticsearch supports 'geopoint' types for latitude and longitude values. After this, we should be able to run our distance query.
@@ -24,7 +26,7 @@ Elasticsearch provides a multi_field type, which allows you to map the same fiel
   {
   "location" : {
         "properties" : {
-            "keyword" : {"type":"string", "index":"not_analyzed"}
+            "keyword" : {"type":"string", "index": "not_analyzed"}
         }
     }
 }

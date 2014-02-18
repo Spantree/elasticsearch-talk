@@ -67,7 +67,7 @@ and install all the tools extra tools you'll need to play along.  You may be req
 
 That's it.  That's all there is to it.
 
-You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo:9200`:
+You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo.local:9200`:
 
 ![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/esbrowser.png?raw=true)
 

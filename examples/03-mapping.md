@@ -51,22 +51,6 @@
 
 `GET /wikipedia-mappings-simple/_analyze?field=name&text=Lane Tech: College Prep High School`
 
-## Updating the mappings
-
-`PUT /wikipedia-mappings-simple/locations/_mapping`
-
-```json
-{
-  "locations": {
-    "properties": {
-      "phone_number": {
-        "type": "string"
-      }
-    }
-  }
-}
-```
-
 ## Adding the Chicago History Museum
 
 `PUT /wikipedia-mappings-simple/locations/chicago_history_museum`
@@ -97,6 +81,18 @@
   }
 }
 ```
+
+## Reviewing the Mapping for Phone Number
+
+`GET /wikipedia-mappings-simple/_mapping`
+
+## Analyzing the Indexed Phone Number
+
+`GET /wikipedia-mappings-simple/_analyze?field=phone_number&text=(312) 642-4600`
+
+## Analyzing the Queried Phone Number
+
+`GET /wikipedia-mappings-simple/_analyze?field=phone_number&text=312.642.4600`
 
 ## Adding a Proper Phone Number Mapping
 
@@ -137,11 +133,15 @@
 }
 ```
 
-## Testing Our New Field Mapping
+## Analyzing the Indexed Phone Number Again
 
 `GET /wikipedia-mappings-phone/_analyze?field=phone_number&text=(312) 642-4600`
 
-## Indexing the Chicago History Museum Again
+## Analyzing the Queried Phone Number Again
+
+`GET /wikipedia-mappings-phone/_analyze?field=phone_number&text=312.642.4600`
+
+## Indexing the Chicago History Museum with the Proper Mappings
 
 `PUT /wikipedia-mappings-phone/locations/chicago_history_museum`
 
@@ -172,15 +172,397 @@
 }
 ```
 
-## TODO: Not analyzed
 
-## TODO: Not stored
+## Stemming
 
-## TODO: Snowball Stemming
+`POST /wikipedia-mappings-stemmed/`
 
-## TODO: Synonyms
+```json
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "stemmed": {
+          "type": "snowball",
+          "language": "English"
+        }
+      },
+      "analyzer": {
+        "stemmed": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "standard",
+            "lowercase",
+            "stemmed"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "analyzer": "stemmed"
+        }
+      }
+    }
+  }
+}
+```
 
-## TODO: Edge NGrams
+## Testing Our Stemmed Field
 
-## TODO: Multi-Field
+`GET /wikipedia-mappings-stemmed/_analyze?field=description&text=Spantree is one of many companies at the Chicago Java Users Group that are looking for great developers.`
 
+## Working with Synonyms
+
+`POST /wikipedia-mappings-synonyms/`
+
+```json
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "first_name_synonyms": {
+          "type": "synonym",
+          "synonyms": [
+            "susan, susie",
+            "ed, edward",
+            "tom, thomas"
+          ]
+        }
+      },
+      "analyzer": {
+        "first_name_synonyms": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "first_name_synonyms"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "author": {
+          "type": "string",
+          "analyzer": "first_name_synonyms"
+        }
+      }
+    }
+  }
+}
+```
+
+## Testing Out Our Synonym Field
+
+`GET /wikipedia-mappings-synonyms/_analyze?field=author&text=Thomas Jefferson`
+
+## Working with Edge N-Grams
+
+`POST /wikipedia-mappings-edgengrams/`
+
+```json
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "edge_left": {
+          "type": "edgeNGram",
+          "side": "front",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "edge_left": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "edge_left"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "title": {
+          "type" : "string",
+          "index_analyzer" : "edge_left",
+          "search_analyzer" : "standard",
+          "include_in_all" : false
+        }
+      }
+    }
+  }
+}
+```
+
+## Testing Out Our Edge N-Gram Field
+
+`GET /wikipedia-mappings-edgengrams/_analyze?field=title&text=Lorem ipsum dolor`
+
+## Putting It All Together With Multi-fields
+
+`POST /wikipedia-mappings-multifield`
+
+```json
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "edge_left": {
+          "type": "edgeNGram",
+          "side": "front",
+          "min_gram": 1,
+          "max_gram": 20
+        },
+        "first_name_synonyms": {
+          "type": "synonym",
+          "synonyms": [
+            "susan, susie",
+            "ed, edward",
+            "tom, thomas"
+          ]
+        },
+        "stemmed": {
+          "type": "snowball",
+          "language": "English"
+        }
+      },
+      "analyzer": {
+        "edge_left": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "edge_left"
+          ],
+          "tokenizer": "standard"
+        },
+        "stemmed": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "stemmed"
+          ],
+          "tokenizer": "standard"
+        },
+        "first_name_synonyms": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "first_name_synonyms"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "name": {
+          "type": "multi_field",
+          "fields": {
+            "name": {
+              "type": "string",
+              "index": "analyzed"
+            },
+            "edge" : {
+              "type" : "string",
+              "index_analyzer" : "edge_left",
+              "search_analyzer" : "standard",
+              "include_in_all" : false
+            },
+            "stemmed" : {
+              "type" : "string",
+              "analyzer" : "stemmed",
+              "include_in_all" : false
+            }
+          }
+        },
+        "author": {
+          "type": "multi_field",
+          "fields": {
+            "author": {
+              "type": "string",
+              "index": "analyzed"
+            },
+            "edge" : {
+              "type" : "string",
+              "index_analyzer" : "edge_left",
+              "search_analyzer" : "standard",
+              "include_in_all" : false
+            },
+            "stemmed" : {
+              "type" : "string",
+              "analyzer" : "stemmed",
+              "include_in_all" : false
+            },
+            "synonyms": {
+              "type": "string",
+              "index_analyzer" : "first_name_synonyms",
+              "search_analyzer" : "standard",
+              "include_in_all": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Adding an Essay to Our Multi-Field Index
+
+`PUT /wikipedia-mappings-multifield/essays/rights_of_british_america`
+
+```json
+{
+  "name": "A Summary View of the Rights of British America",
+  "author": "Thomas Jefferson"
+}
+```
+
+## Handling Type-Ahead Searches with Edge N-Grams
+
+`GET /wikipedia-mappings-multifield/_search`
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "righ",
+            "fields": [
+              "name",
+              "name.edge",
+              "name.stemmed",
+              "author",
+              "author.edge",
+              "author.stemmed",
+              "author.synonyms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "name.edge": {},
+          "name.stemmed": {},
+          "author": {},
+          "author.edge": {},
+          "author.stemmed": {},
+          "author.synonyms": {}
+      }
+  }
+}
+```
+
+## Handling Word Variations with Stemming
+
+`GET /wikipedia-mappings-multifield/_search`
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "summaries",
+            "fields": [
+              "name",
+              "name.edge",
+              "name.stemmed",
+              "author",
+              "author.edge",
+              "author.stemmed",
+              "author.synonyms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "name.edge": {},
+          "name.stemmed": {},
+          "author": {},
+          "author.edge": {},
+          "author.stemmed": {},
+          "author.synonyms": {}
+      }
+  }
+}
+```
+
+## Finding Tom Jefferson with Name Synonyms
+
+`GET /wikipedia-mappings-multifield/_search`
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "tom jefferson",
+            "fields": [
+              "name",
+              "name.edge",
+              "name.stemmed",
+              "author",
+              "author.edge",
+              "author.stemmed",
+              "author.synonyms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "name.edge": {},
+          "name.stemmed": {},
+          "author": {},
+          "author.edge": {},
+          "author.stemmed": {},
+          "author.synonyms": {}
+      }
+  }
+}
+```

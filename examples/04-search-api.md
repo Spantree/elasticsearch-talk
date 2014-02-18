@@ -157,6 +157,14 @@ Return only the name and keywords fields.
 }
 ```
 
+## TODO: Match Query
+
+## TODO: Multimatch
+
+## TODO: Filters
+
+## TODO: Explain
+
 ## Highlight Matches
 
 Search for the term "Chicago" and highlight matches.

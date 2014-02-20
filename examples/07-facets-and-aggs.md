@@ -34,7 +34,9 @@
 }
 ```
 
-## Get min / max / avg trip duration. As a note, 85117 seconds is roughly 23.6 hours.
+## Get min / max / avg trip duration.
+
+As a note, 85117 seconds is roughly 23.6 hours.
 
 `GET /divvy/trip/_search`
 

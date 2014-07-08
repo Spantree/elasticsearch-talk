@@ -21,7 +21,7 @@ Installers on this USB drive for Mac, Windows and Linux
 From the command line (or Git Shell on Windows), clone this repository with:
 
 ```
-git clone elasticsearch-talk.gitbundle /path/to/your/home/directort -b develop
+git clone elasticsearch-talk.gitbundle /path/to/your/home/directory -b develop
 ```
 
 #### Set up your vagrant instance

@@ -8,7 +8,7 @@
 
 **Gary Turovsky:** Senior Software Engineer
 
-**Malynda Chizek Frouard** Junior Software Engineer
+**Malynda Chizek Frouard** Software Engineer
 
 ### When
 

@@ -347,6 +347,11 @@
               ![PostgreSQL](images/postgres.svg)
             </script>
           </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Transactional
+            </script>
+          </section>
           <section data-markdown class="screenshot">
             <script type="text/template">
               ### A Crawler
@@ -358,7 +363,7 @@
             <script type="text/template">
               ### A Machine Learner
 
-              ![Apache Mahout](images/mahout.svg)
+              ![Apache Spark](images/spark.png)
               ![Carrot2](images/carrot2.png)
             </script>
           </section>
@@ -390,16 +395,6 @@
               * Find the documents that match the query
               * Score the documents 
 
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Finding matching documents
-
-              * Query is a set of terms, Q
-              * Each document has a set of terms, D
-              * Find all D that intersect Q
-              * We will need a special data structure
             </script>
           </section>
           <section data-markdown>
@@ -717,8 +712,9 @@
             <script type="text/template">
               ### Clustering: Sharding and Replication
 
-              * <em>Shard</em> - Single Lucene index (portion of Elasticsearch index)
+              * <em>Shard</em> - A slice of an index
                 * More shards means better write performance
+                * Single Lucene index (portion of Elasticsearch index)
               * <em>Replica</em> - Copy of a shard
                 * More replicas means faster queries
             </script>
@@ -728,6 +724,16 @@
               ### Example
 
               ![Analysis phases](images/sharding-replica.svg)
+            </script>
+          </section>
+          <section>
+            <script type="text/template">
+              ### Failover
+
+              * When a Node Fails
+                * If Master Elect a new Master
+                * Replicas are promoted to primary shards
+                * Cluster status is yellow but operational
             </script>
           </section>
         </section>
@@ -799,7 +805,7 @@
               ```bash
               curl -XPOST 'http://esdemo.local:9200/wikipedia/location/1/_update' -d '{
                 "doc": {
-                  "date": "2014-02-18T02:14:41+0000"
+                  "lastUpdated": "2014-02-18T02:14:41+0000"
                 }
               }'
               ```
@@ -848,7 +854,7 @@
                 "query" : {
                   "term" : { "about" : "lake" }
                 }
-              }
+              }'
               ```
             </script>
           </section>
@@ -865,7 +871,7 @@
              <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
            <tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
              <tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
-             <tr><td>   prefix </td><td> query string   </td><td>  simple query </td><tr> 
+             <tr><td>   prefix </td><td> query_string   </td><td>  simple query </td><tr>
             <tr><td>    range</td><td> regexp   </td><td> span first </td><tr> 
          <tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
            <tr><td>     span or  </td><td> span term  </td><td> term </td><tr> 
@@ -887,7 +893,7 @@
              <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
            <tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
              <tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
-             <tr><td>   prefix </td><td> query string   </td><td>  simple query </td><tr> 
+             <tr><td>   prefix </td><td> <b>query_string</b>   </td><td>  simple query </td><tr>
             <tr><td>   <b> range </b></td><td> regexp   </td><td> span first </td><tr> 
          <tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
            <tr><td>     span or  </td><td> span term  </td><td> <b>term </b> </td><tr> 
@@ -901,7 +907,7 @@
             <script type="text/template">
               ### Scoring
 
-              * Defaults to TF/IDF
+              * Defaults to Okapi BM25
               * Modified via boosting
               * Can rewrite scoring engine
 

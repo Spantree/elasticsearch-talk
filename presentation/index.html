@@ -362,8 +362,8 @@
           <section data-markdown class="logos-big">
             <script type="text/template">
               ### A Machine Learner
-
-              ![Apache Spark](images/spark.png)
+              ![Apache Mahout](images/mahout.svg)
+              <!--![Apache Spark](images/spark.png)-->
               ![Carrot2](images/carrot2.png)
             </script>
           </section>
@@ -740,6 +740,78 @@
         <section>
           <section data-markdown>
             <script type="text/template">
+              ## Installing on Windows
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Configuring your environment
+
+              * Install Java 7 or 8
+              * Configure your `JAVA_HOME`
+              * Download the Elasticsearch zip file from web
+              * Extract to destination directory (e.g. C:\elasticsearch)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Starting Elasticsearch
+
+              ```
+              cd C:\elasticsearch\elasticsearch-1.2.1\bin
+              ./elasticsearch
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Installing plugins
+
+              ```
+              cd C:\elasticsearch\elasticsearch-1.2.1\bin
+              ./plugin -i lukas-vlcek/bigdesk
+              ./plugin -i elasticsearch/marvel/latest
+              ./plugin -i mobz/elasticsearch-head
+              ./elasticsearch
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Configuring a cluster with multicast
+
+              * Just works out the box (usually)
+              * Repeat the process on two machines on the same subnet
+              * They will (usually) discover each other via multicast
+              * Must have the same cluster name
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Configuring a cluster with explicit IPs
+
+              Modify `config/elasticsearch.yml`
+
+              ```
+              discovery.zen.ping.multicast.enabled: false
+              discovery.zen.ping.unicast.hosts: ["192.168.0.250[9300-9400]", "192.168.0.251[9300-9400]"]
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Configuring as a Windows service
+
+              ```
+              cd C:\elasticsearch\elasticsearch-1.2.1\bin
+              ./service install
+              ```
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
               ## Indexing
             </script>
           </section>
@@ -850,7 +922,7 @@
               or
 
               ```bash
-              curl -XGET http://esdemo.local:9200/wikipedia/_search -d '{
+              curl -XGET "http://esdemo.local:9200/wikipedia/_search" -d '{
                 "query" : {
                   "term" : { "about" : "lake" }
                 }
@@ -979,7 +1051,6 @@
 
               * The new facets
               * Allow for hierarchical data analysis
-
               </script>
           </section>
 
@@ -987,114 +1058,110 @@
         <section>
           <section data-markdown>
             <script type="text/template">
-              ## Java API
+              ## Connecting from .NET
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Installing
+              ### Connections
 
-              ```xml
-              <dependency>
-                <groupId>org.elasticsearch</groupId>
-                <artifactId>elasticsearch</artifactId>
-                <version>1.0.0</version>
-              </dependency>
-            
-              ```
-
-              </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              ### Connecting
-                ```
-                import static org.elasticsearch.node.NodeBuilder.*;
-
-                // on startup
-
-                Node node = nodeBuilder().node();
-                Client client = node.client();
-
-                // on shutdown
-
-                node.close();
-                ```
-              <!-- TODO: Fill in with ES Client setup boilerplate for Java  -->
+              * JVM clients typically use the Transport layer (9300)
+              * Non-JVM clients typically use HTTP-REST (9200) or Thrift (9400)
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Indexing
-              ```java
-              import static org.elasticsearch.common.xcontent.XContentFactory.*;
+              ### Available Libraries
               
-
-              IndexResponse response = client.prepareIndex("wikipedia", "locations", "lake_point_tower")
-                  .setSource(jsonBuilder()
-                    .startObject()
-                        .field("name", "Lake Point Tower")
-                        .field("external_links", "http://rdf.freebase.com/ns/m/07k2z6")
-                        .field("keywords", ["residential","skyscrapers"])
-                    .endObject()
-                  )
-                  .execute()
-                  .actionGet();
-              ```
-
-              ```bash
-              curl -XPUT 'http://localhost:9200/wikipedia/locations/lake_point_tower' -d '{
-                "locations" : {
-                    "properties" : {
-                      "name" : "Lake Point Tower",
-                      "external_links" : "http://rdf.freebase.com/ns/m/07k2z6",
-                      "keywords" : ["residential","skyscrapers"]
-                    }
-                }
-              }'
-              ```
-
+              * [PlasticElastic.net](https://github.com/Yegoroff/PlainElastic.Net) (command builder pattern)
+              * [NEST](https://github.com/Mpdreamz/NEST) (High-Level)
+              * [Elasticsearch.net](https://github.com/medcl/ElasticSearch.Net) (Low-Level)
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ### Querying
+              ### PlasticElastic
+              
+              ```c#
+              // 1. It provides ES HTTP connection
+              var connection  = new ElasticConnection("localhost", 9200);
 
+              // 2. And sophisticated ES command builders:
+              string command = Commands.Index(index: "twitter", type: "user", id: test)
 
-              ```java
-              import org.elasticsearch.action.search.SearchResponse;
-              import org.elasticsearch.action.search.SearchType;
-              import org.elasticsearch.index.query.QueryBuilders.*;
-              SearchResponse response = client.prepareSearch("wikipedia")
-                .setTypes("locations")
-                .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-                .setQuery(QueryBuilders.termQuery("name", "lake")) // Query
-                .execute()
-                .actionGet();
+              // 3. And gives you the ability to serialize your objects to JSON:  
+              var serializer = new JsonNetSerializer();
+              var tweet = new Tweet { Name = "Some Name" };
+              string jsonData = serializer.ToJson(tweet);
+
+              // 4. Then you can use appropriate HTTP verb to execute ES command:
+              string response = connection.Put(command, jsonData);
+
+              // 5. And then you can deserialize operation response to typed object to easily analyze it:
+              IndexResult indexResult = serializer.ToIndexResult(result);
+              if(indexResult.ok) {
+                 ... // do something useful.
+              }
               ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### NEST
 
-              ```bash
-              curl -XGET 'http:localhost:9200/wikipedia/locations/' -d '{
-                "query" : {  
-                   "term" : { "name" : "lake"}
-                  }
-              }'
+
+              ```c#
+              public class Person
+              {
+                  public string Id { get; set; }
+                  public string Firstname { get; set; }
+                  public string Lastname { get; set; }
+              }
+
+              var person = new Person
+              {
+                  Id = "1",
+                  Firstname = "Martijn",
+                  Lastname = "Laarman"
+              };
+              var index = client.Index(person);
               ```
-
             </script>
           </section>
         </section>
         <section data-markdown>
             <script type="text/template">
-              ## Demo Time
+              ## Elasticsearch.net
+
+              ```c#
+              var client = new ElasticSearchClient(“localhost”);
+              client.CreateIndex("index", new IndexSetting(5, 1));
+              client.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
+              ```
             </script>
         </section>
+
         <section>
           <h3>Have fun with Elasticsearch!</h3>
           <iframe class="vine-embed" src="https://vine.co/v/M7rdWEdIrtq/embed/simple" width="600" height="600" frameborder="0"></iframe>
         </section>
       </div>
+      <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Cluster Design
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Master Nodes
 
+              * Keeps track of all the other nodes
+              * Is elected on a per-shard basis
+              * Routes new documents to the right shard
+              * Handles all indexing operations for a shard 
+            </script>
+          </section>
     </div>
 
     <script src="lib/js/head.min.js"></script>

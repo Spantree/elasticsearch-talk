@@ -1171,7 +1171,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## When to use dedicated masters
+              ### When to use dedicated masters
 
               * When you have critical clusters
               * When you have high write or read throughput
@@ -1182,7 +1182,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## Shard allocation
+              ### Shard allocation
 
               * Happens during initial recovery, replica allocation, rebalancing, and node addition/removal
               * Shard allocation awareness allows us to ensure that a primary shard and its replica will not be collocated to a node with the same value 
@@ -1190,25 +1190,36 @@
           </secton>
           <section data-markdown>
             <script type="text/template">
-              ## Configuring shard allocation awareness
+              ### Configuring shard allocation awareness
 
               ```yaml
               node.rack_id: rack_one
               cluster.routing.allocation.awareness.attributes: rack_id
               ```
             </script>
-
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## Planning for resiliency
+              ### Planning for resiliency
               
               * Prefer bulk updates when possible, buffering updates to reduce data loss
               * Force a refresh at the as an ACK
               * Use an external message queue (RabbitMQ, Kafka, etc) to feed events into Elasticsearch
+              * If you run into issues, consider using alternative discovery plugins (e.g. [sonian-zookeeper](https://github.com/sonian/elasticsearch-zookeeper))
             </script>
           </section>
         </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Securing Elasticsearch
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Securing Elasticsearch
+            </script>
+          </section>
         <section>
           <h3>Have fun with Elasticsearch!</h3>
           <iframe class="vine-embed" src="https://vine.co/v/M7rdWEdIrtq/embed/simple" width="600" height="600" frameborder="0"></iframe>

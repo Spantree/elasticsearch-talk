@@ -1128,7 +1128,8 @@
               ```
             </script>
           </section>
-          <section data-markdown>
+        </section>
+        <section data-markdown>
             <script type="text/template">
               ## Elasticsearch.net
 
@@ -1138,10 +1139,63 @@
               client.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
               ```
             </script>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Types of embedded objects
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Inner object
+
+              ```javascript
+                [
+                  {
+                    first_name : "Gary",
+                    last_name : "Turovsky"
+                  },
+                  {
+                    first_name : "Cedric",
+                    last_name : "Hurst"
+                  }
+                ]
+              ```
+
+              ### becomes
+
+              ```javascript
+              {
+                  first_name : ["Gary", "Cedric"],
+                  last_name : ["Turovsky", "Hurst"]
+              }
+              ```
+
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Nested 
+
+              * Maintained as separate document
+              * Must be explicitly defined on mapping
+              * Can only accessed by a nested query
+              * Can use "include_in_root" to also index as inner object
+              * Can complicate queries if there are multiple types of nested objects used
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Parent-child
+
+              * Child is a first-class document that has a special *_parent* type
+              * Can query on children separately from parents
+              * Can do "Has Child/arent" queries
+              * Slower and require an in-memory *join table*
+            </script>
           </section>
         </section>
-        
-
         <section>
           <section data-markdown>
             <script type="text/template">
@@ -1517,7 +1571,6 @@
             * Document-level security?
           </section>
         </section>
-
         <section>
           <h3>Have fun with Elasticsearch!</h3>
           <iframe class="vine-embed" src="https://vine.co/v/M7rdWEdIrtq/embed/simple" width="600" height="600" frameborder="0"></iframe>

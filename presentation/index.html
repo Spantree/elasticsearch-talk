@@ -1142,11 +1142,6 @@
         </section>
 
         <section>
-          <h3>Have fun with Elasticsearch!</h3>
-          <iframe class="vine-embed" src="https://vine.co/v/M7rdWEdIrtq/embed/simple" width="600" height="600" frameborder="0"></iframe>
-        </section>
-      </div>
-      <section>
           <section data-markdown>
             <script type="text/template">
               ## Cluster Design
@@ -1156,12 +1151,38 @@
             <script type="text/template">
               ## Master Nodes
 
+              * Elected on a per-cluster basis and primarily responsible for coordination
               * Keeps track of all the other nodes
-              * Is elected on a per-shard basis
-              * Routes new documents to the right shard
-              * Handles all indexing operations for a shard 
+              * Is replaced by another master-eligible node if current master fails
+              * Routes new documents to data node holding the primary shard
+              * Handles collating responses from shards, doing sorting, pagination, etc 
+              * Nodes electable as master by setting `node.master: true` in `elasticsearch.yml` 
             </script>
           </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Data node
+
+              * Holds one or more primary and replica shards
+              * Responsible for indexing data on its primary shards
+              * Responsible for querying data on its primary and replica shard
+              * Nodes eligible as data nodes by setting `node.data: true` in `elasticsearch.yml`
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Shard allocation
+
+              * Happens during initial recovery, replica allocation, rebalancing, and node addition/removal
+              * 
+            </script>
+          </section>
+        </section>
+        <section>
+          <h3>Have fun with Elasticsearch!</h3>
+          <iframe class="vine-embed" src="https://vine.co/v/M7rdWEdIrtq/embed/simple" width="600" height="600" frameborder="0"></iframe>
+        </section>
+      </div>
     </div>
 
     <script src="lib/js/head.min.js"></script>

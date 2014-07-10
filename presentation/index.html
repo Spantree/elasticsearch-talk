@@ -1179,6 +1179,74 @@
           </section>
         </section>
         <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Rivers 
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## What are rivers? 
+
+              * Services that automatically index data from various datasources
+              * Installed as plugins
+              * Run on one node in your cluster at a time
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Managing river plugins 
+
+              * Install like plugins
+              * Started on a cluster like so:
+
+              ```
+              curl -XPUT 'localhost:9200/_river/my_river/_meta' -d '{
+                "type" : "dummy"
+              }'
+              ```
+              * Stopping:
+
+              ```
+              curl -XDELETE 'localhost:9200/_river/my_river'
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Why use rivers? 
+
+              * Minimal effort to ensure that your index mirrors your database
+              * Simple failover in the cluster
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Why NOT use rivers? 
+
+              * Rivers do not distribute load
+              * Node failure can cause some data not to get indexed
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## JDBC River Issues
+
+              * When rows are updated can be complex
+                 * Use *$job* and *$now* parameters to grab latest data
+              * Updating existing documents happens when _id field stays the same
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Recommendation
+
+              * Feed data externally to mitigate data loss
+              * Externally feeding threads can be coordinated via a message queue
+            </script>
+          </section>
+        </section>
+        <section>
           <h3>Have fun with Elasticsearch!</h3>
           <iframe class="vine-embed" src="https://vine.co/v/M7rdWEdIrtq/embed/simple" width="600" height="600" frameborder="0"></iframe>
         </section>

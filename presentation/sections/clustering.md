@@ -27,6 +27,9 @@
 * <em>Replica</em> - Copy of a shard
     * More replicas means faster queries
 
+<div class="shard-illustration"></div>
+
+
 Note: 
 * Show configuration
 

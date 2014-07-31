@@ -1,9 +1,48 @@
 ## Cluster Design
 
+<!--
+* Shards and replicas
+* Master and slave nodes
+* Discovery
+    * Multicast
+    * Unicast
+* Automatic balancing
+* Transport protocol
+* How are requests directed?
+* What happens when a node fails?
+    * Split brain problem
+* Designing your application for resiliency
+    * Dedicated masters
+    * Shard allocation
+    * Efficiently indexing into the cluster
+        * Bulk indexing
+        * River plugins
+-->
 
-### Example
 
-![Analysis phases](images/sharding-replica.svg)
+### Shards and Replicas
+
+* <em>Shard</em> - A slice of an index
+    * Single Lucene index (portion of Elasticsearch index)
+* <em>Replica</em> - Copy of a shard
+    * More replicas means faster queries
+
+Note: 
+* Show configuration
+
+
+### Master and Slave Nodes
+
+* Master
+    * Elected on a per-cluster basis and primarily responsible for coordination
+    * Keeps track of all the other nodes
+    * Is replaced by another master-eligible node if current master fails
+    * Routes new documents to data node holding the primary shard
+    * Handles collating responses from shards, doing sorting, pagination, etc 
+    * Nodes electable as master by setting `node.master: true` in `elasticsearch.yml`
+
+Note: 
+* Show configuration
 
 
 ### Configuring a cluster with multicast
@@ -24,16 +63,18 @@ discovery.zen.ping.unicast.hosts: ["192.168.0.250[9300-9400]", "192.168.0.251[93
 ```
 
 
-### Clustering: Sharding and Replication
+### Automatic balancing
 
-* <em>Shard</em> - A slice of an index
-    * More shards means better write performance
-    * Single Lucene index (portion of Elasticsearch index)
-* <em>Replica</em> - Copy of a shard
-    * More replicas means faster queries
+![Analysis phases](images/sharding-replica.svg)
 
 
-### Failover
+### Transport protocol
+
+
+### How are requests directed
+
+
+### What happens when a node fails?
 
 * When a Node Fails
     * If Master Elect a new Master
@@ -41,25 +82,10 @@ discovery.zen.ping.unicast.hosts: ["192.168.0.250[9300-9400]", "192.168.0.251[93
     * Cluster status is yellow but operational
 
 
-### Master Nodes
-
-* Elected on a per-cluster basis and primarily responsible for coordination
-* Keeps track of all the other nodes
-* Is replaced by another master-eligible node if current master fails
-* Routes new documents to data node holding the primary shard
-* Handles collating responses from shards, doing sorting, pagination, etc 
-* Nodes electable as master by setting `node.master: true` in `elasticsearch.yml` 
+### Split brain problem 
 
 
-### Data nodes
-
-* Holds one or more primary and replica shards
-* Responsible for indexing data on its primary shards
-* Responsible for querying data on its primary and replica shard
-* Nodes eligible as data nodes by setting `node.data: true` in `elasticsearch.yml`
-
-
-### When to use dedicated masters
+### Dedicated masters
 
 * When you have critical clusters
 * When you have high write or read throughput
@@ -73,18 +99,12 @@ discovery.zen.ping.unicast.hosts: ["192.168.0.250[9300-9400]", "192.168.0.251[93
 * Happens during initial recovery, replica allocation, rebalancing, and node addition/removal
 * Shard allocation awareness allows us to ensure that a primary shard and its replica will not be collocated to a node with the same value 
 
-
-### Configuring shard allocation awareness
-
 ```yaml
 node.rack_id: rack_one
 cluster.routing.allocation.awareness.attributes: rack_id
 ```
 
 
-### Planning for resiliency
+### Alternative discovery plugins
               
-* Prefer bulk updates when possible, buffering updates to reduce data loss
-* Force a refresh at the as an ACK
-* Use an external message queue (RabbitMQ, Kafka, etc) to feed events into Elasticsearch
 * If you run into issues, consider using alternative discovery plugins (e.g. [sonian-zookeeper-plugin](https://github.com/sonian/elasticsearch-zookeeper))

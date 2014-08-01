@@ -17,15 +17,17 @@
     * Efficiently indexing into the cluster
         * Bulk indexing
         * River plugins
+* Tribes
 -->
 
 
 ### Shards and Replicas
 
 * <em>Shard</em> - A slice of an index
-    * Single Lucene index (portion of Elasticsearch index)
+    * Single Lucene instance 
+    * Choose carefully: can't be changed later
 * <em>Replica</em> - Copy of a shard
-    * More replicas means faster queries
+    * Grow and shrink number as desired
 
 Note: 
 * Show configuration
@@ -35,44 +37,44 @@ Note:
 <div class="shard-illustration"></div>
 
 
-### Master and Slave Nodes
+### Master Nodes
 
 * Master
-    * Elected on a per-cluster basis and primarily responsible for coordination
-    * Keeps track of all the other nodes
-    * Is replaced by another master-eligible node if current master fails
-    * Routes new documents to data node holding the primary shard
-    * Handles collating responses from shards, doing sorting, pagination, etc 
-    * Nodes electable as master by setting `node.master: true` in `elasticsearch.yml`
+    * Holds/applies cluster state
+    * Distributes shards in cluster
+* Not to be confused with master replicas
 
 Note: 
 * Show configuration
+* Any node can handle a query, including paging/sorting/collating results
 
 
-### Configuring a cluster with multicast
-
-* Just works out the box (usually)
-* Repeat the process on two machines on the same subnet
-* They will (usually) discover each other via multicast
-* Must have the same cluster name
+### Zen: Pinging
 
 
-### Configuring a cluster with explicit IPs
+### Zen: Multicast
 
-Modify `config/elasticsearch.yml`
+* Default configuration
+    * Port 54328 broadcast to multicast group 224.2.2.4
 
-```
-discovery.zen.ping.multicast.enabled: false
-discovery.zen.ping.unicast.hosts: ["192.168.0.250[9300-9400]", "192.168.0.251[9300-9400]"]
-```
+
+### Zen: Unicast
+
+* Specify list of IP addresses
+
+
+### Transport protocol
+
+### Routing a document request
+
+Note:
+* ``` shard = hash(routing) % number_of_primary_shards ```
+    * This is why number of shards is not changeable
 
 
 ### Automatic balancing
 
 ![Analysis phases](images/sharding-replica.svg)
-
-
-### Transport protocol
 
 
 ### How are requests directed

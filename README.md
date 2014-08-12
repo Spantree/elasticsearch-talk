@@ -8,8 +8,6 @@
 
 **Gary Turovsky:** Senior Software Engineer
 
-**Malynda Chizek Frouard** Software Engineer
-
 ### When
 
 Tuesday February 18th, 2014

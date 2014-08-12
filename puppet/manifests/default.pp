@@ -1,6 +1,6 @@
 node default {
   $node_version = 'v0.10.25'
-  $elasticsearch_version = '1.0.0'
+  $elasticsearch_version = '1.3.1'
 
 	# Virtual Machines
 	class { 'java7': }

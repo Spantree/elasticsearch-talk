@@ -114,4 +114,8 @@ This repo will here for you should you need it again.
 Email info@spantree.net if you run into issues.  We'd be happy to help.
 
 
+#### Push to gh-pages
 
+```
+git subtree push --prefix presentation origin gh-pages
+```

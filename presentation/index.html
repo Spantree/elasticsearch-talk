@@ -26,6 +26,7 @@
       document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
     </script>
 
+    
     <!--[if lt IE 9]>
     <script src="reveal.js/lib/js/html5shiv.js"></script>
     <![endif]-->
@@ -113,10 +114,12 @@
          data-charset="iso-8859-15">
         </section>
 
+        <script src="sections/js/clustering.js" type="text/javascript"></script>
         <section data-markdown="sections/clustering.md"  
          data-separator="^\n\n\n"  
          data-vertical="^\n\n"  
-         data-notes="^Note:"  
+         data-notes="^Note:"
+         data-script=""  
          data-charset="iso-8859-15">
         </section>
 
@@ -146,6 +149,7 @@
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
     <script src="https://platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
+
     <script>
 
       // Full list of configuration options available here:
@@ -196,5 +200,26 @@
 
     </script>
 
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script>
+      function onSlideChange(e) {
+        currentSlide = e.currentSlide;
+        var illustrations = $(currentSlide).find('[class*=illustration]');
+
+        for( var i = 0, len = illustrations.length; i < len; i++ ) {
+          var illustration = illustrations[i];
+          var eventName = $(illustration).attr('class') + "-show"
+
+          var event = document.createEvent( "HTMLEvents", 1, 2 );
+          event.initEvent( eventName, true, true );
+          document.dispatchEvent( event );
+
+        }
+      }
+
+      document.addEventListener( 'slidechanged', onSlideChange, false );
+    </script>
   </body>
 </html>

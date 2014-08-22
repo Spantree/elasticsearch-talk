@@ -47,6 +47,7 @@ node default {
   # Hotness
   class { 'elasticsearch':
     package_url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${elasticsearch_version}.deb",
+    autoupgrade => true,
     require     => Class['java7'],
     config      => {
       'http' => {

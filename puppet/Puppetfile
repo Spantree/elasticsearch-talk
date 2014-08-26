@@ -1,4 +1,4 @@
-forge 'http://forge.puppetlabs.com'
+forge 'https://forgeapi.puppetlabs.com'
 
 mod 'spantree/java7', '0.2.2'
 mod 'elasticsearch/elasticsearch', '0.2.3'

@@ -15,10 +15,12 @@ define elasticsearch_talk::index(
 
   exec { "delete-index-${name}":
     command => "curl -s -S -XDELETE http://localhost:9200/${name}",
+    returns => [0, 7]
   }
 
+  
   if(!$delete_only) {
-    $pause_payload = '{"index": {"refresh_interval": "-1"}}'
+    $pause_payload = '{"index": {"refresh_interval": "60s"}}'
     $restart_payload = '{"index": {"refresh_interval": "1s"}}'
 
     exec { "create-index-${name}":
@@ -32,11 +34,20 @@ define elasticsearch_talk::index(
       require => Exec["create-index-${name}"]
     }
 
+    exec { "extract-${bulk_file}":
+      command => "tar xzvf ${bulk_file}.tar.gz -C /tmp/",
+      cwd => $bulk_file_dir
+    }
+
     exec { "bulk-insert-${name}":
       command => "curl -f -s -S -XPOST --data-binary \"@${bulk_file}\" http://localhost:9200/${name}/_bulk",
-      cwd => $bulk_file_dir,
-      require => Exec["pause-refresh-interval-${name}"],
-      logoutput => on_failure
+      cwd => '/tmp/',
+      require => [
+        Exec["pause-refresh-interval-${name}"],
+        Exec["extract-${bulk_file}"]
+      ],
+      logoutput => on_failure,
+      timeout => 0
     }
 
     exec { "restart-refresh-interval-${name}":

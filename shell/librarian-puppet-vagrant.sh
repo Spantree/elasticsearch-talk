@@ -68,16 +68,26 @@ fi
 
 if [[ ! -f /var/puppet-init/librarian-puppet-installed ]]; then
     echo 'Installing librarian-puppet'
+    gem install bundler > /dev/null 
     gem install librarian-puppet >/dev/null
     echo 'Finished installing librarian-puppet'
 
     echo 'Running initial librarian-puppet'
-    cd "$PUPPET_DIR" && librarian-puppet install --clean >/dev/null
+    cd /etc/puppet/
+    sudo librarian-puppet update
     echo 'Finished running initial librarian-puppet'
 
     touch /var/puppet-init/librarian-puppet-installed
 else
-    echo 'Running update librarian-puppet'
-    cd "$PUPPET_DIR" && librarian-puppet update >/dev/null
-    echo 'Finished running update librarian-puppet'
+    sha1sum -c /var/puppet-init/Puppetfile.sha1 >/dev/null
+    if [[ $? > 0 ]]
+    then
+        echo 'Running update librarian-puppet'
+        #librarian-puppet update >/dev/null
+        cd /etc/puppet
+        sudo librarian-puppet update
+        echo 'Finished running update librarian-puppet'
+    else
+        echo 'Skipping librarian-puppet (Puppetfile unchanged)'
+    fi
 fi

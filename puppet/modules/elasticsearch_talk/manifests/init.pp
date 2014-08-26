@@ -60,6 +60,17 @@ class elasticsearch_talk(
     mapping_file => 'wikipedia.locations.mappings.json'
   }
 
+  elasticsearch_talk::index { 'freebase':
+    bulk_file    => 'films.json.bulk',
+    mapping_file => 'films.mappings.json'
+  }
+
+  exec { 'delete-inappropriate-films':
+    command => "curl -XDELETE -f -s -S --data-binary \"@films-delete-inappropriate-query.json\" http://localhost:9200/freebase/film/_query",
+    require => Elasticsearch_talk::Index['freebase'],
+    cwd => "/usr/src/elasticsearch-talk/data/bulk"
+  }
+
   elasticsearch_talk::index { 'wikipedia-mappings-simple':
     delete_only  => true
   }
@@ -84,11 +95,10 @@ class elasticsearch_talk(
     delete_only  => true
   }
 
-  class { 'elasticsearch_talk::divvy': }
+  # class { 'elasticsearch_talk::divvy': }
 
   elasticsearch_talk::index { "divvy":
-    bulk_file     => 'divvy_bulk_update.json',
-    mapping_file  => 'divvy_mappings.json',
-    require       => Class['elasticsearch_talk::divvy']
+    bulk_file     => 'divvy.json.bulk',
+    mapping_file  => 'divvy.mappings.json'
   }
 }

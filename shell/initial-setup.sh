@@ -31,7 +31,7 @@ if [[ ! -f /var/puppet-init/initial-setup-repo-update ]]; then
     fi
 fi
 
-if [[ "$OS" == 'ubuntu' && ("$CODENAME" == 'lucid' || "$CODENAME" == 'precise') && ! -f /var/puppet-init/ubuntu-required-libraries ]]; then
+if [[ "$OS" == 'ubuntu' && ! -f /var/puppet-init/ubuntu-required-libraries ]]; then
     echo 'Installing basic curl packages (Ubuntu only)'
     apt-get install -y curl unzip libcurl3 libcurl4-gnutls-dev >/dev/null
     echo 'Finished installing basic curl packages (Ubuntu only)'

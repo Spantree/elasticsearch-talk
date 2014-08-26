@@ -1,6 +1,7 @@
 node default {
-  $node_version = 'v0.10.25'
-  $elasticsearch_version = '1.0.0'
+  $node_version = 'v0.10.31'
+  $elasticsearch_version = '1.3.2'
+
 
 	# Virtual Machines
 	class { 'java7': }
@@ -29,6 +30,7 @@ node default {
 
   class { 'nodejs':
     version => $node_version,
+    make_install => false
   }
 
   package { 'grunt-cli':
@@ -44,15 +46,52 @@ node default {
     require          => Package['grunt-cli']
   }
 
+  $es_heap_size = floor($memorysize_mb * 0.6)
+
+  $elasticsearch_publish_host = $vm_type ? {
+    'vagrant' => $ipaddress_eth1,
+    default   => $ipaddress_eth0
+  }
+
   # Hotness
   class { 'elasticsearch':
     package_url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${elasticsearch_version}.deb",
-    require     => Class['java7'],
-    config      => {
-      'http' => {
-        'max_content_length'=> '500mb'
+    status => 'enabled',
+    init_defaults => {
+      'ES_HEAP_SIZE' => "${es_heap_size}m"
+    },
+    config => {
+      http => {
+        max_content_length => '500mb'
+      },
+      network => {
+        publish_host => $elasticsearch_publish_host,
+        bind_host => '0.0.0.0'
+      },
+      cluster => {
+        routing => {
+          allocation => {
+            cluster_concurrent_rebalance => 2
+          }
+        }
+      },
+      marvel => {
+        agent => {
+          enabled => $enable_marvel_agent
+        }
+      },
+      bootstrap => {
+        mlockall => true
+      },
+      indices => {
+        fielddata => {
+          cache => {
+            size => '25%'
+          }
+        }
       }
-    }
+    },
+    require => Class['java7'],
 	}
 
   elasticsearch::plugin{'mobz/elasticsearch-head':
@@ -66,6 +105,7 @@ node default {
   class {'elasticsearch_talk' :
     require     => [
       Class['groovy'],
+      Class['elasticsearch'],
       Elasticsearch::Plugin['elasticsearch/marvel/latest']
     ]
   }

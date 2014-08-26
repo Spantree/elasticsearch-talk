@@ -23,7 +23,8 @@ class revealjs(
   }
 
   exec { 'revealjs-link-presentation':
-    command => "ln -sf ${presentation_dir}/* .",
+    command => "ln -sfn ${presentation_dir}/* .",
+    returns => [0, 1],
     cwd     => $src_dir,
     require => Exec['revealjs-npm-install']
   }

@@ -75,7 +75,7 @@ Find locations matching "chicago" sorted by distance from the Spantree offices.
 Sorting by strings is actually a bit trickier. In Lucene, sorts are based on individual terms in the inverted index. 
 Because our name field is tokenized, the first alphabetical token in the field value determines a field's ranking.
 
-`GET /wikipedia/_search`
+`GET /wikipedia/locations/_search`
 
 ```json
 {
@@ -104,19 +104,19 @@ non-alphanumeric characters so punctuation symbols don't get sorted.
 For the name field, we want to do both full-text search and string sorting. So to make sure we can handle both, we 
 configure name to be a multi-field.
 
-`GET /wikipedia/location/_mapping`
+`GET /wikipedia/locations/_mapping`
 
 ## Testing the Sortable String Analyzer
 
 When creating new analyzers, we recommend testing them out using the Analyze API to make sure they work as expected.
 
-`GET /wikipedia/_analyze?field=name.sortable&text=I wanna know what love is; I want you to show me!`
+`GET /wikipedia/locations/_analyze?field=name.sortable&text=I wanna know what love is; I want you to show me!`
 
 ## Sorting Strings the Right Way
 
-Now that we've done all that, we simply swap out the sort field from the previous query to use `name.alpha_space_only`.
+Now that we've done all that, we simply swap out the sort field from the previous query to use `name.sorted`.
 
-`GET /wikipedia/_search`
+`GET /wikipedia/locations/_search`
 
 ```json
 {

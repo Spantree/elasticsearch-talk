@@ -90,7 +90,7 @@
     }
   },
   "mappings": {
-    "location": {
+    "locations": {
       "properties": {
         "name": {
           "type": "multi_field",

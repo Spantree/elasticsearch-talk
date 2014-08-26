@@ -26,7 +26,8 @@ class revealjs(
     command => "ln -sfn ${presentation_dir}/* .",
     returns => [0, 1],
     cwd     => $src_dir,
-    require => Exec['revealjs-npm-install']
+    require => Exec['revealjs-npm-install'],
+    returns => [0,1,],
   }
 
   file { "/etc/init/revealjs.conf":

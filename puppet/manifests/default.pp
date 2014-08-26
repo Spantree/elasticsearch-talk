@@ -60,6 +60,7 @@ node default {
     init_defaults => {
       'ES_HEAP_SIZE' => "${es_heap_size}m"
     },
+    autoupgrade => true,
     config => {
       http => {
         max_content_length => '500mb'

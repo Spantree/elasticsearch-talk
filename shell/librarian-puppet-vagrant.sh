@@ -79,14 +79,15 @@ if [[ ! -f /var/puppet-init/librarian-puppet-installed ]]; then
 
     touch /var/puppet-init/librarian-puppet-installed
 else
+    cd /etc/puppet/
     sha1sum -c /var/puppet-init/Puppetfile.sha1 >/dev/null
     if [[ $? > 0 ]]
     then
         echo 'Running update librarian-puppet'
-        #librarian-puppet update >/dev/null
         cd /etc/puppet
         sudo librarian-puppet update
         echo 'Finished running update librarian-puppet'
+        sha1sum Puppetfile > /var/puppet-init/Puppetfile.sha1
     else
         echo 'Skipping librarian-puppet (Puppetfile unchanged)'
     fi

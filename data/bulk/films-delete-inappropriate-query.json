@@ -1,8 +1,8 @@
 {
   "query": {
     "query_string": {
-      "default_field": "genre",
-      "query": "pornographic OR pornography"
+      "fields": ["genre", "description"],
+      "query": "pornographic OR pornography OR \"adult film\""
     }
   }
 }

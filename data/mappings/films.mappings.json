@@ -22,11 +22,7 @@
         },
         "first_name_synonyms": {
           "type": "synonym",
-          "synonyms": [
-            "fred, frederick",
-            "ed, edward",
-            "amir, aamir"
-          ]
+          "synonyms_path": "analysis/first_name.synonyms.txt"
         },
         "snowball_stemmed": {
           "type": "snowball",
@@ -174,6 +170,11 @@
               "type" : "string",
               "analyzer" : "stemmed",
               "include_in_all" : false
+            },
+            "synonyms": {
+              "type" : "string",
+              "analyzer" : "first_name_synonyms",
+              "include_in_all" : false
             }
           }
         },
@@ -205,6 +206,11 @@
             "stemmed" : {
               "type" : "string",
               "analyzer" : "stemmed",
+              "include_in_all" : false
+            },
+            "synonyms": {
+              "type" : "string",
+              "analyzer" : "first_name_synonyms",
               "include_in_all" : false
             }
           }
@@ -327,6 +333,11 @@
             "stemmed" : {
               "type" : "string",
               "analyzer" : "stemmed",
+              "include_in_all" : false
+            },
+            "synonyms": {
+              "type" : "string",
+              "analyzer" : "first_name_synonyms",
               "include_in_all" : false
             }
           }

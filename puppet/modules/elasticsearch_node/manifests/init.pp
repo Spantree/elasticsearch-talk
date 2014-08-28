@@ -71,4 +71,18 @@ class elasticsearch_node(
   elasticsearch::plugin { 'polyfractal/elasticsearch-inquisitor':
     module_dir  => 'inquisitor'
   }
+
+  file { '/etc/elasticsearch/analysis':
+    ensure => 'directory',
+    owner => $user,
+    group => $group
+  }
+
+  file { '/etc/elasticsearch/analysis/first_name.synonyms.txt':
+    ensure => file,
+    source  => "puppet:///modules/elasticsearch_node/etc/elasticsearch/analysis/first_name.synonyms.txt",
+    owner => $user,
+    group => $group,
+    require => File['/etc/elasticsearch/analysis']
+  }
 }

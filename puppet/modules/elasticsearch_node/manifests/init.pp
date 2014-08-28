@@ -64,7 +64,11 @@ class elasticsearch_node(
 	  module_dir  => 'head'
 	}
 
-	elasticsearch::plugin { 'elasticsearch/marvel/latest':
-	  module_dir  => 'marvel'
-	}
+  elasticsearch::plugin { 'elasticsearch/marvel/latest':
+    module_dir  => 'marvel'
+  }
+
+  elasticsearch::plugin { 'polyfractal/elasticsearch-inquisitor':
+    module_dir  => 'inquisitor'
+  }
 }

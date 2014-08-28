@@ -9,7 +9,8 @@ PUPPET_OPTIONS = [
 
 PUPPET_FACTS = {
   "vm_type" => "vagrant",
-  "enable_marvel_agent" => true
+  "enable_marvel_agent" => true,
+  "do_reindex" => ENV['DO_REINDEX'] || false
 }
 
 Vagrant.configure("2") do |config|

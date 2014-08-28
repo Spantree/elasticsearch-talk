@@ -22,7 +22,7 @@ define elasticsearch_talk::index(
   }
 
   if(!$delete_only) {
-    $pause_payload = '{"index": {"refresh_interval": "10s"}}'
+    $pause_payload = '{"index": {"refresh_interval": "60s"}}'
     $restart_payload = '{"index": {"refresh_interval": "1s"}}'
 
     exec { "create-index-${name}":

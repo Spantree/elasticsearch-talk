@@ -1,7 +1,7 @@
 class elasticsearch_node(
   $elasticsearch_version = '1.3.2'
 ) {
-	$es_heap_size = floor($memorysize_mb * 0.8)
+  $es_heap_size = floor($memorysize_mb * 0.6)
 
 	$elasticsearch_publish_host = $vm_type ? {
 	  'vagrant' => $ipaddress_eth1,

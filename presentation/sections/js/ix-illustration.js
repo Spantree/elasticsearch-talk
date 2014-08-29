@@ -2,18 +2,22 @@ angular.module('presentation',[]).controller( "InvertedIndexController", functio
 
     var orderBy = $filter('orderBy');
 
-    $scope.documents = [
-        'document one is cool',
-        'document two is cool',
-        'document three is kinda cool'
-    ]
+    $scope.documents = {
+        "1":'cool cool',
+        "2":'cool',
+        "3":'cool'
+    }
 
     $scope.invIndex = []
 
+
     $scope.buildInvIndex = function() {
+
+        console.log('buildInvIndex');
         var itemsMap = {}
         for(var docIx in $scope.documents) {
             var doc = $scope.documents[docIx];
+            console.log(doc);
             var words = doc.split(' ');
 
             for(var wordIx = 0; wordIx < words.length; wordIx++) {
@@ -26,10 +30,12 @@ angular.module('presentation',[]).controller( "InvertedIndexController", functio
                 }
 
                 if(itemsMap[word]['documents'] === undefined || itemsMap[word]['documents'] === null) {
+                    console.log(word + ' creating documents array');
                     itemsMap[word]['documents'] = {};
                 }
 
-                if(itemsMap[word][docIx] === undefined || itemsMap[word][docIx] === null) {
+                if(itemsMap[word]['documents'][docIx] === undefined || itemsMap[word]['documents'][docIx] === null) {
+                    console.log(word + ' creating ' + docIx + ' array');
                     itemsMap[word]['documents'][docIx] = [];
                 }
 
@@ -43,7 +49,6 @@ angular.module('presentation',[]).controller( "InvertedIndexController", functio
         }
 
         $scope.invIndex = orderBy($scope.invIndex, 'word', false);
-        console.log($scope.invIndex);
     };
 
     $scope.buildInvIndex();

@@ -2,47 +2,37 @@
 
 
 ### Inverted Index Illustration
-<div class="row ix-illustration" ng-controller="InvertedIndexController">
-  <div class="col-md-4" ng-model="documents" ng-repeat="doc in documents">
-    <textarea class="form-control" rows="3">{{doc}}</textarea>
+<div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
+  <div class="col-md-4" ng-model="documents" ng-repeat="(docKey, doc) in documents">
+    <textarea class="form-control" rows="3" ng-model="documents[docKey]" ng-change="buildInvIndex()">{{doc}}</textarea>
   </div>
   <div class="col-md-12">
-      <table class="table">
-        <tr>
-          <th>
-            Word
-          </th>
-          <th>
-            Document
-          </th>
-          <th>
-            Positions
-          </th>
-        </tr>
-        <tr ng-model="invindex" ng-repeat="entry in invIndex">
-          <td>
-            {{entry.word}}
-          </td>
-          <td colspan="2">
-            <table>
-              <tr ng-repeat="(document, words) in entry.documents">
-                <td>
-                  {{document}}
-                </td>
-                <td>
-                  <table>
-                    <tr>
-                      <td>
-                        <span ng-repeat="word in words">{{word}}</span>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              <tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+      <div style="height:300px; overflow-y:scroll; font-size: 50%">
+        <table class="table" >
+          <tr>
+            <th>
+              Word
+            </th>
+            <th>
+              Document : Positions
+            </th>
+          </tr>
+          <tr ng-model="invindex" ng-repeat="entry in invIndex">
+            <td>
+              {{entry.word}}
+            </td>
+            <td colspan="2">
+              <table class="table" style="background-color: transparent">
+                <tr ng-repeat="(document, words) in entry.documents">
+                  <td style="border: none">
+                    <span>{{document}}</span>:[{{words.join(',')}}]
+                  </td>
+                <tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
   </div>
 </div>
 

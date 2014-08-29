@@ -1,7 +1,7 @@
 #/etc/init/revealjs.conf
 description "A reveal.js runtime"
 
-env GRUNT_EXEC=<%= @node_home %>/bin/grunt
+env GRUNT_EXEC=/usr/local/bin/grunt
 env APP_DIR='<%= @src_dir %>'
 env NODE_PATH=$NODE_PATH:<%= @src_dir %>/node_modules
 env PID_FILE=/var/run/revealjs.pid

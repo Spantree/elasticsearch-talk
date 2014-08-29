@@ -1,6 +1,52 @@
 ## How It Works
 
 
+### Inverted Index Illustration
+<div class="row ix-illustration" ng-controller="InvertedIndexController">
+  <div class="col-md-4" ng-model="documents" ng-repeat="doc in documents">
+    <textarea class="form-control" rows="3">{{doc}}</textarea>
+  </div>
+  <div class="col-md-12">
+      <table class="table">
+        <tr>
+          <th>
+            Word
+          </th>
+          <th>
+            Document
+          </th>
+          <th>
+            Positions
+          </th>
+        </tr>
+        <tr ng-model="invindex" ng-repeat="entry in invIndex">
+          <td>
+            {{entry.word}}
+          </td>
+          <td colspan="2">
+            <table>
+              <tr ng-repeat="(document, words) in entry.documents">
+                <td>
+                  {{document}}
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td>
+                        <span ng-repeat="word in words">{{word}}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              <tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+
 ### What does querying an index do?
 
 * Find the documents that match the query

@@ -1,4 +1,4 @@
-node /^(es2|esdemo)\.local$/ {
+node default {
   $node_version = 'v0.10.31'
 
 	# Virtual Machines

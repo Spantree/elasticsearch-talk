@@ -9,9 +9,10 @@ PUPPET_OPTIONS = [
 
 PUPPET_FACTS = {
   "vm_type" => "vagrant",
-  "enable_marvel_agent" => true,
-  "do_reindex" => ENV['DO_REINDEX'] || false
+  "enable_marvel_agent" => true
 }
+
+DO_REINDEX = ENV['DO_REINDEX']
 
 Vagrant.configure("2") do |config|
   # config.vm.box = "estalk-precise-vbox"
@@ -47,7 +48,6 @@ Vagrant.configure("2") do |config|
     end
 
     es1.vm.provision :puppet do |puppet|
-      puppet.manifest_file = "es1.pp"
       puppet.manifests_path = "puppet/manifests"
       puppet.options = PUPPET_OPTIONS
       puppet.facter = PUPPET_FACTS
@@ -65,10 +65,11 @@ Vagrant.configure("2") do |config|
     end
 
     es2.vm.provision :puppet do |puppet|
-      puppet.manifest_file = "es2.pp"
       puppet.manifests_path = "puppet/manifests"
       puppet.options = PUPPET_OPTIONS
-      puppet.facter = PUPPET_FACTS
+      puppet.facter = PUPPET_FACTS.merge({
+        :do_reindex => ENV['DO_REINDEX']
+      })
     end
   end
 end

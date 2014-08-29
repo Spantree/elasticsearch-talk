@@ -17,3 +17,8 @@ task transform(dependsOn: 'classes', type: JavaExec) {
     main = 'net.spantree.elasticsearch.talk.TransformExamples'
     classpath = sourceSets.main.runtimeClasspath
 }
+
+task copyDependencies(type: Copy) {
+    from configurations.runtime
+    into new File("lib")
+}

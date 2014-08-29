@@ -6,12 +6,12 @@ class elasticsearch_talk(
     path  => [
       '/usr/local/sbin', '/usr/local/bin',
       '/usr/sbin', '/usr/bin', '/sbin', '/bin',
-      '/usr/share/groovy/bin', '/opt/gradle/bin/'
+      '/usr/share/groovy/bin'
     ]
   }
 
   exec { 'create-sense-files':
-    command => "gradle transform",
+    command => "groovy -cp \"lib/*\" src/main/groovy/net/spantree/elasticsearch/talk/TransformExamples.groovy",
     cwd     => "/usr/src/elasticsearch-talk/transform",
   }
 

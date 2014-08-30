@@ -29,7 +29,7 @@ define elasticsearch_talk::index(
       command => "curl -f -s -S -XPOST --data-binary \"@${mapping_file}\" http://localhost:9200/${name}",
       cwd => $mapping_file_dir,
       tries => 5,
-      try_sleep => 5,
+      try_sleep => 10,
       require => Exec["delete-index-${name}"]
     }
 

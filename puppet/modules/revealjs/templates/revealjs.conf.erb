@@ -19,11 +19,17 @@ end script
 post-stop script
 	if [ -f $PID_FILE ]
 	then
-		echo "Stopping revealjs..."
-        echo "Killing `cat $PID_FILE`"
-        kill `cat $PID_FILE`;
-        rm -f $PID_FILE;
-        echo "Node stopped"
+        PID=`cat $PID_FILE`
+        if [ `ps aux | gawk '{print $2}' | grep ^$PID$` ]
+        then
+            echo "Stopping Reveal.js Node server..."
+            echo "Killing $PID"
+            kill $PID;
+            echo "Reveal.js Node server stopped"
+        else
+            "Reveal.js process id ${PID} not running, removing PID file."
+        fi
     fi
+    rm -f $PID_FILE;
     sleep 10
 end script

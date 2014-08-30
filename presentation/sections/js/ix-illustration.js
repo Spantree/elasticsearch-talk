@@ -1,22 +1,37 @@
-angular.module('presentation',[]).controller( "InvertedIndexController", function ($scope, $filter) {
+
+var app = angular.module('presentation',[]);
+
+app.controller( "InvertedIndexController", function ($scope, $filter, $sce) {
 
     var orderBy = $filter('orderBy');
 
     $scope.documents = {
-        "1":'cool cool',
-        "2":'cool',
-        "3":'cool'
-    }
+        "1": 'work it make it do it makes us harder better faster stronger',
+        "2":'more than hour hour never ever after work is over',
+        "3":'work it harder make it better do it faster makes us stronger'
+    };
 
-    $scope.invIndex = []
+    $scope.documentsHtml = {
+        "1": $sce.trustAsHtml($scope.documents['1']),
+        "2": $sce.trustAsHtml($scope.documents['2']),
+        "3": $sce.trustAsHtml($scope.documents['3'])
+    };
 
+    //$sce.trustAsHtml(
+    $scope.invIndex = [];
+
+
+    $scope.highlight = function(word) {
+        console.log('highlight ' + word);
+    };
 
     $scope.buildInvIndex = function() {
 
         console.log('buildInvIndex');
-        var itemsMap = {}
+        var itemsMap = {};
         for(var docIx in $scope.documents) {
             var doc = $scope.documents[docIx];
+            doc = doc.trim();
             console.log(doc);
             var words = doc.split(' ');
 
@@ -30,15 +45,14 @@ angular.module('presentation',[]).controller( "InvertedIndexController", functio
                 }
 
                 if(itemsMap[word]['documents'] === undefined || itemsMap[word]['documents'] === null) {
-                    console.log(word + ' creating documents array');
                     itemsMap[word]['documents'] = {};
                 }
 
                 if(itemsMap[word]['documents'][docIx] === undefined || itemsMap[word]['documents'][docIx] === null) {
-                    console.log(word + ' creating ' + docIx + ' array');
                     itemsMap[word]['documents'][docIx] = [];
                 }
 
+                itemsMap[word]['documentsLength'] = Object.keys(itemsMap[word].documents).length;
                 itemsMap[word]['documents'][docIx].push(wordIx);
             }
         }
@@ -49,9 +63,11 @@ angular.module('presentation',[]).controller( "InvertedIndexController", functio
         }
 
         $scope.invIndex = orderBy($scope.invIndex, 'word', false);
+
+
     };
 
-    $scope.buildInvIndex();
+
 });
 
 var svg = null;

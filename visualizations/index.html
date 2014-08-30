@@ -1,35 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    
     <title>Elasticsearch Visualizations</title>
-    <script src="scripts/require.js"></script>
-    <script>require(["scripts/main"], function () {})</script>
-    <style>
-        body {
-            font: 14px sans-serif;
+    <script src="bower_components/jquery/jquery.js"></script>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/crossfilter/crossfilter.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/elasticsearch/elasticsearch.js"></script>
+    <script src="bower_components/elasticsearch/elasticsearch.angular.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script>
+        var es = new elasticsearch.Client({
+            host: 'esdemo.local:9200',
+            log: 'trace'
+        });
+
+        dimensions = {
+            date_of_trip: {
+                date_histogram: {
+                    field: 'start_time',
+                    interval: 'day'
+                }
+            }
         }
 
-        .arc path {
-            stroke: #fff;
-            stroke-width: 3px;
-        }
+        es.search({
+            index: 'divvy',
+            body: {
+                aggs: {
+                    date_of_trip: dimensions.date_of_trip
+                },
+                size: 0
+            }
+        }).then(function(resp) {
+            var buckets = resp.aggregations.date_of_trip.buckets
+            var data = _.map(buckets, function(bucket) {
+                return {
+                    date: bucket.key_as_string,
+                    count: bucket.doc_count
+                } 
+            });
 
-        .node circle {
-            fill: #fff;
-            stroke: steelblue;
-            stroke-width: 1.5px;
-        }
+            ndx = crossfilter(data);
+            console.log("ndx", ndx);
 
-        .node {
-            font: 10px sans-serif;
-        }
-
-        .link {
-            fill: none;
-            stroke: #ccc;
-            stroke-width: 1.5px;
-        }
-    </style>
+            days = ndx.dimension(function(d) {
+                return new Date(d.date)
+            });
+        })
+    </script>
 </head>
 <body>
     <div id="donut-chart"></div>

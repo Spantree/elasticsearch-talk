@@ -6,7 +6,10 @@
     "d3": "3.4.11",
     "elasticsearch": "~2.4.0",
     "jquery": "~1.10.2",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "crossfilter": "~1.3.0",
+    "angular-dc": "~0.0.4",
+    "dcjs": "master"
   },
   "private": true
 }

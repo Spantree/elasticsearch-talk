@@ -8,9 +8,9 @@
       <div class="panel-body" style="height:500px; overflow-y:scroll; padding: 30px;">
         <span> Documents </span>
         <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
-            <div style="padding-bottom: 5px">
+            <div style="padding-bottom: 5px; height: 100px; ">
                 <span style="font-size: 14pt">{{docKey}}</span>
-                <div ng-bind-html="doc" class="form-control" style="font-size: 14pt; line-height: 16pt; font-weight: bold; height: 60px; ">
+                <div ng-bind-html="doc" class="form-control" style="font-size: 18pt; line-height: 20pt; font-weight: bold; height: 60px; ">
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             </th>
           </tr>
           <tr ng-model="invindex" ng-repeat-start="entry in invIndex">
-            <td rowspan="{{entry.documentsLength}}" ng-mouseover="highlight(entry.word)">
+            <td rowspan="{{entry.documentsLength}}" ng-mouseover="highlight(entry.word)" style="cursor: pointer">
               {{entry.word}}
             </td>
             <td ng-repeat-start="(document, words) in entry.documents" ng-show="$first">

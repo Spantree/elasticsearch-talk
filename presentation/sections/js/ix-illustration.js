@@ -6,60 +6,76 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce) {
     var orderBy = $filter('orderBy');
 
     $scope.documents = {
-        "1": 'work it make it do it makes us harder better faster stronger',
-        "2":'more than hour hour never ever after work is over',
-        "3":'work it harder make it better do it faster makes us stronger'
+        "1":'work it harder make it better',
+        "2":'do it faster makes us stronger',
+        "3":'more than ever hour after',
     };
 
-    $scope.documentsHtml = {
-        "1": $sce.trustAsHtml($scope.documents['1']),
-        "2": $sce.trustAsHtml($scope.documents['2']),
-        "3": $sce.trustAsHtml($scope.documents['3'])
-    };
-
-    //$sce.trustAsHtml(
+    $scope.documentsHtml = {};
+    $scope.invIndexMap = {}
     $scope.invIndex = [];
 
+    $scope.resetHighlighting = function() {
+        for(docKey in $scope.documents) {
+            $scope.documentsHtml[docKey] = $sce.trustAsHtml($scope.documents[docKey]); 
+        }
+    }
+
+    $scope.resetHighlighting();
 
     $scope.highlight = function(word) {
+        $scope.resetHighlighting();
         console.log('highlight ' + word);
+        var wordLocations = $scope.invIndexMap[word];
+        for(docKey in wordLocations.documents) {
+           var doc = $scope.documents[docKey].trim();
+           var words = doc.split(' ');
+           var wordIndices = wordLocations['documents'][docKey]
+
+           for(ix in wordIndices) {
+            var wordIx = wordIndices[ix];
+            words[wordIx] = "<em class=\"text-primary\">" + words[wordIx] + "</em>" 
+           }
+           
+           var newDoc = words.join(' ');
+
+           $scope.documentsHtml[docKey] = $sce.trustAsHtml(newDoc); 
+        }
     };
 
     $scope.buildInvIndex = function() {
 
-        console.log('buildInvIndex');
-        var itemsMap = {};
+        $scope.invIndexMap = {};
         for(var docIx in $scope.documents) {
             var doc = $scope.documents[docIx];
             doc = doc.trim();
-            console.log(doc);
             var words = doc.split(' ');
 
             for(var wordIx = 0; wordIx < words.length; wordIx++) {
                 var word = words[wordIx];
 
-                if(itemsMap[word] === undefined || itemsMap[word] === null) {
-                    itemsMap[word] = {
+                if($scope.invIndexMap[word] === undefined || $scope.invIndexMap[word] === null) {
+                    $scope.invIndexMap[word] = {
                         'word': word
                     };
                 }
 
-                if(itemsMap[word]['documents'] === undefined || itemsMap[word]['documents'] === null) {
-                    itemsMap[word]['documents'] = {};
+                if($scope.invIndexMap[word]['documents'] === undefined || $scope.invIndexMap[word]['documents'] === null) {
+                    $scope.invIndexMap[word]['documents'] = {};
                 }
 
-                if(itemsMap[word]['documents'][docIx] === undefined || itemsMap[word]['documents'][docIx] === null) {
-                    itemsMap[word]['documents'][docIx] = [];
+                if($scope.invIndexMap[word]['documents'][docIx] === undefined || $scope.invIndexMap[word]['documents'][docIx] === null) {
+                    $scope.invIndexMap[word]['documents'][docIx] = [];
                 }
 
-                itemsMap[word]['documentsLength'] = Object.keys(itemsMap[word].documents).length;
-                itemsMap[word]['documents'][docIx].push(wordIx);
+                $scope.invIndexMap[word]['documentsLength'] = Object.keys($scope.invIndexMap[word].documents).length;
+                $scope.invIndexMap[word]['documents'][docIx].push(wordIx);
             }
         }
 
         $scope.invIndex = [];
-        for(var wordKey in itemsMap) {
-            $scope.invIndex.push(itemsMap[wordKey]);
+        for(var wordKey in $scope.invIndexMap) {
+            $scope.invIndex.push($scope.invIndexMap[wordKey]);
         }
 
         $scope.invIndex = orderBy($scope.invIndex, 'word', false);

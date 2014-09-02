@@ -1,7 +1,7 @@
 
 var app = angular.module('presentation',[]);
 
-app.controller( "InvertedIndexController", function ($scope, $filter, $sce) {
+app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $timeout) {
 
     var orderBy = $filter('orderBy');
 
@@ -11,9 +11,15 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce) {
         "3":'more than ever hour after',
     };
 
+    $scope.documentCount = null;
+
     $scope.documentsHtml = {};
     $scope.invIndexMap = {}
     $scope.invIndex = [];
+    $scope.searchQuery = '';
+    $scope.searchWords = [];
+    $scope.termFrequencies = {};
+    $scope.documentFrequencies = {};
 
     $scope.resetHighlighting = function() {
         for(docKey in $scope.documents) {
@@ -23,18 +29,68 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce) {
 
     $scope.resetHighlighting();
 
+    $scope.updateQuery = function() {
+        if( Object.keys($scope.invIndexMap).length === 0) {
+            $scope.buildInvIndex();
+            $scope.documentCount = Object.keys($scope.documents).length;
+        }
+
+        $scope.searchWords = $scope.searchQuery.trim().split(' ');
+
+        $scope.documentFrequencies = {};
+        $scope.termFrequencies = {}
+
+        for(wordIx in $scope.searchWords) {
+            var word = $scope.searchWords[wordIx];
+
+            if($scope.invIndexMap[word] !== undefined) {
+                $scope.documentFrequencies[word] = Object.keys($scope.invIndexMap[word]['documents']).length;
+
+                for(docKey in $scope.documents) {
+
+                    if($scope.termFrequencies[docKey] == undefined) {
+                        $scope.termFrequencies[docKey] = {};
+                    }
+
+                    if($scope.invIndexMap[word]['documents'][docKey] !== undefined) {
+                        $scope.termFrequencies[docKey][word] = Object.keys($scope.invIndexMap[word]['documents'][docKey]).length;
+                    } else {
+                        $scope.termFrequencies[docKey][word] = 0;
+                    }
+                }
+            } else {
+                $scope.documentFrequencies[word] = 0;
+
+                for(docKey in $scope.documents) {
+                    if($scope.termFrequencies[docKey] == undefined) {
+                        $scope.termFrequencies[docKey] = {};
+                    }
+
+                    $scope.termFrequencies[docKey][word] = 0;
+                }
+            }
+
+            
+        }
+
+    };
+
+    $scope.updateMathJax = function() {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+
     $scope.highlight = function(word) {
         $scope.resetHighlighting();
-        console.log('highlight ' + word);
+        
         var wordLocations = $scope.invIndexMap[word];
+
         for(docKey in wordLocations.documents) {
-           var doc = $scope.documents[docKey].trim();
-           var words = doc.split(' ');
+           var doc = $scope.documents[docKey].trim().split(' ');
            var wordIndices = wordLocations['documents'][docKey]
 
            for(ix in wordIndices) {
-            var wordIx = wordIndices[ix];
-            words[wordIx] = "<em class=\"text-primary\">" + words[wordIx] + "</em>" 
+                var wordIx = wordIndices[ix];
+                words[wordIx] = "<em class=\"text-primary\">" + words[wordIx] + "</em>" 
            }
            
            var newDoc = words.join(' ');
@@ -86,13 +142,32 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce) {
 
 });
 
+// Copied from http://stackoverflow.com/a/16646667 and then slightly modified
+app.directive("mathjaxBind", function() {
+    return {
+        restrict: "A",
+        controller: ["$scope", "$element", "$attrs",
+            function($scope, $element, $attrs) {
+                $scope.$watch(
+                    function() {
+                        return $element.attr( $attrs.$attr.mathjaxBind); 
+                    }, 
+                    function(texExpression) {
+                        var texScript = angular.element("<script type='math/tex'>")
+                            .html(texExpression ? texExpression :  "");
+                        $element.html("");
+                        $element.append(texScript);
+                        MathJax.Hub.Queue(["Reprocess", MathJax.Hub, $element[0]]);
+                    }
+                );
+        }]
+    };
+});
+
 var svg = null;
 
 function init(e) {
-
     angular.bootstrap(document, ['presentation']);
-    
-    console.log("You are on a slide that will one day have an illustration");
 }
 
 function onShow(e) {
@@ -100,3 +175,4 @@ function onShow(e) {
 }
 
 document.addEventListener( 'ix-illustration-show', onShow, false );
+document.addEventListener( 'tfidf-illustration-show', onShow, false );

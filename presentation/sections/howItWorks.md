@@ -1,6 +1,22 @@
 ## How It Works
 
 
+### What does querying an index do?
+
+* Find the documents that match the query
+* Score the documents 
+
+
+### Inverted index
+
+![Book Index](images/book-index.png)
+
+
+### Inverted index
+
+* Maps word to document or position
+
+
 ### Inverted Index 
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
   <div class="col-md-4">
@@ -23,7 +39,7 @@
   <div class="col-md-7">
     <div class="panel panel-default">
       <div class="panel-body" style="height:500px; overflow-y:scroll; padding: 30px;">
-        <table class="table" style="font-size: 50%;">
+        <table class="table" style="font-size: 70%;">
           <tr>
             <th>
               Word
@@ -36,7 +52,7 @@
             </th>
           </tr>
           <tr ng-model="invindex" ng-repeat-start="entry in invIndex">
-            <td rowspan="{{entry.documentsLength}}" ng-mouseover="highlight(entry.word)" style="cursor: pointer">
+            <td rowspan="{{entry.documentsLength}}" ng-mouseover="highlight(entry.word)" style="cursor: pointer; font-weight: bold">
               {{entry.word}}
             </td>
             <td ng-repeat-start="(document, words) in entry.documents" ng-show="$first">
@@ -61,131 +77,57 @@
 </div>
 
 
-### What does querying an index do?
-
-* Find the documents that match the query
-* Score the documents 
-
-
-### Inverted index
-
-![Book Index](images/book-index.png)
-
-
-### Inverted index
-
-* Maps word to document or position
-
-
-### Finding the right document
-
-<table class="documents">
-  <tr>
-    <th>0</th>
-    <th>1</th>
-    <th>2</th>
-  </tr>
-  <tr>
-    <td>
-      work it make it<br/>
-      do it makes us<br/>
-      harder better<br/>
-      faster stronger
-    </td>
-    <td>
-      more than hour,<br/>
-      hour never<br/>
-      ever after,<br/>
-      work is over
-    </td>
-    <td>
-      work it harder<br/>
-      make it better<br/>
-      do it faster<br/>
-      makes us stronger
-    </td>
-  </tr>
-</table>
-<br/>
-<table style="margin: auto">
-  <tr>
-    <td>work</td><td>&rarr;</td><td>0, 1, 2</td>
-  </tr>
-  <tr>
-    <td>hour</td><td>&rarr;</td><td>1</td>
-  </tr>
-  <tr>
-    <td>harder</td><td>&rarr;</td><td>0, 2</td>
-  </tr>
-</table>
-
-
-### Finding position in document
-
-<table class="documents">
-  <tr>
-    <th>0</th>
-    <th>1</th>
-    <th>2</th>
-  </tr>
-  <tr>
-    <td>
-      work it make it<br/>
-      do it makes us<br/>
-      harder better<br/>
-      faster stronger
-    </td>
-    <td>
-      more than hour,<br/>
-      hour never<br/>
-      ever after<br/>
-      work is over
-    </td>
-    <td>
-      work it harder<br/>
-      make it better<br/>
-      do it faster<br/>
-      makes us stronger
-    </td>
-  </tr>
-</table>
-<br/>
-<table style="margin: auto">
-  <tr>
-    <td rowspan="3">work</td><td rowspan="3">&rarr;</td><td>0:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>{7}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>hour</td><td>&rarr;</td><td>1:</td><td>{2, 3}</td>
-  </tr>
-  <tr>
-    <td rowspan="2">harder</td><td rowspan="2">&rarr;</td><td>0:</td><td>{8}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{2}</td>
-  </tr>
-  <tr>
-    <td rowspan="3">it</td><td rowspan="3">&rarr;</td><td>0:</td><td>{1, 3, 5}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{1, 4, 7}</td>
-  </tr>
-</table>
-<br/>
-Does "work it" occur in a document?
-
-
 ### TF-IDF Scoring Of Documents
 $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 * <em>term frequency ($tf$)</em> number of times a term occurs in a particular document
 * <em>document frequency ($df$)</em> number of all documents a term occurs in 
 * <em>inverse document frequency ($idf$)</em> is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
+
+
+### Scoring documents
+<div class="row tfidf-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-body" style="height:500px; overflow-y:scroll; padding: 30px;">
+        <span> Documents </span>
+        <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+            <div style="padding-bottom: 5px; height: 100px; ">
+                <span style="font-size: 14pt">{{docKey}}</span>
+                <div ng-bind-html="doc" class="form-control" style="font-size: 18pt; line-height: 20pt; font-weight: bold; height: 60px; ">
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" ng-click="buildInvIndex()">Build Index</button>
+       </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-7">
+    <div class="panel panel-default">
+      <div class="panel-body" style="height: 500px; overflow-y: scroll; padding: 30px;">
+        <input type="text" class="form-control" ng-model="searchQuery" ng-change="updateQuery()" placeholder="Enter search text" ng-value="searchQuery"/>
+        <table class="table" style="font-size: 70%;" ng-show="searchQuery">
+          <tr>
+            <th>
+            </th>
+            <th ng-repeat="word in searchWords track by $index">
+              {{word}}
+            </th>
+          </tr>
+          <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+            <td>{{docKey}}</td>
+            <td ng-model="searchWords" ng-repeat="word in searchWords track by $index">
+              <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{documentCount}} }{ {{documentFrequencies[word]}} } }">
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 ### Scoring our example

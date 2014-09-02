@@ -128,7 +128,7 @@
 
         "packer/puppet-apply.sh",
         "packer/cleanup.sh",
-        "packer/cleanup-ifs.sh",
+        "packer/add-vagrant-ssh-key.sh",
         "packer/zerodisk.sh"
       ]
     }

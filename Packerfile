@@ -27,7 +27,8 @@
 
       "guest_os_type": "Ubuntu_64",
       "guest_additions_path": "VBoxGuestAdditions.iso",
-      "guest_additions_mode": "upload",
+      "guest_additions_mode": "attach",
+      
       "headless": "{{user `headless`}}",
       "boot_wait": "10s",
       "http_directory" : "packer/http",
@@ -58,6 +59,9 @@
       "vm_name": "{{ user `box_name` }}-{{user `version`}}",
 
       "source_path": "{{user `ovf_file`}}",
+
+      "guest_additions_path": "VBoxGuestAdditions.iso",
+      "guest_additions_mode": "attach",
 
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
@@ -123,9 +127,11 @@
       "execute_command": "echo 'vagrant' | sudo -S bash '{{.Path}}'",
       "scripts": [
         "shell/initial-setup.sh",
+        "shell/update-ruby.sh",
         "shell/update-puppet.sh",
         "shell/librarian-puppet-vagrant.sh",
 
+        "packer/install-vboxguest.sh",
         "packer/puppet-apply.sh",
         "packer/cleanup.sh",
         "packer/add-vagrant-ssh-key.sh",

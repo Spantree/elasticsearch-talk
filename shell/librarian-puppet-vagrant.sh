@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /usr/local/rvm/scripts/rvm
+
 PWD=/usr/src/elasticsearch-talk/shell
 OS=$(/bin/bash $PWD/os-detect.sh ID)
 CODENAME=$(/bin/bash $PWD/os-detect.sh CODENAME)
@@ -74,18 +76,24 @@ if [[ ! -f /var/puppet-init/librarian-puppet-installed ]]; then
 
     echo 'Running initial librarian-puppet'
     cd /etc/puppet/
-    sudo librarian-puppet update
+    librarian-puppet update
     echo 'Finished running initial librarian-puppet'
 
     touch /var/puppet-init/librarian-puppet-installed
 else
     cd /etc/puppet/
-    sha1sum -c /var/puppet-init/Puppetfile.sha1 >/dev/null
+    
+    if [[ -f /var/puppet-init/Puppetfile.sha1 ]]; then
+        sha1sum -c /var/puppet-init/Puppetfile.sha1 >/dev/null
+    else
+        cat /var/puppet-init/Puppetfile.sha1 &> /dev/null
+    fi
+
     if [[ $? > 0 ]]
     then
         echo 'Running update librarian-puppet'
         cd /etc/puppet
-        sudo librarian-puppet update
+        librarian-puppet update
         echo 'Finished running update librarian-puppet'
         sha1sum Puppetfile > /var/puppet-init/Puppetfile.sha1
     else

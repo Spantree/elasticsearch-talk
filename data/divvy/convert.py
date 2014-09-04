@@ -1,5 +1,6 @@
 import json
 import csv
+import datetime
 
 stations_in = open('stations.in','r')
 station_reader = csv.reader(stations_in)
@@ -9,6 +10,8 @@ trips_in = open('trips.in','r')
 trip_reader = csv.reader(trips_in)
 next(trip_reader)
 name_id_map = {}
+
+dayOfWeekMap = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 for trip_fields in trip_reader:
   trip_map = {}
@@ -25,6 +28,14 @@ for trip_fields in trip_reader:
   trip_map['user_type'] = trip_fields[9]
   trip_map['gender'] = trip_fields[10]
   trip_map['birth_year'] = trip_fields[11].strip()
+  if trip_map['birth_year'] != '':
+    trip_map['age'] = datetime.date.today().year - int(trip_map['birth_year'])
+
+  date_field = trip_fields[1].split(' ')[0]
+  date_fields = date_field.split('-')
+  date = datetime.date(int(date_fields[0]),int(date_fields[1]), int(date_fields[2]))
+  weekday = date.weekday()
+  trip_map['day_of_week'] = dayOfWeekMap[weekday]
 
   name_id_map[trip_map['from_station_name']] = trip_map['from_station_id']
   name_id_map[trip_map['to_station_name']] = trip_map['to_station_id']

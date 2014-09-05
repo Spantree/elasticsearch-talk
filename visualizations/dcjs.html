@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    
+    <title>Elasticsearch Visualizations</title>
+    <link rel="stylesheet" type="text/css" href="//dc-js.github.io/dc.js/css/dc.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css"/>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.7/crossfilter.min.js"></script>
+    <script type="text/javascript" src="//dc-js.github.io/dc.js/js/dc.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.js"></script>
+    <script type="text/javascript" src="//tardyp.github.io/angular-jade/javascripts/angular-jade-min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-dc/dist/angular-dc.js"></script>
+    
+    <script src="bower_components/elasticsearch/elasticsearch.js"></script>
+    <script src="bower_components/elasticsearch/elasticsearch.angular.js"></script>
+
+    <script src="scripts/demo.js"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="myController" class="container">
+        <div class="row" style="padding-top: 20px;">
+            <img src="images/Divvy_Logo.svg" width="100"/>
+            <h2>Ride Navigator</h2>
+            <a ng-click="resetAll()">Reset All</a>
+        </div>
+        <div class="row" style="padding-top: 20px;">
+            <span class="col-xs-4">
+                <h4>Gender</h4>
+                <div dc-chart="pieChart" dc-width="240" dc-height="240" dc-radius="120" dc-dimension="gender_dimension" dc-group="gender_group" class="dc-chart"></div>
+            </span>
+            <span class="col-xs-4">
+                <h4>Age</h4>
+                <div dc-chart="barChart" dc-margins="{top: 10, right: 50, bottom: 30, left: 40}" dc-width="400" dc-height="240" dc-elastic-y="true" dc-center-bar="true" dc-gap="1" dc-render-horizontal-grid-lines="true" dc-x="d3.scale.linear().domain([12, 80])" dc-dimension="age_dimension" dc-group="age_group" dc-post-setup-chart="age_chart_post_setup" class="dc-chart"></div>
+            </span>
+            <span class="col-xs-4">
+                <h4>Trip Duration (in minutes)</h4>
+                <div dc-chart="barChart" dc-margins="{top: 10, right: 50, bottom: 30, left: 40}" dc-width="400" dc-height="240" dc-elastic-y="true" dc-center-bar="true" dc-gap="1" dc-render-horizontal-grid-lines="true" dc-x="d3.scale.linear().domain([0, 2000])" dc-dimension="trip_duration_dimension" dc-group="trip_duration_group" dc-post-setup-chart="trip_duration_chart_post_setup" class="dc-chart"></div>
+            </span>
+        </div>
+        <div class="row" style="padding-top: 20px;">
+            <span class="col-xs-12">
+                <h4>Trips over Time</h4>
+                <div dc-chart="lineChart" dc-render-area="true" dc-width="990" dc-height="200" dc-transition-duration="1000" dc-margins="{top: 30, right: 50, bottom: 25, left: 40}" dc-dimension="date_of_trip_dimension" dc-group="date_of_trip_group" dc-mouse-zoomable="true" dc-x="d3.time.scale().domain([Date(2013, 5, 27), Date(2013, 11, 31)])" dc-x-units="d3.time.day" dc-elastic-y="true" class="dc-chart"></div>
+            </span>
+        </div>
+    </div>
+
+</body>
+</html>

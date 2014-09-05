@@ -37,13 +37,13 @@
             </span>
             <span class="col-xs-4">
                 <h4>Trip Duration (in minutes)</h4>
-                <div dc-chart="barChart" dc-margins="{top: 10, right: 50, bottom: 30, left: 40}" dc-width="400" dc-height="240" dc-elastic-y="true" dc-center-bar="true" dc-gap="1" dc-render-horizontal-grid-lines="true" dc-x="d3.scale.linear().domain([0, 2000])" dc-dimension="trip_duration_dimension" dc-group="trip_duration_group" dc-post-setup-chart="trip_duration_chart_post_setup" class="dc-chart"></div>
+                <div dc-chart="barChart" dc-margins="{top: 10, right: 50, bottom: 30, left: 40}" dc-width="400" dc-height="240" dc-elastic-y="true" dc-center-bar="true" dc-gap="1" dc-render-horizontal-grid-lines="true" dc-x="d3.scale.linear().domain([0, 40])" dc-dimension="trip_duration_dimension" dc-group="trip_duration_group" dc-post-setup-chart="trip_duration_chart_post_setup" class="dc-chart"></div>
             </span>
         </div>
         <div class="row" style="padding-top: 20px;">
             <span class="col-xs-12">
                 <h4>Trips over Time</h4>
-                <div dc-chart="lineChart" dc-render-area="true" dc-width="990" dc-height="200" dc-transition-duration="1000" dc-margins="{top: 30, right: 50, bottom: 25, left: 40}" dc-dimension="date_of_trip_dimension" dc-group="date_of_trip_group" dc-mouse-zoomable="true" dc-x="d3.time.scale().domain([Date(2013, 5, 27), Date(2013, 11, 31)])" dc-x-units="d3.time.day" dc-elastic-y="true" class="dc-chart"></div>
+                <div dc-chart="lineChart" dc-render-area="true" dc-width="1170" dc-height="200" dc-transition-duration="1000" dc-margins="{top: 30, right: 10, bottom: 25, left: 40}" dc-dimension="date_of_trip_dimension" dc-group="date_of_trip_group" dc-mouse-zoomable="true" dc-x="d3.time.scale().domain([Date(2013, 5, 27), Date(2013, 11, 31)])" dc-x-units="d3.time.day" dc-elastic-y="true" class="dc-chart"></div>
             </span>
         </div>
     </div>

@@ -119,8 +119,7 @@ window.myController = ($scope) ->
 		name: 'trip_duration'
 		field: 'trip_duration'
 		interval: 60
-		chartPostSetup: (c) ->
-			c.xAxis().tickFormat (v) -> d3.round(v/60)
+		dimensionFunction: (d) -> d3.round(d.trip_duration)/60
 
 	aggregations = [genderAgg, dateAgg, ageAgg, durationAgg]
 	aggregationBody = buildAggregationBody(aggregations)

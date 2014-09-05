@@ -200,10 +200,8 @@
       name: 'trip_duration',
       field: 'trip_duration',
       interval: 60,
-      chartPostSetup: function(c) {
-        return c.xAxis().tickFormat(function(v) {
-          return d3.round(v / 60);
-        });
+      dimensionFunction: function(d) {
+        return d3.round(d.trip_duration) / 60;
       }
     });
     aggregations = [genderAgg, dateAgg, ageAgg, durationAgg];

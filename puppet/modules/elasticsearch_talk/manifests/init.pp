@@ -6,13 +6,22 @@ class elasticsearch_talk(
     path  => [
       '/usr/local/sbin', '/usr/local/bin',
       '/usr/sbin', '/usr/bin', '/sbin', '/bin',
-      '/usr/share/groovy/bin'
+      '/usr/share/groovy/bin', '/opt/gradle/bin/'
     ]
+  }
+
+  $transform_dir = "/usr/src/elasticsearch-talk/transform"
+
+  exec { 'copy-transform-dependencies':
+    command => "gradle copyDependencies",
+    cwd => $transform_dir,
+    creates => "${transform_dir}/lib"
   }
 
   exec { 'create-sense-files':
     command => "groovy -cp \"lib/*\" src/main/groovy/net/spantree/elasticsearch/talk/TransformExamples.groovy",
-    cwd     => "/usr/src/elasticsearch-talk/transform",
+    cwd => $transform_dir,
+    require => Exec['copy-transform-dependencies']
   }
 
   file { '/var/www':

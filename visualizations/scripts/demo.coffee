@@ -79,7 +79,8 @@ flattenAggregationResults = (aggregations, results, parentData) ->
   data = []
   for bucket in buckets
     obj = _.clone(parentData)
-    obj[aggregation.name] = aggregation.bucketKey(bucket)
+    value = aggregation.bucketKey(bucket)
+    obj[aggregation.name] = value
     if(childAggregations.length == 0)
       obj.count = aggregation.bucketCount(bucket)
       data.push obj
@@ -92,12 +93,12 @@ flattenAggregationResults = (aggregations, results, parentData) ->
 window.myController = ($scope) ->
   $pb = $('.progress-bar')
 
-  setProgressBarStatus = (percentage) ->
+  window.setProgressBarStatus = (percentage) ->
     $pb.css('width', "#{percentage}%")
     $pb.attr('aria-valuenow', percentage)
-    # $pb.html("#{percentage}%")
+    $pb.html("#{percentage}%")
 
-  setProgressBarStatus 10
+  setProgressBarStatus 0
 
   days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
@@ -113,7 +114,6 @@ window.myController = ($scope) ->
       interval: '1h'
       dimensionFunction: (d) -> d3.time.day.floor(d.date_of_trip)
       chartPostSetup: (c) ->
-        # c.stack $scope.date_of_trip_group, "Rides per Day", (d) -> d.value
         c.group $scope.date_of_trip_group, "Rides per Day"
       chartOptions:
         title: (d) ->
@@ -130,10 +130,12 @@ window.myController = ($scope) ->
     new TermsAggregation
       name: 'gender',
       field: 'gender'
+      reduceSumFunction: (d) ->
+        if d.gender == 'Undisclosed' or d.rider_type == 'Customer' then 0 else d.count
     
-    new HistogramAggregation
-      name: 'age'
-      field: 'age'
+    # new HistogramAggregation
+    #   name: 'age'
+    #   field: 'age'
 
     new HistogramAggregation
       name: 'trip_duration'
@@ -142,13 +144,14 @@ window.myController = ($scope) ->
       dimensionFunction: (d) -> d3.round(d.trip_duration)/60
   ]
 
-  updateTimeout = null
+  window.updateTimeout = null
 
-  updateProgressBar = (min, max) ->
+  window.updateProgressBarLinearly = (min, max) ->
+    clearTimeout(updateTimeout)
     v = Number.parseInt($pb.attr('aria-valuenow'))
     if(v < max)
-      setProgressBarStatus v + 1
-      updateTimeout = setTimeout _.partial(updateProgressBar, min, max), 100
+      setProgressBarStatus v + 3
+      updateTimeout = setTimeout _.partial(updateProgressBarLinearly, min, max), 100
 
   es = new elasticsearch.Client
     host: 'esdemo.local:9200'
@@ -156,9 +159,7 @@ window.myController = ($scope) ->
 
   aggregationBody = buildAggregationBody(aggregations)
 
-  setProgressBarStatus 20
-
-  updateProgressBar 20, 100
+  updateProgressBarLinearly 0, 100
 
   es.search
     index: 'divvy'
@@ -167,39 +168,45 @@ window.myController = ($scope) ->
   .then (resp) ->
     clearTimeout(updateTimeout)
 
-    data = flattenAggregationResults(aggregations, resp.aggregations)
+    setProgressBarStatus 100
+    $('#loading h4').html("Processing data...")
 
-    window.ndx = crossfilter(data)
+    setTimeout () ->
+      data = flattenAggregationResults(aggregations, resp.aggregations)
 
-    for agg in aggregations
-      agg.applyToCrossfilter(ndx)
-      $scope["#{agg.name}_dimension"] = agg.dimension
-      $scope["#{agg.name}_group"] = agg.group
-      $scope["#{agg.name}_chart_post_setup"] = agg.chartPostSetup
-      $scope["#{agg.name}_chart_options"] = agg.chartOptions
+      window.ndx = crossfilter(data)
 
-    $scope.day_of_week_dimension = ndx.dimension (d) ->
-      d.date_of_trip.getDay()
+      for agg in aggregations
+        agg.applyToCrossfilter(ndx)
+        $scope["#{agg.name}_dimension"] = agg.dimension
+        $scope["#{agg.name}_group"] = agg.group
+        $scope["#{agg.name}_chart_post_setup"] = agg.chartPostSetup
+        $scope["#{agg.name}_chart_options"] = agg.chartOptions
+        $scope["#{agg.name}_ordering"] = agg.ordering
 
-    $scope.day_of_week_group = $scope.day_of_week_dimension.group().reduceSum(dateAgg.reduceSumFunction)
+      $scope.day_of_week_dimension = ndx.dimension (d) ->
+        d.date_of_trip.getDay()
 
-    $scope.day_of_week_post_setup = (c) ->
-      c.label (d) ->
-        days[d.key]
-      .xAxis().ticks(4)
+      $scope.day_of_week_group = $scope.day_of_week_dimension.group().reduceSum(dateAgg.reduceSumFunction)
 
-    $scope.hour_of_day_dimension = ndx.dimension (d) ->
-      d.date_of_trip.getHours()
+      $scope.day_of_week_post_setup = (c) ->
+        c.label (d) ->
+          days[d.key]
+        .xAxis().ticks(4)
 
-    $scope.hour_of_day_group = $scope.hour_of_day_dimension.group().reduceSum(dateAgg.reduceSumFunction)
+      $scope.hour_of_day_dimension = ndx.dimension (d) ->
+        d.date_of_trip.getHours()
 
-    $scope.hour_of_day_post_setup = (c) ->
-      c.xAxis().tickFormat (v) ->
-        if v == 0 then "Midnight" else if v < 12 then "#{v}am" else "#{v-12}pm"
-      .ticks(6)
+      $scope.hour_of_day_group = $scope.hour_of_day_dimension.group().reduceSum(dateAgg.reduceSumFunction)
 
-    $scope.$apply()
+      $scope.hour_of_day_post_setup = (c) ->
+        c.xAxis().tickFormat (v) ->
+          if v == 0 then "Midnight" else if v < 12 then "#{v}am" else "#{v-12}pm"
+        .ticks(6)
 
-    $('#loading').css('display', 'none')
-    $('#charts').css('display', 'table')
+      $scope.$apply()
+
+      $('#loading').css('display', 'none')
+      $('#charts').css('display', 'table')
+    , 200
 

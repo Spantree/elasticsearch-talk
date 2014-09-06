@@ -142,7 +142,7 @@
   };
 
   flattenAggregationResults = function(aggregations, results, parentData) {
-    var aggregation, bucket, buckets, child, childAggregations, children, data, obj, _i, _j, _len, _len1;
+    var aggregation, bucket, buckets, child, childAggregations, children, data, obj, value, _i, _j, _len, _len1;
     parentData = parentData || new Object;
     aggregation = _.first(aggregations);
     childAggregations = _.rest(aggregations);
@@ -151,7 +151,8 @@
     for (_i = 0, _len = buckets.length; _i < _len; _i++) {
       bucket = buckets[_i];
       obj = _.clone(parentData);
-      obj[aggregation.name] = aggregation.bucketKey(bucket);
+      value = aggregation.bucketKey(bucket);
+      obj[aggregation.name] = value;
       if (childAggregations.length === 0) {
         obj.count = aggregation.bucketCount(bucket);
         data.push(obj);
@@ -167,13 +168,14 @@
   };
 
   window.myController = function($scope) {
-    var $pb, aggregationBody, aggregations, dateAgg, dateFormat, days, es, setProgressBarStatus, updateProgressBar, updateTimeout;
+    var $pb, aggregationBody, aggregations, dateAgg, dateFormat, days, es;
     $pb = $('.progress-bar');
-    setProgressBarStatus = function(percentage) {
+    window.setProgressBarStatus = function(percentage) {
       $pb.css('width', "" + percentage + "%");
-      return $pb.attr('aria-valuenow', percentage);
+      $pb.attr('aria-valuenow', percentage);
+      return $pb.html("" + percentage + "%");
     };
-    setProgressBarStatus(10);
+    setProgressBarStatus(0);
     days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     $scope.resetAll = function() {
       dc.filterAll();
@@ -202,10 +204,14 @@
         field: 'user_type'
       }), new TermsAggregation({
         name: 'gender',
-        field: 'gender'
-      }), new HistogramAggregation({
-        name: 'age',
-        field: 'age'
+        field: 'gender',
+        reduceSumFunction: function(d) {
+          if (d.gender === 'Undisclosed' || d.rider_type === 'Customer') {
+            return 0;
+          } else {
+            return d.count;
+          }
+        }
       }), new HistogramAggregation({
         name: 'trip_duration',
         field: 'trip_duration',
@@ -215,13 +221,14 @@
         }
       })
     ];
-    updateTimeout = null;
-    updateProgressBar = function(min, max) {
-      var v;
+    window.updateTimeout = null;
+    window.updateProgressBarLinearly = function(min, max) {
+      var updateTimeout, v;
+      clearTimeout(updateTimeout);
       v = Number.parseInt($pb.attr('aria-valuenow'));
       if (v < max) {
-        setProgressBarStatus(v + 1);
-        return updateTimeout = setTimeout(_.partial(updateProgressBar, min, max), 100);
+        setProgressBarStatus(v + 3);
+        return updateTimeout = setTimeout(_.partial(updateProgressBarLinearly, min, max), 100);
       }
     };
     es = new elasticsearch.Client({
@@ -229,53 +236,57 @@
       log: 'debug'
     });
     aggregationBody = buildAggregationBody(aggregations);
-    setProgressBarStatus(20);
-    updateProgressBar(20, 100);
+    updateProgressBarLinearly(0, 100);
     return es.search({
       index: 'divvy',
       body: {
         aggs: aggregationBody
       }
     }).then(function(resp) {
-      var agg, data, _i, _len;
       clearTimeout(updateTimeout);
-      data = flattenAggregationResults(aggregations, resp.aggregations);
-      window.ndx = crossfilter(data);
-      for (_i = 0, _len = aggregations.length; _i < _len; _i++) {
-        agg = aggregations[_i];
-        agg.applyToCrossfilter(ndx);
-        $scope["" + agg.name + "_dimension"] = agg.dimension;
-        $scope["" + agg.name + "_group"] = agg.group;
-        $scope["" + agg.name + "_chart_post_setup"] = agg.chartPostSetup;
-        $scope["" + agg.name + "_chart_options"] = agg.chartOptions;
-      }
-      $scope.day_of_week_dimension = ndx.dimension(function(d) {
-        return d.date_of_trip.getDay();
-      });
-      $scope.day_of_week_group = $scope.day_of_week_dimension.group().reduceSum(dateAgg.reduceSumFunction);
-      $scope.day_of_week_post_setup = function(c) {
-        return c.label(function(d) {
-          return days[d.key];
-        }).xAxis().ticks(4);
-      };
-      $scope.hour_of_day_dimension = ndx.dimension(function(d) {
-        return d.date_of_trip.getHours();
-      });
-      $scope.hour_of_day_group = $scope.hour_of_day_dimension.group().reduceSum(dateAgg.reduceSumFunction);
-      $scope.hour_of_day_post_setup = function(c) {
-        return c.xAxis().tickFormat(function(v) {
-          if (v === 0) {
-            return "Midnight";
-          } else if (v < 12) {
-            return "" + v + "am";
-          } else {
-            return "" + (v - 12) + "pm";
-          }
-        }).ticks(6);
-      };
-      $scope.$apply();
-      $('#loading').css('display', 'none');
-      return $('#charts').css('display', 'table');
+      setProgressBarStatus(100);
+      $('#loading h4').html("Processing data...");
+      return setTimeout(function() {
+        var agg, data, _i, _len;
+        data = flattenAggregationResults(aggregations, resp.aggregations);
+        window.ndx = crossfilter(data);
+        for (_i = 0, _len = aggregations.length; _i < _len; _i++) {
+          agg = aggregations[_i];
+          agg.applyToCrossfilter(ndx);
+          $scope["" + agg.name + "_dimension"] = agg.dimension;
+          $scope["" + agg.name + "_group"] = agg.group;
+          $scope["" + agg.name + "_chart_post_setup"] = agg.chartPostSetup;
+          $scope["" + agg.name + "_chart_options"] = agg.chartOptions;
+          $scope["" + agg.name + "_ordering"] = agg.ordering;
+        }
+        $scope.day_of_week_dimension = ndx.dimension(function(d) {
+          return d.date_of_trip.getDay();
+        });
+        $scope.day_of_week_group = $scope.day_of_week_dimension.group().reduceSum(dateAgg.reduceSumFunction);
+        $scope.day_of_week_post_setup = function(c) {
+          return c.label(function(d) {
+            return days[d.key];
+          }).xAxis().ticks(4);
+        };
+        $scope.hour_of_day_dimension = ndx.dimension(function(d) {
+          return d.date_of_trip.getHours();
+        });
+        $scope.hour_of_day_group = $scope.hour_of_day_dimension.group().reduceSum(dateAgg.reduceSumFunction);
+        $scope.hour_of_day_post_setup = function(c) {
+          return c.xAxis().tickFormat(function(v) {
+            if (v === 0) {
+              return "Midnight";
+            } else if (v < 12) {
+              return "" + v + "am";
+            } else {
+              return "" + (v - 12) + "pm";
+            }
+          }).ticks(6);
+        };
+        $scope.$apply();
+        $('#loading').css('display', 'none');
+        return $('#charts').css('display', 'table');
+      }, 200);
     });
   };
 

@@ -29,6 +29,7 @@ for trip_fields in trip_reader:
   trip_map['trip_id'] = int(trip_fields[0])
   trip_map['start_time'] = start_time.strftime('%m/%d/%Y %H:%M')
   trip_map['end_time'] = end_time.strftime('%m/%d/%Y %H:%M')
+  trip_map['hour_of_day'] = start_time.strftime('%H')
   trip_map['bike_id'] = int(trip_fields[3])
   trip_map['trip_duration'] = int(trip_fields[4].replace(",", ""))
   trip_map['from_station_id'] = trip_fields[5]
@@ -40,6 +41,8 @@ for trip_fields in trip_reader:
   trip_map['birth_year'] = trip_fields[11].strip()
   if trip_map['birth_year'] != '':
     trip_map['age'] = 2013 - int(trip_map['birth_year'])
+  else:
+    trip_map['age'] = -1
 
   weekday = start_time.weekday()
   trip_map['day_of_week'] = dayOfWeekMap[weekday]

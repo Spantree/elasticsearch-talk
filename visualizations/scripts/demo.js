@@ -167,18 +167,42 @@
   };
 
   window.myController = function($scope) {
-    var aggregations, es;
+    var $pb, aggregationBody, aggregations, dateAgg, dateFormat, days, es, setProgressBarStatus, updateProgressBar, updateTimeout;
+    $pb = $('.progress-bar');
+    setProgressBarStatus = function(percentage) {
+      $pb.css('width', "" + percentage + "%");
+      return $pb.attr('aria-valuenow', percentage);
+    };
+    setProgressBarStatus(10);
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     $scope.resetAll = function() {
       dc.filterAll();
       return dc.redrawAll();
     };
+    dateFormat = d3.time.format("%A %B %e, %Y");
+    dateAgg = new DateHistogramAggregation({
+      name: 'date_of_trip',
+      field: 'start_time',
+      interval: '1h',
+      dimensionFunction: function(d) {
+        return d3.time.day.floor(d.date_of_trip);
+      },
+      chartPostSetup: function(c) {
+        return c.group($scope.date_of_trip_group, "Rides per Day");
+      },
+      chartOptions: {
+        title: function(d) {
+          return "" + (dateFormat(d.key)) + "\n" + d.value + " rides";
+        }
+      }
+    });
     aggregations = [
-      new TermsAggregation({
+      dateAgg, new TermsAggregation({
+        name: 'rider_type',
+        field: 'user_type'
+      }), new TermsAggregation({
         name: 'gender',
         field: 'gender'
-      }), new DateHistogramAggregation({
-        name: 'date_of_trip',
-        field: 'start_time'
       }), new HistogramAggregation({
         name: 'age',
         field: 'age'
@@ -191,17 +215,30 @@
         }
       })
     ];
+    updateTimeout = null;
+    updateProgressBar = function(min, max) {
+      var v;
+      v = Number.parseInt($pb.attr('aria-valuenow'));
+      if (v < max) {
+        setProgressBarStatus(v + 1);
+        return updateTimeout = setTimeout(_.partial(updateProgressBar, min, max), 100);
+      }
+    };
     es = new elasticsearch.Client({
       host: 'esdemo.local:9200',
       log: 'debug'
     });
+    aggregationBody = buildAggregationBody(aggregations);
+    setProgressBarStatus(20);
+    updateProgressBar(20, 100);
     return es.search({
       index: 'divvy',
       body: {
-        aggs: buildAggregationBody(aggregations)
+        aggs: aggregationBody
       }
     }).then(function(resp) {
       var agg, data, _i, _len;
+      clearTimeout(updateTimeout);
       data = flattenAggregationResults(aggregations, resp.aggregations);
       window.ndx = crossfilter(data);
       for (_i = 0, _len = aggregations.length; _i < _len; _i++) {
@@ -210,8 +247,35 @@
         $scope["" + agg.name + "_dimension"] = agg.dimension;
         $scope["" + agg.name + "_group"] = agg.group;
         $scope["" + agg.name + "_chart_post_setup"] = agg.chartPostSetup;
+        $scope["" + agg.name + "_chart_options"] = agg.chartOptions;
       }
-      return $scope.$apply();
+      $scope.day_of_week_dimension = ndx.dimension(function(d) {
+        return d.date_of_trip.getDay();
+      });
+      $scope.day_of_week_group = $scope.day_of_week_dimension.group().reduceSum(dateAgg.reduceSumFunction);
+      $scope.day_of_week_post_setup = function(c) {
+        return c.label(function(d) {
+          return days[d.key];
+        }).xAxis().ticks(4);
+      };
+      $scope.hour_of_day_dimension = ndx.dimension(function(d) {
+        return d.date_of_trip.getHours();
+      });
+      $scope.hour_of_day_group = $scope.hour_of_day_dimension.group().reduceSum(dateAgg.reduceSumFunction);
+      $scope.hour_of_day_post_setup = function(c) {
+        return c.xAxis().tickFormat(function(v) {
+          if (v === 0) {
+            return "Midnight";
+          } else if (v < 12) {
+            return "" + v + "am";
+          } else {
+            return "" + (v - 12) + "pm";
+          }
+        }).ticks(6);
+      };
+      $scope.$apply();
+      $('#loading').css('display', 'none');
+      return $('#charts').css('display', 'table');
     });
   };
 

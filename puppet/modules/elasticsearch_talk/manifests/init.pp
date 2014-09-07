@@ -1,6 +1,7 @@
 class elasticsearch_talk(
   $sense_root = '/usr/share/elasticsearch/plugins/marvel/_site/sense',
-  $editor_replace_file = 'spantree.senseEditorReplace.js'
+  $editor_replace_file = 'spantree.senseEditorReplace.js',
+  $src_dir = '/usr/src/elasticsearch-talk'
 ) {
   Exec {
     path  => [
@@ -10,7 +11,7 @@ class elasticsearch_talk(
     ]
   }
 
-  $transform_dir = "/usr/src/elasticsearch-talk/transform"
+  $transform_dir = "${src_dir}/transform"
 
   exec { 'copy-transform-dependencies':
     command => "gradle copyDependencies",
@@ -54,6 +55,10 @@ class elasticsearch_talk(
     unless    => "cat index.html | grep '${editor_replace_file}'",
     require   => File["${sense_root}/app/${editor_replace_file}"],
     logoutput => on_failure
+  }
+
+  class { 'elasticsearch_talk::visualizations':
+    src_dir => "${src_dir}/visualizations"
   }
 
   if($do_reindex == 'true') {

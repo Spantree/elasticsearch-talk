@@ -30,7 +30,7 @@ node default {
     make_install => false
   }
 
-  package { 'grunt-cli':
+  package { ['grunt-cli', 'bower', 'coffee-script']:
     provider => npm,
     require => Class['nodejs']
   }

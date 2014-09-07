@@ -11,7 +11,7 @@ rm -rf /dev/.udev/
 rm /lib/udev/rules.d/75-persistent-net-generator.rules
 
 echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
-echo "pre-up sleep 2" >> /etc/network/interfaces
+echo "pre-up sleep 5" >> /etc/network/interfaces
 
 sleep 3
 

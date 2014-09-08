@@ -85,6 +85,13 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 * <em>inverse document frequency ($idf$)</em> is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
 
 
+### Cosine similarity
+* Documents are vectors of TF-IDF values
+* Compute the angle between query and document
+
+$\cos{\theta} = \frac{d \cdot q}{||d|| \cdot ||q||} $
+
+
 ### Scoring documents
 <div class="row tfidf-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
   <div class="col-md-4">
@@ -167,74 +174,6 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
     </div>
   </div>
 </div>
-
-
-### Scoring our example
-
-<table style="margin: auto">
-  <tr>
-    <td rowspan="3">work</td><td rowspan="3">&rarr;</td><td>0:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>{7}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>hour</td><td>&rarr;</td><td>1:</td><td>{2, 3}</td>
-  </tr>
-  <tr>
-    <td rowspan="2">harder</td><td rowspan="2">&rarr;</td><td>0:</td><td>{8}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{2}</td>
-  </tr>
-</table>
-
-
-<table class="tf-idf">
-  <tr>
-    <th></th>
-    <th>work</th>
-    <th>hour</th>
-    <th>harder</th>
-  </tr>
-  <tr>
-    <td>0:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$0 \times \log{\frac{3}{1}}$</td><td>$1 \times \log{\frac{3}{2}}$</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$2 \times \log{\frac{3}{1}}$</td><td>$0 \times \log{\frac{3}{2}}$</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$0 \times \log{\frac{3}{1}}$</td><td>$1 \times \log{\frac{3}{2}}$</td>
-  </tr>
-<table>
-
-
-### Scoring our example
-<table class="scoring">
-  <tr>
-    <th></th>
-    <th>work</th>
-    <th>hour</th>
-    <th>harder</th>
-  </tr>
-  <tr>
-    <td>0:</td><td>0</td><td>0</td><td>.35</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>0</td><td>.95</td><td>0</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>0</td><td>0</td><td>.35</td>
-  </tr>
-<table>
-<br/>
-
-* Create a vector for the query: $\[1,1,1\]$
-* Take the cosine-similarity of the two vectors
-  * Gives the cosine of the angle between two vectors
 
 
 ### The Lucene Library

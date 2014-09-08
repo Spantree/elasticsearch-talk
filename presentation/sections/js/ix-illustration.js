@@ -40,8 +40,10 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
 
         var wordScores = $scope.tfidfScores[docKey]
 
-        for(wordKey in wordScores) {
+        for(wordIx in $scope.searchWords) {
+            var wordKey = $scope.searchWords[wordIx];
             var score = wordScores[wordKey];
+            
             dotProductTerms.push(number(score, 2) + '\\times 1');
             docLenTerms.push(number(score, 2) + '^2');
             queryLenTerms.push('1^2');
@@ -56,7 +58,8 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
 
         var wordScores = $scope.tfidfScores[docKey]
 
-        for(wordKey in wordScores) {
+        for(wordIx in $scope.searchWords) {
+            var wordKey = $scope.searchWords[wordIx];
             var score = wordScores[wordKey];
 
             dotProductValue += score;

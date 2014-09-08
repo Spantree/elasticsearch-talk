@@ -18,15 +18,15 @@ HOST_HOME_DIR = ENV['HOME']
 
 Vagrant.configure("2") do |config|
   # For regular use
-  # config.vm.box = "spantree/elasticsearch-talk"
-  # config.vm.box_version = "1.0.3"
+  config.vm.box = "spantree/elasticsearch-talk"
+  config.vm.box_version = "1.0.4"
   
   # For testing "from scratch" provisioning
   # config.vm.box = "hashicorp/precise64"
   
   # For testing local Packer builds
-  config.vm.box = "elasticsearch-talk"
-  config.vm.box_url = "file:///#{HOST_HOME_DIR}/src/spantree/elasticsearch-talk/elasticsearch-talk-trusty64-1.0.2-virtualbox.box"
+  # config.vm.box = "elasticsearch-talk"
+  # config.vm.box_url = "file:///#{HOST_HOME_DIR}/src/spantree/elasticsearch-talk/elasticsearch-talk-trusty64-1.0.2-virtualbox.box"
 
   # Use this if connecting locally from the Spantree network
   # config.vm.box_url = "http://10.0.1.54/estalk-precise-vbox-x86_64.box"

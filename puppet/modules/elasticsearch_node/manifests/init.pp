@@ -29,6 +29,9 @@ class elasticsearch_node(
         routing => {
           allocation => {
             cluster_concurrent_rebalance => 2
+          },
+          balance => {
+            primary => 1
           }
         }
       },

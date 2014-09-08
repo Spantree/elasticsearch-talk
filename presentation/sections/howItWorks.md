@@ -108,22 +108,61 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
     <div class="panel panel-default">
       <div class="panel-body" style="height: 500px; overflow-y: scroll; padding: 30px;">
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="updateQuery()" placeholder="Enter search text" ng-value="searchQuery"/>
-        <table class="table" style="font-size: 70%;" ng-show="searchQuery">
-          <tr>
-            <th>
-            </th>
-            <th ng-repeat="word in searchWords track by $index">
-              {{word}}
-            </th>
-          </tr>
-          <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
-            <td>{{docKey}}</td>
-            <td ng-model="searchWords" ng-repeat="word in searchWords track by $index">
-              <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{documentCount}} }{ {{documentFrequencies[word]}} } }">
-              </span>
-            </td>
-          </tr>
-        </table>
+        <label class="radio-inline" style="font-size: 50%; line-height: 100%; padding-right: 10px">
+          <input type="radio" name="calcTypeRdo" id="inlineRadio1" ng-model="tab" value="tfidf"> TF-IDF
+        </label>
+        <label class="radio-inline" style="font-size: 50%; line-height: 100%; padding-right: 10px">
+          <input type="radio" name="calcTypeRdo" id="inlineRadio2" ng-model="tab" value="cossim"> Cos Similarity
+        </label>
+        <div ng-show="searchQuery && tab=='tfidf'">
+          <table class="table" style="font-size: 70%;">
+            <tr>
+              <th>
+              </th>
+              <th ng-repeat="word in searchWords track by $index">
+                {{word}}
+              </th>
+            </tr>
+            <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+              <td>{{docKey}}</td>
+              <td ng-model="searchWords" ng-repeat="word in searchWords track by $index">
+                <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{documentCount}} }{ {{documentFrequencies[word]}} } }" ng-show="showTfidfFormulas">
+                </span>
+                <span ng-show="!showTfidfFormulas">
+                  {{tfidfScores[docKey][word] | number:2}}
+                </span>
+              </td>
+            </tr>
+          </table>
+          <label class="checkbox-inline" style="font-size: 50%; line-height: 100%">
+            <input type="checkbox" id="showFormulasChkbx" value="show" ng-model="showTfidfFormulas" ng-checked="showTfidfFormulas"> Show formulas
+          </label>
+        </div>
+        <div ng-show="searchQuery && tab=='cossim'">
+          <table class="table" style="font-size: 70%;">
+            <tr>
+              <th>
+              </th>
+              <th>
+                Formula
+              </th>
+              <th>
+                Similarity
+              </th>
+            </tr>
+            <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+              <td>
+                {{docKey}}
+              </td>
+              <td>
+                <span mathjax-bind="{{getCosSimFormula(docKey)}}">
+                </span>
+              </td>
+              <td>
+                {{getCosSimValue(docKey) | number:2 }}
+              </td>
+            </tr>
+        </div>
       </div>
     </div>
   </div>

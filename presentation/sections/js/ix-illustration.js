@@ -4,6 +4,7 @@ var app = angular.module('presentation',[]);
 app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $timeout) {
 
     var orderBy = $filter('orderBy');
+    var number = $filter('number');
 
     $scope.documents = {
         "1":'work it harder make it better',
@@ -20,6 +21,9 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
     $scope.searchWords = [];
     $scope.termFrequencies = {};
     $scope.documentFrequencies = {};
+    $scope.tfidfScores = {};
+    $scope.showTfidfFormulas = true;
+    $scope.tab = 'tfidf';
 
     $scope.resetHighlighting = function() {
         for(docKey in $scope.documents) {
@@ -28,6 +32,48 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
     }
 
     $scope.resetHighlighting();
+
+    $scope.getCosSimFormula = function(docKey) {
+        var dotProductTerms = [];
+        var docLenTerms = [];
+        var queryLenTerms = [];
+
+        var wordScores = $scope.tfidfScores[docKey]
+
+        for(wordKey in wordScores) {
+            var score = wordScores[wordKey];
+            dotProductTerms.push(number(score, 2) + '\\times 1');
+            docLenTerms.push(number(score, 2) + '^2');
+            queryLenTerms.push('1^2');
+        }
+        return '\\frac{ ' + dotProductTerms.join(' + ') +' }{ \\sqrt{' + docLenTerms.join(' + ') + '} \\sqrt{' + queryLenTerms.join(' + ') + '} }';
+    };
+
+    $scope.getCosSimValue = function(docKey) {
+        var dotProductValue = 0;
+        var docLen = 0;
+        var queryLen = 0;
+
+        var wordScores = $scope.tfidfScores[docKey]
+
+        for(wordKey in wordScores) {
+            var score = wordScores[wordKey];
+
+            dotProductValue += score;
+            docLen += ( score * score );
+            queryLen++;  
+        } 
+
+        var cosSimScore =  dotProductValue
+
+        if(docLen > 0) {
+            cosSimScore = cosSimScore / ( Math.sqrt(docLen) * Math.sqrt(queryLen) );
+            return cosSimScore; 
+        } else {
+            return 0;
+        }
+        
+    }
 
     $scope.updateQuery = function() {
         if( Object.keys($scope.invIndexMap).length === 0) {
@@ -71,6 +117,21 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
             }
 
             
+        }
+
+        
+        for(docKey in $scope.documents) {
+            $scope.tfidfScores[docKey] = {};
+
+            for(wordIx in $scope.searchWords) {
+                var word = $scope.searchWords[wordIx];
+
+                if($scope.documentFrequencies[word] === 0) {
+                    $scope.tfidfScores[docKey][word] = 0;
+                } else {
+                    $scope.tfidfScores[docKey][word] = $scope.termFrequencies[docKey][word] * ( Math.log( $scope.documentCount / $scope.documentFrequencies[word] ) / Math.LN10 );
+                }
+            }
         }
 
     };

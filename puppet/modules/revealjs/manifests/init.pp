@@ -28,27 +28,4 @@ class revealjs(
     cwd     => $src_dir,
     require => Exec['revealjs-npm-install']
   }
-
-  file { "/etc/init/revealjs.conf":
-    ensure             => file,
-    content            => template('revealjs/revealjs.conf.erb'),
-    mode               => '0700',
-    notify             => Service['revealjs'],
-    require            => Exec['revealjs-link-presentation']
-  }
-
-  service { 'revealjs':
-    enable     => true,
-    ensure     => running,
-    hasstatus  => true,
-    hasrestart => true,
-    provider   => 'upstart',
-    require    => File["/etc/init/revealjs.conf"]
-  }
-
-  exec { 'restart-revealjs':
-    command => 'service revealjs restart',
-    require => Service['revealjs'],
-    returns => [0, 1]
-  }
 }

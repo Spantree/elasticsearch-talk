@@ -1,4 +1,0 @@
-title: Get Server Status
-description: This is the basic "hello world" of ElasticSearch
-method: GET
-url: http://localhost:9200/

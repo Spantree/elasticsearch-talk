@@ -1,5 +1,0 @@
-title: Bulk Insert
-method: PUT
-url: http://localhost:9200/wikipedia/locations/_bulk
-bulk: locations.json
-description: Add all of our location documents at once using the bulk API

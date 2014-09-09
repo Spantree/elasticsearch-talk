@@ -38,6 +38,9 @@ class TransformExamples {
                 <li>
                     <a href="{{esRoot}}/_plugin/marvel/sense/" target="es_sense">Sense API Explorer</a>
                 </li>
+                <li>
+                    <a href="/visualizations/" target="es_visualization">Data Visualization Demo</a>
+                </li>
             </ul>
 
             <h2>Example REST Calls</h2>

@@ -9,7 +9,8 @@ PUPPET_OPTIONS = [
 
 PUPPET_FACTS = {
   "vm_type" => "vagrant",
-  "enable_marvel_agent" => true
+  "enable_marvel_agent" => true,
+  "ssh_username" => "vagrant"
 }
 
 DO_REINDEX = ENV['DO_REINDEX']
@@ -18,7 +19,7 @@ HOST_HOME_DIR = ENV['HOME']
 Vagrant.configure("2") do |config|
   # For regular use
   config.vm.box = "spantree/elasticsearch-talk"
-  config.vm.box_version = "1.0.3"
+  config.vm.box_version = "1.0.4"
   
   # For testing "from scratch" provisioning
   # config.vm.box = "hashicorp/precise64"

@@ -13,10 +13,19 @@ PUPPET_FACTS = {
 }
 
 DO_REINDEX = ENV['DO_REINDEX']
+HOST_HOME_DIR = ENV['HOME']
 
 Vagrant.configure("2") do |config|
-  # config.vm.box = "estalk-precise-vbox"
+  # For regular use
   config.vm.box = "spantree/elasticsearch-talk"
+  config.vm.box_version = "1.0.3"
+  
+  # For testing "from scratch" provisioning
+  # config.vm.box = "hashicorp/precise64"
+  
+  # For testing local Packer builds
+  # config.vm.box = "elasticsearch-talk"
+  # config.vm.box_url = "file:///#{HOST_HOME_DIR}/src/spantree/elasticsearch-talk/elasticsearch-talk-trusty64-1.0.2-virtualbox.box"
 
   # Use this if connecting locally from the Spantree network
   # config.vm.box_url = "http://10.0.1.54/estalk-precise-vbox-x86_64.box"
@@ -35,6 +44,7 @@ Vagrant.configure("2") do |config|
   config.hostmanager.include_offline = true
 
   config.vm.provision :shell, :path => "shell/initial-setup.sh"
+  config.vm.provision :shell, :path => "shell/update-ruby.sh"
   config.vm.provision :shell, :path => "shell/update-puppet.sh"
   config.vm.provision :shell, :path => "shell/librarian-puppet-vagrant.sh"
 

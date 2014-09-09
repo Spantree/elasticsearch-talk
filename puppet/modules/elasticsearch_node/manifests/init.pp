@@ -29,6 +29,9 @@ class elasticsearch_node(
         routing => {
           allocation => {
             cluster_concurrent_rebalance => 2
+          },
+          balance => {
+            primary => 1
           }
         }
       },
@@ -54,7 +57,7 @@ class elasticsearch_node(
               enabled => false
             },
             unicast => {
-              hosts => ["es1.local[9300]", "es2.local[9300]"]
+              hosts => ["192.168.80.100[9300]", "192.168.80.101[9300]"]
             }
           }
         }

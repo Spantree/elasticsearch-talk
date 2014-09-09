@@ -1,5 +1,8 @@
 export FACTER_enable_marvel_agent='false'
 export FACTER_do_reindex='true'
+export FACTER_ssh_username='vagrant'
+
+source /usr/local/rvm/scripts/rvm
 
 source /usr/local/rvm/scripts/rvm
 

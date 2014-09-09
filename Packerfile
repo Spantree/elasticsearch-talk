@@ -5,7 +5,7 @@
     "iso_checksum": "ca2531b8cd79ea5b778ede3a524779b9",
     "iso_checksum_type": "md5",
     "headless": true,
-    "version": "1.0.2",
+    "version": "1.0.4",
     "build_number": 1,
     "hostname": "esdemo.local",
     "ovf_file": "{{env `HOME`}}/.packer/virtualbox-trusty64-1.0.2.ovf"
@@ -142,7 +142,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "elasticsearch-talk-trusty64-{{user `version`}}-{{.Provider}}.box"
+      "output": "{{user `box_name`}}-{{user `version`}}-{{.Provider}}.box"
     }
   ]
 }

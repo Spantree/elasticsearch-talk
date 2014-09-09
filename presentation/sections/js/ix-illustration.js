@@ -84,6 +84,7 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
             $scope.documentCount = Object.keys($scope.documents).length;
         }
 
+        console.log($scope.searchQuery);
         $scope.searchWords = $scope.searchQuery.trim().split(' ');
 
         $scope.documentFrequencies = {};

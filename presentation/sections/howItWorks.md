@@ -19,61 +19,7 @@
 
 ### Inverted Index 
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-body" style="height:500px; overflow-y:scroll; padding: 30px;">
-        <span> Documents </span>
-        <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
-            <div style="padding-bottom: 5px; height: 100px; ">
-                <span style="font-size: 14pt">{{docKey}}</span>
-                <div ng-bind-html="doc" class="form-control" style="font-size: 18pt; line-height: 20pt; font-weight: bold; height: 60px; ">
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-success" ng-click="buildInvIndex()">Build Index</button>
-       </div>
-    </div>
-  </div>
-  <div class="col-md-1">
-  </div>
-  <div class="col-md-7">
-    <div class="panel panel-default">
-      <div class="panel-body" style="height:500px; overflow-y:scroll; padding: 30px;">
-        <table class="table" style="font-size: 70%;">
-          <tr>
-            <th>
-              Word
-            </th>
-            <th>
-              Document
-            </th>
-            <th>
-              Positions
-            </th>
-          </tr>
-          <tr ng-model="invindex" ng-repeat-start="entry in invIndex">
-            <td rowspan="{{entry.documentsLength}}" ng-mouseover="highlight(entry.word)" style="cursor: pointer; font-weight: bold">
-              {{entry.word}}
-            </td>
-            <td ng-repeat-start="(document, words) in entry.documents" ng-show="$first">
-                {{document}}
-            </td>
-            <td ng-repeat-end ng-show="$first">
-                {{words.join(', ')}}
-            </td>
-          </tr>
-          <tr ng-repeat-end ng-repeat="(document, words) in entry.documents" ng-show="!$first">
-            <td>
-                {{document}}
-            </td>
-            <td>
-                {{words.join(', ')}}
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+  <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
 </div>
 
 
@@ -93,86 +39,8 @@ $\cos{\theta} = \frac{d \cdot q}{||d|| \cdot ||q||} $
 
 
 ### Scoring documents
-<div class="row tfidf-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-body" style="height:500px; overflow-y:scroll; padding: 30px;">
-        <span> Documents </span>
-        <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
-            <div style="padding-bottom: 5px; height: 100px; ">
-                <span style="font-size: 14pt">{{docKey}}</span>
-                <div ng-bind-html="doc" class="form-control" style="font-size: 18pt; line-height: 20pt; font-weight: bold; height: 60px; ">
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-success" ng-click="buildInvIndex()">Build Index</button>
-       </div>
-    </div>
-  </div>
-  <div class="col-md-1">
-  </div>
-  <div class="col-md-7">
-    <div class="panel panel-default">
-      <div class="panel-body" style="height: 500px; overflow-y: scroll; padding: 30px;">
-        <input type="text" class="form-control" ng-model="searchQuery" ng-change="updateQuery()" placeholder="Enter search text" ng-value="searchQuery"/>
-        <label class="radio-inline" style="font-size: 50%; line-height: 100%; padding-right: 10px">
-          <input type="radio" name="calcTypeRdo" id="inlineRadio1" ng-model="tab" value="tfidf"> TF-IDF
-        </label>
-        <label class="radio-inline" style="font-size: 50%; line-height: 100%; padding-right: 10px">
-          <input type="radio" name="calcTypeRdo" id="inlineRadio2" ng-model="tab" value="cossim"> Cos Similarity
-        </label>
-        <div ng-show="searchQuery && tab=='tfidf'">
-          <table class="table" style="font-size: 70%;">
-            <tr>
-              <th>
-              </th>
-              <th ng-repeat="word in searchWords track by $index">
-                {{word}}
-              </th>
-            </tr>
-            <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
-              <td>{{docKey}}</td>
-              <td ng-model="searchWords" ng-repeat="word in searchWords track by $index">
-                <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{documentCount}} }{ {{documentFrequencies[word]}} } }" ng-show="showTfidfFormulas">
-                </span>
-                <span ng-show="!showTfidfFormulas">
-                  {{tfidfScores[docKey][word] | number:2}}
-                </span>
-              </td>
-            </tr>
-          </table>
-          <label class="checkbox-inline" style="font-size: 50%; line-height: 100%">
-            <input type="checkbox" id="showFormulasChkbx" value="show" ng-model="showTfidfFormulas" ng-checked="showTfidfFormulas"> Show formulas
-          </label>
-        </div>
-        <div ng-show="searchQuery && tab=='cossim'">
-          <table class="table" style="font-size: 70%;">
-            <tr>
-              <th>
-              </th>
-              <th>
-                Formula
-              </th>
-              <th>
-                Similarity
-              </th>
-            </tr>
-            <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
-              <td>
-                {{docKey}}
-              </td>
-              <td>
-                <span mathjax-bind="{{getCosSimFormula(docKey)}}">
-                </span>
-              </td>
-              <td>
-                {{getCosSimValue(docKey) | number:2 }}
-              </td>
-            </tr>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="row tfidf-illustration ix-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
+  <dv ng-include src="'sections/js/templates/_scoring.html'"></div>
 </div>
 
 

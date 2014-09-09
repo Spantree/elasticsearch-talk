@@ -24,7 +24,7 @@ class TransformExamples {
             <h2>Resources</h2>
             <ul>
                 <li>
-                    <a href="/slides" target="es_slides">Slides</a>
+                    <a href="/slides/" target="es_slides">Slides</a>
                 </li>
                 <li>
                     <a href="{{esRoot}}" target="es_rest">Elasticsearch REST Interface</a>

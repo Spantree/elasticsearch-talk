@@ -13,3 +13,5 @@ estalk-precise-vbox-x86_64.box
 transform/www
 presentation/outline (Autosaved).mmap
 presentation/~$outline.mmap.~$lock
+visualizations/bower_components
+transform/lib

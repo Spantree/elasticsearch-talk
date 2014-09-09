@@ -32,6 +32,8 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 
 ### Cosine similarity
+
+* Vector space model
 * Documents are vectors of TF-IDF values
 * Compute the angle between query and document
 
@@ -49,7 +51,17 @@ $\cos{\theta} = \frac{d \cdot q}{||d|| \cdot ||q||} $
 ![Lucene](images/lucene.png)
 
 
-### How it *really* works
+### Okapi BM25 Scoring
+<br/>
+$\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.5 }{ df + 0.5 }$
+<br/><br/>
+
+* $tf$, $df$ and $N$ defined as before
+* $dl$ is document length and $avdl$ is average document length
+* $k_1$ and $b$ are free variables
+
+
+### For the curious
 
 * [http://lucene.apache.org/core/4_0_0/core/overview-summary.html](http://lucene.apache.org/core/4_0_0/core/overview-summary.html)
 * [http://wiki.apache.org/lucene-java/LucenePapers](http://wiki.apache.org/lucene-java/LucenePapers)

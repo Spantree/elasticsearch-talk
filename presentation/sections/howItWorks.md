@@ -17,107 +17,10 @@
 * Maps word to document or position
 
 
-### Finding the right document
-
-<table class="documents">
-  <tr>
-    <th>0</th>
-    <th>1</th>
-    <th>2</th>
-  </tr>
-  <tr>
-    <td>
-      work it make it<br/>
-      do it makes us<br/>
-      harder better<br/>
-      faster stronger
-    </td>
-    <td>
-      more than hour,<br/>
-      hour never<br/>
-      ever after,<br/>
-      work is over
-    </td>
-    <td>
-      work it harder<br/>
-      make it better<br/>
-      do it faster<br/>
-      makes us stronger
-    </td>
-  </tr>
-</table>
-<br/>
-<table style="margin: auto">
-  <tr>
-    <td>work</td><td>&rarr;</td><td>0, 1, 2</td>
-  </tr>
-  <tr>
-    <td>hour</td><td>&rarr;</td><td>1</td>
-  </tr>
-  <tr>
-    <td>harder</td><td>&rarr;</td><td>0, 2</td>
-  </tr>
-</table>
-
-
-### Finding position in document
-
-<table class="documents">
-  <tr>
-    <th>0</th>
-    <th>1</th>
-    <th>2</th>
-  </tr>
-  <tr>
-    <td>
-      work it make it<br/>
-      do it makes us<br/>
-      harder better<br/>
-      faster stronger
-    </td>
-    <td>
-      more than hour,<br/>
-      hour never<br/>
-      ever after<br/>
-      work is over
-    </td>
-    <td>
-      work it harder<br/>
-      make it better<br/>
-      do it faster<br/>
-      makes us stronger
-    </td>
-  </tr>
-</table>
-<br/>
-<table style="margin: auto">
-  <tr>
-    <td rowspan="3">work</td><td rowspan="3">&rarr;</td><td>0:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>{7}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>hour</td><td>&rarr;</td><td>1:</td><td>{2, 3}</td>
-  </tr>
-  <tr>
-    <td rowspan="2">harder</td><td rowspan="2">&rarr;</td><td>0:</td><td>{8}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{2}</td>
-  </tr>
-  <tr>
-    <td rowspan="3">it</td><td rowspan="3">&rarr;</td><td>0:</td><td>{1, 3, 5}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{1, 4, 7}</td>
-  </tr>
-</table>
-<br/>
-Does "work it" occur in a document?
+### Inverted Index 
+<div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
+  <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
+</div>
 
 
 ### TF-IDF Scoring Of Documents
@@ -128,72 +31,17 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 * <em>inverse document frequency ($idf$)</em> is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
 
 
-### Scoring our example
+### Cosine similarity
+* Documents are vectors of TF-IDF values
+* Compute the angle between query and document
 
-<table style="margin: auto">
-  <tr>
-    <td rowspan="3">work</td><td rowspan="3">&rarr;</td><td>0:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>{7}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{0}</td>
-  </tr>
-  <tr>
-    <td>hour</td><td>&rarr;</td><td>1:</td><td>{2, 3}</td>
-  </tr>
-  <tr>
-    <td rowspan="2">harder</td><td rowspan="2">&rarr;</td><td>0:</td><td>{8}</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>{2}</td>
-  </tr>
-</table>
+$\cos{\theta} = \frac{d \cdot q}{||d|| \cdot ||q||} $
 
 
-<table class="tf-idf">
-  <tr>
-    <th></th>
-    <th>work</th>
-    <th>hour</th>
-    <th>harder</th>
-  </tr>
-  <tr>
-    <td>0:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$0 \times \log{\frac{3}{1}}$</td><td>$1 \times \log{\frac{3}{2}}$</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$2 \times \log{\frac{3}{1}}$</td><td>$0 \times \log{\frac{3}{2}}$</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>$1 \times \log{\frac{3}{3}}$</td><td>$0 \times \log{\frac{3}{1}}$</td><td>$1 \times \log{\frac{3}{2}}$</td>
-  </tr>
-<table>
-
-
-### Scoring our example
-<table class="scoring">
-  <tr>
-    <th></th>
-    <th>work</th>
-    <th>hour</th>
-    <th>harder</th>
-  </tr>
-  <tr>
-    <td>0:</td><td>0</td><td>0</td><td>.35</td>
-  </tr>
-  <tr>
-    <td>1:</td><td>0</td><td>.95</td><td>0</td>
-  </tr>
-  <tr>
-    <td>2:</td><td>0</td><td>0</td><td>.35</td>
-  </tr>
-<table>
-<br/>
-
-* Create a vector for the query: $\[1,1,1\]$
-* Take the cosine-similarity of the two vectors
-  * Gives the cosine of the angle between two vectors
+### Scoring documents
+<div class="row tfidf-illustration ix-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
+  <dv ng-include src="'sections/js/templates/_scoring.html'"></div>
+</div>
 
 
 ### The Lucene Library

@@ -1,0 +1,55 @@
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body document-panel">
+      <span> Documents </span>
+      <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+          <div class="document-panel-item">
+              <span>{{docKey}}</span>
+              <div ng-bind-html="doc" class="form-control document-item">
+              </div>
+          </div>
+      </div>
+      <button class="btn btn-success" ng-click="buildInvIndex()">Build Index</button>
+     </div>
+  </div>
+</div>
+<div class="col-md-1">
+</div>
+<div class="col-md-7">
+  <div class="panel panel-default">
+    <div class="panel-body document-panel">
+      <table class="table">
+        <tr>
+          <th>
+            Word
+          </th>
+          <th>
+            Document
+          </th>
+          <th>
+            Positions
+          </th>
+        </tr>
+        <tr ng-model="invindex" ng-repeat-start="entry in invIndex">
+          <td rowspan="{{entry.documentsLength}}" ng-mouseover="highlight(entry.word)" class="entry-highlighted">
+            {{entry.word}}
+          </td>
+          <td ng-repeat-start="(document, words) in entry.documents" ng-show="$first">
+              {{document}}
+          </td>
+          <td ng-repeat-end ng-show="$first">
+              {{words.join(', ')}}
+          </td>
+        </tr>
+        <tr ng-repeat-end ng-repeat="(document, words) in entry.documents" ng-show="!$first">
+          <td>
+              {{document}}
+          </td>
+          <td>
+              {{words.join(', ')}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

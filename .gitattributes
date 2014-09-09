@@ -3,5 +3,6 @@
 *.tar.gz binary
 *.gz binary
 *.png binary
+*.jpg binary
 *.gif binary
 *.jar binary

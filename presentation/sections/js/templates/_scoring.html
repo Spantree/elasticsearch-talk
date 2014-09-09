@@ -1,0 +1,79 @@
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body document-panel">
+      <span> Documents </span>
+      <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+          <div class="document-panel-item">
+              <span>{{docKey}}</span>
+              <div ng-bind-html="doc" class="form-control document-item">
+              </div>
+          </div>
+      </div>
+      <button class="btn btn-success" ng-click="buildInvIndex()">Build Index</button>
+     </div>
+  </div>
+</div>
+<div class="col-md-1">
+</div>
+<div class="col-md-7">
+  <div class="panel panel-default">
+    <div class="panel-body document-panel">
+      <input type="text" class="form-control" ng-model="$parent.searchQuery" ng-change="updateQuery()" placeholder="Enter search text" ng-value="$parent.searchQuery"/>
+      <label class="radio-inline">
+        <input type="radio" name="calcTypeRdo" id="inlineRadio1" ng-model="tab" value="tfidf"> TF-IDF
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="calcTypeRdo" id="inlineRadio2" ng-model="tab" value="cossim"> Cos Similarity
+      </label>
+      <div ng-show="searchQuery && tab=='tfidf'">
+        <table class="table">
+          <tr>
+            <th>
+            </th>
+            <th ng-repeat="word in searchWords track by $index">
+              {{word}}
+            </th>
+          </tr>
+          <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+            <td>{{docKey}}</td>
+            <td ng-model="searchWords" ng-repeat="word in searchWords track by $index">
+              <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{documentCount}} }{ {{documentFrequencies[word]}} } }" ng-show="showTfidfFormulas">
+              </span>
+              <span ng-show="!showTfidfFormulas">
+                {{tfidfScores[docKey][word] | number:2}}
+              </span>
+            </td>
+          </tr>
+        </table>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="showFormulasChkbx" value="show" ng-model="showTfidfFormulas" ng-checked="showTfidfFormulas"> Show formulas
+        </label>
+      </div>
+      <div ng-show="searchQuery && tab=='cossim'">
+        <table class="table">
+          <tr>
+            <th>
+            </th>
+            <th>
+              Formula
+            </th>
+            <th>
+              Similarity
+            </th>
+          </tr>
+          <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+            <td>
+              {{docKey}}
+            </td>
+            <td>
+              <span mathjax-bind="{{getCosSimFormula(docKey)}}">
+              </span>
+            </td>
+            <td>
+              {{getCosSimValue(docKey) | number:2 }}
+            </td>
+          </tr>
+      </div>
+    </div>
+  </div>
+</div>

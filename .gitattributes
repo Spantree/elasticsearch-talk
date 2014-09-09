@@ -1,3 +1,7 @@
 # Set the default end of line behavior
 * text eol=lf
 *.tar.gz binary
+*.gz binary
+*.png binary
+*.gif binary
+*.jar binary

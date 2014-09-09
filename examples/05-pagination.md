@@ -68,4 +68,6 @@ a user is sorting results by freshness, a search result once appeared in positio
 
 ## Continuing a Scan Query
 
+Use the field _scroll_id from the above query in the following query.
+
 `GET /_search/scroll?scroll=10m&scroll_id={scroll_id}`

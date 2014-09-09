@@ -150,7 +150,7 @@ window.myController = ($scope) ->
     clearTimeout(updateTimeout)
     v = Number.parseInt($pb.attr('aria-valuenow'))
     if(v < max)
-      setProgressBarStatus v + 3
+      setProgressBarStatus v + 2
       updateTimeout = setTimeout _.partial(updateProgressBarLinearly, min, max), 100
 
   es = new elasticsearch.Client

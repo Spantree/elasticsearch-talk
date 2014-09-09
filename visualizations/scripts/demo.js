@@ -227,7 +227,7 @@
       clearTimeout(updateTimeout);
       v = Number.parseInt($pb.attr('aria-valuenow'));
       if (v < max) {
-        setProgressBarStatus(v + 3);
+        setProgressBarStatus(v + 2);
         return updateTimeout = setTimeout(_.partial(updateProgressBarLinearly, min, max), 100);
       }
     };

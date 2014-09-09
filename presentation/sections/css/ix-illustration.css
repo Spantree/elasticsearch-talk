@@ -1,0 +1,41 @@
+.ix-illustration .document-panel {
+	height: 500px; 
+	overflow-y: scroll; 
+	padding: 30px;
+}
+
+.ix-illustration .document-panel-item {
+	padding-bottom: 5px; 
+	height: 100px; 
+}
+
+.ix-illustration .document-panel-item span {
+	font-size: 14pt;
+}
+
+.ix-illustration .document-item {
+	font-size: 18pt; 
+	line-height: 20pt; 
+	font-weight: bold; 
+	height: 60px; 
+}
+
+.ix-illustration .radio-inline {
+	font-size: 50%; 
+	line-height: 100%; 
+	padding-right: 10px;
+}
+
+.ix-illustration .checkbox-inline {
+	font-size: 50%; 
+	line-height: 100%;
+}
+
+.ix-illustration table {
+	font-size: 70%;
+}
+
+.ix-illustration table .entry-highlighted {
+	cursor: pointer; 
+	font-weight: bold;
+}

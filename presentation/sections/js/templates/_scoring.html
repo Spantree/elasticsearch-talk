@@ -37,7 +37,7 @@
           <tr ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
             <td>{{docKey}}</td>
             <td ng-model="searchWords" ng-repeat="word in searchWords track by $index">
-              <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{documentCount}} }{ {{documentFrequencies[word]}} } }" ng-show="showTfidfFormulas">
+              <span mathjax-bind="{{termFrequencies[docKey][word]}} \times \log{ \frac{ {{$parent.documentCount}} }{ {{documentFrequencies[word]}} } }" ng-show="showTfidfFormulas">
               </span>
               <span ng-show="!showTfidfFormulas">
                 {{tfidfScores[docKey][word] | number:2}}

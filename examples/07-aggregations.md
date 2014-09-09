@@ -2,7 +2,7 @@
 
 ## Get gender terms via aggregation
 
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 
 ```json
 {
@@ -16,7 +16,7 @@
 
 ## Get gender terms via facet
 
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 
 ```json
 {
@@ -38,7 +38,7 @@
 
 As a note, 85117 seconds is roughly 23.6 hours.
 
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 
 ```json
 {
@@ -58,7 +58,7 @@ As a note, 85117 seconds is roughly 23.6 hours.
 
 ## Get all stats
 
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 
 ```json
 {
@@ -72,7 +72,7 @@ As a note, 85117 seconds is roughly 23.6 hours.
 
 ## Get gender terms / stats via facet
 
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 
 ```json
 {
@@ -101,7 +101,7 @@ As a note, 85117 seconds is roughly 23.6 hours.
 
 ## Get buckets based on Spantree's office
 
-`GET /divvy/station/_search`
+`GET /divvy/station/_search?search_type=count`
 
 ```json
 {
@@ -129,7 +129,7 @@ As a note, 85117 seconds is roughly 23.6 hours.
 ```
 
 ## Get bike trip duration histogram
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 
 ```json
 {
@@ -148,7 +148,7 @@ As a note, 85117 seconds is roughly 23.6 hours.
 
 ## Get bike trips by week
 
-`GET /divvy/trip/_search`
+`GET /divvy/trip/_search?search_type=count`
 ```json
 {
     "aggs" : {

@@ -14,6 +14,19 @@
 * Phrase suggester
 
 
+### Why do you mean by a suggestion?
+
+* **Autocorrect** Pick closest known terms
+* **Autocomplete** Predict rest of query
+* **Autosuggest** Predict alternate queries
+
+
+### Autocorrect
+
+* Term suggester
+* Phrase suggester
+
+
 ### Term suggester
 
 * Edit distance (Levenshtein)

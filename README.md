@@ -2,6 +2,8 @@
 
 ### Speakers
 
+[Spantree Technology Group, LLC](http://www.spantree.net)
+
 **Cedric Hurst:** Principal &amp; Lead Software Engineer  
 
 **Kevin Greene:** Senior Software Engineer
@@ -10,13 +12,12 @@
 
 ### When
 
-Tuesday February 18th, 2014
+Wednesday September 17th, 2014
 
 ### Where
 
-Spantree Technology Group, LLC  
-1144 W Fulton Market, Suite 120
-Chicago, IL 60607
+Strangeloop Conference
+http://www.thestrangeloop.com
 
 ### Instructions for setting up this sample project
 
@@ -29,15 +30,15 @@ the time of the presentation, but the virtual machine stuff shouldn't change too
 Install the following tools to bootstrap your environment
 
 * Install [Git](https://help.github.com/articles/set-up-git)
-* Install [VirtualBox](https://www.virtualbox.org/) (we used version 4.3)
-* Install [Vagrant](http://www.vagrantup.com/) (we used version 1.3.5)
+* Install [VirtualBox](https://www.virtualbox.org/) (version 4.3.8 or above)
+* Install [Vagrant](http://www.vagrantup.com/) (version 1.6.4 or above)
 
 #### Clone this repository
 
 From the command line, clone this repository with:
 
 ```bash
-git clone --recursive --depth 1 git@github.com:Spantree/elasticsearch-talk.git
+git clone --depth 1 git@github.com:Spantree/elasticsearch-talk.git
 ```
 
 ![src vagrant precise64_ _elasticsearch-talk bash IR_Black 238 55 1](https://f.cloud.github.com/assets/530343/91372/a8ba382e-659c-11e2-924e-1dec8536f9ad.png)
@@ -50,13 +51,20 @@ If you're new to git and run into trouble with this step, it might be due to mis
 Then initialize your vagrant instance with:
 
 ```bash
-cd elasticsearch-talk
 vagrant plugin install vagrant-hostmanager
+vagrant plugin install vagrant-vbguest
+cd elasticsearch-talk
 vagrant up
 ```
 
 ![vagrant up](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantup.png?raw=true)
 
+Note: you may be prompted for your host system password. We aren't installing viruses or keyloggers, we promise. This is just so that the hostmanager plugin can write out mappings to your `/etc/hosts` file.  If you aren't comfortable with entering your password, you can add the following entries to `/etc/hosts` manually:
+
+```
+192.168.80.100	es1.local esdemo.local
+192.168.80.101	es2.local
+``` 
 
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
 and install all the tools extra tools you'll need to play along.  You may be required to enter your password at some point so that hostmanager can add an entry for "esdemo.local" to your /etc/hosts file.
@@ -80,13 +88,12 @@ the latest changes by doing the following from your host terminal:
 
 ```
 git pull
-vagrant reload
-vagrant provision
+vagrant reload --provision
 ```
 
 #### Shut down vagrant
 
-When you're all done elasticsearching, you can gracefull shut down your vagrant instance by running:
+When you're all done elasticsearching, you can gracefully shut down your vagrant instance by running:
 
 ```
 vagrant halt
@@ -98,22 +105,14 @@ This will close the VM.
 
 #### Remove the virtual machine from disk
 
-If you want to conserve disk space, you can get rid of the disk images at `~/.vagrant.d` 
-and `~/VirtualBox VMs`:
+If you want to conserve disk space, you can get rid of the disk images via the `destroy` command:
 
-![elasticsearch-talk](https://f.cloud.github.com/assets/530343/92637/39ba1012-65e6-11e2-873f-3e756b54cd70.png)
-
-![elasticsearch-talk_1358999479](https://f.cloud.github.com/assets/530343/92638/4fdf39e4-65e6-11e2-81bd-9d281d9fa412.png)
+```
+vagrant destroy
+```
 
 This repo will here for you should you need it again.
 
 #### Show us some love
 
 Email info@spantree.net if you run into issues.  We'd be happy to help.
-
-
-#### Push to gh-pages
-
-```
-git subtree push --prefix presentation origin gh-pages
-```

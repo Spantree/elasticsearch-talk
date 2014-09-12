@@ -162,3 +162,65 @@ As a note, 85117 seconds is roughly 23.6 hours.
     }
 }
 ```
+
+## Get oldest movie by genre
+
+`GET /freebase/film/_search?search_type=count`
+
+```json
+{
+   "aggs":{
+      "top_genres":{
+         "terms":{
+            "field":"genre",
+            "size":10
+         },
+         "aggs":{
+            "top_genre_hits":{
+               "top_hits":{
+                  "sort":[
+                     {
+                        "initial_release_date":{
+                           "order":"asc"
+                        }
+                     }
+                  ],
+                  "_source":{
+                     "include":[
+                        "name",
+                        "initial_release_date"
+                     ]
+                  },
+                  "size":1
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+## Get top 3 directors by genre
+
+`GET /freebase/film/_search?search_type=count`
+
+```json
+{
+   "aggs":{
+      "top_genres":{
+         "terms":{
+            "field":"genre",
+            "size":10
+         },
+         "aggs":{
+            "top_directors":{
+               "terms":{
+                  "field":"directed_by.facet",
+                  "size":4
+               }
+            }
+         }
+      }
+   }
+}
+```

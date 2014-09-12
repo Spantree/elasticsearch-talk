@@ -16,13 +16,14 @@ Wednesday September 17th, 2014
 
 ### Where
 
-Strangeloop Conference
-http://www.thestrangeloop.com
+[The Strangeloop Conference](http://www.thestrangeloop.com)
+Peabody Opera Center
+St Louis, MO
 
 ### Instructions for setting up this sample project
 
 We ask that you walk through these steps before you stop by since you'll need to download stuff
-and we don't want to crush our office bandwidth.  The project itself will likely evolve up until
+and we don't want to crush the hotel bandwidth.  The project itself will likely evolve up until
 the time of the presentation, but the virtual machine stuff shouldn't change too much.
 
 #### Tools You'll Need
@@ -59,15 +60,21 @@ vagrant up
 
 ![vagrant up](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantup.png?raw=true)
 
-Note: you may be prompted for your host system password. We aren't installing viruses or keyloggers, we promise. This is just so that the hostmanager plugin can write out mappings to your `/etc/hosts` file.  If you aren't comfortable with entering your password, you can add the following entries to `/etc/hosts` manually:
+If you're feeling adventurous, we also have the option of setting up an Elasticsearch cluster (two VMs) on your machine. To do this instead, just modify the last line to be:
+
+```
+CLUSTER=true vagrant up
+```
+
+This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
+and install all the tools extra tools you'll need to play along.
+
+Please note that you may be prompted for your host system password. We aren't installing viruses or keyloggers, we promise. This is just so that the hostmanager plugin can write out mappings to your `/etc/hosts` file.  If you're feeling particularly paranoid, you can add the following entries to `/etc/hosts` manually:
 
 ```
 192.168.80.100	es1.local esdemo.local
 192.168.80.101	es2.local
 ``` 
-
-This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
-and install all the tools extra tools you'll need to play along.  You may be required to enter your password at some point so that hostmanager can add an entry for "esdemo.local" to your /etc/hosts file.
 
 #### Dance!
 

@@ -14,7 +14,19 @@ PUPPET_FACTS = {
 }
 
 DO_REINDEX = ENV['DO_REINDEX']
+CLUSTER = ENV['CLUSTER']
 HOST_HOME_DIR = ENV['HOME']
+
+if CLUSTER == 'true'
+  ES1_FACTS = PUPPET_FACTS
+  ES2_FACTS = PUPPET_FACTS.merge({
+    :do_reindex => ENV['DO_REINDEX']
+  })
+else
+  ES1_FACTS = PUPPET_FACTS.merge({
+    :do_reindex => ENV['DO_REINDEX']
+  })
+end
 
 Vagrant.configure("2") do |config|
   # For regular use
@@ -61,26 +73,26 @@ Vagrant.configure("2") do |config|
     es1.vm.provision :puppet do |puppet|
       puppet.manifests_path = "puppet/manifests"
       puppet.options = PUPPET_OPTIONS
-      puppet.facter = PUPPET_FACTS
+      puppet.facter = ES1_FACTS
     end
   end
 
-  # The second node has Elasticsearch and our presentation assets.
-  # It also does bulk indexing of sample data (distributed to the cluster).
-  config.vm.define "es2" do |es2|
-    es2.vm.hostname = "es2.local"
-    es2.hostmanager.aliases = %w(esdemo.local)
-    es2.vm.provider :virtualbox do |v, override|
-      override.vm.network :private_network, ip: "192.168.80.101"
-      v.customize ["modifyvm", :id, "--memory", 1536]
-    end
+  if CLUSTER == 'true'  
+    # The second node has Elasticsearch and our presentation assets.
+    # It also does bulk indexing of sample data (distributed to the cluster).
+    config.vm.define "es2" do |es2|
+      es2.vm.hostname = "es2.local"
+      es2.hostmanager.aliases = %w(esdemo.local)
+      es2.vm.provider :virtualbox do |v, override|
+        override.vm.network :private_network, ip: "192.168.80.101"
+        v.customize ["modifyvm", :id, "--memory", 1536]
+      end
 
-    es2.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "puppet/manifests"
-      puppet.options = PUPPET_OPTIONS
-      puppet.facter = PUPPET_FACTS.merge({
-        :do_reindex => ENV['DO_REINDEX']
-      })
+      es2.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "puppet/manifests"
+        puppet.options = PUPPET_OPTIONS
+        puppet.facter = ES2_FACTS
+      end
     end
   end
 end

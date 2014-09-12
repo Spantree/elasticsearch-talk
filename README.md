@@ -17,7 +17,9 @@ Wednesday September 17th, 2014
 ### Where
 
 [The Strangeloop Conference](http://www.thestrangeloop.com)
+
 Peabody Opera Center
+
 St Louis, MO
 
 ### Instructions for setting up this sample project

@@ -1,6 +1,10 @@
-# Term suggester
+# Suggesters
 
-POST /wikipedia/_suggest
+## Term suggester
+
+`POST /wikipedia/_suggest `
+
+```json
 {
   "term_suggestion": {
     "text": "buildng",
@@ -9,8 +13,11 @@ POST /wikipedia/_suggest
     }
   }
 }
+```
 
-POST /wikipedia/_suggest
+`POST /wikipedia/_suggest `
+
+```json
 {
   "text": "high risk buildng",
   "simple_phrase": {
@@ -37,23 +44,31 @@ POST /wikipedia/_suggest
     }
   }
 }
+```
 
-PUT /suggestions
-PUT /suggestions/suggestion/_mapping
+`PUT /suggestions `
+
+`PUT /suggestions/suggestion/_mapping `
+
+```json
 {
   "suggestion" : {
         "properties" : {
             "name" : { "type" : "string" },
-            "suggest" : { "type" : "completion",
-                          "index_analyzer" : "simple",
-                          "search_analyzer" : "simple",
-                          "payloads" : true
+            "suggest" : { 
+              "type" : "completion",
+              "index_analyzer" : "simple",
+              "search_analyzer" : "simple",
+              "payloads" : true
             }
         }
     }
 }
+```
 
-PUT /suggestions/suggestion/1
+`PUT /suggestions/suggestion/1 `
+
+```json
 {
     "name" : "Nevermind",
     "suggest" : {
@@ -63,8 +78,11 @@ PUT /suggestions/suggestion/1
         "weight" : 34
     }
 }
+```
 
-POST /suggestions/_suggest
+`POST /suggestions/_suggest `
+
+```json
 {
   "completion_suggestion": {
     "text": "n",
@@ -73,3 +91,20 @@ POST /suggestions/_suggest
     }
   }
 }
+```
+
+`POST /suggestions/_suggest `
+
+```json
+{
+  "completion_suggestion": {
+    "text": "n",
+    "completion": {
+      "field": "suggest",
+      "fuzzy" : {
+        "fuzziness" : 2
+      }
+    }
+  }
+}
+```

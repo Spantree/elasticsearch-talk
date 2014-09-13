@@ -37,3 +37,39 @@ POST /wikipedia/_suggest
     }
   }
 }
+
+PUT /suggestions
+PUT /suggestions/suggestion/_mapping
+{
+  "suggestion" : {
+        "properties" : {
+            "name" : { "type" : "string" },
+            "suggest" : { "type" : "completion",
+                          "index_analyzer" : "simple",
+                          "search_analyzer" : "simple",
+                          "payloads" : true
+            }
+        }
+    }
+}
+
+PUT /suggestions/suggestion/1
+{
+    "name" : "Nevermind",
+    "suggest" : {
+        "input": [ "Nevermind", "Nirvana" ],
+        "output": "Nirvana - Nevermind",
+        "payload" : { "artistId" : 2321 },
+        "weight" : 34
+    }
+}
+
+POST /suggestions/_suggest
+{
+  "completion_suggestion": {
+    "text": "n",
+    "completion": {
+      "field": "suggest"
+    }
+  }
+}

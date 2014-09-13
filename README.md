@@ -34,36 +34,26 @@ Install the following tools to bootstrap your environment
 * Install [VirtualBox](https://www.virtualbox.org/) (version 4.3.8 or above)
 * Install [Vagrant](http://www.vagrantup.com/) (version 1.6.4 or above)
 
-#### Clone this repository
+#### Clone this repository and start Vagrant
 
-From the command line, clone this repository with:
-
-```bash
-git clone --depth 1 git@github.com:Spantree/elasticsearch-talk.git
-```
-
-![src vagrant precise64_ _elasticsearch-talk bash IR_Black 238 55 1](https://f.cloud.github.com/assets/530343/91372/a8ba382e-659c-11e2-924e-1dec8536f9ad.png)
-
-If you're new to git and run into trouble with this step, it might be due to missing 
-[github keys](https://help.github.com/articles/generating-ssh-keys).
-
-#### Set up your vagrant instance
-
-Then initialize your vagrant instance with:
+From the command line, install the `hostmanager` and `vbguest` vagrant plugins.  We use these Vagrant plugins to manage `/etc/hosts` entries and make sure you have the right version of Virtualbox Guest Additions installed:
 
 ```bash
 vagrant plugin install vagrant-hostmanager
 vagrant plugin install vagrant-vbguest
+```
+
+Next, you'll want to clone this repository via Git:
+
+```bash
+git clone --depth 1 https://github.com/Spantree/elasticsearch-talk.git
 cd elasticsearch-talk
+```
+
+Finally, you'll want to start the Vagrant virtual machine instance:
+
+```bash
 vagrant up
-```
-
-![vagrant up](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantup.png?raw=true)
-
-If you're feeling adventurous, we also have the option of setting up an Elasticsearch cluster (two VMs) on your machine. To do this instead, just modify the last line to be:
-
-```
-CLUSTER=true vagrant up
 ```
 
 This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
@@ -76,17 +66,29 @@ Please note that you may be prompted for your host system password. We aren't in
 192.168.80.101	es2.local
 ``` 
 
+The whole process from end to end should look like this:
+
+![git clone and vagrant up](images/git-clone-and-vagrant-up.gif)
+
+If you're feeling adventurous, you also have the option of setting up a two machine Elasticsearch cluster. To do this, just modify the Vagrant up command to be:
+
+```bash
+CLUSTER=true vagrant up
+```
+
+![git up cluster](images/vagrant-up-cluster.gif)
+
 #### Dance!
 
 That's it.  That's all there is to it.
 
-You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo.local:9200`:
+You should now be able to access elasticsearch on your machine from a web browser at `http://esdemo.local`:
 
-![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/esbrowser.png?raw=true)
+![esdemo in a web browser](images/esdemo-web-browser.gif)
 
-You should also be able to ssh into your virtual machine using the `vagrant ssh` command:
+You should also be able to ssh into your virtual machine using the `vagrant ssh es1` command:
 
-![vagrant ssh](https://github.com/Spantree/elasticsearch-talk/blob/develop/images/vagrantssh.png?raw=true)
+![vagrant ssh](images/vagrant-ssh-es1)
 
 #### Stay up-to-date
 

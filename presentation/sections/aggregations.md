@@ -3,21 +3,25 @@
 
 ### Buckets vs Metrics
 
+* Buckets - Classify your data
+* Metrics - Analyze your data
 
-### Bucket Usefulness - Terms
 
+### Bucket - Terms
+
+* Break up the data based on defined terms
+
+Example Picture
 
 ### Bucket Usefulness - Histograms
-* Dates
-* Anything else
 
+* Define an interval to break up the data
+* 
 
 ### Bucket Usefulness - Other
 
-* Bucket by distance from something
-* Neighborhood with Geoshapes
-* Range
-
+* Bucket by range
+* Bucket by distance from school
 
 ### Metric Usefulness - Stats
 
@@ -34,7 +38,7 @@ Percentile
 * Create Google Ads-esque design with one query
 
 
-### Nested Aggregations
+### Subaggregations
 * Enables processing of several different facets in memory
 * Enables complex graphs and visualizations
 

@@ -15,6 +15,8 @@
 }
 ```
 
+## Phrase suggester
+
 `POST /wikipedia/_suggest `
 
 ```json
@@ -46,7 +48,11 @@
 }
 ```
 
+## Create suggestions index
+
 `PUT /suggestions `
+
+## Create suggestion mapping
 
 `PUT /suggestions/suggestion/_mapping `
 
@@ -66,6 +72,8 @@
 }
 ```
 
+## Create suggestion
+
 `PUT /suggestions/suggestion/1 `
 
 ```json
@@ -80,6 +88,8 @@
 }
 ```
 
+## Get completion suggestion
+
 `POST /suggestions/_suggest `
 
 ```json
@@ -92,6 +102,8 @@
   }
 }
 ```
+
+## Get fuzzy completion suggestion
 
 `POST /suggestions/_suggest `
 

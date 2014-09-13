@@ -64,7 +64,7 @@ GET /spantree/_search
     </tr>
     <tr>
       <th>ASCII Folding</th>
-      <td>Nestlé</td>
+      <td>Nestl&eacute;</td>
       <td>&#8781;</td>
       <td>Nestle</td>
     </tr>

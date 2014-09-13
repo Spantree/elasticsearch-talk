@@ -59,7 +59,7 @@ The whole process from end to end should look like this...
 
 #### Build a cluster (optional)
 
-If you're feeling adventurous, you also have the option of setting up a two machine Elasticsearch cluster. This will spin up a second virtual machine and requires about 4GB of available RAM on the host machine.
+If you're feeling adventurous, you also have the option of setting up a second Elasticsearch VM to set up a cluster. Running both VMs requires at about 4GB of available RAM on the host machine.
 
 To spin up a second node, just re-run the Vagrant up command with the `CLUSTER=true` environment variable.
 

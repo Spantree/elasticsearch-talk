@@ -18,6 +18,7 @@
 
 * Edit distance (Levenshtein)
 
+
 ### Phrase suggester
 
 * How to correct multiple terms?

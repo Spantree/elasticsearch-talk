@@ -77,9 +77,13 @@ You should now be able to access elasticsearch on your machine from a web browse
 
 ![esdemo in a web browser](images/esdemo-web-browser.gif)
 
-You should also be able to ssh into your virtual machine using the `vagrant ssh es1` command:
+#### SSH into the box
+
+You should also be able to ssh into your virtual machine using the `vagrant ssh es1` command. 
 
 ![vagrant ssh](images/vagrant-ssh-es1.gif)
+
+If you enabled clustering, you can also ssh into the second VM using `vagrant ssh es2`.
 
 #### Stay up-to-date
 

@@ -4,10 +4,8 @@
 
 [Spantree Technology Group, LLC](http://www.spantree.net)
 
-**Cedric Hurst:** Principal &amp; Lead Software Engineer  
-
-**Kevin Greene:** Senior Software Engineer
-
+**Cedric Hurst:** Principal &amp; Lead Software Engineer<br/>
+**Kevin Greene:** Senior Software Engineer<br/>
 **Gary Turovsky:** Senior Software Engineer
 
 ### When
@@ -16,8 +14,8 @@ Wednesday September 17th, 2014
 
 ### Where
 
-[The Strangeloop Conference](http://www.thestrangeloop.com)
-Peabody Opera Center
+[The Strangeloop Conference](http://www.thestrangeloop.com)<br/>
+Peabody Opera Center<br/>
 St Louis, MO
 
 ### Instructions for setting up this sample project

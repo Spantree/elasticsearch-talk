@@ -7,75 +7,76 @@ is talking about
 ![Elasticsearch](images/elasticsearch.png)
 
 
-## Who We Are
+### More about Spantree
 
 <table class="ourpictures">
   <tr>
     <td>
       ![Kevin](images/kevin.png)
-      <br/>
-      <p>Kevin Greene</p>
-      <p>Senior Software Engineer</p>
     </td>
     <td>
       ![Cedric](images/cedric.png)
-      <br/>
-      <p>Cedric Hurst</p>
-      <p>Principal</p>
     </td>
     <td>
       ![Gary](images/gary.png)
-      <br/>
-      <p>Gary Turovsky</p>
-      <p>Senior Software Engineer</p>
+    </td>
+    <td>
+      ![Jerry](images/jerry.png)
+    </td>
+    <td>
+      ![Bob](images/bob.png)
     </td>
   </tr>
   <tr>
     <td>
       ![Allie](images/allie.png)
-      <br/>
-      <p>Allie Curry</p>
-      <p>Senior Software Engineer</p>
     </td>
     <td vertical-align="top">
       ![Roberto](images/roberto.png)
-      <br/>
-      <p>Roberto Guerra</p>
-      <p>Senior Software Engineer</p>
     </td>
     <td>
       ![Andrea](images/andrea.png)
-      <br/>
-      <p>Andrea Schuster</p>
-      <p>Director of Operations</p>
     </td>
-    
-  <tr>
+    <td>
+      ![Jonathan](images/jon.png)
+    </td>
+    <td>
+      ![Nemik](images/nemik.png)
+    </td>
+  </tr>
 </table>
 
 
-## What We Work On
+### Sorts of things we work on
 
 ![Arena](images/arena.png)
 ![Chicago.com](images/chicagocom.png)
-![NMH](images/nmh.gif)
-![Channel company](images/channelcompany.gif)
 ![Doejo](images/doejo.png)
-![MileIQ](images/mileiq.png)
+![GoHealth](images/gohealth.png)
 ![High School Cube](images/highschoolcube.png)
 ![Hosted Buyer](images/hostedbuyer.png)
-![Wrapports](images/wrapports.png)
-![GoHealth](images/gohealth.png)
+![MileIQ](images/mileiq.png)
 ![Mobiquity](images/mobiquity.png)
+![Mozilla Foundation](images/mozilla.svg)
+![NMH](images/nmh.gif)
 ![Panera](images/panera.png)
+![Phoshor Games Studio](images/phosphor.jpg)
+![Reverb.com](images/reverb.png)
+![The Channel Company](images/tcc.jpg)
+![Wrapports](images/wrapports.png)
 
 
-## Stuff We Use
+### Stuff we use
 
 ![Amazon Web Services](images/aws.svg)
+![Asgard](images/asgard.png)
+![Netflix Simian Army](images/simian-army.png)
 ![Github](images/github.svg)
 ![Vagrant](images/vagrant.png)
+![Packer](images/packer.png)
 ![Puppet](images/puppet.svg)
+![Jenkins](images/jenkins.png)
+![Apache JMeter](images/jmeter.png)
 
 ![PostgreSQL](images/postgres.svg)
 ![MongoDB](images/mongodb.png)
@@ -91,3 +92,12 @@ is talking about
 ![jQuery](images/jquery.svg)
 ![Coffeescript](images/coffeescript.svg)
 ![Backbone.js](images/backbone.png)
+
+
+## How this talk will work
+
+This presentation is also free and open source.
+
+http://github.com/Spantree/elasticsearch-talk
+
+http://spantree.github.io/elasticsearch-talk/slides

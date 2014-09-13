@@ -106,20 +106,6 @@ table.laundry-list td {
 	padding-right: 40px;
 }
 
-table.ourpictures {
-	margin: auto;
-}
-
-table.ourpictures td {
-	width: 200px;
-	font-size: 14pt;
-	line-height: 20pt;
-}
-
-table.ourpictures td img {
-	height: 220px;
-}
-
 table.tf-idf { 
 	margin: auto;
 }
@@ -142,4 +128,29 @@ table.qvf{
 
 table.qvf td {
 	padding-right: 40px
+}
+
+section.logos img {
+  max-width: 150px;
+  max-height: 70px;
+  margin: 0px 10px;
+  padding: 10px;
+}
+
+table.ourpictures {
+  margin: auto;
+}
+
+table.ourpictures img {
+  max-height: 120px;
+}
+
+table.ourpictures td {
+  width: 200px;
+  font-size: 14pt;
+  line-height: 20pt;
+}
+
+table.ourpictures td img {
+  height: 220px;
 }

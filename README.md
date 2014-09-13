@@ -49,7 +49,7 @@ This will download a base Virtualbox Ubuntu image, set it up as a virtual machin
 Please note that you may be prompted for your host system password. We aren't installing viruses or keyloggers, we promise. This is just so that the hostmanager plugin can write out mappings to your `/etc/hosts` file.  If you're feeling particularly paranoid, you can add the following entries to `/etc/hosts` manually.
 
 ```
-192.168.80.100	es1.local esdemo.local
+192.168.80.100	es1.local esdemo.local kibana.local
 192.168.80.101	es2.local
 ``` 
 

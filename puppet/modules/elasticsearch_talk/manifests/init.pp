@@ -61,6 +61,11 @@ class elasticsearch_talk(
     src_dir => "${src_dir}/visualizations"
   }
 
+  class { 'elasticsearch_talk::elk':
+    backend_hostname => 'esdemo.local',
+    frontend_hostname => 'kibana.local'
+  }
+
   if($do_reindex == 'true') {
     elasticsearch_talk::index { 'getting-started':
       delete_only  => true

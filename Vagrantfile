@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
   # This first node only has Elasticsearch installed.
   config.vm.define "es1" do |es1|
     es1.vm.hostname = "es1.local"
-    es1.hostmanager.aliases = %w(esdemo.local)
+    es1.hostmanager.aliases = %w(esdemo.local kibana.local)
     es1.vm.provider :virtualbox do |v, override|
       override.vm.network :private_network, ip: "192.168.80.100"
       v.customize ["modifyvm", :id, "--memory", 1536]

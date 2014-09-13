@@ -36,7 +36,7 @@
 ```json
 {
   "doc": {
-    "git_commits": 1978
+    "git_commits": 2560
   }
 }
 ```
@@ -58,12 +58,12 @@
 ```json
 {
   "doc": {
-    "git_commits": 724
+    "git_commits": 1912
   },
   "upsert": {
     "name": "Kevin Greene",
     "title": "Senior Software Engineer",
-    "git_commits": 724
+    "git_commits": 1912
   }
 }
 ```
@@ -78,9 +78,9 @@
 
 ```json
 {"index":{"_id":"gary","_type": "people"}}
-{"name":"Gary Turovsky","title":"Senior Software Engineer","git_commits":  797}
-{"index":{"_id":"malynda","_type": "people"}}
-{"name":"Malynda Chizek Frouard","title":"Software Engineer","git_commits": 33}
+{"name":"Gary Turovsky","title":"Senior Software Engineer","git_commits":  611}
+{"index":{"_id":"jonathan","_type": "people"}}
+{"name":"Jonathan Freeman","title":"Software Engineer","git_commits": 186}
 ```
 
 ## Reviewing the Whole List

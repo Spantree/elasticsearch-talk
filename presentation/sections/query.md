@@ -45,7 +45,7 @@ http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,L10
 <table>
 <tr><td>match</td><td><b>multi match </b> </td><td> <b> bool </b></td><tr>                
 
-<tr><td> <b>boosting </b>  </td><td> common terms </td><td nowrap> constant score </td><tr> 
+<tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr> 
 <tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr> 
 <tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr> 
 <tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 

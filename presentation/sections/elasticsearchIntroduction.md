@@ -21,12 +21,6 @@ FROM Person INNER JOIN Scientist ON Person.ID = Scientist.ID
 WHERE FirstName LIKE "Edgar%" And LastName = "Codd";
 ```
 
-#### MongoDB
-
-```javascript
-db.spantree.find({firstName: "Eric", lastName: "Evans"});
-```
-
 #### Elasticsearch
 
 ```json

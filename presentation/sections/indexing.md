@@ -12,6 +12,8 @@ curl -XPUT 'http://esdemo.local:9200/wikipedia/location/1' -d '{
 }'
 ```
 
+http://esdemo.local:9200/_plugin/marvel/sense/#02-indexing,L5
+
 
 ### Automatic Mappings
 
@@ -39,6 +41,7 @@ curl -XPOST 'http://esdemo.local:9200/wikipedia/location/' -d '{
 }'
 ```
 
+http://esdemo.local:9200/_plugin/marvel/sense/#02-indexing,L46
 
 ### Update API
 
@@ -59,6 +62,7 @@ curl -XPOST 'http://esdemo.local:9200/wikipedia/location/1/_update' -d '{
 }'
 ```
 
+http://esdemo.local:9200/_plugin/marvel/sense/#02-indexing,L28
 
 ### Bulk API
 
@@ -74,3 +78,5 @@ $ cat divvy.json
 ```bash
 curl -f -s -S -XPOST --data-binary "@divvy.json" http://esdemo.local:9200/divvy/_bulk
 ```
+
+http://esdemo.local:9200/_plugin/marvel/sense/#02-indexing,L64

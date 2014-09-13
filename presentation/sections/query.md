@@ -17,6 +17,8 @@ curl -XGET "http://esdemo.local:9200/wikipedia/_search" -d '{
 }'
 ```
 
+http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,L10
+
 
 <h3>Types of Queries</h3>
 

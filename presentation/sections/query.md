@@ -4,16 +4,16 @@
 ### Search API
 
 ```bash
-curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
+curl -XPOST http://esdemo.local:9200/wikipedia/_search?q=about:lake
 ```
 
 or
 
 ```bash
-curl -XGET "http://esdemo.local:9200/wikipedia/_search" -d '{
-"query" : {
-"term" : { "about" : "lake" }
-}
+curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
+  "query" : {
+    "term" : { "about" : "lake" }
+  }
 }'
 ```
 

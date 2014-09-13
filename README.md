@@ -24,41 +24,44 @@ Install the following tools to bootstrap your environment
 
 #### Clone this repository and start Vagrant
 
-From the command line, install the `hostmanager` and `vbguest` vagrant plugins.  We use these Vagrant plugins to manage `/etc/hosts` entries and make sure you have the right version of Virtualbox Guest Additions installed:
+From the command line, install the `hostmanager` and `vbguest` vagrant plugins.  We use these Vagrant plugins to manage `/etc/hosts` entries and make sure you have the right version of Virtualbox Guest Additions installed.
 
 ```bash
 vagrant plugin install vagrant-hostmanager
 vagrant plugin install vagrant-vbguest
 ```
 
-Next, you'll want to clone this repository via Git:
+Next, you'll want to clone this repository via Git.
 
 ```bash
 git clone --depth 1 https://github.com/Spantree/elasticsearch-talk.git
 cd elasticsearch-talk
 ```
 
-Finally, you'll want to start the Vagrant virtual machine instance:
+Finally, you'll want to start the Vagrant virtual machine instance.
 
 ```bash
 vagrant up
 ```
 
-This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally,
-and install all the tools extra tools you'll need to play along.
+This will download a base Virtualbox Ubuntu image, set it up as a virtual machine to run locally, and install all the tools extra tools you'll need to play along.
 
-Please note that you may be prompted for your host system password. We aren't installing viruses or keyloggers, we promise. This is just so that the hostmanager plugin can write out mappings to your `/etc/hosts` file.  If you're feeling particularly paranoid, you can add the following entries to `/etc/hosts` manually:
+Please note that you may be prompted for your host system password. We aren't installing viruses or keyloggers, we promise. This is just so that the hostmanager plugin can write out mappings to your `/etc/hosts` file.  If you're feeling particularly paranoid, you can add the following entries to `/etc/hosts` manually.
 
 ```
 192.168.80.100	es1.local esdemo.local
 192.168.80.101	es2.local
 ``` 
 
-The whole process from end to end should look like this:
+The whole process from end to end should look like this...
 
 ![git clone and vagrant up](images/clone-and-vagrant-up.gif)
 
-If you're feeling adventurous, you also have the option of setting up a two machine Elasticsearch cluster. To do this, just modify the Vagrant up command to be:
+#### Build a cluster (optional)
+
+If you're feeling adventurous, you also have the option of setting up a two machine Elasticsearch cluster. This will spin up a second virtual machine and requires about 4GB of available RAM on the host machine.
+
+To spin up a second node, just re-run the Vagrant up command with the `CLUSTER=true` environment variable.
 
 ```bash
 CLUSTER=true vagrant up

@@ -47,7 +47,8 @@
 
 ```json
 {
-  "script": "ctx._source.git_commits += 1"
+  "script": "ctx._source.git_commits += 1",
+  "lang": "groovy"
 }
 ```
 

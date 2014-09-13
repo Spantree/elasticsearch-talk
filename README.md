@@ -66,7 +66,7 @@ Please note that you may be prompted for your host system password. We aren't in
 
 The whole process from end to end should look like this:
 
-![git clone and vagrant up](images/git-clone-and-vagrant-up.gif)
+![git clone and vagrant up](images/clone-and-vagrant-up.gif)
 
 If you're feeling adventurous, you also have the option of setting up a two machine Elasticsearch cluster. To do this, just modify the Vagrant up command to be:
 
@@ -86,7 +86,7 @@ You should now be able to access elasticsearch on your machine from a web browse
 
 You should also be able to ssh into your virtual machine using the `vagrant ssh es1` command:
 
-![vagrant ssh](images/vagrant-ssh-es1)
+![vagrant ssh](images/vagrant-ssh-es1.gif)
 
 #### Stay up-to-date
 
@@ -105,8 +105,6 @@ When you're all done elasticsearching, you can gracefully shut down your vagrant
 ```
 vagrant halt
 ```
-
-[![elasticsearch-talk vagrant precise64_ bash IR_Black 116 44 2-1](https://f.cloud.github.com/assets/530343/92646/fa12d092-65e6-11e2-9391-ffd039939874.png)]]
 
 This will close the VM.
 

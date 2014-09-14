@@ -119,6 +119,7 @@ One or more Lucene indexes, composed of segments
 * string
 * integer/long
 * float/double
+* date
 * boolean
 * ip
 * geo point

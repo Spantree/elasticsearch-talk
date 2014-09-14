@@ -17,10 +17,8 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 }'
 ```
 
-http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,L10
 
-
-<h3>Types of Queries</h3>
+### Types of Queries
 
 <table>
 <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
@@ -40,7 +38,7 @@ http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,L10
 </table>
 
 
-<h3>Types of Queries</h3>
+### Most Useful Queries
 
 <table>
 <tr><td>match</td><td><b>multi match </b> </td><td> <b> bool </b></td><tr>                
@@ -60,11 +58,66 @@ http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,L10
 </table>
 
 
-### Scoring
+### Search Demos
+
+
+### How is it so fast?
+
+
+### Inverted index
+<div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
+  <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
+</div> 
+
+
+### How does it know which document is most relevant?
+
+* ...Math
+
+
+### Simple scoring
+
+* Make vectors of scores
+* Finds angle between vectors of scores
+
+
+### Simple example: TF-IDF
+$tf \times idf = tf \times \log{ \frac{N}{df} }$
+
+* **term frequency ($tf$)** number of times a term occurs in a particular document
+* **document frequency ($df$)** number of all documents a term occurs in 
+* **inverse document frequency ($idf$)** is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
+
+
+### Scoring demo
+<div class="row tfidf-illustration ix-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
+  <dv ng-include src="'sections/js/templates/_scoring.html'"></div>
+</div>
+
+
+### Actual scoring: Okapi BM25
+
+<br/>
+$\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.5 }{ df + 0.5 }$
+<br/><br/>
+
+* Yuck!
+
+
+### That was fun
+
+
+### Explaining queries
+
+
+### More on scoring
 
 * Defaults to Okapi BM25
 * Modified via boosting
 * Can rewrite scoring engine
+
+
+### Filtering
 
 
 ### Queries vs Filters

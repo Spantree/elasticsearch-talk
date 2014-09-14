@@ -38,7 +38,7 @@ Note:
 * Master
     * Maintains "official" cluster state and applies any modifications
     * Distributes shards in cluster
-* Not to be confused with master replicas
+* Not to be confused with primary replicas
 
 Note: 
 * Show configuration
@@ -53,7 +53,7 @@ Note:
 ### Zen: Multicast
 
 * Default configuration
-    * Port 54328 broadcast to multicast group 224.2.2.4
+    * (Port 54328 broadcast to multicast group 224.2.2.4)
 * Great for magically forming clusters
 * Doesn't work well on EC2
 
@@ -66,8 +66,7 @@ Note:
 ### What happens when a node fails?
 
 * When a Node Fails
-    * If Master failed, elect a new Master
-        * Sort eligible nodes, pick first (?!)
+    * If master failed, elect a new Master
     * Some replica shards promoted to primary shards
 
 
@@ -94,11 +93,10 @@ Note:
 ![Analysis phases](images/sharding-replica.svg)
 
 
-### Which shard to use?
+### Indexing/getting a document
 
-* **GET** ```/index/type/id```
 * **```shard = hash(id) % number_of_primary_shards```**
-    * This is why number of shards is not changeable
+* This is why number of shards is not changeable
 
 
 ### Servicing a search query

@@ -1,7 +1,10 @@
 ## Suggestions
 
 
-### Why do you mean by a suggestion?
+### What do you mean by query suggestion?
+
+
+### Some definitions of suggestions
 
 * **Autocorrect** Pick closest known terms
 * **Autocomplete** Predict rest of query
@@ -49,5 +52,5 @@
 
 ### Autosuggest
 
-* Data science tools + Elasticsearch
+* Data science tools -> Elasticsearch
 

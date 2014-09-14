@@ -6,6 +6,8 @@ class elasticsearch_talk::elk(
   $frontend_hostname = nil,
   $default_dashboard = 'apachelogs.json'
 ) {
+  $elasticsearch_url = "http://${backend_hostname}:9200"
+
   file { "${log_file_archive}":
     ensure => file,
     source => "puppet:///modules/elasticsearch_talk${log_file_archive}"
@@ -33,7 +35,6 @@ class elasticsearch_talk::elk(
   }
 
   class { 'kibana':
-    elasticsearch_url => "http://${backend_hostname}:9200",
     file_content      => template('elasticsearch_talk/kibana/config.js.erb'),
     webserver         => nginx,
     version           => $kibana_version,

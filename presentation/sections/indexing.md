@@ -43,6 +43,7 @@ curl -XPOST 'http://esdemo.local:9200/wikipedia/location/' -d '{
 
 http://esdemo.local:9200/_plugin/marvel/sense/#02-indexing,L46
 
+
 ### Update API
 
 ```bash
@@ -63,6 +64,7 @@ curl -XPOST 'http://esdemo.local:9200/wikipedia/location/1/_update' -d '{
 ```
 
 http://esdemo.local:9200/_plugin/marvel/sense/#02-indexing,L28
+
 
 ### Bulk API
 

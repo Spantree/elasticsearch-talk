@@ -2,11 +2,11 @@
 
 ## Register a percolation query
 
-Percolation queries allow you to search in reverse.  Instead of adding documents and then providing a query, you add 
-queries first and then provide documents to see which queries they match. This is very useful for things like RSS feeds 
-and notification systems.
+Percolation queries allow you to search in reverse.  Instead of adding documents and then providing a query, you add queries first and then provide documents to see which queries they match. This is very useful for things like RSS feeds and notification systems.
 
-First, we will register a percolation query for the phrase 'earl grey'.
+Below are some examples based on a theoretical employee onboarding process at Spantree, where we'd like to be notified if they modify our scheduled amazon orders for various teas.
+
+First, we will register a percolator for people who like to drink earl grey.
 
 `PUT /spantree/.percolator/earl_grey`
 
@@ -14,38 +14,73 @@ First, we will register a percolation query for the phrase 'earl grey'.
 {
 	"query" : {
 		"match" : {
-			"body": "earl grey"
+			"drinks": "earl grey"
 		}
 	}
 }
 ```
 
-## See If Malynda Likes Earl Grey
+## Add Percolator for Russian Caravan
 
-This newly-added document will provide no matches for the percolation query.
+`PUT /spantree/.percolator/russian_caravan`
+
+```json
+{
+	"query" : {
+		"match" : {
+			"drinks": "russian caravan"
+		}
+	}
+}
+```
+
+## See if Cedric modifies the Amazon schedule
 
 `GET /spantree/people/_percolate`
 
 ```json
 {
 	"doc" : {
-		"title": "Favorite Office Drinks",
-		"body": "Malynda likes to drink peppermint tea"
+		"name": "Cedric",
+		"drinks": [
+		  "Triple Espresso",
+		  "Green Tea with Brown Rice",
+		  "Coconut Water"
+		]
 	}
 }
 ```
 
-## See If Gary Likes Earl Grey
+## See if Kevin modifies the Amazon schedule
 
-However, this one will match.
+`GET /spantree/people/_percolate`
+
+```json
+{
+	"doc" : {
+		"name": "Kevin",
+		"drinks": [
+		  "Sodastream Energy",
+		  "Dark Magic Coffee",
+		  "Earl Grey Tea"
+		]
+	}
+}
+```
+
+## See If Gary modifies the Amazon schedule
 
 `GET /spantree/people/_percolate`
 
 ```json
 {
 	"doc": {
-		"title": "Favorite Office Drinks",
-		"body": "Gary likes to drink Earl Grey tea"
+		"name": "Gary",
+		"drinks": [
+		  "Earl Grey Tea",
+		  "Russian Caravan Tea",
+		  "Assam Tea"
+		]
 	}
 }
 ```

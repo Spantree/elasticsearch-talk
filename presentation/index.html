@@ -253,20 +253,23 @@
     <script src="sections/js/ix-illustration.js" type="text/javascript"></script>
 
     <script>
-      var setApiExampleTarget = function(element) {
+      var esPluginRegex = new RegExp("\\/_plugin\/([^\/]+).*");
+
+      var setEsPluginTarget = function(element) {
         var links = $('a', element);
-        var regex = new RegExp("\\/_plugin\\/marvel\\/sense\\/");
         for(var i = 0; i<links.length; i++) {
             var $link = $(links[i]);
-            if(regex.test($link.attr('href'))) {
-                $link.attr('target', '_sense');
+            var href = $link.attr('href');
+            var match = esPluginRegex.exec(href);
+            if(match) {
+                $link.attr('target', "_" + match[1].replace('/', '_'));
             }
         }
       }
 
       function onSlideChange(e) {
         var currentSlide = e.currentSlide;
-        setApiExampleTarget(currentSlide);
+        setEsPluginTarget(currentSlide);
         var illustrations = $(currentSlide).find('[class*=illustration]');
 
         for( var i = 0, len = illustrations.length; i < len; i++ ) {

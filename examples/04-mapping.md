@@ -47,6 +47,18 @@
 
 `GET /wikipedia-mappings-simple/_mapping`
 
+## Let's try to get Elasticsearch to infer an integer mapping
+
+`PUT /spantree-mappings/employee/andrea`
+{
+  "dogs": 1
+}
+
+`PUT /spantree-mappings/employee/allie`
+{
+  "dogs": ["Kirby"]
+}
+
 ## Seeing How a Name Value Gets Analyzed
 
 `GET /wikipedia-mappings-simple/_analyze?field=name&text=Lane Tech: College Prep High School`

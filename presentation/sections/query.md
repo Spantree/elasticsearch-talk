@@ -4,7 +4,7 @@
 ### Search API
 
 ```bash
-curl -XPOST http://esdemo.local:9200/wikipedia/_search?q=about:lake
+curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
 ```
 
 or
@@ -59,6 +59,8 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 
 
 ### Search Demos
+
+[API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api)
 
 
 ### How is it so fast?

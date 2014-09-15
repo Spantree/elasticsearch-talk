@@ -68,6 +68,10 @@ First, we will register a percolator for people who like to drink earl grey.
 }
 ```
 
+## Check what that percolator represents
+
+`GET /spantree/.percolator/earl_grey`
+
 ## See If Gary modifies the Amazon schedule
 
 `GET /spantree/people/_percolate`

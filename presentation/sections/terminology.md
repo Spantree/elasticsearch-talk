@@ -100,15 +100,37 @@ One or more nodes sharing data and workload
 </tr>
 
 
+### Tokens
+
+Individual words or piees of text indexed by Elasticsearch
+
+`the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
+
+
+### Tokenizers
+
+Methods of splitting up a field value into tokens
+
+[Example](http://esdemo.local:9200/_plugin/inquisitor/#/tokenizers)
+
+
+### Character filters
+
+Preprocess a character stream before being passed to a tokenizer
+
+
+### Token filters
+
+Modify tokens by adding, removing or changing their values
+
+[Example](http://esdemo.local:9200/_plugin/inquisitor/#/analyzers)
+
+
 ### Analyzers
 
-
-### Analyzer chain
+A chain of character filters, tokenizers and token filters
 
 ![Analysis phases](images/analysis-chain.svg)
-
-
-### Index-time vs Query-time analysis
 
 
 ### Analyzing at query and index time

@@ -163,7 +163,7 @@ server {
   "price": 34.99,
   "visible_to_groups": [
     "spantree",
-    "kcura"
+    "strangeloop"
   ],
   "visible_to_users": [
     "george_smith",

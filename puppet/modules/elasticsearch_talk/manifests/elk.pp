@@ -18,7 +18,7 @@ class elasticsearch_talk::elk(
   }
 
   logstash::configfile { 'logstash':
-    source => "puppet:///modules/elasticsearch_talk/etc/logstash/logstash.conf",
+    content => template('elasticsearch_talk/logstash/logstash.conf')
   }
 
   exec { 'push-to-logstash':

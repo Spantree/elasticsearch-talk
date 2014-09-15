@@ -28,7 +28,7 @@ filter {
 output {
   elasticsearch {
     bind_port => 9350
-    host => "localhost"
+    host => "<%= @backend_hostname %>"
     port => 9300
   }
 }

@@ -7,40 +7,33 @@
 * Metrics - Analyze your data
 
 
-### Bucket - Terms
+### Buckets
 
-* Break up the data based on defined terms
-
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L5
-
-Example Picture
-
-
-### Bucket Usefulness - Histograms
-
-* Define an interval to break up the data
-
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L140
-
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L157
+* **Terms** - Break up the data based on text / keywords
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L5)
+* **Histograms** - Define an interval to break up the data
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L140)
 
 
-### Bucket Usefulness - Other
+### Custom Buckets
 
-* Bucket by range
-* Bucket by distance
+* Bucket by defined ranges
 
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L40
-
-
-### Metric Usefulness - Stats
-
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L40
+[API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L40)
 
 
-### Metric Usefulness - Other
+### Metrics - Statistics
 
-Percentile
+* **Stats** - Common statistics for your data
+
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,S7.4)
+
+* **Extended Stats** - More statistics for your data
+
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,S7.5)
+
+
+### Metrics - Percentiles
 
 
 ### Aggregations as a User Experience

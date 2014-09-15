@@ -110,7 +110,7 @@ configure name to be a multi-field.
 
 When creating new analyzers, we recommend testing them out using the Analyze API to make sure they work as expected.
 
-`GET /wikipedia/locations/_analyze?field=name.sortable&text=I wanna know what love is; I want you to show me!`
+`GET /wikipedia/_analyze?field=name.sortable&text=I wanna know what love is; I want you to show me!`
 
 ## Sorting Strings the Right Way
 
@@ -128,7 +128,7 @@ Now that we've done all that, we simply swap out the sort field from the previou
       }]
     }
   },
-  "sort": [{"name.sortable": "desc"}]
+  "sort": ["name.sortable"]
 }
 ```
 

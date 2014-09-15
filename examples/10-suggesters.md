@@ -48,11 +48,11 @@
 }
 ```
 
-## Create suggestions index
+## Create completion suggestions index
 
 `PUT /suggestions `
 
-## Create suggestion mapping
+## Create completion suggestion mapping
 
 `PUT /suggestions/suggestion/_mapping `
 
@@ -72,18 +72,34 @@
 }
 ```
 
-## Create suggestion
+## Create completion suggestion 1
 
 `PUT /suggestions/suggestion/1 `
 
 ```json
 {
-    "name" : "Nevermind",
+    "name" : "Cedric Hurst",
     "suggest" : {
-        "input": [ "Nevermind", "Nirvana" ],
-        "output": "Nirvana - Nevermind",
-        "payload" : { "artistId" : 2321 },
-        "weight" : 34
+        "input": [ "Cedster", "The Ced", "C-Man", "Hurst the Not So First", "Software Engineer" ],
+        "output": "Cedric",
+        "payload" : { "title" : "Principal" },
+        "weight" : 37
+    }
+}
+```
+
+## Create completion suggestion 2
+
+`PUT /suggestions/suggestion/2 `
+
+```json
+{
+    "name" : "Kevin Greene",
+    "suggest" : {
+        "input": [ "Kev", "KG", "Greene", "Michigan", "Software Engineer" ],
+        "output": "Kevin",
+        "payload" : { "title" : "Senior Software Engineer" },
+        "weight" : 101
     }
 }
 ```
@@ -95,7 +111,7 @@
 ```json
 {
   "completion_suggestion": {
-    "text": "n",
+    "text": "software",
     "completion": {
       "field": "suggest"
     }
@@ -110,7 +126,7 @@
 ```json
 {
   "completion_suggestion": {
-    "text": "n",
+    "text": "mchgan",
     "completion": {
       "field": "suggest",
       "fuzzy" : {
@@ -118,5 +134,102 @@
       }
     }
   }
+}
+```
+
+## Create context suggestion type
+
+`PUT suggestions/conference/_mapping `
+
+```json
+{
+    "conference": {
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "suggestion": {
+                "type": "completion",
+                "context": {
+                    "location": {
+                        "type": "geo",
+                        "precision": "500km",
+                        "neighbors": true,
+                        "default": "u33"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+## Create Goto Chicago 2014 context suggestion
+
+`PUT suggestions/conference/1`
+
+```json
+{
+    "name": "Goto Chicago 2014",
+    "suggestion": {
+        "input": [
+            "goto",
+            "chicago",
+            "tech conference"
+        ],
+        "output": "Goto Chicago 2014",
+        "context": {
+            "location": {
+                "lat": 41.8337329,
+                "lon": -87.7321555
+            }
+        }
+    }
+}
+```
+
+## Create Strangeloop 2014 context suggestion
+
+`PUT suggestions/conference/2`
+
+```json
+{
+    "name": "Strangeloop 2014",
+    "suggestion": {
+        "input": [
+            "strange",
+            "loop",
+            "tech conference"
+        ],
+        "output": "Strangeloop 2014",
+        "context": {
+            "location": {
+                "lat": 38.6537065,
+                "lon": -90.2477908
+            }
+        }
+    }
+}
+```
+
+## Suggest nearby
+
+`POST suggestions/_suggest`
+
+```json
+{
+    "context_suggestion": {
+        "text": "tech",
+        "completion": {
+            "field": "suggestion",
+            "size": 10,
+            "context": {
+                "location": {
+                    "lat": 39.626072,
+                    "lon": -90.0769822
+                }
+            }
+        }
+    }
 }
 ```

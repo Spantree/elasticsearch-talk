@@ -24,8 +24,12 @@ class elasticsearch_talk::elk(
   exec { 'push-to-logstash':
     command => "bzip2 -cd ${log_file_archive} | nc localhost 3333",
     unless => "curl -XHEAD -fs http://localhost:9200/logstash-2011.08.29",
+    timeout => 0,
+    tries => 5,
+    try_sleep => 10,
     require => [
       Class["logstash"],
+      Class["elasticsearch"],
       File["${log_file_archive}"]
     ]
   }

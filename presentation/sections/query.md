@@ -4,7 +4,7 @@
 ### Search API
 
 ```bash
-curl -XPOST http://esdemo.local:9200/wikipedia/_search?q=about:lake
+curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
 ```
 
 or

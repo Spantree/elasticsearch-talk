@@ -230,10 +230,21 @@
     <script src="sections/js/ix-illustration.js" type="text/javascript"></script>
 
     <script>
+      var setApiExampleTarget = function(element) {
+        var links = $('a', element);
+        var regex = new RegExp("\\/_plugin\\/marvel\\/sense\\/");
+        for(var i = 0; i<links.length; i++) {
+            var $link = $(links[i]);
+            if(regex.test($link.attr('href'))) {
+                $link.attr('target', '_sense');
+            }
+        }
+      }
+
       function onSlideChange(e) {
-        currentSlide = e.currentSlide;
+        var currentSlide = e.currentSlide;
+        setApiExampleTarget(currentSlide);
         var illustrations = $(currentSlide).find('[class*=illustration]');
-        console.log(illustrations);
 
         for( var i = 0, len = illustrations.length; i < len; i++ ) {
           var illustration = illustrations[i];

@@ -1,6 +1,8 @@
 # Set the default end of line behavior
 * text eol=lf
 *.tar.gz binary
+*.tar.bz2 binary
+*.2.bz2 binary
 *.gz binary
 *.png binary
 *.jpg binary

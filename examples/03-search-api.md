@@ -8,15 +8,11 @@ Find the term "college" anywhere in the documents
 
 ```json
 {
-  "query": {
-    "bool": {
-      "must": [{
-        "query_string": {
+    "query": {
+      "query_string": {
           "query": "college"
         }
-      }]
     }
-  }
 }
 ```
 
@@ -29,12 +25,8 @@ Find the terms "lake" and "shore" anywhere in the documents.
 ```json
 {
   "query": {
-    "bool": {
-      "must": [{
-        "query_string": {
-          "query": "lake shore"
-        }
-      }]
+    "query_string": {
+      "query": "lake shore"
     }
   }
 }
@@ -49,13 +41,9 @@ Find the terms "lake" and "shore" anywhere in the documents.  Both the terms sho
 ```json
 {
   "query": {
-    "bool": {
-      "must": [{
-        "query_string": {
-          "query": "lake shore",
-          "minimum_should_match": "100%"
-        }
-      }]
+    "query_string": {
+      "query": "lake shore",
+      "minimum_should_match": "100%"
     }
   }
 }
@@ -68,15 +56,9 @@ Find the terms "lake" and "shore" anywhere in the documents.  Both the terms sho
 ```json
 {
   "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "fields": ["name", "keywords"],
-            "query": "theater OR theatre"
-          }
-        }
-      ]
+    "query_string": {
+      "fields": ["name", "keywords"],
+      "query": "theater OR theatre"
     }
   }
 }
@@ -92,15 +74,9 @@ Return only the name and keywords fields.
 {
   "fields": ["name", "keywords"],
   "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "fields": ["name", "keywords"],
-            "query": "theater OR theatre"
-          }
-        }
-      ]
+    "query_string": {
+      "fields": ["name", "keywords"],
+      "query": "theater OR theatre"
     }
   }
 }
@@ -116,18 +92,12 @@ description or about.
 
 ```json
 {
-  "fields": ["name", "keywords"],
+  "fields": ["name", "keywords", "about"],
   "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "fields": ["name^2", "keywords^1.5", "about"],
-            "query": "theater",
-            "minimum_should_match": "100%"
-          }
-        }
-      ]
+    "query_string": {
+      "fields": ["name^2", "keywords^1.5", "about"],
+      "query": "theater",
+      "minimum_should_match": "100%"
     }
   }
 }

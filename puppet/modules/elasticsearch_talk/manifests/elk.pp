@@ -4,7 +4,7 @@ class elasticsearch_talk::elk(
   $log_file_archive = '/tmp/apache_log.2.bz2',
   $backend_hostname = nil,
   $frontend_hostname = nil,
-  $default_dashboard = 'apachelogs.json'
+  $default_dashboard = 'apachelogs'
 ) {
   $elasticsearch_url = "http://${backend_hostname}:9200"
 

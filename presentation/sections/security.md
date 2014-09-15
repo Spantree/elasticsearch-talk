@@ -11,11 +11,11 @@
   ### Scripting
 
   * Elasticsearch provides robust scripting support
-  * These scripts are *not* run in a sandbox
+  * These scripts are run in a sandbox *as of 1.3.0*
   * [Remote code execution is possible](http://blog.liftsecurity.io/2013/11/30/elasticsearch-command-execution-using-script)
 
 
-  ### How to read a file system using dynamic scripts
+  ### How to read a file system using dynamic scripts with Python
 
   ```python
   read_file = (filename) ->
@@ -54,7 +54,7 @@
   ```
 
 
-### Disabling dynamic scripts
+### Disabling dynamic scripts on older versions
 
 ```yaml
 script.disable_dynamic: false
@@ -64,8 +64,8 @@ script.disable_dynamic: false
 ### Use preloaded scripts instead
 
 ```bash
-$ cat config/scripts/scoring/recency_boost.mvel
-(0.08 / ((3.16*pow(10,-11)) * abs(now - doc['timestamp'].date.getMillis()) + 0.05)) + 1.0
+$ cat config/scripts/scoring/recency_boost.groovy
+(0.08 / ((3.16*10.power(-11)) * (now - doc['timestamp'].date.getMillis()).abs() + 0.05)) + 1.0
 ```
 
 ```json

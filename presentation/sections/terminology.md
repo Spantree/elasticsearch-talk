@@ -42,54 +42,24 @@
 * Analyzed based on the defined mappings of a type
 
 
-### A logical view
-
-![Document Structure](images/document-structure.svg)
-
-
-### Index
-
-* Siloed containers for mapping types
-* Physically isolated in separate files on disk
-* Has discrete settings (number of shards, etc)
-* You can search across indices
-
-
-### Node
-
-An instance of Elasticsearch
-
-
-### Cluster
-
-One or more nodes sharing data and workload
-
-
-### Shard
-
-* A slice of the data in an index
-* Physically siloed into seperate directories on disk
-* Can be replicated across nodes for fail tolerance and throughput
-
-
 ### Data Types
 
 <table class="examples col-3">
   <tr>
     <td>String</td>
-    <td>Integer</td>
-    <td>Long
+    <td>Integer (&#42;)</td>
+    <td>Long (&#42;)</td>
   </tr>
   <tr>
-    <td>Float</td>
-    <td>Double</td>
-    <td>Boolean</td>
+    <td>Float (&#42;)</td>
+    <td>Double (&#42;)</td>
+    <td>Boolean (&#42;)</td>
   </tr>
   <tr>
 
   <tr>
-    <td>Date</td>
-    <td>Geopoint</td>
+    <td>Date (&#42;)</td>
+    <td>Geopoint (&#42;)</td>
     <td>Geoshape</td>
   </tr>
   <tr>
@@ -97,12 +67,17 @@ One or more nodes sharing data and workload
     <td>Attachment</td>
     <td>Object</td>
   </tr>
+  <tr>
+    <td colspan="3" style="font-size: 0.8em;">
+      (&#42;) Numbers and dates are stored as tries.
+    </td>
+  </tr>
 </tr>
 
 
 ### Tokens
 
-Individual words or piees of text indexed by Elasticsearch
+Individual words or piees of text indexed by Elasticsearch, for example:
 
 `the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
 
@@ -136,3 +111,38 @@ A chain of character filters, tokenizers and token filters
 ### Analyzing at query and index time
 
 ![Mapping and analysis](images/mapping-analysis.svg)
+
+
+### A logical view
+
+![Document Structure](images/document-structure.svg)
+
+
+### Index
+
+* Siloed containers for mapping types
+* Physically isolated in separate files on disk
+* Has discrete settings (number of shards, etc)
+* You can search across indices
+
+
+### Node
+
+An instance of Elasticsearch
+
+
+### Cluster
+
+One or more nodes sharing data and workload
+
+
+### Shard
+
+* A slice of the data in an index
+* Physically siloed into seperate directories on disk
+* Can be replicated across nodes for fail tolerance and throughput
+
+
+### A physical view
+
+![A physical view](images/sharding-replica.svg)

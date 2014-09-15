@@ -128,7 +128,7 @@ Now that we've done all that, we simply swap out the sort field from the previou
       }]
     }
   },
-  "sort": [{"name.sortable": "asc"}]
+  "sort": ["name.sortable"]
 }
 ```
 

@@ -14,6 +14,12 @@
 
 `GET /spantree/_search`
 
+## Reviewing automatic mappings
+
+Elasticsearch will automatically guess a mapping for new fields.
+
+`GET /spantree/_mapping`
+
 ## Indexing Cedric with a known ID
 
 `PUT /spantree/people/cedric`

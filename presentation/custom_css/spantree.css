@@ -154,3 +154,25 @@ table.ourpictures td {
 table.ourpictures td img {
   height: 220px;
 }
+
+table.examples {
+  width: 100%;
+}
+
+table.examples td {
+  text-align: center;
+}
+
+table.col-3 td {
+  width: 33.33%;
+}
+
+.reveal ul {
+  margin-top: 1em;
+  list-style-type: none;
+}
+
+.reveal ul li {
+  margin-bottom: 0.5em;
+  text-align: center;
+}

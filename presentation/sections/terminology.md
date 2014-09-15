@@ -1,14 +1,12 @@
 ## Terminology
 
 
-### Index
-
-![Index Structure](images/index-structure.svg)
-
-
 ### Document
 
-![Document Structure](images/document-structure.svg)
+* A JSON object
+* Smallest searchable unit
+* Self-contained
+* Hierarchical
 
 
 ### What a document looks like
@@ -31,21 +29,75 @@
 ```
 
 
-### Mapping
-* Defines fields and field data types
-* Defines analyzers
+### Mapping types
+
+* Logical grouping of documents
+* Mappings specify the structure of a document
+
+
+### Field
+
+* The "keys" in a JSON document
+* Has a type (e.g. string, date, integer or complex object)
+* Analyzed based on the defined mappings of a type
+
+
+### A logical view
+
+![Document Structure](images/document-structure.svg)
+
+
+### Index
+
+* Siloed containers for mapping types
+* Physically isolated in separate files on disk
+* Has discrete settings (number of shards, etc)
+* You can search across indices
+
+
+### Node
+
+An instance of Elasticsearch
+
+
+### Cluster
+
+One or more nodes sharing data and workload
+
+
+### Shard
+
+* A slice of the data in an index
+* Physically siloed into seperate directories on disk
+* Can be replicated across nodes for fail tolerance and throughput
 
 
 ### Data Types
-* string
-* integer/long
-* float/double
-* boolean
-* ip
-* geo point
-* geo shape
-* attachment
-* object
+
+<table class="examples col-3">
+  <tr>
+    <td>String</td>
+    <td>Integer</td>
+    <td>Long
+  </tr>
+  <tr>
+    <td>Float</td>
+    <td>Double</td>
+    <td>Boolean</td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>Date</td>
+    <td>Geopoint</td>
+    <td>Geoshape</td>
+  </tr>
+  <tr>
+    <td>IP</td>
+    <td>Attachment</td>
+    <td>Object</td>
+  </tr>
+</tr>
 
 
 ### Analyzers

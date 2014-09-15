@@ -9,12 +9,8 @@ Find the term "college" anywhere in the documents
 ```json
 {
   "query": {
-    "bool": {
-      "must": [{
-        "query_string": {
-          "query": "college"
-        }
-      }]
+    "query_string": {
+      "query": "college"  
     }
   }
 }

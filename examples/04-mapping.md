@@ -50,14 +50,21 @@
 ## Let's try to get Elasticsearch to infer an integer mapping
 
 `PUT /spantree-mappings/employee/andrea`
+
+```json
 {
   "dogs": 1
 }
+```
+
+## We can add another employee with a different setup
 
 `PUT /spantree-mappings/employee/allie`
+```json
 {
   "dogs": ["Kirby"]
 }
+```
 
 ## Seeing How a Name Value Gets Analyzed
 

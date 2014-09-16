@@ -39,3 +39,7 @@
 	cursor: pointer; 
 	font-weight: bold;
 }
+
+.ix-illustration button {
+	margin-top: 30px;
+}

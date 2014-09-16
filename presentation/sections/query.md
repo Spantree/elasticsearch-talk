@@ -130,3 +130,8 @@ $s = queryNorm * coord * \sum\nolimit_{t}{tf \times \log{ \frac{N}{df} }^2 \time
 <td>Never scored</td>
 </tr>
 </table>
+
+
+### Filtering Demos
+
+[API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,S3.14)

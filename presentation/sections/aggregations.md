@@ -35,23 +35,25 @@
 
 ### Metrics - Percentiles
 
+* Approximate, not exact
+* Still incredidbly good
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,S7.7)
 
 ### Aggregations as a User Experience
+
+
+### Terms Facets
+* Enable visual filters
+* Better inform choices
 
 
 ### Top Hits
 * Meld two types of products
 * Create Google Ads-esque design with one query
-
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L171
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L171)
 
 
 ### Subaggregations
 * Enables processing of several different facets in memory
 * Enables complex graphs and visualizations
-
-http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L203
-
-
-### Terms Facets
-* By giving users counts you can better inform their choices
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L203)

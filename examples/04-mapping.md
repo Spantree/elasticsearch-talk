@@ -47,7 +47,9 @@
 
 `GET /wikipedia-mappings-simple/_mapping`
 
-## Let's try to get Elasticsearch to infer an integer mapping
+## Getting Elasticsearch to infer an integer type
+
+Elasticsearch will guess the type based on the first use of the field
 
 `PUT /spantree-mappings/employee/andrea`
 
@@ -57,9 +59,13 @@
 }
 ```
 
-## We can add another employee with a different setup
+## Breaking inferred types
+
+But if you try to insert a second document with a different type, Elasticsearch
+will fail.
 
 `PUT /spantree-mappings/employee/allie`
+
 ```json
 {
   "dogs": ["Kirby"]
@@ -582,6 +588,212 @@
           "author.stemmed": {},
           "author.synonyms": {}
       }
+  }
+}
+```
+
+## Working with inner objects
+
+`PUT /spantree/employee/allie`
+
+```json
+{
+  "name": "Allie Curry",
+  "pets": [
+    {
+      "type": "cat",
+      "name": "starsky"
+    },
+    {
+      "type": "dog",
+      "name": "kirby"
+    }
+  ]
+}
+```
+
+## Inner objects will flatten properties as a list
+
+`GET /spantree/employee/_search`
+
+```json
+{
+  "query": {
+    "query_string": {
+      "query": "pets.type:dog pets.name:starsky"
+    }
+  }
+}
+```
+
+## Adding a nested type mapping
+
+`PUT /spantree-nested`
+
+```json
+{
+  "mappings": {
+    "employee": {
+      "properties": {
+        "pets": {
+          "type": "nested",
+          "properties": {
+            "type": {"type": "string"},
+            "name": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Adding documents with nested types
+
+`PUT /spantree-nested/employee/allie`
+
+```json
+{
+  "name": "Allie Curry",
+  "pets": [
+    {
+      "type": "cat",
+      "name": "starsky"
+    },
+    {
+      "type": "dog",
+      "name": "kirby"
+    }
+  ]
+}
+```
+
+## Querying nested types
+
+Nested types treat each inner object as if they were a separate doc 
+
+`GET /spantree-nested/employee/_search`
+
+```json
+{
+  "query": {
+    "nested": {
+      "path": "pets",
+      "query": {
+        "bool": {
+          "must": [
+            {"match": {"pets.type": "dog"}},
+            {"match": {"pets.name": "starsky"}}
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Querying nested types with the right values
+
+`GET /spantree-nested/employee/_search`
+```json
+{
+  "query": {
+    "nested": {
+      "path": "pets",
+      "query": {
+        "bool": {
+          "must": [
+            {"match": {"pets.type": "cat"}},
+            {"match": {"pets.name": "starsky"}}
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Adding a parent-child mapping
+
+`PUT /spantree-parent-child/`
+
+```json
+{
+  "mappings": {
+    "employee": {},
+    "pet": {
+      "_parent": {
+        "type": "employee"
+      }
+    }
+  }
+}
+```
+
+## Adding a parent
+
+`PUT /spantree-parent-child/employee/allie`
+
+```json
+{
+  "name": "Allie Curry"
+}
+```
+
+## Adding Starsky as a child
+`PUT /spantree-parent-child/pet/starsky?parent=allie`
+```json
+{
+  "type": "cat",
+  "name": "starsky"
+}
+```
+
+## Adding Kirby as a child
+
+`PUT /spantree-parent-child/pet/kirby?parent=allie`
+
+```json
+{
+  "type": "dog",
+  "name": "kirby"
+}
+```
+
+## Finding a parent
+
+`GET /spantree-parent-child/employee/_search`
+
+```json
+{
+  "query": {
+    "has_child": {
+      "type": "pet",
+      "query": {
+        "query_string": {
+          "query": "type:dog name:starsky"
+        }
+      }
+    }
+  }
+}
+```
+
+## Finding children
+
+`GET /spantree-parent-child/pet/_search`
+
+```json
+{
+  "query": {
+    "has_parent": {
+      "type": "employee",
+      "query": {
+        "query_string": {
+          "query": "curry"
+        }
+      }
+    }
   }
 }
 ```

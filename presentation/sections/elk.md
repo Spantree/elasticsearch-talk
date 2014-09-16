@@ -30,7 +30,7 @@ Provide a low-maintenance toolchain
 
 Use an agent to tail log files, parse them into a uniform format, and ship them "somewhere else.""
 
-<table>
+<table width="100%">
   <tr>
     <td>![Logstash](images/logstash.png)</td>
     <td>![Fluentd](images/fluentd.png)</td>

@@ -39,6 +39,7 @@
 * Still incredidbly good
 * [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,S7.7)
 
+
 ### Aggregations as a User Experience
 
 

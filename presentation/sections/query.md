@@ -146,4 +146,8 @@ $\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.
 <td>Never cached</td>
 <td>Cacheable</td>
 </tr>
+<tr>
+<td>Scored</td>
+<td>Never scored</td>
+</tr>
 </table>

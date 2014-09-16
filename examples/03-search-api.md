@@ -234,15 +234,30 @@ Double the score of each document
 
 ```json
 {
-  "fields": ["name", "keywords", "about"],
-  "query": {
-    "query_string": {
-      "fields": ["name", "keywords", "about"],
-      "query": "theater",
-      "minimum_should_match": "100%"
+    "fields": [
+        "name",
+        "keywords",
+        "about"
+    ],
+    "query": {
+      "function_score": {
+          "query": {
+              "query_string": {
+                  "fields": [
+                      "name",
+                      "keywords",
+                      "about"
+                  ],
+                  "query": "theater",
+                  "minimum_should_match": "100%"
+              }
+          },
+          "script_score": {
+            "script": "_score * 2",
+            "lang": "groovy"
+          }
+      }
     }
-  },
-  "script" : "_score * 2"
 }
 ```
 

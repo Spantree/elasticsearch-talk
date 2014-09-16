@@ -47,17 +47,30 @@
 
 `GET /wikipedia-mappings-simple/_mapping`
 
-## Let's try to get Elasticsearch to infer an integer mapping
+## Getting Elasticsearch to infer an integer type
+
+Elasticsearch will guess the type based on the first use of the field
 
 `PUT /spantree-mappings/employee/andrea`
+
+```json
 {
   "dogs": 1
 }
+```
+
+## Breaking inferred types
+
+But if you try to insert a second document with a different type, Elasticsearch
+will fail.
 
 `PUT /spantree-mappings/employee/allie`
+
+```json
 {
   "dogs": ["Kirby"]
 }
+```
 
 ## Seeing How a Name Value Gets Analyzed
 

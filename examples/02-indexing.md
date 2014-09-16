@@ -93,24 +93,3 @@ Elasticsearch will automatically guess a mapping for new fields.
 ## Reviewing the Whole List
 
 `GET /spantree/_search`
-
-## Let's add some inner objects
-
-`PUT /spantree/people/allie`
-
-```json
-{
-  "name": "Allie Curry",
-  "title": "Mobile Specialist",
-  "pets": [
-    {
-      "type": "Dog",
-      "name": "Kirby"
-    },
-    {
-      "type": "Cat",
-      "name": "Starsky"
-    }
-  ]
-}
-```

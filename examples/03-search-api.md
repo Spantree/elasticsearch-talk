@@ -226,6 +226,26 @@ description or about.
 }
 ```
 
+## Scripted scoring
+
+Double the score of each document
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "keywords", "about"],
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords", "about"],
+      "query": "theater",
+      "minimum_should_match": "100%"
+    }
+  },
+  "script" : "_score * 2"
+}
+```
+
 ## Highlighting Matched Terms
 
 Search for the term "Chicago" and highlight matches.

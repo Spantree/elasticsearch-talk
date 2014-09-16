@@ -82,6 +82,7 @@ is talking about
 ![MongoDB](images/mongodb.png)
 ![Neo4J](images/neo4j.svg)
 ![Elasticsearch](images/elasticsearch.png)
+![Angular](images/angular.png)
 
 ![Java](images/java.svg)
 ![Groovy](images/groovy.svg)

@@ -70,6 +70,23 @@ As a note, 85117 seconds is roughly 23.6 hours.
 }
 ```
 
+## Get percentiles
+
+`GET /divvy/trip/_search?search_type=count`
+
+```json
+{
+    "aggs": {
+        "trip_length": {
+            "percentiles": {
+                "field": "trip_duration",
+                "percents": [25,50,75]
+            }
+        }
+    }
+}
+```
+
 ## Get gender terms / stats via facet
 
 `GET /divvy/trip/_search?search_type=count`

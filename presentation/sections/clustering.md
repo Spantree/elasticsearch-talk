@@ -21,41 +21,37 @@
 -->
 
 
-### Shards and Replicas
+### Primary shard
 
-* <em>Shard</em> - A slice of an index
-    * Single Lucene instance 
-    * Choose # carefully: can't be changed later
-* <em>Replica</em> - Copy of a shard
-    * Grow and shrink number as desired
-
-Note: 
-* Show configuration
+* Where documents are indexed
+* Quantity can only be set at index creation
 
 
-### Master Nodes
+### Replica shard
 
-* Master
-    * Maintains "official" cluster state and applies any modifications
-    * Distributes shards in cluster
-* Not to be confused with primary replicas
-
-Note: 
-* Show configuration
-* Any node can handle a query, including paging/sorting/collating results
+* Gets updates from primary shard
+* Handles queries
+* Grow and shrink as desired
 
 
-### Master election with Zen
+### Master Node
+
+* Maintains "official" cluster state and applies any modifications
+* Distributes shards in cluster
+* Does not necessarily have all the primary shards
+* Does not necessarily coordinate all the queries
+
+
+### Zen
 
 * Elasticsearch built-in discovery algorithm
 
 
-### Zen: Multicast
+### Multicast Zen
 
-* Default configuration
-    * (Port 54328 broadcast to multicast group 224.2.2.4)
 * Great for magically forming clusters
-* Doesn't work well on EC2
+* (Port 54328 broadcast to multicast group 224.2.2.4)
+* Doesn't work well in some cases
 
 
 ### Zen: Unicast
@@ -63,20 +59,19 @@ Note:
 * Specify list of IP addresses
 
 
-### What happens when a node fails?
+### Client nodes
 
-* When a Node Fails
-    * If master failed, elect a new Master
-    * Some replica shards promoted to primary shards
+* Bidirectional R/W connection
+* Can be a data node
+* Port 9300
+* Full mesh
 
 
-### Communicating with a cluster
+### Transport client
 
-* Client node: 
-    * Bidirectional R/W connection
-    * Can also be a data node
-* Transport client
-    * Unidirectional R/W connection
+* Unidirectional R/W connection
+* Does not join cluster
+* Port 9300
 
 
 ### Elasticsearch connections
@@ -88,15 +83,30 @@ Note:
 * **Ping (1)** - Detecting missing nodes
 
 
+### REST client
+
+* HTTP
+* Port 9200
+
+
+### Balancing load
+
+
 ### Automatic shard balancing
 
 ![Analysis phases](images/sharding-replica.svg)
 
 
-### Indexing/getting a document
+### Balancing document indexing
 
 * **```shard = hash(id) % number_of_primary_shards```**
 * This is why number of shards is not changeable
+
+
+### Recovery
+
+* If master failed, elect a new Master
+* If primary replica failed, make another replica primary
 
 
 ### Servicing a search query
@@ -104,46 +114,46 @@ Note:
 ![Query phases](images/query-steps.svg)
 
 
-### Production clusters
-* Some tips
-
-
-### Split brain problem 
-* A network can split in two and form two clusters with elected masters
-    * Now there are two indexes that can have different content!
-
-
 ### Split brain problem 
 ![Query phases](images/split-brain.svg)
 
 
-### Split brain solution(?)
+### Split brain safeguard
 * Have an odd number of nodes
-* Elect new master when you can see n/2+1 of all nodes
-* There are many ways this can still fail 
-    * (but rarely does!)
+* Can I see n/2+1 of all nodes?
+
+```
+discovery.zen.minimum_master_nodes: 2
+```
+
+
+### Load problem
+
+* Master keeps getting overloaded and goes down
+* Other master-eligible nodes under heavy load too
+* Triggers a lot of instability
 
 
 ### Dedicated masters
 
 * Eligible masters and clients, but not data nodes
-* Decreases querying/indexing load on masters
 
+```
+node.master: true 
+node.data: false
+```
 
-### AWS EC2 ZEN
+* Client-only data nodes
 
-* EC2 discovery plugin
-    * Uses AWS API for unicast discovery
+```
+node.master: false ## or node.client: true
+node.data: true
+```
+
+### On AWS 
+
+* Use AWS Discovery Plugin
+* Discover based on groups, IPs, tags
 * Bonus: save snapshots to S3
 
-
-### Shard allocation
-
-* Don't place your primary and replica shards where you can lose them both!
-* Shard allocation:
-
-```yaml
-node.rack_id: rack_one
-cluster.routing.allocation.awareness.attributes: rack_id
-```
 

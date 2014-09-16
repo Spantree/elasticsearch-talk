@@ -1,4 +1,4 @@
-## The "ELK Stack"
+## Log Aggregation with the ELK Stack
 
 * Elasticsearch
 * Logstash
@@ -30,12 +30,12 @@ Provide a low-maintenance toolchain
 
 Use an agent to tail log files, parse them into a uniform format, and ship them "somewhere else.""
 
-<table width="100%">
+<table>
   <tr>
-    <td>![Logstash](images/logstash.png)</td>
-    <td>![Fluentd](images/fluentd.png)</td>
-    <td>![Rsyslog](images/rsyslog.png)</td>
-    <td>![Flume](images/flume.png)</td>
+    <td style="vertical-align: middle;">![Logstash](images/logstash.png)</td>
+    <td style="vertical-align: middle;"><img src="images/fluentd.png" alt="Fluentd" style="width: 500px;"/></td>
+    <td style="vertical-align: middle;">![Rsyslog](images/rsyslog.png)</td>
+    <td style="vertical-align: middle;">![Flume](images/flume.png)</td>
   </tr>
 </table>
 

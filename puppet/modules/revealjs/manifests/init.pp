@@ -28,4 +28,9 @@ class revealjs(
     cwd     => $src_dir,
     require => Exec['revealjs-npm-install']
   }
+
+  exec { 'revealjs-add-read-permissions':
+    command => "chmod -R a+r ${presentation_dir}",
+    require => Exec['revealjs-link-presentation']
+  }
 }

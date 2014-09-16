@@ -42,6 +42,14 @@ class elasticsearch_talk(
   	]
   }
 
+  file { "/home/${::ssh_username}/transform-examples.sh":
+    ensure => file,
+    owner => $::ssh_username,
+    group => $::ssh_username,
+    mode => '0744',
+    source => "puppet:///modules/elasticsearch_talk/transform-examples.sh"
+  }
+
   file { "${sense_root}/app/${editor_replace_file}":
     ensure  => file,
     source  => "puppet:///modules/elasticsearch_talk/sense/app/${editor_replace_file}"

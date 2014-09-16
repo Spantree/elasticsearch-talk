@@ -53,7 +53,7 @@
   <tr>
     <td>Float (&#42;)</td>
     <td>Double (&#42;)</td>
-    <td>Boolean (&#42;)</td>
+    <td>Boolean</td>
   </tr>
   <tr>
 

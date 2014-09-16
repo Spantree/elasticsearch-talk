@@ -82,27 +82,6 @@ Return only the name and keywords fields.
 }
 ```
 
-## Field Boosting
-
-Find the term "theater" anywhere in the documents,
-boosting matches on name higher than matches on
-description or about.
-
-`GET /wikipedia/_search`
-
-```json
-{
-  "fields": ["name", "keywords", "about"],
-  "query": {
-    "query_string": {
-      "fields": ["name^2", "keywords^1.5", "about"],
-      "query": "theater",
-      "minimum_should_match": "100%"
-    }
-  }
-}
-```
-
 ## Searching with Boolean Syntax
 
 Find the term "theater" and "theatre" anywhere in the documents.
@@ -211,6 +190,42 @@ Find the term "theater" and "theatre" anywhere in the documents.
 }
 ```
 
+## Explaining Results
+
+`GET /wikipedia/locations/chicago_shakespeare_theater/_explain`
+
+```json
+{
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords", "description"],
+      "query": "navy pier"
+    }
+  }
+}
+```
+
+## Field Boosting
+
+Find the term "theater" anywhere in the documents,
+boosting matches on name higher than matches on
+description or about.
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "keywords", "about"],
+  "query": {
+    "query_string": {
+      "fields": ["name^2", "keywords^1.5", "about"],
+      "query": "theater",
+      "minimum_should_match": "100%"
+    }
+  }
+}
+```
+
 ## Highlighting Matched Terms
 
 Search for the term "Chicago" and highlight matches.
@@ -240,20 +255,6 @@ Search for the term "Chicago" and highlight matches.
 }
 ```
 
-## Explaining Results
-
-`GET /wikipedia/locations/chicago_shakespeare_theater/_explain`
-
-```json
-{
-  "query": {
-    "query_string": {
-      "fields": ["name", "keywords", "description"],
-      "query": "navy pier"
-    }
-  }
-}
-```
 
 ## Term Filtering
 

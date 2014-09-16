@@ -63,6 +63,9 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 [API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api)
 
 
+### Explaining queries
+
+
 ### How is it so fast?
 
 
@@ -107,9 +110,6 @@ $\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.
 
 
 ### That was fun
-
-
-### Explaining queries
 
 
 ### More on scoring

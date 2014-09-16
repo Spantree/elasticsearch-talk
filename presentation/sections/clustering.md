@@ -20,6 +20,8 @@
 * Tribes
 -->
 
+### Terminology
+
 
 ### Primary shard
 
@@ -57,6 +59,9 @@
 ### Zen: Unicast
 
 * Specify list of IP addresses
+
+
+### Types of cluster communication
 
 
 ### Client nodes
@@ -97,21 +102,28 @@
 ![Analysis phases](images/sharding-replica.svg)
 
 
+### Recovery
+
+* If master failed, elect a new master
+* If primary replica failed, make another replica primary
+
+
 ### Routing
 
+
+### Hashing a document to its location
 * **```shard = hash(id) % number_of_primary_shards```**
 * Customizable
 
 
-### Recovery
-
-* If master failed, elect a new Master
-* If primary replica failed, make another replica primary
+### Servicing queries
 
 
 ### Servicing a search query
-
 ![Query phases](images/query-steps.svg)
+
+
+### Split brain
 
 
 ### Split brain problem 
@@ -120,11 +132,13 @@
 
 ### Split brain safeguard
 * Have an odd number of nodes
-* Can I see n/2+1 of all nodes?
 
 ```
-discovery.zen.minimum_master_nodes: 2
+discovery.zen.minimum_master_nodes: 2 #(n/2)+1
 ```
+
+
+### High load
 
 
 ### Load problem
@@ -143,6 +157,7 @@ node.master: true
 node.data: false
 ```
 
+
 * Client-only data nodes
 
 ```
@@ -150,10 +165,9 @@ node.master: false ## or node.client: true
 node.data: true
 ```
 
+
 ### On AWS 
 
 * Use AWS Discovery Plugin
 * Discover based on groups, IPs, tags
 * Bonus: save snapshots to S3
-
-

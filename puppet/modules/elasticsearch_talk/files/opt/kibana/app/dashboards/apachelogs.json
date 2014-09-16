@@ -28,10 +28,21 @@
           "active": true,
           "alias": "",
           "id": 0
+        },
+        "1": {
+          "type": "time",
+          "from": "2011-08-29T19:59:46.937Z",
+          "to": "2011-08-31T15:52:28.718Z",
+          "field": "@timestamp",
+          "mandate": "must",
+          "active": true,
+          "alias": "",
+          "id": 1
         }
       },
       "ids": [
-        0
+        0,
+        1
       ]
     }
   },
@@ -149,15 +160,7 @@
             "font-size": "9pt"
           },
           "overflow": "min-height",
-          "fields": [
-            "@timestamp",
-            "agent",
-            "bytes",
-            "clientip",
-            "verb",
-            "request",
-            "response"
-          ],
+          "fields": [],
           "localTime": true,
           "timeField": "@timestamp",
           "highlight": [],

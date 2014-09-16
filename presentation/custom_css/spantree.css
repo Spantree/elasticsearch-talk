@@ -25,6 +25,7 @@ body {
 	max-width: 90%;
 	border: 0px solid black;
 	box-shadow: none;
+  background: none;
 }
 
 section.logos img {

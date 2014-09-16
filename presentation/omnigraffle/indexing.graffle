@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-09-16 17:28:09 +0000</string>
+	<string>2014-09-16 21:11:51 +0000</string>
 	<key>Modifier</key>
 	<string>Gary Turovsky</string>
 	<key>NotesVisible</key>
@@ -7237,7 +7237,173 @@ id: 27, score 1.7\
 			<array>
 				<dict>
 					<key>Bounds</key>
-					<string>{{396, 424}, {90, 37}}</string>
+					<string>{{373, 347.24999952316284}, {147, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FitText</key>
+					<string>YES</string>
+					<key>Flow</key>
+					<string>Resize</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Font</key>
+						<string>Helvetica</string>
+						<key>Size</key>
+						<real>14</real>
+					</dict>
+					<key>ID</key>
+					<integer>109</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Pad</key>
+						<integer>0</integer>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\fs30 \cf0 (sensible score cutoff)}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+					<key>Wrap</key>
+					<string>NO</string>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>ID</key>
+					<integer>44</integer>
+					<key>Points</key>
+					<array>
+						<string>{361, 367.49999952316284}</string>
+						<string>{529, 368.49999952316284}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>Legacy</key>
+							<true/>
+							<key>Pattern</key>
+							<integer>1</integer>
+							<key>TailArrow</key>
+							<string>0</string>
+							<key>Width</key>
+							<real>4</real>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{373, 307.99999952316284}, {136, 37}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Font</key>
+						<string>Helvetica-Bold</string>
+						<key>Size</key>
+						<real>12</real>
+					</dict>
+					<key>ID</key>
+					<integer>105</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0.789222</string>
+								<key>g</key>
+								<string>0.40767</string>
+								<key>r</key>
+								<string>0.830609</string>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\b\fs40 \cf0 RED BLUE}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{70, 400.49999952316284}, {136, 37}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Font</key>
+						<string>Helvetica-Bold</string>
+						<key>Size</key>
+						<real>12</real>
+					</dict>
+					<key>ID</key>
+					<integer>104</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0.789222</string>
+								<key>g</key>
+								<string>0.40767</string>
+								<key>r</key>
+								<string>0.830609</string>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\b\fs40 \cf0 RED BLUE}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{400, 491.49999952316284}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7279,7 +7445,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{396, 369}, {90, 37}}</string>
+					<string>{{400, 436.49999952316284}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7321,7 +7487,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{396, 314}, {90, 37}}</string>
+					<string>{{400, 381.49999952316284}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7363,7 +7529,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{396, 259.00000047683716}, {90, 37}}</string>
+					<string>{{396, 248.5}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7405,7 +7571,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{396, 204.00000047683716}, {90, 37}}</string>
+					<string>{{396, 193.5}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7447,7 +7613,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{396, 149.00000047683716}, {90, 37}}</string>
+					<string>{{396, 138.5}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7489,7 +7655,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{106, 124}, {109, 24}}</string>
+					<string>{{106, 113.49999952316284}, {109, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -7544,7 +7710,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{485.5, 34.999999523162842}, {53, 24}}</string>
+					<string>{{485.5, 24.499999046325684}, {53, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -7599,7 +7765,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{555, 91.999999523162842}, {72, 24}}</string>
+					<string>{{555, 81.499999046325684}, {72, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -7654,7 +7820,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{400, 91.999999523162842}, {82, 24}}</string>
+					<string>{{400, 81.499999046325684}, {82, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -7709,7 +7875,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{546, 259.00000047683716}, {90, 37}}</string>
+					<string>{{546, 248.5}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7751,7 +7917,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{546, 204.00000047683716}, {90, 37}}</string>
+					<string>{{546, 193.5}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7793,7 +7959,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{546, 149.00000047683716}, {90, 37}}</string>
+					<string>{{546, 138.5}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7835,7 +8001,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{197, 322}, {90, 37}}</string>
+					<string>{{197, 311.49999952316284}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7877,7 +8043,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{56, 297.99999618530273}, {90, 37}}</string>
+					<string>{{56, 287.49999570846558}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7919,7 +8085,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{116, 196}, {90, 37}}</string>
+					<string>{{116, 185.49999952316284}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -7961,7 +8127,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{94, 348.99999713897705}, {90, 37}}</string>
+					<string>{{94, 338.49999666213989}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -8003,7 +8169,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{42, 246.99999904632568}, {90, 37}}</string>
+					<string>{{42, 236.49999856948853}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -8045,7 +8211,7 @@ id: 27, score 1.7\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{168, 265}, {90, 37}}</string>
+					<string>{{168, 254.49999952316284}, {90, 37}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -8145,7 +8311,7 @@ id: 27, score 1.7\
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>1</integer>
+		<integer>7</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
@@ -8163,9 +8329,9 @@ id: 27, score 1.7\
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{0, 0}, {652.5, 345}}</string>
+		<string>{{-275, -68}, {1305, 690}}</string>
 		<key>Zoom</key>
-		<real>2</real>
+		<real>1</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>

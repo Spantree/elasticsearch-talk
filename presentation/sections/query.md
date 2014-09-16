@@ -69,12 +69,15 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 ### Inverted index
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
   <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
-</div> 
+</div>
+
+
+### Explaining queries
 
 
 ### How does it know which document is most relevant?
 
-* ...Math
+* ...Math?
 
 
 ### Simple scoring
@@ -97,24 +100,20 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 </div>
 
 
-### Actual scoring: Okapi BM25
+### Elasticsearch: scoring
+$s = queryNorm * coord * \sum\nolimit_{t}{tf \times \log{ \frac{N}{df} }^2 \times boost_t \times norm}$
 
-<br/>
-$\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.5 }{ df + 0.5 }$
-<br/><br/>
-
-* Yuck!
+* **$queryNorm$** 
+* **$coord$** 
+* **$boost_t$** 
+* **$norm$**
 
 
 ### That was fun
 
 
-### Explaining queries
-
-
 ### More on scoring
 
-* Defaults to Okapi BM25
 * Modified via boosting
 * Can rewrite scoring engine
 

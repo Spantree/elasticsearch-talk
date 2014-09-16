@@ -97,10 +97,10 @@
 ![Analysis phases](images/sharding-replica.svg)
 
 
-### Balancing document indexing
+### Routing
 
 * **```shard = hash(id) % number_of_primary_shards```**
-* This is why number of shards is not changeable
+* Customizable
 
 
 ### Recovery

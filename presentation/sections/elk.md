@@ -31,12 +31,12 @@ Provide a low-maintenance toolchain
 Use an agent to tail log files, parse them into a uniform format, and ship them "somewhere else.""
 
 <table>
-	<tr>
-		<td>![Logstash](images/logstash.png)</td>
-		<td>![Fluentd](images/fluentd.png)</td>
-		<td>![Rsyslog](images/rsyslog.png)</td>
-		<td>![Flume](images/flume.png)</td>
-	</tr>
+  <tr>
+    <td>![Logstash](images/logstash.png)</td>
+    <td>![Fluentd](images/fluentd.png)</td>
+    <td>![Rsyslog](images/rsyslog.png)</td>
+    <td>![Flume](images/flume.png)</td>
+  </tr>
 </table>
 
 
@@ -76,7 +76,7 @@ input {
 }
 filter {
   grok {
-  	type => "apache",
+    type => "apache",
     match => [ "message", "\[%{HTTPDATE:timestamp}\] %{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes}"]
   }
 

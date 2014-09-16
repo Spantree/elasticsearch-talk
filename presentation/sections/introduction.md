@@ -1,10 +1,10 @@
-Hey guys!
+### Hey folks!
 
-![Spantree logo](images/spantree.svg)
+<img src="images/spantree.svg" alt="Spantree Logo" style="max-width: 1000px;"/>
 
-is talking about
+### is talking about
 
-![Elasticsearch](images/elasticsearch.png)
+<img src="images/elasticsearch.png" alt="Elasticsearch Logo" style="max-width: 1500px;"/>
 
 
 ### More about Spantree
@@ -95,10 +95,16 @@ is talking about
 ![Backbone.js](images/backbone.png)
 
 
-## How this talk will work
+### How this talk will work
 
 This presentation is also free and open source.
 
 http://github.com/Spantree/elasticsearch-talk
 
 http://spantree.github.io/elasticsearch-talk/slides
+
+
+### We will probably run out of time
+
+But if we do we'll try to record the full version
+and post it online.

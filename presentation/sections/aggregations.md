@@ -36,7 +36,7 @@
 ### Metrics - Percentiles
 
 * Approximate, not exact
-* Still incredidbly good
+* Still incredibly good
 * [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,S7.7)
 
 
@@ -58,3 +58,8 @@
 * Enables processing of several different facets in memory
 * Enables complex graphs and visualizations
 * [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#07-aggregations,L203)
+
+
+### Visualization Demo
+
+* [Divvy Visualization](http://es1.local/visualizations/)

@@ -14,49 +14,7 @@
 }
 ```
 
-## Get gender terms via facet
-
-`GET /divvy/trip/_search?search_type=count`
-
-```json
-{
-  "query" : {
-    "match_all" : {  }
-  },
-  "facets" : {
-    "gender" : {
-      "terms" : {
-        "field" : "gender",
-        "size" : 10
-      }
-    }
-  }
-}
-```
-
-## Get min / max / avg trip duration.
-
-As a note, 85117 seconds is roughly 23.6 hours.
-
-`GET /divvy/trip/_search?search_type=count`
-
-```json
-{
-    "aggs" : {
-        "min_trip" : {
-            "min" : { "field" : "trip_duration" }
-        },
-        "max_trip" : {
-            "max" : { "field" : "trip_duration" }
-        },
-        "avg_trip" : {
-            "avg" : { "field" : "trip_duration" }
-        }
-    }
-}
-```
-
-## Get all stats
+## Get stats for trip duration
 
 `GET /divvy/trip/_search?search_type=count`
 
@@ -65,6 +23,20 @@ As a note, 85117 seconds is roughly 23.6 hours.
     "aggs" : {
         "trip_duration_stats" : {
             "stats" : { "field" : "trip_duration" }
+        }
+    }
+}
+```
+
+## Get extended stats for trip duration
+
+`GET /divvy/trip/_search?search_type=count`
+
+```json
+{
+    "aggs" : {
+        "trip_duration_stats" : {
+            "extended_stats" : { "field" : "trip_duration" }
         }
     }
 }
@@ -233,7 +205,7 @@ As a note, 85117 seconds is roughly 23.6 hours.
             "top_directors":{
                "terms":{
                   "field":"directed_by.facet",
-                  "size":4
+                  "size":3
                }
             }
          }

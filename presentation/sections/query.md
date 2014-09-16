@@ -124,13 +124,18 @@ $\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.
 
 ### Queries vs Filters
 
+![Ornaments](images/querying_vs_filtering.svg)
+
+
+### Queries vs Filters
+
 <table class="qvf">
 <tr>
 <th>Queries</th>
 <th>Filters</th>
 </tr>
 <tr>
-<td>Fuzzy</td>
+<td>Scored</td>
 <td>Boolean</td>
 </tr>
 <tr>
@@ -142,17 +147,3 @@ $\frac{tf}{(k_1(1 - b) + b \frac{dl}{avdl}) + tf} \times \log \frac{ N - df + 0.
 <td>Cacheable</td>
 </tr>
 </table>
-
-
-### Filter on Red and Green
-
-![Ornaments](images/red-and-green-ornaments.jpg)
-![MM](images/red-green-m-m.jpg)
-![RedGreen](images/red_green.jpg)
-
-
-### Query on Red and Green - Also returns
-
-![Red](images/red.png)
-![Green](images/green.png)
-![Blue](images/blue.svg)

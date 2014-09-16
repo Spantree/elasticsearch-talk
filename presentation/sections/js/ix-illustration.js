@@ -7,9 +7,9 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
     var number = $filter('number');
 
     $scope.documents = {
-        "1":'work it harder make it better',
-        "2":'do it faster makes us stronger',
-        "3":'more than ever hour after',
+        "0":'work it harder make it better',
+        "1":'do it faster makes us stronger',
+        "2":'more than ever hour after',
     };
 
     $scope.documentCount = null;

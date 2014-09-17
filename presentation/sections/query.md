@@ -66,7 +66,7 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 * Finds angle between vectors of scores
 
 
-### Simple example: TF-IDF
+### Classic example: TF-IDF
 $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 * **term frequency ($tf$)** number of times a term occurs in a particular document
@@ -80,13 +80,16 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 </div>
 
 
-### Elasticsearch: scoring
-$s = queryNorm * coord * \sum\nolimit_{t}{tf \times \log{ \frac{N}{df} }^2 \times boost_t \times norm}$
+### In Lucene...
 
-* **$queryNorm$** 
-* **$coord$** 
-* **$boost_t$** 
-* **$norm$**
+
+### Practical Scoring Function
+$s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \times fn)$
+
+* **$qn$** - queryNorm, tries to make results of different queries comparable
+* **$coord$** - coord, boosts documents that contain more of the query
+* **$boost$** - boost value of a term in the query
+* **$fn$** - fieldNorm, boosts score when matching shorter fields
 
 
 ### That was fun

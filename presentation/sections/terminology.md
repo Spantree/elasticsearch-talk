@@ -77,7 +77,7 @@
 
 ### Tokens
 
-Individual words or piees of text indexed by Elasticsearch, for example:
+Individual words or pieces of text indexed by Elasticsearch, for example:
 
 `the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
 
@@ -113,11 +113,6 @@ A chain of character filters, tokenizers and token filters
 ![Mapping and analysis](images/mapping-analysis.svg)
 
 
-### A logical view
-
-![Document Structure](images/document-structure.svg)
-
-
 ### Index
 
 * Siloed containers for mapping types
@@ -140,7 +135,7 @@ One or more nodes sharing data and workload
 
 * A slice of the data in an index
 * Physically siloed into seperate directories on disk
-* Can be replicated across nodes for fail tolerance and throughput
+* Can be replicated across nodes for fault tolerance and throughput
 
 
 ### A physical view

@@ -18,7 +18,6 @@
 ### Sense
 
 * Sense gives you autocomplete in queries
-* [Link](http://esdemo.local:9200/_plugin/marvel/sense/)
 
 
 ### More
@@ -32,4 +31,4 @@
 
 * Executed with Sense
 * Available in Markdown
-* [Link](http://esdemo.local:9200/_plugin/marvel/sense/#01-getting-started)
+* [Link](http://esdemo.local:9200/_plugin/marvel/sense/#01-getting-started,L1)

@@ -29,19 +29,6 @@
 ```
 
 
-### Mapping types
-
-* Logical grouping of documents
-* Mappings specify the structure of a document
-
-
-### Field
-
-* The "keys" in a JSON document
-* Has a type (e.g. string, date, integer or complex object)
-* Analyzed based on the defined mappings of a type
-
-
 ### Data Types
 
 <table class="examples col-3">
@@ -73,6 +60,18 @@
     </td>
   </tr>
 </tr>
+
+
+### Field
+
+* The "keys" in a JSON document
+* Has a type
+* Analyzed based on the defined mapping
+
+### Mapping types
+
+* Logical grouping of documents
+* Mappings specify the structure of a document
 
 
 ### Tokens
@@ -133,8 +132,8 @@ One or more nodes sharing data and workload
 ### Shard
 
 * A slice of the data in an index
-* Physically siloed into seperate directories on disk
-* Can be replicated across nodes for fault tolerance and throughput
+* Siloed in different directories
+* Can be replicated across nodes
 
 
 ### A physical view

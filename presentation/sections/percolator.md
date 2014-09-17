@@ -1,5 +1,7 @@
 ## It's Time for the Percolator
 
+![Percolator Dance](images/percolator.gif)
+
 
 ### Querying, in Reverse
 

@@ -82,16 +82,16 @@ Individual words or pieces of text indexed by Elasticsearch, for example:
 `the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
 
 
+### Character filters
+
+Preprocess a character stream before being passed to a tokenizer
+
+
 ### Tokenizers
 
 Methods of splitting up a field value into tokens
 
 [Example](http://esdemo.local:9200/_plugin/inquisitor/#/tokenizers)
-
-
-### Character filters
-
-Preprocess a character stream before being passed to a tokenizer
 
 
 ### Token filters
@@ -117,7 +117,6 @@ A chain of character filters, tokenizers and token filters
 
 * Siloed containers for mapping types
 * Physically isolated in separate files on disk
-* Has discrete settings (number of shards, etc)
 * You can search across indices
 
 

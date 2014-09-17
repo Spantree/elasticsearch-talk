@@ -46,6 +46,7 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 ### How is it so fast?
 * Interesting data structure
 
+
 ### Inverted index
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
   <dv ng-include src="'sections/js/templates/_invindex.html'"></div>

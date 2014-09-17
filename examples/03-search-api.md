@@ -196,12 +196,14 @@ Find the term "theater" and "theatre" anywhere in the documents.
 
 ```json
 {
-  "query": {
-    "query_string": {
-      "fields": ["name", "keywords", "description"],
-      "query": "navy pier"
+    "query": {
+        "query_string": {
+            "fields": [
+                "description"
+            ],
+            "query": "navy^3 pier^2 place^4"
+        }
     }
-  }
 }
 ```
 

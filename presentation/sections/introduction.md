@@ -74,25 +74,28 @@
 ![Github](images/github.svg)
 ![Vagrant](images/vagrant.png)
 ![Packer](images/packer.png)
+
 ![Puppet](images/puppet.svg)
 ![Jenkins](images/jenkins.png)
 ![Apache JMeter](images/jmeter.png)
+![Gatling](images/gatling.png)
 
 ![PostgreSQL](images/postgres.svg)
 ![MongoDB](images/mongodb.png)
 ![Neo4J](images/neo4j.svg)
 ![Elasticsearch](images/elasticsearch.png)
-![Angular](images/angular.png)
 
 ![Java](images/java.svg)
 ![Groovy](images/groovy.svg)
 ![Grails](images/grails.svg)
-![Marionette.js](images/marionettejs.png)
+![Scala](images/scala.png)
 
-![Dojo](images/dojo.svg)
+![Angular](images/angular.png)
 ![jQuery](images/jquery.svg)
 ![Coffeescript](images/coffeescript.svg)
 ![Backbone.js](images/backbone.png)
+![Marionette.js](images/marionettejs.png)
+![Dojo](images/dojo.svg)
 
 
 ### How this talk will work

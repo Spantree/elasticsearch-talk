@@ -26,12 +26,29 @@ WHERE FirstName LIKE "Edgar%" And LastName = "Codd";
 ```json
 GET /spantree/_search
 
-{"query": { "bool": {"must": [
-  {"query_string": {"query": "vannevar bush"}}
-]}}}
+{
+  "query": {
+    "query_string": {
+      "query": "vannevar bush"
+    }
+  }
+}
 ```
 
-<!--TODO: Add Elasticsearch family tree-->
+
+### What People Expect
+#### Searching Across Fields
+
+```json
+{
+  "product": {
+    "name": "nifty doodad",
+    "description": "this is an example"
+  }
+}
+```
+
+This document should match <em>example doodad</em>
 
 
 ### What People Expect
@@ -82,20 +99,4 @@ GET /spantree/_search
     </tr>
   </tbody>
 </table>
-
-
-### What People Expect
-#### Searching Across Fields
-
-```json
-{
-  "product": {
-    "name": "nifty doodad",
-    "description": "this is an example"
-  }
-}
-```
-
-This document should match <em>example doodad</em>
-
 <!-- TODO: Fill in with multi-match example -->

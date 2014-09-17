@@ -44,7 +44,7 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 
 
 ### How is it so fast?
-
+* Interesting data structure
 
 ### Inverted index
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
@@ -64,6 +64,7 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 
 * Make vectors of scores
 * Finds angle between vectors of scores
+* (Cosine similarity)
 
 
 ### Classic example: TF-IDF
@@ -86,19 +87,17 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 ### Practical Scoring Function
 $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \times fn)$
 
-* **$qn$** - queryNorm, tries to make results of different queries comparable
-* **$coord$** - coord, boosts documents that contain more of the query
-* **$boost$** - boost value of a term in the query
-* **$fn$** - fieldNorm, boosts score when matching shorter fields
-
-
-### That was fun
+* **qn (queryNorm)** - tries to make results of different queries comparable
+* **coord** - coord, boosts documents that contain more of the query
+* **boost** - boosts value of a term in the query
+* **fn (fieldNorm)** - boosts score when matching shorter fields
 
 
 ### More on scoring
 
 * Modified via boosting
-* Can rewrite scoring engine
+* Can rewrite scoring algorithm
+* Can use alternative scoring algorithms (Okapi BM25, etc)
 
 
 ### Filtering

@@ -62,6 +62,13 @@
 * Specify list of IP addresses
 
 
+### On AWS 
+
+* Use AWS Discovery Plugin
+* Discover based on groups, IPs, tags
+* Bonus: save snapshots to S3
+
+
 ### Types of cluster communication
 
 
@@ -132,7 +139,7 @@
 
 
 ### Split brain safeguard
-* Have an odd number of nodes
+* Have an odd number of master-eligible nodes
 
 ```
 discovery.zen.minimum_master_nodes: 2 #(n/2)+1
@@ -165,10 +172,3 @@ node.data: false
 node.master: false ## or node.client: true
 node.data: true
 ```
-
-
-### On AWS 
-
-* Use AWS Discovery Plugin
-* Discover based on groups, IPs, tags
-* Bonus: save snapshots to S3

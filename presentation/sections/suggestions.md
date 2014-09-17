@@ -70,3 +70,6 @@
 
 * Data science tools -> Elasticsearch
 
+
+### More like this
+[MLT API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#09-more-like-this)

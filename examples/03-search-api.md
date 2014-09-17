@@ -190,6 +190,35 @@ Find the term "theater" and "theatre" anywhere in the documents.
 }
 ```
 
+## Highlighting Matched Terms
+
+Search for the term "Chicago" and highlight matches.
+
+`GET /wikipedia/_search`
+
+```json
+{
+  "fields": ["name", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "chicago"
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "description": {}
+      }
+  }
+}
+```
+
 ## Explaining Results
 
 `GET /wikipedia/locations/chicago_shakespeare_theater/_explain`
@@ -262,36 +291,6 @@ Double the score of each document
     }
 }
 ```
-
-## Highlighting Matched Terms
-
-Search for the term "Chicago" and highlight matches.
-
-`GET /wikipedia/_search`
-
-```json
-{
-  "fields": ["name", "description"],
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "query": "chicago"
-          }
-        }
-      ]
-    }
-  },
-  "highlight": {
-      "fields": {
-          "name": {},
-          "description": {}
-      }
-  }
-}
-```
-
 
 ## Term Filtering
 

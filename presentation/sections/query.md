@@ -81,7 +81,7 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 
 ### Elasticsearch: scoring
-$s = queryNorm * coord * \sum\nolimit_{t}{tf \times \log{ \frac{N}{df} }^2 \times boost_t \times norm}$
+$queryNorm \times coord \times tf \times \log{ \frac{N}{df} }^2 \times boost_t \times norm$
 
 * **$queryNorm$** 
 * **$coord$** 

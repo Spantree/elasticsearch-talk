@@ -128,10 +128,6 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 <td>Never cached</td>
 <td>Cacheable</td>
 </tr>
-<tr>
-<td>Scored</td>
-<td>Never scored</td>
-</tr>
 </table>
 
 

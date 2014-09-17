@@ -1,10 +1,10 @@
-## More Queries
+## Query Options
 
 
 ### Pagination
 
 * Most cases use from / to
-* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#05-pagination)
+* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#05-pagination,L1)
 * Option of using a cursor
 * [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#05-pagination,S5.3)
 
@@ -13,7 +13,7 @@
 
 * Sort most fields by ascending or descending
 
-[API Example](http://es1.local:9200/_plugin/marvel/sense/#06-sorting)
+[API Example](http://es1.local:9200/_plugin/marvel/sense/#06-sorting,L1)
 
 
 ### Sorting - What you don't expect
@@ -22,9 +22,3 @@
 * Need to make sure you are sorting on the right field
 
 [API Example](http://es1.local:9200/_plugin/marvel/sense/#06-sorting,S6.4)
-
-
-### Count
-
-* Doesn't return hits
-* Normally leaves you wanted for more statistics

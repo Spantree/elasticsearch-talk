@@ -104,8 +104,6 @@ This presentation is also free and open source.
 
 http://github.com/Spantree/elasticsearch-talk
 
-http://spantree.github.io/elasticsearch-talk/slides
-
 
 ### We will probably run out of time
 

@@ -80,6 +80,9 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 </div>
 
 
+### In Lucene...
+
+
 ### Practical Scoring Function
 $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \times fn)$
 

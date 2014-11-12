@@ -2,6 +2,10 @@
 
 The following repository corresponds to [Spantree](http://www.spantree.net)'s Elasticsearch workshop. It uses Vagrant, Virtualbox and Puppet to bootstrap a virtual machine that allows you to play along with our exploration of Elasticsearch. It also contains all the slides in our deck, courtesy of [reveal.js](https://github.com/hakimel/reveal.js/).
 
+### Screencast
+
+If you're more of a visual and auditory learner, we've got you covered! We recorded a live version of this talk during our [workshop at the StrangeLoop Conference](http://bit.ly/strangeloop-elasticsearch) in September 2014.
+
 ### Authors
 
 **Cedric Hurst:** Principal &amp; Lead Software Engineer<br/>

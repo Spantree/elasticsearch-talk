@@ -4,7 +4,7 @@ The following repository corresponds to [Spantree](http://www.spantree.net)'s El
 
 ### Screencast
 
-If you're more of a visual and auditory learner, we've got you covered! We recorded a live version of this talk during our [workshop at the StrangeLoop Conference](http://bit.ly/strangeloop-elasticsearch) in September 2014.
+If you're more of a visual and auditory learner, we've got you covered! We recorded a [live version]((http://bit.ly/strangeloop-elasticsearch) of this talk during our [workshop at the StrangeLoop Conference](https://thestrangeloop.com/sessions/getting-started-with-elasticsearch) in September 2014.
 
 ### Authors
 

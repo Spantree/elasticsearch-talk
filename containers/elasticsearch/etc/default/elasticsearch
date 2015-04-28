@@ -1,0 +1,14 @@
+ES_USER=elasticsearch
+ES_GROUP=elasticsearch
+
+# Maximum number of VMA (Virtual Memory Areas) a process can own
+MAX_MAP_COUNT=262144
+
+# Elasticsearch log directory
+LOG_DIR=/var/log/elasticsearch
+
+# Elasticsearch data directory
+DATA_DIR=/usr/share/elasticsearch/data
+
+# Elasticsearch configuration directory
+CONF_DIR=/usr/share/elasticsearch/config

@@ -1,0 +1,30 @@
+network:
+  bind_host: 0.0.0.0
+index:
+  number_of_replicas: 0
+http:
+  max_content_length: 500mb
+cluster:
+  routing:
+    allocation:
+      cluster_concurrent_rebalance: 2
+    balance:
+      primary: 1
+marvel:
+  agent:
+    enabled: false
+bootstrap:
+  mlockall: true
+indices:
+  fielddata:
+    cache:
+      size: 25%
+cloud:
+  aws:
+    access_key: AKIAI3VGEABTIWCBHHKA
+    secret_key: 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
+discovery:
+  zen:
+    ping:
+      multicast:
+        enabled: false

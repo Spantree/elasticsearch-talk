@@ -26,7 +26,7 @@ create_index () {
 	split -a 5 -l ${MAX_SPLIT_LINES} "${data_file}.json.bulk" "${data_file}.json.bulk."
 	for f in `ls ${data_file}.json.bulk.*`
 	do
-		http  --ignore-stdin -h POST "${ES_URL}/${index}/_bulk" "@${f}"
+		http --ignore-stdin --timeout 60 -h POST "${ES_URL}/${index}/_bulk" "@${f}"
 	done
 	http POST "${ES_URL}/${index}/_refresh"
 	http POST "${ES_URL}/${index}/_optimize"

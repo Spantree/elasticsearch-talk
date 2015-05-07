@@ -1,8 +1,8 @@
 elasticsearch:
-  build: containers/elasticsearch
-  privileged: true
+  build: .
   volumes:
     - containers/elasticsearch/config:/usr/share/elasticsearch/config
+    - containers/elasticsearch/etc/default/elasticsearch:/etc/default/elasticsearch
   ports:
     - "9200:9200"
     - "9300:9300"

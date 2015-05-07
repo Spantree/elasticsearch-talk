@@ -48,7 +48,7 @@ COPY containers/elasticsearch/etc/default/elasticsearch /etc/default/elasticsear
 COPY containers/elasticsearch/sense/app/spantree.senseEditorReplace.js /usr/share/elasticsearch/plugins/marvel/_site/sense/app/spantree.senseEditorReplace.js
 
 # Inject our custom Sense editor tutorial script (to preload examples based on URL hash)
-RUN sed -i -e 's|</body>|<script src="spantree.senseEditorReplace.js"></script></body>|'  /usr/share/elasticsearch/plugins/marvel/_site/sense/index.html
+RUN sed -i -e 's|</body>|<script src="app/spantree.senseEditorReplace.js"></script></body>|'  /usr/share/elasticsearch/plugins/marvel/_site/sense/index.html
 
 # Add our sample data sets
 ADD data /tmp/data

@@ -19,10 +19,6 @@ indices:
   fielddata:
     cache:
       size: 25%
-cloud:
-  aws:
-    access_key: AKIAI3VGEABTIWCBHHKA
-    secret_key: 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
 discovery:
   zen:
     ping:

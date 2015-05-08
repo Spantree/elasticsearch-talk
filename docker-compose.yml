@@ -1,11 +1,11 @@
 elasticsearch:
-  # image: spantree/elasticsearch-talk-es:latest
-  build: elasticsearch
+  image: spantree/elasticsearch-talk-es:latest
+  # build: elasticsearch
   ports:
     - "9200:9200"
     - "9300:9300"
 www:
-  # image: spantree/elasticsearch-talk-www:latest
-  build: www
+  image: spantree/elasticsearch-talk-www:latest
+  # build: www
   ports:
     - "80:80"

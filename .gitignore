@@ -15,3 +15,6 @@ presentation/outline (Autosaved).mmap
 presentation/~$outline.mmap.~$lock
 visualizations/bower_components
 transform/lib
+www/transform/build
+www/transform/lib
+www/transform/.gradle

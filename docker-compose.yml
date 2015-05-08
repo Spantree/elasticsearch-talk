@@ -1,8 +1,9 @@
 elasticsearch:
-  build: .
-  volumes:
-    - containers/elasticsearch/config:/usr/share/elasticsearch/config
-    - containers/elasticsearch/etc/default/elasticsearch:/etc/default/elasticsearch
+  build: elasticsearch
   ports:
     - "9200:9200"
     - "9300:9300"
+www:
+  build: www
+  ports:
+    - "80:80"

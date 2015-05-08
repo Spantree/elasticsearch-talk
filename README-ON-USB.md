@@ -31,6 +31,7 @@ Then initialize your vagrant instance with:
 ```bash
 cd elasticsearch-talk
 vagrant plugin install vagrant-hostmanager
+vagrant plugin install vagrant-vbguest
 vagrant up
 ```
 

@@ -29,19 +29,6 @@
 ```
 
 
-### Mapping types
-
-* Logical grouping of documents
-* Mappings specify the structure of a document
-
-
-### Field
-
-* The "keys" in a JSON document
-* Has a type (e.g. string, date, integer or complex object)
-* Analyzed based on the defined mappings of a type
-
-
 ### Data Types
 
 <table class="examples col-3">
@@ -75,6 +62,18 @@
 </tr>
 
 
+### Field
+
+* The "keys" in a JSON document
+* Has a type
+* Analyzed based on the defined mapping
+
+### Mapping types
+
+* Logical grouping of documents
+* Mappings specify the structure of a document
+
+
 ### Tokens
 
 Individual words or pieces of text indexed by Elasticsearch, for example:
@@ -82,16 +81,16 @@ Individual words or pieces of text indexed by Elasticsearch, for example:
 `the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
 
 
+### Character filters
+
+Preprocess a character stream before being passed to a tokenizer
+
+
 ### Tokenizers
 
 Methods of splitting up a field value into tokens
 
 [Example](http://esdemo.local:9200/_plugin/inquisitor/#/tokenizers)
-
-
-### Character filters
-
-Preprocess a character stream before being passed to a tokenizer
 
 
 ### Token filters
@@ -117,7 +116,6 @@ A chain of character filters, tokenizers and token filters
 
 * Siloed containers for mapping types
 * Physically isolated in separate files on disk
-* Has discrete settings (number of shards, etc)
 * You can search across indices
 
 
@@ -134,8 +132,8 @@ One or more nodes sharing data and workload
 ### Shard
 
 * A slice of the data in an index
-* Physically siloed into seperate directories on disk
-* Can be replicated across nodes for fault tolerance and throughput
+* Siloed in different directories
+* Can be replicated across nodes
 
 
 ### A physical view

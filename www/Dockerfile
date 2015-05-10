@@ -2,12 +2,17 @@ FROM nginx:latest
 
 MAINTAINER Spantree Technology Group <devops@spantree.net>
 
+ENV LANG C.UTF-8
 ENV REVEAL_VERSION 2.6.2
 ENV MATHJAX_VERSION 2.5.3
 
+ENV CA_CERTIFICATES_JAVA_VERSION 20140324
+
 RUN apt-get update \
-	&& apt-get install -y -q wget nodejs npm nodejs-legacy gradle \
+	&& apt-get install -y -q wget nodejs npm nodejs-legacy openjdk-7-jdk ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
 	&& rm -rf /var/lib/apt/lists/*
+
+RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 WORKDIR /tmp/revealjs
 
@@ -22,7 +27,7 @@ ADD transform /usr/local/src/transform
 ADD examples /usr/local/src/examples
 
 WORKDIR /usr/local/src/transform
-RUN gradle transform -Parguments="-e /usr/local/src/examples -o /usr/share/nginx/html"
+RUN /usr/local/src/transform/gradlew transform -Parguments="-e /usr/local/src/examples -o /usr/share/nginx/html"
 
 WORKDIR /tmp/mathjax
 

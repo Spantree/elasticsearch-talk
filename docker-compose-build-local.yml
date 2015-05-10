@@ -9,3 +9,10 @@ www:
   build: www
   ports:
     - "80:80"
+logstash:
+  build: logstash
+  ports:
+    - "9201:9200"
+    - "3333:3333"
+kibana:
+  image: digitalwonderland/kibana:latest

@@ -18,3 +18,5 @@ transform/lib
 www/transform/build
 www/transform/lib
 www/transform/.gradle
+logstash/.gradle
+logstash/build

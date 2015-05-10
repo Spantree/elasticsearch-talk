@@ -28,7 +28,9 @@ wait_for_port_open $ELASTICSEARCH_HTTP_PORT
 cat /var/log/logstash/logstash.stdout
 
 # Download and decompress the star wars kid log files and pipe to logstash tcp
-gunzip -c /tmp/star_wars_kid.log.gz | pv -b | nc -q 0 localhost $LOGSTASH_TCP_PORT
+gunzip /tmp/star_wars_kid.log.gz
+pv -fber /tmp/star_wars_kid.log | nc -q 0 localhost $LOGSTASH_TCP_PORT
+rm /tmp/star_wars_kid.log
 
 # Also pipe a random string into logstash tcp
 RANDOM_STRING=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)

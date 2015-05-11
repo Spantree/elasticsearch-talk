@@ -1,0 +1,15 @@
+logstash:
+  image: spantree/logstash-star-wars-kid:latest
+  ports:
+    - "3333:3333"
+    - "9201:9200"
+  command: "logstash agent --config /etc/logstash/conf.d/logstash.conf"
+kibana:
+  image: bobrik/kibana:4.0.2
+  ports:
+    - "5601:5601"
+  links:
+    - logstash
+  environment:
+    KIBANA_ES_URL: "http://logstash:9200"
+  # command: "env && cat /etc/hosts && /opt/kibana-4.0.2/bin/kibana"

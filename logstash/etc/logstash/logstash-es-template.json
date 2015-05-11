@@ -17,8 +17,7 @@
         }
     },
     "mappings": {
-        "_default_": { 
-            "_all": { "enabled": false },
+        "_default_": {
             "_source": { "compress": true },
             "dynamic_templates": [
                 {

@@ -23,7 +23,7 @@
 
 
 ### Term suggester
-[Term API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#10-suggesters,S10.1)
+[Term API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.1)
 
 
 ### Phrase suggester
@@ -35,7 +35,7 @@
 
 
 ### Phrase suggester
-[Phrase API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#10-suggesters,S10.2)
+[Phrase API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.2)
 
 
 ### Autocomplete
@@ -53,7 +53,7 @@
 
 
 ### Completion suggester
-[Completion API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#10-suggesters,S10.3)
+[Completion API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.3)
 
 
 ### Context suggester
@@ -63,7 +63,7 @@
 
 
 ### Context suggester
-[Context API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#10-suggesters,S10.9)
+[Context API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.9)
 
 
 ### Autosuggest
@@ -72,4 +72,4 @@
 
 
 ### More like this
-[MLT API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#09-more-like-this)
+[MLT API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#09-more-like-this)

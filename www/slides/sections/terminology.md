@@ -90,14 +90,14 @@ Preprocess a character stream before being passed to a tokenizer
 
 Methods of splitting up a field value into tokens
 
-[Example](http://esdemo.local:9200/_plugin/inquisitor/#/tokenizers)
+[Example](http://estalk.spantree.local:9200/_plugin/inquisitor/#/tokenizers)
 
 
 ### Token filters
 
 Modify tokens by adding, removing or changing their values
 
-[Example](http://esdemo.local:9200/_plugin/inquisitor/#/analyzers)
+[Example](http://estalk.spantree.local:9200/_plugin/inquisitor/#/analyzers)
 
 
 ### Analyzers

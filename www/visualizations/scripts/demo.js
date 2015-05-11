@@ -232,7 +232,7 @@
       }
     };
     es = new elasticsearch.Client({
-      host: 'esdemo.local:9200',
+      host: 'estalk.spantree.local:9200',
       log: 'debug'
     });
     aggregationBody = buildAggregationBody(aggregations);

@@ -2,7 +2,7 @@ define(['scripts/d3.v3', 'scripts/elasticsearch'], function(d3, elasticsearch) {
 
     "use strict";
     var client = new elasticsearch.Client({
-        host: 'esdemo.local:9200'
+        host: 'estalk.spantree.local:9200'
     });
 
     client.search({

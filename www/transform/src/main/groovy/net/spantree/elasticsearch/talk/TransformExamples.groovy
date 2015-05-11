@@ -93,7 +93,7 @@ class TransformExamples {
         def handlebars = new HandlebarsTemplateEngine()
         def template = handlebars.createTemplate(new StringReader(indexTemplate))
         def model = [
-            esRoot: 'http://es-talk.docker:9200',
+            esRoot: 'http://estalk.spantree.local:9200',
             chapters: chapters
         ]
         def file = new File('index.html', target)

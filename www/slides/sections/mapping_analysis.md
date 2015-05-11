@@ -6,7 +6,7 @@
 * Elasticsearch will try to guess your mappings based on input
 * But you can also provide them explicitly
 
-[API Example](http://esdemo.local:9200/_plugin/marvel/sense/#04-mapping)
+[API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#04-mapping)
 
 
 ### Embedded Objects

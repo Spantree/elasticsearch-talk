@@ -4,9 +4,9 @@
 ### Pagination
 
 * Most cases use from / to
-* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#05-pagination,L1)
+* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#05-pagination,L1)
 * Option of using a cursor
-* [API Example](http://esdemo.local:9200/_plugin/marvel/sense/#05-pagination,S5.3)
+* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#05-pagination,S5.3)
 
 
 ### Sorting - What you expect

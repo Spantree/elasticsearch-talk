@@ -12,7 +12,7 @@
 ### Head
 
 * The Head plugin lets you get an overview of your data
-* [Link](http://esdemo.local:9200/_plugin/head/)
+* [Link](http://estalk.spantree.local:9200/_plugin/head/)
 
 
 ### Sense
@@ -22,8 +22,8 @@
 
 ### More
 
-* [Inquisitor](http://esdemo.local:9200/_plugin/inquisitor/#/analyzers) - Explore how Elasticsearch processes
-* [Marvel](http://esdemo.local:9200/_plugin/marvel/kibana/index.html#/dashboard/file/marvel.overview.json) - Explore stats on your cluster
+* [Inquisitor](http://estalk.spantree.local:9200/_plugin/inquisitor/#/analyzers) - Explore how Elasticsearch processes
+* [Marvel](http://estalk.spantree.local:9200/_plugin/marvel/kibana/index.html#/dashboard/file/marvel.overview.json) - Explore stats on your cluster
 * [Kibana](http://kibana.local) - Make sense of your logs
 
 
@@ -31,4 +31,4 @@
 
 * Executed with Sense
 * Available in Markdown
-* [Link](http://esdemo.local:9200/_plugin/marvel/sense/#01-getting-started,L1)
+* [Link](http://estalk.spantree.local:9200/_plugin/marvel/sense/#01-getting-started,L1)

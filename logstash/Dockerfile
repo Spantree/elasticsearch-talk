@@ -35,7 +35,7 @@ ADD ./send-log.sh /tmp/send-log.sh
 
 RUN /tmp/send-log.sh
 
-ADD kibana/ /tmp/kibana/add-kibana-assets.sh
+COPY kibana/ /tmp/kibana/
 RUN /tmp/kibana/add-kibana-assets.sh
 
 COPY ./docker-entrypoint.sh /

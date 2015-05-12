@@ -23,7 +23,7 @@ service elasticsearch start
 wait_for_port_open $ELASTICSEARCH_HTTP_PORT
 
 # add our initial visualizations and dashboard
-http POST "localhost:${ELASTICSEARCH_HTTP_PORT}/_bulk?refresh=true" "@/tmp/kibana/kibana-assets.json.bulk"
+http --ignore-stdin POST "localhost:${ELASTICSEARCH_HTTP_PORT}/_bulk?refresh=true" "@/tmp/kibana/kibana-assets.json.bulk"
 
 # wait until our assets have been indexed
 result_count=0

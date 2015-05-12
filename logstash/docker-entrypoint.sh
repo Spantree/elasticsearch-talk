@@ -4,6 +4,10 @@ set -e
 
 service elasticsearch start
 
+ES_HEAP_SIZE=${ES_HEAP_SIZE?"1g"}
+
+echo "ES_HEAP_SIZE=${ES_HEAP_SIZE}" > /etc/default/elasticsearch
+
 # Add logstash as command if needed
 if [[ "$1" == -* ]]; then
 	set -- logstash "$@"

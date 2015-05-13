@@ -1,0 +1,27 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://jcenter.bintray.com'
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.0'
+    compile 'uk.co.cacoethes:groovy-handlebars-engine:0.2'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-cli:commons-cli:1.2'
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+}
+
+task transform(dependsOn: 'classes', type: JavaExec) {
+    main = 'net.spantree.elasticsearch.talk.TransformExamples'
+    classpath = sourceSets.main.runtimeClasspath
+    args = "${arguments}".tokenize(' ')
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtime
+    into new File("lib")
+}

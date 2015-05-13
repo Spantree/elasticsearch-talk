@@ -1,0 +1,25 @@
+# Use this config if you want to run everything at once
+
+elasticsearch:
+  image: spantree/elasticsearch-talk-es:latest
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+www:
+  image: spantree/elasticsearch-talk-www:latest
+  ports:
+    - "80:80"
+logstash:
+  image: spantree/logstash-star-wars-kid:latest
+  ports:
+    - "3333:3333"
+    - "9201:9200"
+  environment:
+    ES_HEAP_SIZE: 2g
+  command: "logstash agent --config /etc/logstash/conf.d/logstash.conf"
+kibana:
+  image: bobrik/kibana:4.0.2
+  ports:
+    - "5601:5601"
+  environment:
+    KIBANA_ES_URL: "http://logstash:9200"

@@ -43,7 +43,7 @@ echo "$(boot2docker ip) estalk.spantree.local" | sudo tee -a /etc/hosts
 #### Clone this repository and start Docker Compose
 
 ```bash
-git clone https://github.com/Spantree/elasticsearch-talk.git
+git clone --depth 1 https://github.com/Spantree/elasticsearch-talk.git
 cd elasticsearch-talk
 docker-compose up
 ```

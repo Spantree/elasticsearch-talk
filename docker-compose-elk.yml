@@ -1,8 +1,12 @@
+# Use this config if you only want to run the elk demos
+
 logstash:
   image: spantree/logstash-star-wars-kid:latest
   ports:
     - "3333:3333"
     - "9201:9200"
+  environment:
+    ES_HEAP_SIZE: 2g
   command: "logstash agent --config /etc/logstash/conf.d/logstash.conf"
 kibana:
   image: bobrik/kibana:4.0.2
@@ -12,4 +16,3 @@ kibana:
     - logstash
   environment:
     KIBANA_ES_URL: "http://logstash:9200"
-  # command: "env && cat /etc/hosts && /opt/kibana-4.0.2/bin/kibana"

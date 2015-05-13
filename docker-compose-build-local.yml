@@ -1,11 +1,11 @@
+# Use this config only if you want to build all the Docker images
+# locally (this could take quite some time)
 elasticsearch:
-  # image: spantree/elasticsearch-talk-es:latest
   build: elasticsearch
   ports:
     - "9200:9200"
     - "9300:9300"
 www:
-  # image: spantree/elasticsearch-talk-www:latest
   build: www
   ports:
     - "80:80"

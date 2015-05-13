@@ -30,7 +30,4 @@ WORKDIR /tmp/data
 # Create the mappings and index the data for our sample data sets
 RUN /tmp/data/index.sh
 
-# Add a list minute fix for entrypoint permissions on the CCC VM
-RUN chmod u+x /docker-entrypoint.sh
-
 WORKDIR /data

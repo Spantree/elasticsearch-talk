@@ -37,13 +37,13 @@ For some of the labs, we'll need a little bit more RAM than the 2GB normally pro
 boot2docker init -m 4096
 boot2docker up
 $(boot2docker shellinit)
-echo "$(boot2docker ip) estalk.spantree.local" | sudo tee -a /etc/hosts
+echo "$(boot2docker ip) estalk.spantree.local esdemo.local" | sudo tee -a /etc/hosts
 ```
 
 #### Clone this repository and start Docker Compose
 
 ```bash
-git clone https://github.com/Spantree/elasticsearch-talk.git
+git clone --depth 1 https://github.com/Spantree/elasticsearch-talk.git
 cd elasticsearch-talk
 docker-compose up
 ```

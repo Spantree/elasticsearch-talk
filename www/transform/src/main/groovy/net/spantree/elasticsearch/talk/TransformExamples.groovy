@@ -34,7 +34,7 @@ class TransformExamples {
                     <a href="{{esRoot}}/_plugin/marvel/" target="es_marvel">Marvel Plugin</a>
                 </li>
                 <li>
-                    <a href="{{esRoot}}/_plugin/head/" target="es_head">Head Plugin</a>
+                    <a href="{{esRoot}}/_plugin/kopf/" target="es_head">Kopf Plugin</a>
                 </li>
                 <li>
                     <a href="{{esRoot}}/_plugin/inquisitor/#/analyzers" target="es_inquistor_plugin">Inquisitor Plugin</a>

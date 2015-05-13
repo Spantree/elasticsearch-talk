@@ -68,6 +68,7 @@
 * Has a type
 * Analyzed based on the defined mapping
 
+
 ### Mapping types
 
 * Logical grouping of documents

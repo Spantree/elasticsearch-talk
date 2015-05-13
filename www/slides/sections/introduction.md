@@ -9,42 +9,7 @@
 
 ### More about Spantree
 
-<table class="ourpictures">
-  <tr>
-    <td>
-      ![Kevin](images/kevin.png)
-    </td>
-    <td>
-      ![Cedric](images/cedric.png)
-    </td>
-    <td>
-      ![Gary](images/gary.png)
-    </td>
-    <td>
-      ![Jerry](images/jerry.png)
-    </td>
-    <td>
-      ![Bob](images/bob.png)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      ![Allie](images/allie.png)
-    </td>
-    <td vertical-align="top">
-      ![Roberto](images/roberto.png)
-    </td>
-    <td>
-      ![Andrea](images/andrea.png)
-    </td>
-    <td>
-      ![Jonathan](images/jon.png)
-    </td>
-    <td>
-      ![Nemik](images/nemik.png)
-    </td>
-  </tr>
-</table>
+<img alt="Spantree Team" src="images/team.jpg" style="max-width: 930px; max-height: 600px;"/>
 
 
 ### Sorts of things we work on

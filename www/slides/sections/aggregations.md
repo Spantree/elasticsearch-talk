@@ -11,6 +11,7 @@
 
 * **Terms** - Break up the data based on text / keywords
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,L5)
+
 * **Histograms** - Define an interval to break up the data
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.7)
 
@@ -55,11 +56,12 @@
 
 
 ### Subaggregations
+
 * Enables processing of several different facets in memory
 * Enables complex graphs and visualizations
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.10)
 
 
-### Visualization Demo
+### Visualization in Practice
 
-* [Divvy Visualization](http://es1.local/visualizations/)
+* [Divvy Data Dashboard](images/divvy-data-dashboard.png)

@@ -117,7 +117,7 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 <th>Filters</th>
 </tr>
 <tr>
-<td>Scored</td>
+<td>Fuzzy</td>
 <td>Boolean</td>
 </tr>
 <tr>

@@ -9,9 +9,9 @@
 * Kibana / Marvel data
 
 
-### Head
+### Kopf
 
-* The Head plugin lets you get an overview of your data
+* A simple web administration tool written in AngularJS
 * [Link](http://estalk.spantree.local:9200/_plugin/head/)
 
 

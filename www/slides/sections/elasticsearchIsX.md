@@ -35,4 +35,4 @@
 
 ### ...And Real-Time Analytics
 
-![ES Hamlet](images/logstash-search-screenshot.png)
+![Kibana](images/kibana-4-waxy-dashboard.png)

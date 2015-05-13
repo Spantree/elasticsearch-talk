@@ -92,15 +92,9 @@ Find the term "theater" and "theatre" anywhere in the documents.
 {
   "fields": ["name", "keywords", "description"],
   "query": {
-    "bool": {
-      "must": [
-        {
-          "query_string": {
-            "fields": ["name", "keywords", "description"],
-            "query": "theater AND theatre"
-          }
-        }
-      ]
+    "query_string": {
+      "fields": ["name", "keywords", "description"],
+      "query": "theater AND theatre"
     }
   }
 }

@@ -164,20 +164,20 @@
 }
 ```
 
-## Create Goto Chicago 2014 context suggestion
+## Create Chicago Coder Conference 2015 context suggestion
 
 `PUT suggestions/conference/1`
 
 ```json
 {
-    "name": "Goto Chicago 2014",
+    "name": "Chicago Coder Conference 2015",
     "suggestion": {
         "input": [
             "goto",
             "chicago",
             "tech conference"
         ],
-        "output": "Goto Chicago 2014",
+        "output": "Chicago Coder Conference 2015",
         "context": {
             "location": {
                 "lat": 41.8337329,

@@ -219,6 +219,5 @@ http.createServer (req, res) ->
 
 ### (Completely speculative) future security features
 
-* Dynamic scripts running in a sandbox?
-* Pluggable authentication (via CAS, JAAS, etc)?
 * Document-level security?
+* Field-level security?

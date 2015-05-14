@@ -1,5 +1,12 @@
 # Percolation
 
+## Add a sample document to seed our mappings
+
+PUT /spantree/team/cedric
+{
+  "drinks": ["Red Bull"]
+}
+
 ## Register a percolation query
 
 Percolation queries allow you to search in reverse.  Instead of adding documents and then providing a query, you add queries first and then provide documents to see which queries they match. This is very useful for things like RSS feeds and notification systems.

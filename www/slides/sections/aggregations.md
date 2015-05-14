@@ -60,3 +60,8 @@
 * Enables processing of several different facets in memory
 * Enables complex graphs and visualizations
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.10)
+
+
+### Visualization in Practice
+
+* [Divvy Data Dashboard](images/divvy-data-dashboard.png)

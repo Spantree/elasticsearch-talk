@@ -12,6 +12,7 @@
 
   * Elasticsearch provides robust scripting support
   * These scripts are run in a sandbox *as of 1.3.0*
+  * Dynamic scripting is disabled by default *as of 1.4.3*
   * [Remote code execution is possible](http://blog.liftsecurity.io/2013/11/30/elasticsearch-command-execution-using-script)
 
 
@@ -218,6 +219,5 @@ http.createServer (req, res) ->
 
 ### (Completely speculative) future security features
 
-* Dynamic scripts running in a sandbox?
-* Pluggable authentication (via CAS, JAAS, etc)?
 * Document-level security?
+* Field-level security?

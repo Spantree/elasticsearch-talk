@@ -1,5 +1,15 @@
 # Aggregations
 
+## Divvy trips
+
+`GET /divvy/trip/_search`
+
+
+## Divvy stations
+
+`GET /divvy/station/_search`
+
+
 ## Get gender terms via aggregation
 
 `GET /divvy/trip/_search?search_type=count`

@@ -9,8 +9,29 @@
 * Hierarchical
 
 
-### What a document looks like
+### Field
 
+* The "keys" in a JSON document
+* Has a type
+* Analyzed based on the defined mapping
+
+
+### What you might pass to Elasticsearch
+
+```json
+{
+  "field0": 777,
+  "field1": "value",
+  "field2": ["value1","value2","value3"],
+  "field3": {
+    "subfield0":"value1",
+    "subfield1":"value2"
+  } 
+}
+```
+
+
+### What it looks like in Elasticsearch
 ```json
 {
   "_index": "index_name",
@@ -62,17 +83,39 @@
 </tr>
 
 
-### Field
-
-* The "keys" in a JSON document
-* Has a type
-* Analyzed based on the defined mapping
-
-
 ### Mapping types
 
 * Logical grouping of documents
 * Mappings specify the structure of a document
+
+
+### Index
+
+* Siloed containers for mapping types
+* Physically isolated in separate files on disk
+* You can search across indices
+
+
+### Node
+
+An instance of Elasticsearch
+
+
+### Cluster
+
+One or more nodes sharing data and workload
+
+
+### Shard
+
+* A slice of the data in an index
+* Siloed in different directories
+* Can be replicated across nodes
+
+
+### A physical view
+
+![A physical view](images/sharding-replica.svg)
 
 
 ### Tokens
@@ -111,32 +154,3 @@ A chain of character filters, tokenizers and token filters
 ### Analyzing at query and index time
 
 ![Mapping and analysis](images/mapping-analysis.svg)
-
-
-### Index
-
-* Siloed containers for mapping types
-* Physically isolated in separate files on disk
-* You can search across indices
-
-
-### Node
-
-An instance of Elasticsearch
-
-
-### Cluster
-
-One or more nodes sharing data and workload
-
-
-### Shard
-
-* A slice of the data in an index
-* Siloed in different directories
-* Can be replicated across nodes
-
-
-### A physical view
-
-![A physical view](images/sharding-replica.svg)

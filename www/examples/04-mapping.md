@@ -240,7 +240,7 @@ will fail.
 
 ## Testing Our Stemmed Field
 
-`GET /wikipedia-mappings-stemmed/_analyze?field=description&text=Spantree is one of many companies at the Chicago Java Users Group that are looking for great developers.`
+`GET /wikipedia-mappings-stemmed/_analyze?field=description&text=Spantree is one of many companies at the Chicago Coder Conference that are looking for passionate engineers.`
 
 ## Working with Synonyms
 

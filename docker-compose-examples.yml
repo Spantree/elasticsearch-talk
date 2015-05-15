@@ -8,5 +8,8 @@ elasticsearch:
 www:
   # image: spantree/elasticsearch-talk-www:latest
   build: www
+  # volumes:
+  #   - "www/slides/sections:/usr/share/nginx/html/slides/sections"
+  #   - "www/slides/images:/usr/share/nginx/html/slides/images"
   ports:
     - "80:80"

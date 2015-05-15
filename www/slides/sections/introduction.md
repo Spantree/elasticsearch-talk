@@ -75,4 +75,5 @@ http://github.com/Spantree/elasticsearch-talk
 
 * This is a "best of" presentation
 * Focused on developers
-* Likely won't cover cluster management, security, suggesters, more like this or ELK (in depth)
+* Likely won't cover cluster management, security, suggesters, language-specific drivers, more like this
+* May have time for a hand-wavey demo of ELK (in depth)

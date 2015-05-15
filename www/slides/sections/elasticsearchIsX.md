@@ -20,7 +20,7 @@
 
 ### Distributed and Fault Tolerant
 
-![ES Github Repo](images/es-karmi.png)
+![Kopf Cluster View](images/kopf-cluster.png)
 
 
 ### Good at Handling Lots of Data

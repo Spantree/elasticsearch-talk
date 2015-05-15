@@ -8,7 +8,8 @@ body {
 }
 
 .reveal pre {
-	border: 15px solid rgba(63, 63, 63, 1);
+	border: 15px solid #000;
+	background-color: #000;
 	margin-bottom: 30px;
 }
 

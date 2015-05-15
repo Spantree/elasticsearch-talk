@@ -34,21 +34,22 @@
 ### Stuff we use
 
 ![Amazon Web Services](images/aws.svg)
+![Docker](images/docker.png)
+![Mesos](images/mesos.png)
+![Kubernetes](images/kubernetes.png)
 ![Asgard](images/asgard.png)
-![Netflix Simian Army](images/simian-army.png)
-![Github](images/github.svg)
+
 ![Vagrant](images/vagrant.png)
 ![Packer](images/packer.png)
-
 ![Puppet](images/puppet.svg)
+![Github](images/github.svg)
 ![Jenkins](images/jenkins.png)
-![Apache JMeter](images/jmeter.png)
-![Gatling](images/gatling.png)
 
 ![PostgreSQL](images/postgres.svg)
 ![MongoDB](images/mongodb.png)
 ![Neo4J](images/neo4j.svg)
 ![Elasticsearch](images/elasticsearch.png)
+![Kafka](images/kafka.png)
 
 ![Java](images/java.svg)
 ![Groovy](images/groovy.svg)
@@ -57,10 +58,10 @@
 
 ![Angular](images/angular.png)
 ![jQuery](images/jquery.svg)
+![React.js](images/react.png)
 ![Coffeescript](images/coffeescript.svg)
 ![Backbone.js](images/backbone.png)
 ![Marionette.js](images/marionettejs.png)
-![Dojo](images/dojo.svg)
 
 
 ### How this talk will work

@@ -73,5 +73,6 @@ http://github.com/Spantree/elasticsearch-talk
 
 ### We will probably run out of time
 
-But if we do we'll try to record the full version
-and post it online.
+* This is a "best of" presentation
+* Focused on developers
+* Likely won't cover cluster management, security, suggesters, more like this or ELK (in depth)

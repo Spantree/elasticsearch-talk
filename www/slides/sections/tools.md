@@ -12,7 +12,7 @@
 ### Kopf
 
 * A simple web administration tool written in AngularJS
-* [Link](http://estalk.spantree.local:9200/_plugin/head/)
+* [Link](http://estalk.spantree.local:9200/_plugin/kopf/)
 
 
 ### Sense

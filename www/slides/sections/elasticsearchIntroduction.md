@@ -24,15 +24,7 @@ WHERE FirstName LIKE "Edgar%" And LastName = "Codd";
 #### Elasticsearch
 
 ```json
-GET /spantree/_search
-
-{
-  "query": {
-    "query_string": {
-      "query": "vannevar bush"
-    }
-  }
-}
+GET /spantree/_search?q=edgar codd
 ```
 
 

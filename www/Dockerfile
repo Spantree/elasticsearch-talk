@@ -52,3 +52,5 @@ ADD slides/images/ /usr/share/nginx/html/slides/images
 ADD slides/lib/ /usr/share/nginx/html/slides/lib
 ADD slides/plugin/ /usr/share/nginx/html/slides/plugin
 ADD slides/sections/ /usr/share/nginx/html/slides/sections
+
+# VOLUME ["/usr/share/nginx/html/slides/sections", "/usr/share/nginx/html/slides/images", "/usr/share/nginx/html/slides/css"]

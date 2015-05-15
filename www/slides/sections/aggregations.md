@@ -64,4 +64,4 @@
 
 ### Visualization in Practice
 
-* [Divvy Data Dashboard](images/divvy-data-dashboard.png)
+* <img alt="Divvy Data Dashboard" src="images/divvy-data-dashboard.png" style="max-width: 700px;"/>

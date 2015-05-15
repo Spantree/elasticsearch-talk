@@ -43,32 +43,34 @@ curl -XPOST "http://estalk.spantree.local:9200/wikipedia/_search" -d '{
 [API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#03-search-api)
 
 
+### Search is very fast!
+
+
 ### How is it so fast?
-* Interesting data structure
+
+* ![Science Cat](images/science-cat.jpg)
 
 
-### Inverted index
+### Simple example: Inverted index
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
   <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
 </div>
 
 
-### Explaining queries
+### Simple example: How to query? 
+
+* Make vectors of document scores
+* Make vector to represent query 
+* Find smallest angle between document and query
 
 
-### How does it know which document is most relevant?
+### Simple example: Document score vector
 
-* ...Math?
-
-
-### Simple scoring
-
-* Make vectors of scores
-* Finds angle between vectors of scores
-* (Cosine similarity)
+* "A text query"
+* $[\text{score}_0, \text{score}_1, \text{score}_2]$
 
 
-### Classic example: TF-IDF
+### Simple example: TF-IDF scores
 $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 * **term frequency ($tf$)** number of times a term occurs in a particular document
@@ -76,13 +78,20 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 * **inverse document frequency ($idf$)** is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
 
 
-### Scoring demo
+### Simple example: Finding angles
+
+* $\text{similarity} = \cos(\theta) = {D \cdot Q \over \|D\| \|Q\|}$
+
+
+### Simple example: Scoring demo
 <div class="row tfidf-illustration ix-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
   <dv ng-include src="'sections/js/templates/_scoring.html'"></div>
 </div>
 
 
 ### In Lucene...
+
+* It's more complicated!
 
 
 ### Practical Scoring Function
@@ -94,6 +103,11 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 * **fn (fieldNorm)** - boosts score when matching shorter fields
 
 
+### Scoring in action
+
+[Explain query](http://estalk.spantree.local:9200/_plugin/marvel/sense/#03-search-api,S3.11)
+
+
 ### More on scoring
 
 * Modified via boosting
@@ -101,7 +115,9 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 * Can use alternative scoring algorithms (Okapi BM25, etc)
 
 
-### Filtering
+### Now for something completely different
+
+* Filtering
 
 
 ### Queries vs Filters

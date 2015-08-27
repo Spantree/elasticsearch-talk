@@ -19,6 +19,7 @@
     "mappings": {
         "_default_": {
             "_source": { "compress": true },
+            "_all" : {"enabled" : true},
             "dynamic_templates": [
                 {
                     "string_template" : { 

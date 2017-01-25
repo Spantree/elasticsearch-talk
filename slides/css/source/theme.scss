@@ -17,25 +17,25 @@
 
 
 // Include theme-specific fonts
-@import url(../bower_components/reveal.js/lib/font/source-sans-pro/source-sans-pro.css);
-
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
 // Override theme settings (see ../../bower_components/reveal.js/css/theme/template/settings.scss)
-$backgroundColor: #222;
+$backgroundColor: #16a085;
 
-$mainColor: #fff;
-$headingColor: #fff;
+$mainColor: #ecf0f1;
+$headingColor: #ecf0f1;
 
 $mainFontSize: 38px;
 $mainFont: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
 $headingFont: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
-$headingTextTransform: uppercase;
-$headingFontWeight: 600;
-$linkColor: #42affa;
-$linkColorHover: lighten( $linkColor, 15% );
-$selectionBackgroundColor: lighten( $linkColor, 25% );
+$headingTextTransform: normal;
+$headingFontWeight: 300;
+$linkColor: #2c3e50;
+$linkColorHover: #34495e;
+$selectionBackgroundColor: #2980b9;
 
 $heading1Size: 2.5em;
 $heading2Size: 1.6em;
@@ -46,6 +46,16 @@ section.has-light-background {
 	&, h1, h2, h3, h4, h5, h6 {
 		color: #222;
 	}
+}
+
+.reveal section img {
+  max-width: 600px;
+  max-height: 600px;
+  background: none;
+  border: 0;
+  &.plain {
+    box-shadow: none;
+  }
 }
 
 // Theme template ------------------------------

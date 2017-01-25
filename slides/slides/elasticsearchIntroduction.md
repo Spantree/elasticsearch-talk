@@ -2,14 +2,17 @@
 
 <p><img src="images/kimchy.jpeg" style="width:50px;vertical-align:text-top"> "You know, for Search!"</p>
 
+---
 
 ![Cote Tweet](images/cote-tweet.png)
 
+---
 
 ## The Challenge
 
 ![Simplicity](images/simplicity.png)
 
+---
 
 ### How We Query
 
@@ -35,6 +38,7 @@ GET /spantree/_search
 }
 ```
 
+---
 
 ### What People Expect
 #### Searching Across Fields
@@ -50,6 +54,7 @@ GET /spantree/_search
 
 This document should match <em>example doodad</em>
 
+---
 
 ### What People Expect
 

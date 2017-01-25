@@ -4,27 +4,23 @@
 * Logstash
 * Kibana
 
+---
 
 ### What are our goals for log management?
 
-
 Aggregate business and system events from multiple sources
-
 
 Figure out what went wrong
 
-
 Figure out what will go wrong
-
 
 Search, filter and report via a central interface
 
-
 Detect critical events and trigger notifications
-
 
 Provide a low-maintenance toolchain
 
+---
 
 ### How can we meet these goals?
 
@@ -39,6 +35,7 @@ Use an agent to tail log files, parse them into a uniform format, and ship them 
   </tr>
 </table>
 
+---
 
 ### How else can we meet these goals?
 
@@ -46,6 +43,7 @@ Make that "somewhere else" be Elasticsearch, and use its powerful query and aggr
 
 ![Elasticsearch](images/elasticsearch.png)
 
+---
 
 ### How else can we meet these goals?
 
@@ -53,11 +51,13 @@ Develop a composable dashboard and data visualization tool to help us make sense
 
 ![Kibana](images/kibana.png)
 
+---
 
 ### What does this look like?
 
 ![ELK Flow](images/elk-flow.png)
 
+---
 
 ### Logstash in a Nutshell
 
@@ -65,6 +65,7 @@ Develop a composable dashboard and data visualization tool to help us make sense
 * Uses a configuration format called `grok` to parse log files
 * Ships logging events in batch to an "output", usually Elasticsearch
 
+---
 
 ### What does grok look like?
 
@@ -93,6 +94,7 @@ output {
 }
 ```
 
+---
 
 ### What does the output look like?
 
@@ -113,11 +115,13 @@ output {
 }
 ```
 
+---
 
 ### Elasticsearch
 
 We already know about Elasticsearch (woo!)
 
+---
 
 ### Kibana
 

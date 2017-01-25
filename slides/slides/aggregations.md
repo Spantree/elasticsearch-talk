@@ -1,11 +1,13 @@
 ## Aggregations
 
+---
 
 ### Buckets vs Metrics
 
 * Buckets - Classify your data
 * Metrics - Analyze your data
 
+---
 
 ### Buckets
 
@@ -15,6 +17,7 @@
 * **Histograms** - Define an interval to break up the data
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.7)
 
+---
 
 ### Custom Buckets
 
@@ -22,6 +25,7 @@
 
 [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.6)
 
+---
 
 ### Metrics - Statistics
 
@@ -33,6 +37,7 @@
 
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.3)
 
+---
 
 ### Metrics - Percentiles
 
@@ -40,20 +45,24 @@
 * Still incredibly good
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.4)
 
+---
 
 ### Aggregations as a User Experience
 
+---
 
 ### Terms Facets
 * Enable visual filters
 * Better inform choices
 
+---
 
 ### Top Hits
 * Meld two types of products
 * Create Google Ads-esque design with one query
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.9)
 
+---
 
 ### Subaggregations
 
@@ -61,6 +70,7 @@
 * Enables complex graphs and visualizations
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.10)
 
+---
 
 ### Visualization in Practice
 

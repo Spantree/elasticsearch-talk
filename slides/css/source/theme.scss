@@ -13,6 +13,7 @@
 // Default mixins and settings -----------------
 @import "../../bower_components/reveal.js/css/theme/template/mixins";
 @import "../../bower_components/reveal.js/css/theme/template/settings";
+@import "flat-ui-colors";
 // ---------------------------------------------
 
 
@@ -20,11 +21,10 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
-// Override theme settings (see ../../bower_components/reveal.js/css/theme/template/settings.scss)
-$backgroundColor: #16a085;
+$backgroundColor: $flat-green-sea;
 
-$mainColor: #ecf0f1;
-$headingColor: #ecf0f1;
+$mainColor: $flat-clouds;
+$headingColor: $flat-clouds;
 
 $mainFontSize: 38px;
 $mainFont: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
@@ -33,9 +33,9 @@ $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: normal;
 $headingFontWeight: 300;
-$linkColor: #2c3e50;
-$linkColorHover: #34495e;
-$selectionBackgroundColor: #2980b9;
+$linkColor: $flat-midnight-blue;
+$linkColorHover: $flat-wet-asphalt;
+$selectionBackgroundColor: $flat-belize-hole;
 
 $heading1Size: 2.5em;
 $heading2Size: 1.6em;
@@ -48,14 +48,33 @@ section.has-light-background {
 	}
 }
 
-.reveal section img {
-  max-width: 600px;
-  max-height: 600px;
-  background: none;
-  border: 0;
-  &.plain {
-    box-shadow: none;
+.reveal {
+  section {
+    em {
+      background-color: $flat-amethyst;
+      font-style: normal;
+    }
+    img {
+      max-width: 600px;
+      max-height: 500px;
+      background: none;
+      border: 0;
+      &.plain {
+        box-shadow: none;
+        background: none;
+      }
+    }
+    ul {
+      list-style: none;
+      text-align: center;
+      margin: 0;
+      padding-top: 1em;
+      li {
+        padding-bottom: 0.5em;
+      }
+    }
   }
+
 }
 
 // Theme template ------------------------------

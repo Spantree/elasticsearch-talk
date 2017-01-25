@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "dependencies": {
     "reveal.js": "~3.3.0",
-    "highlightjs": "~9.0.0"
+    "highlightjs": "~9.0.0",
+    "angularjs": "~1.3.0"
   }
 }

@@ -1,15 +1,15 @@
 ### Hey folks!!!
 
-<img src="images/spantree.svg" alt="Spantree Logo" style="max-width: 1000px;"/>
+<img src="images/spantree.svg" alt="Spantree Logo" class="plain"/>
 
 ### is talking about
 
-<img src="images/elasticsearch.png" alt="Elasticsearch Logo" style="max-width: 1500px;"/>
+<img src="images/elasticsearch.png" alt="Elasticsearch Logo" class="plain"/>
 
 
 ### More about Spantree
 
-<img alt="Spantree Team" src="images/team.jpg" style="max-width: 930px; max-height: 600px;"/>
+<img alt="Spantree Team" src="images/team.jpg" class="plain"/>
 
 
 ### Sorts of things we work on

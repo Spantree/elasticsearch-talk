@@ -1,5 +1,6 @@
 ## Terminology
 
+---
 
 ### Document
 
@@ -8,6 +9,7 @@
 * Self-contained
 * Hierarchical
 
+---
 
 ### What a document looks like
 
@@ -23,11 +25,12 @@
     "field3": {
       "subfield0":"value1",
       "subfield1":"value2"
-    } 
+    }
   }
 }
 ```
 
+---
 
 ### Data Types
 
@@ -61,6 +64,7 @@
   </tr>
 </tr>
 
+---
 
 ### Field
 
@@ -68,12 +72,14 @@
 * Has a type
 * Analyzed based on the defined mapping
 
+---
 
 ### Mapping types
 
 * Logical grouping of documents
 * Mappings specify the structure of a document
 
+---
 
 ### Tokens
 
@@ -81,11 +87,13 @@ Individual words or pieces of text indexed by Elasticsearch, for example:
 
 `the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
 
+---
 
 ### Character filters
 
 Preprocess a character stream before being passed to a tokenizer
 
+---
 
 ### Tokenizers
 
@@ -93,6 +101,7 @@ Methods of splitting up a field value into tokens
 
 [Example](http://estalk.spantree.local:9200/_plugin/inquisitor/#/tokenizers)
 
+---
 
 ### Token filters
 
@@ -100,6 +109,7 @@ Modify tokens by adding, removing or changing their values
 
 [Example](http://estalk.spantree.local:9200/_plugin/inquisitor/#/analyzers)
 
+---
 
 ### Analyzers
 
@@ -107,11 +117,13 @@ A chain of character filters, tokenizers and token filters
 
 ![Analysis phases](images/analysis-chain.svg)
 
+---
 
 ### Analyzing at query and index time
 
 ![Mapping and analysis](images/mapping-analysis.svg)
 
+---
 
 ### Index
 
@@ -119,16 +131,19 @@ A chain of character filters, tokenizers and token filters
 * Physically isolated in separate files on disk
 * You can search across indices
 
+---
 
 ### Node
 
 An instance of Elasticsearch
 
+---
 
 ### Cluster
 
 One or more nodes sharing data and workload
 
+---
 
 ### Shard
 
@@ -136,6 +151,7 @@ One or more nodes sharing data and workload
 * Siloed in different directories
 * Can be replicated across nodes
 
+---
 
 ### A physical view
 

@@ -1,5 +1,6 @@
   ## Securing Elasticsearch
 
+---
 
   ### Elasticsearch trusts you
 
@@ -7,6 +8,7 @@
   * Out the box, systems that have access to port 9200 can basically do whatever they want
   * Do not allow direct access to port 9200
 
+---
 
   ### Scripting
 
@@ -14,6 +16,7 @@
   * These scripts are run in a sandbox *as of 1.3.0*
   * [Remote code execution is possible](http://blog.liftsecurity.io/2013/11/30/elasticsearch-command-execution-using-script)
 
+---
 
   ### How to read a file system using dynamic scripts with Python
 
@@ -53,6 +56,7 @@
           document.write("<hr>")
   ```
 
+---
 
 ### Disabling dynamic scripts on older versions
 
@@ -60,6 +64,7 @@
 script.disable_dynamic: false
 ```
 
+---
 
 ### Use preloaded scripts instead
 
@@ -77,6 +82,7 @@ $ cat config/scripts/scoring/recency_boost.groovy
 }
  ```
 
+---
 
 ### Segregate different tenants/users into separate indexes
 
@@ -84,6 +90,7 @@ $ cat config/scripts/scoring/recency_boost.groovy
 * Some apis like multi-search, multi-get and bulk allow take indexes as URL parameters or in the request body
 * Lock this down with `allow_explicit_index: false`
 
+---
 
 ### Sample nginx proxy rules
 
@@ -154,6 +161,7 @@ server {
 }
 ```
 
+---
 
 ### Include ACLs in document body
 
@@ -172,6 +180,7 @@ server {
 }
 ```
 
+---
 
 ### Use filter aliases to enforce ACLs
 
@@ -191,12 +200,14 @@ curl -XPOST 'http://localhost:9200/_aliases' -d '{
 }'
 ```
 
+---
 
 ### For more complex requirements, consider a middle tier gateway app
 
 * When you need things like field-level access policies, consider writing a gateway app
 * Prefer to use asynchronous, non-blocking frameworks like [Node.js](http://nodejs.org/), [Ratpack](http://www.ratpack.io/) or [Frank](https://github.com/panesofglass/frank).
 
+---
 
 ### Pseudocode for a gateway app
 
@@ -215,6 +226,7 @@ http.createServer (req, res) ->
     res.writeHead 401, 'Unauthorized access'
 ```
 
+---
 
 ### (Completely speculative) future security features
 

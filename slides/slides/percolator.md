@@ -2,12 +2,14 @@
 
 ![Percolator Dance](images/percolator.gif)
 
+---
 
 ### Querying, in Reverse
 
 *  Typical flow is index documents -> Issue queries
 *  Percolators let you index queries -> Issue documents
 
+---
 
 ### Uses
 

@@ -1,5 +1,6 @@
 ## What's in the Box?
 
+---
 
 ### Preseeded Elasticsearch Indices
 
@@ -8,17 +9,20 @@
 * **wikipedia/locations** - Chicago locations from wikipedia
 * Kibana / Marvel data
 
+---
 
 ### Kopf
 
 * A simple web administration tool written in AngularJS
 * [Link](http://estalk.spantree.local:9200/_plugin/head/)
 
+---
 
 ### Sense
 
 * Sense gives you autocomplete in queries
 
+---
 
 ### More
 
@@ -26,6 +30,7 @@
 * [Marvel](http://estalk.spantree.local:9200/_plugin/marvel/kibana/index.html#/dashboard/file/marvel.overview.json) - Explore stats on your cluster
 * [Kibana](http://kibana.local) - Make sense of your logs
 
+---
 
 ### API Examples
 

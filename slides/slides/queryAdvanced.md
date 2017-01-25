@@ -1,5 +1,6 @@
 ## Query Options
 
+---
 
 ### Pagination
 
@@ -8,6 +9,7 @@
 * Option of using a cursor
 * [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#05-pagination,S5.3)
 
+---
 
 ### Sorting - What you expect
 
@@ -15,6 +17,7 @@
 
 [API Example](http://es1.local:9200/_plugin/marvel/sense/#06-sorting,L1)
 
+---
 
 ### Sorting - What you don't expect
 

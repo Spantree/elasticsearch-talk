@@ -1,5 +1,6 @@
 ## Indexing
 
+---
 
 ### Anatomy of a Request
 
@@ -14,6 +15,7 @@ curl -XPUT 'http://estalk.spantree.local:9200/wikipedia/location/1' -d '{
 
 [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#02-indexing,S2.1)
 
+---
 
 ### Automatic Mappings
 
@@ -21,6 +23,7 @@ Elasticsearch will guess the mappings for new fields it hasn't seen before
 
 [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#02-indexing,S2.3)
 
+---
 
 ### Update API
 
@@ -28,6 +31,7 @@ You can also update a document via script or "upsert"
 
 [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#02-indexing,S2.5)
 
+---
 
 ### Bulk API
 
@@ -35,6 +39,7 @@ You can also add/remove/update documents in bulk using the Bulk API. This is rec
 
 [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#02-indexing,S2.9)
 
+---
 
 ### Indexing advice
 

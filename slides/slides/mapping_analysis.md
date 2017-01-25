@@ -1,5 +1,6 @@
 ## Mapping, Analysis and Embedded Objects
 
+---
 
 ### Automatic Mappings
 
@@ -8,9 +9,11 @@
 
 [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#04-mapping)
 
+---
 
 ### Embedded Objects
 
+---
 
 ## Inner object
 
@@ -36,8 +39,9 @@
 }
 ```
 
+---
 
-## Nested 
+## Nested
 
 * Maintained as separate document
 * Must be explicitly defined on mapping
@@ -45,6 +49,7 @@
 * Can use "include_in_root" to also index as inner object
 * Can complicate queries if there are multiple types of nested objects used
 
+---
 
 ## Parent-child
 

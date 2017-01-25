@@ -2,15 +2,19 @@
 
 <img src="images/spantree.svg" alt="Spantree Logo" class="plain"/>
 
+---
+
 ### is talking about
 
 <img src="images/elasticsearch.png" alt="Elasticsearch Logo" class="plain"/>
 
+---
 
 ### More about Spantree
 
 <img alt="Spantree Team" src="images/team.jpg" class="plain"/>
 
+---
 
 ### Sorts of things we work on
 
@@ -30,6 +34,7 @@
 ![The Channel Company](images/tcc.jpg)
 ![Wrapports](images/wrapports.png)
 
+---
 
 ### Stuff we use
 
@@ -62,6 +67,7 @@
 ![Marionette.js](images/marionettejs.png)
 ![Dojo](images/dojo.svg)
 
+---
 
 ### How this talk will work
 
@@ -69,6 +75,7 @@ This presentation is also free and open source.
 
 http://github.com/Spantree/elasticsearch-talk
 
+---
 
 ### We will probably run out of time
 

@@ -1,5 +1,7 @@
 network:
-  bind_host: 0.0.0.0
+  host: _site_
+node:
+  name: ${HOSTNAME}
 index:
   number_of_replicas: 0
 http:
@@ -22,5 +24,10 @@ indices:
 discovery:
   zen:
     ping:
+      unicast:
+        hosts: ["elastic1", "elastic2"]
       multicast:
         enabled: false
+repositories:
+  url:
+    allowed_urls: ["https://elasticsearch-sample-data.s3.amazonaws.com/*"]

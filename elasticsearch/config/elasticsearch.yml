@@ -12,9 +12,6 @@ cluster:
       cluster_concurrent_rebalance: 2
     balance:
       primary: 1
-marvel:
-  agent:
-    enabled: false
 bootstrap:
   mlockall: true
 indices:

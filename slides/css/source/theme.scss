@@ -35,8 +35,10 @@ $headingTextTransform: normal;
 $headingFontWeight: 500;
 $subheadingFontWeight: 300;
 $mainFontWeight: 100;
-$linkColor: $flat-midnight-blue;
-$linkColorHover: $flat-wet-asphalt;
+$linkColor: $flat-clouds;
+$linkColorBackground: $flat-midnight-blue;
+$linkColorHover: $flat-clouds;
+$linkColorBackgroundHover: $flat-wet-asphalt;
 $selectionBackgroundColor: $flat-belize-hole;
 
 $heading1Size: 2.5em;
@@ -84,7 +86,23 @@ section.has-light-background {
     }
     em {
       background-color: $flat-amethyst;
-      font-style: normal;
+      padding: 0.2em 0.4em;
+    }
+    a {
+      color: $linkColor;
+      background-color: $linkColorBackground;
+      padding: 0.2em 0.4em;
+      font-weight: $mainFontWeight;
+      &:hover {
+        background-color: $linkColorBackgroundHover;
+      }
+      &:after {
+        font-family: FontAwesome;
+        // fa-external-link
+        content: "\f08e";
+        padding-left: 0.5em;
+        font-size: 0.7em;
+      }
     }
     ul {
       list-style: none;
@@ -101,6 +119,25 @@ section.has-light-background {
       code {
         padding: 15px;
       }
+    }
+    code {
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;;
+      font-size: 0.9em;
+      background-color: darken($flat-midnight-blue, 10%);
+      color: $flat-clouds;
+      padding: 5px 10px;
+      // .hljs-string {
+      //   color: $flat-peter-river;
+      // }
+      // .hljs-keyword {
+      //   color: $flat-alizarin;
+      // }
+      // .hljs-number {
+      //   color: $flat-amethyst;
+      // }
+      // .hljs-attr {
+      //   color: $flat-alizarin;
+      // }
     }
     table {
       th {

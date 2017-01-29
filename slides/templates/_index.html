@@ -57,8 +57,24 @@
 
         <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
         <script src="bower_components/reveal.js/js/reveal.js"></script>
+        <script src="bower_components/reveal.js/plugin/markdown/marked.js"></script>
         <script src="bower_components/packery/dist/packery.pkgd.min.js"></script>
         <script>
+          marked.Renderer.prototype.image = function(href, title, text) {
+            var split = href.split('#');
+            var classes = split[1] ? split[1].replace(/[\s,]/, " ") : '';
+            var href = split[0];
+            var out = '<img src="' + href + '" alt="' + text + '"';
+            if (title) {
+              out += ' title="' + title + '"';
+            }
+            if (classes) {
+              out += ' class="' + classes + '"';
+            }
+            out += this.options.xhtml ? '/>' : '>';
+            return out;
+          }
+          var mdRenderer = new marked.Renderer();
 
           // Full list of configuration options available at:
           // https://github.com/hakimel/reveal.js#configuration
@@ -68,12 +84,17 @@
             history: true,
             center: true,
 
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+            markdown: {
+              smartypants: true,
+              renderer: mdRenderer,
+            },
 
             // Optional reveal.js plugins
             dependencies: [
               { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-              { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              // { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
               { src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
               { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( '[data-html]' ) || !!document.querySelector( 'pre code' ) || !!document.querySelector( '[data-markdown]' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
               { src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true },

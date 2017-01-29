@@ -22,6 +22,14 @@ services:
     ports:
       - "9201:9200"
       - "9301:9300"
+    depends_on:
+      - elastic1
+  inquisitor:
+    image: spantree/elasticsearch-inquisitor
+    environment:
+      ELASTICSEARCH_URL: "http://elastic1:9200"
+    ports:
+      - "9400:80"
   # www:
   #   image: spantree/elasticsearch-talk-www:latest
   #   ports:

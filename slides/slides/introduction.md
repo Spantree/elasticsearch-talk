@@ -43,34 +43,17 @@
 
 ### Stuff we use
 
-![Amazon Web Services](images/aws.svg)
-![Asgard](images/asgard.png)
-![Netflix Simian Army](images/simian-army.png)
-![Github](images/github.svg)
-![Vagrant](images/vagrant.png)
-![Packer](images/packer.png)
+<!-- .slide: class="stuff-we-use" -->
 
-![Puppet](images/puppet.svg)
-![Jenkins](images/jenkins.png)
-![Apache JMeter](images/jmeter.png)
-![Gatling](images/gatling.png)
-
-![PostgreSQL](images/postgres.svg)
-![MongoDB](images/mongodb.png)
-![Neo4J](images/neo4j.svg)
-![Elasticsearch](images/elasticsearch.png)
-
-![Java](images/java.svg)
-![Groovy](images/groovy.svg)
-![Grails](images/grails.svg)
-![Scala](images/scala.png)
-
-![Angular](images/angular.png)
-![jQuery](images/jquery.svg)
-![Coffeescript](images/coffeescript.svg)
-![Backbone.js](images/backbone.png)
-![Marionette.js](images/marionettejs.png)
-![Dojo](images/dojo.svg)
+* **Cloud Platforms.** AWS, Google Cloud, Heroku.
+* **Devops Tooling.** Docker, Kubernetes, Mesos, Chef, Ansible.
+* **Continuous Delivery.** Jenkins, CircleCI, Spinnaker.
+* **Frontend Languages.** EcmaScript 6, Clojurescript, Elm.
+* **Frontend Frameworks.** React, Angular, Backbone, Reframe.
+* **Backend Languages.** Java, Scala, Clojure, Groovy, Kotlin, Golang, Elixir.
+* **Backend Frameworks.** Spring Boot, Grails, Akka, Compojure, Phoenix.
+* **Testing Frameworks.** Spock, Geb, Gatling, Selenium.
+* **Databases.** PostgreSQL, Mongo, Elasticsearch, Neo4J, Dynamo, Redshift, Redis.
 
 ---
 

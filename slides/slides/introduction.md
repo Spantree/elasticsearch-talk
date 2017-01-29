@@ -1,18 +1,16 @@
-### Hey folks!!!
+### Hi friends!
 
-<img src="images/spantree.svg" alt="Spantree Logo" class="plain"/>
-
----
+![Spantree Logo](images/spantree-white.png#plain)
 
 ### is talking about
 
-<img src="images/elasticsearch.png" alt="Elasticsearch Logo" class="plain"/>
+![Elastic Logo](images/elastic-white.png#plain) <!-- .element: style="max-height: 160px;" -->
 
 ---
 
 ### More about Spantree
 
-<img alt="Spantree Team" src="images/team.jpg" class="plain"/>
+![Spantree Team](images/team.jpg#plain)
 
 ---
 
@@ -62,10 +60,3 @@
 This presentation is also free and open source.
 
 http://github.com/Spantree/elasticsearch-talk
-
----
-
-### We will probably run out of time
-
-But if we do we'll try to record the full version
-and post it online.

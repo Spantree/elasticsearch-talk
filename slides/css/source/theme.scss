@@ -32,7 +32,9 @@ $headingFont: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-se
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: normal;
-$headingFontWeight: 300;
+$headingFontWeight: 500;
+$subheadingFontWeight: 300;
+$mainFontWeight: 100;
 $linkColor: $flat-midnight-blue;
 $linkColorHover: $flat-wet-asphalt;
 $selectionBackgroundColor: $flat-belize-hole;
@@ -50,10 +52,6 @@ section.has-light-background {
 
 .reveal {
   section {
-    em {
-      background-color: $flat-amethyst;
-      font-style: normal;
-    }
     img {
       max-width: 600px;
       max-height: 500px;
@@ -64,6 +62,30 @@ section.has-light-background {
         background: none;
       }
     }
+    .grid {
+      img {
+        max-width: 200px;
+        max-height: 70px;
+        border: 0;
+        box-shadow: none;
+        background: none;
+        // filter: grayscale(100%);
+      }
+    }
+
+    h1, h2, h3 {
+      font-weight: $headingFontWeight;
+    }
+    h4, h5, h6 {
+      font-weight: $subheadingFontWeight;
+    }
+    p {
+      font-weight: $mainFontWeight;
+    }
+    em {
+      background-color: $flat-amethyst;
+      font-style: normal;
+    }
     ul {
       list-style: none;
       text-align: center;
@@ -71,7 +93,30 @@ section.has-light-background {
       padding-top: 1em;
       li {
         padding-bottom: 0.5em;
+        font-weight: $mainFontWeight;
       }
+    }
+    pre {
+      box-shadow: none;
+      code {
+        padding: 15px;
+      }
+    }
+    table {
+      th {
+        font-weight: $headingFontWeight;
+      }
+      td {
+        font-weight: $mainFontWeight;
+      }
+      &.examples {
+        font-size: 0.8em;
+        line-height: 2;
+      }
+    }
+
+    .stuff-we-use {
+      font-size: 0.7em;
     }
   }
 

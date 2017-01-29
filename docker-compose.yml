@@ -1,29 +1,32 @@
 version: '2'
 services:
   elastic1:
-    build: elasticsearch
-    volumes:
-      - "./elasticsearch/config:/usr/share/elasticsearch/config"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+    extends:
+      file: docker-compose-elasticsearch.yml
+      service: elasticsearch
+    environment:
+      ES_NODENAME: elastic1
     ports:
       - "9200:9200"
       - "9300:9300"
   elastic2:
-    build: elasticsearch
-    volumes:
-      - "./elasticsearch/config:/usr/share/elasticsearch/config"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+    extends:
+      file: docker-compose-elasticsearch.yml
+      service: elasticsearch
+    environment:
+      ES_NODENAME: elastic2
     ports:
       - "9201:9200"
       - "9301:9300"
-    depends_on:
-      - elastic1
+  elastic3:
+    extends:
+      file: docker-compose-elasticsearch.yml
+      service: elasticsearch
+    environment:
+      ES_NODENAME: elastic3
+    ports:
+      - "9202:9200"
+      - "9302:9300"
   inquisitor:
     image: spantree/elasticsearch-inquisitor
     environment:

@@ -1,6 +1,8 @@
-![Elasticsearch logo](images/elasticsearch.png)
+![Elasticsearch logo](images/elastic-white.png#plain)  <!-- .element: style="max-height: 160px;" -->
 
-<p><img src="images/kimchy.jpeg" style="width:50px;vertical-align:text-top"> "You know, for Search!"</p>
+"You know, for Search!"
+
+![Shay Bannon](images/shay-bannon.jpg) <!-- .element: style="max-height: 160px;" -->
 
 ---
 
@@ -92,9 +94,9 @@ This document should match <em>example doodad</em>
     </tr>
     <tr>
       <th>Pattern Replace</th>
-      <td>(888) 386-5501</td>
+      <td>+1 (888) 386-5501</td>
       <td>&#8781;</td>
-      <td>888.386.5501</td>
+      <td>8883865501</td>
     </tr>
     <tr>
       <th>Edge NGram</th>

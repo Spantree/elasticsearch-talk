@@ -20,15 +20,18 @@
 * Tribes
 -->
 
+---
 
 ### Terminology
 
+---
 
 ### Primary shard
 
 * Where documents are indexed
 * Quantity can only be set at index creation
 
+---
 
 ### Replica shard
 
@@ -36,6 +39,7 @@
 * Handles queries
 * Grow and shrink as desired
 
+---
 
 ### Master Node
 
@@ -44,11 +48,13 @@
 * Does not necessarily have all the primary shards
 * Does not necessarily coordinate all the queries
 
+---
 
 ### Zen
 
 * Elasticsearch built-in discovery algorithm
 
+---
 
 ### Multicast Zen
 
@@ -56,21 +62,25 @@
 * (Port 54328 broadcast to multicast group 224.2.2.4)
 * Doesn't work well in some cases
 
+---
 
 ### Zen: Unicast
 
 * Specify list of IP addresses
 
+---
 
-### On AWS 
+### On AWS
 
 * Use AWS Discovery Plugin
 * Discover based on groups, IPs, tags
 * Bonus: save snapshots to S3
 
+---
 
 ### Types of cluster communication
 
+---
 
 ### Client nodes
 
@@ -79,6 +89,7 @@
 * Port 9300
 * Full mesh
 
+---
 
 ### Transport client
 
@@ -86,6 +97,7 @@
 * Does not join cluster
 * Port 9300
 
+---
 
 ### Elasticsearch connections
 
@@ -95,48 +107,59 @@
 * **State (1)** - Cluster state read/write
 * **Ping (1)** - Detecting missing nodes
 
+---
 
 ### REST client
 
 * HTTP
 * Port 9200
 
+---
 
 ### Balancing load
 
+---
 
 ### Automatic shard balancing
 
 ![Analysis phases](images/sharding-replica.svg)
 
+---
 
 ### Recovery
 
 * If master failed, elect a new master
 * If primary replica failed, make another replica primary
 
+---
 
 ### Routing
 
+---
 
 ### Hashing a document to its location
 * **```shard = hash(id) % number_of_primary_shards```**
 * Customizable
 
+---
 
 ### Servicing queries
 
+---
 
 ### Servicing a search query
 ![Query phases](images/query-steps.svg)
 
+---
 
 ### Split brain
 
+---
 
-### Split brain problem 
+### Split brain problem
 ![Query phases](images/split-brain.svg)
 
+---
 
 ### Split brain safeguard
 * Have an odd number of master-eligible nodes
@@ -145,9 +168,11 @@
 discovery.zen.minimum_master_nodes: 2 #(n/2)+1
 ```
 
+---
 
 ### High load
 
+---
 
 ### Load problem
 
@@ -155,16 +180,18 @@ discovery.zen.minimum_master_nodes: 2 #(n/2)+1
 * Other master-eligible nodes under heavy load too
 * Triggers a lot of instability
 
+---
 
 ### Dedicated masters
 
 * Eligible masters and clients, but not data nodes
 
 ```
-node.master: true 
+node.master: true
 node.data: false
 ```
 
+---
 
 * Client-only data nodes
 

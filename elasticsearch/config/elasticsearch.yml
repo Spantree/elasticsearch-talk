@@ -1,7 +1,7 @@
 network:
   host: _site_
 node:
-  name: ${HOSTNAME}
+  name: ${ES_NODENAME}
 index:
   number_of_replicas: 0
 http:

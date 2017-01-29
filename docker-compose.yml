@@ -42,12 +42,15 @@ services:
   #   environment:
   #     ES_HEAP_SIZE: 2g
   #   command: "logstash agent --config /etc/logstash/conf.d/logstash.conf"
-  # kibana:
-  #   image: bobrik/kibana:4.0.2
-  #   ports:
-  #     - "5601:5601"
-  #   environment:
-  #     KIBANA_ES_URL: "http://logstash:9200"
+  kibana:
+    build: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: "http://elastic1:9200"
+    depends_on:
+      - elastic1
+      - elastic2
   slides:
     image: spantree/reveal:3.4.0
     ports:

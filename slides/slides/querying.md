@@ -22,6 +22,8 @@ curl -XPOST "http://estalk.spantree.local:9200/wikipedia/_search" -d '{
 
 ### Types of Queries
 
+<!-- .slide: style="font-size: 0.7em;" -->
+
 <table>
 <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
 

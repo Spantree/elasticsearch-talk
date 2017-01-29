@@ -53,7 +53,7 @@
 
 ## Parent-child
 
-* Child is a first-class document that has a special *_parent* type
+* Child is a first-class document that has a special `_parent` type
 * Can query on children separately from parents
 * Can do "Has Child/Parent" queries
 * Slower and require an in-memory *join table*

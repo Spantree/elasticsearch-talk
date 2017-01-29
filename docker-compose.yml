@@ -55,6 +55,8 @@ services:
     image: spantree/reveal:3.4.0
     ports:
       - "9000:9000"
+      # live reload port
+      - "35729:35729"
     volumes:
       - ./slides:/usr/src/slides
       - /usr/src/slides/node_modules

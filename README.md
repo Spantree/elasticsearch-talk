@@ -26,6 +26,10 @@ Install the following tools to bootstrap your environment. We've tested this set
 * Install [Git](https://help.github.com/articles/set-up-git).
 * Install [Docker (Native Linux)](https://docs.docker.com/engine/installation/) or [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 
+Note: If you're running Docker for Mac, be sure to assign about 4-6GB to your
+Docker engine by clicking on the whale in the Mac status bar, selecting
+"Preferences" and then going to the "Advanced" tab. The more memory, the better.
+
 #### Clone this repository and start Docker Compose
 
 ```bash

@@ -52,15 +52,22 @@ services:
       - "5601:5601"
     environment:
       ELASTICSEARCH_URL: "http://elastic1:9200"
+    volumes:
+      - "./kibana/config:/opt/kibana/config"
     depends_on:
       - elastic1
       - elastic2
+      - elastic3
   slides:
     image: spantree/reveal:3.4.0
     ports:
       - "9000:9000"
-      # live reload port
-      - "35729:35729"
+      - "35729:35729" # to enable live reloading
+    environment:
+      ELASTICSEARCH_URL: http://localhost:9200
+      KIBANA_URL: http://localhost:5601
+      INQUISITOR_URL: http://localhost:9400
+      EXERCISES_URL: http://localhost:9500
     volumes:
       - ./slides:/usr/src/slides
       - /usr/src/slides/node_modules

@@ -4,7 +4,7 @@ The following repository corresponds to [Spantree](http://www.spantree.net)'s El
 
 ### Screencast
 
-If you're more of a visual and auditory learner, we've got you covered! We recorded a [live version](http://bit.ly/strangeloop-elasticsearch) of this talk during our [workshop at the StrangeLoop Conference](https://thestrangeloop.com/sessions/getting-started-with-elasticsearch) in September 2014. Some of the artifacts have since been updated for later versions of Elasticsearch.
+If you're more of a visual and auditory learner, we've got you covered! We recorded a [live version](http://bit.ly/strangeloop-elasticsearch) of this talk during our [workshop at the StrangeLoop Conference](https://thestrangeloop.com/sessions/getting-started-with-elasticsearch) in September 2014, though most of the artifacts have since been updated for later versions of Elasticsearch.
 
 ### Authors
 
@@ -21,52 +21,35 @@ the time of the presentation, but the Docker stuff shouldn't change too much.
 
 #### Tools You'll Need
 
-Install the following tools to bootstrap your environment
+Install the following tools to bootstrap your environment. We've tested this setup primarily on Macs.
 
-* Install [Git](https://help.github.com/articles/set-up-git)
-* If on Mac or Windows, install Boot2Docker
-  * [Mac](https://docs.docker.com/installation/mac/)
-  * [Windows](https://docs.docker.com/installation/windows/)
-* Install [Docker Compose](https://docs.docker.com/compose/)
-
-#### Launch a boot2docker machine
-
-For some of the labs, we'll need a little bit more RAM than the 2GB normally provided, which we can do by providing the `-m 4096` flag. We'll also want to create a local host entry for our boot2docker vm so we can access Elasticsearch and various other services from our host machine. If you're on Windows, the syntax may be slightly different and you may have to manually write out your `/etc/hosts` entry. If you know a better way, pull requests are very welcome.
-
-```bash
-boot2docker init -m 4096
-boot2docker up
-$(boot2docker shellinit)
-echo "$(boot2docker ip) estalk.spantree.local esdemo.local" | sudo tee -a /etc/hosts
-```
+* Install [Git](https://help.github.com/articles/set-up-git).
+* Install [Docker (Native Linux)](https://docs.docker.com/engine/installation/) or [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 
 #### Clone this repository and start Docker Compose
 
 ```bash
 git clone --depth 1 https://github.com/Spantree/elasticsearch-talk.git
 cd elasticsearch-talk
-docker-compose up
+./init-all-the-things.sh
 ```
 
 #### Dance!
 
 That's it.  That's all there is to it.
 
-You should now be able to access elasticsearch on your machine from a web browser at `http://estalk.spantree.local`:
+You should now be able to access elasticsearch on your machine from a web browser at `http://localhost:9200`
 
-![esdemo in a web browser](images/esdemo-web-browser.gif)
+<!-- ![esdemo in a web browser](images/esdemo-web-browser.gif) -->
 
 #### Stay up-to-date
 
-As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have 
+As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have
 the latest changes by doing the following from your host terminal:
 
 ```
 git pull
-docker pull spantree/elasticsearch-talk-es
-docker pull spantree/elasticsearch-talk-www
-docker pull spantree/logstash-star-wars-kid
-docker compose up
+docker-compose up --pull
 ```
 
 #### Show us some love

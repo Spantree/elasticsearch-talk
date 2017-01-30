@@ -33,18 +33,19 @@ services:
       ELASTICSEARCH_URL: "http://elastic1:9200"
     ports:
       - "9400:80"
-  # www:
-  #   image: spantree/elasticsearch-talk-www:latest
-  #   ports:
-  #     - "80:80"
-  # logstash:
-  #   image: spantree/logstash-star-wars-kid:latest
-  #   ports:
-  #     - "3333:3333"
-  #     - "9201:9200"
-  #   environment:
-  #     ES_HEAP_SIZE: 2g
-  #   command: "logstash agent --config /etc/logstash/conf.d/logstash.conf"
+  exercises:
+    image: nginx:1.11-alpine
+    volumes:
+      - "./exercises:/usr/share/nginx/html"
+      - "./exercises/nginx:/etc/nginx"
+    ports:
+      - "9500:80"
+  logstash:
+    image: logstash:5
+    volumes:
+      - "./logstash/"
+    ports:
+      - "3333:3333"
   kibana:
     build: kibana
     ports:

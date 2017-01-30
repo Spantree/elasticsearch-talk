@@ -69,7 +69,7 @@ Develop a composable dashboard and data visualization tool to help us make sense
 
 ### What does grok look like?
 
-```json
+```
 input {
   file {
     path => "/var/log/http.log"
@@ -125,4 +125,4 @@ We already know about Elasticsearch (woo!)
 
 ### Kibana
 
-[A picture is worth a thousand words](http://kibana.local)
+[A picture is worth a thousand words](kibana://app/kibana)

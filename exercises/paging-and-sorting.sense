@@ -49,8 +49,6 @@ GET /wikipedia/_search
 # Note: make sure to copy the scroll id from the result because we're
 # going to need it in the next step
 #
-# TODO: Verify this still works the same way
-#
 GET /wikipedia/_search?search_type=scan&scroll=10m&size=10
 {
   "fields": ["name", "coordinates"],

@@ -30,3 +30,18 @@ discovery:
 repositories:
   url:
     allowed_urls: ["https://elasticsearch-sample-data.s3.amazonaws.com/*"]
+script:
+  engine:
+    groovy:
+      inline:
+        aggs: true
+        mapping: true
+        search: true
+        update: true
+        plugin: true
+      indexed:
+        aggs: true
+        mapping: true
+        search: true
+        update: true
+        plugin: true

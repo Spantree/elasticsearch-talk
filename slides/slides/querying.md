@@ -25,7 +25,7 @@ curl -XPOST "http://localhost:9200/wikipedia/_search" -d '{
 <!-- .slide: style="font-size: 0.7em;" -->
 
 <table>
-<tr><td>match</td><td>multi match </td><td> bool</td><tr>                
+<tr><td>match</td><td>multi match </td><td> bool</td><tr>
 
 <tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr>
 <tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr>
@@ -56,7 +56,7 @@ curl -XPOST "http://localhost:9200/wikipedia/_search" -d '{
 
 ### Inverted index
 <div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
-  <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
+  <div ng-include src="'js/templates/_invindex.html'"></div>
 </div>
 
 ---
@@ -90,7 +90,7 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 ### Scoring demo
 <div class="row tfidf-illustration ix-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
-  <dv ng-include src="'sections/js/templates/_scoring.html'"></div>
+  <div ng-include src="'js/templates/_scoring.html'"></div>
 </div>
 
 ---

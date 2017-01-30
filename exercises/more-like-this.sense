@@ -8,12 +8,42 @@
 # This request will return all documents with similar names,"about"
 # fields, or descriptions as the lake_shore_drive wikipedia page.
 #
-GET /wikipedia/locations/lake_shore_drive/_mlt?name,about,description&min_doc_freq=1
+POST /wikipedia/_search
+{
+  "query": {
+    "more_like_this" : {
+        "fields" : ["name", "about", "description"],
+        "like" : [
+        {
+            "_index" : "wikipedia",
+            "_type" : "locations",
+            "_id" : "northwestern_university_settlement_house"
+        }
+        ],
+        "min_term_freq" : 1,
+        "max_query_terms" : 12
+    }
+  }
+}
 
 # Limit the terms shown in the results. You may not necessarily want
 # to see ALL of the information returned by the "more like this"
 # query.
-GET /wikipedia/locations/lake_shore_drive/_mlt?name,about,description&min_doc_freq=1
+POST /wikipedia/_search
 {
-    "fields" : ["about"]
+  "fields" : ["about"],
+  "query": {
+    "more_like_this" : {
+        "fields" : ["name", "about", "description"],
+        "like" : [
+        {
+            "_index" : "wikipedia",
+            "_type" : "locations",
+            "_id" : "northwestern_university_settlement_house"
+        }
+        ],
+        "min_term_freq" : 1,
+        "max_query_terms" : 12
+    }
+  }
 }

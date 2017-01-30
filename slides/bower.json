@@ -8,6 +8,7 @@
     "highlightjs": "~9.0.0",
     "MathJax": "~2.7.0",
     "packery": "2.1.1",
-    "reveal.js": "~3.3.0"
+    "reveal.js": "~3.3.0",
+    "jquery": "1.7.1"
   }
 }

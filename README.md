@@ -10,7 +10,7 @@ If you're more of a visual and auditory learner, we've got you covered! We recor
 
 **Cedric Hurst:** Principal &amp; Lead Software Engineer<br/>
 **Kevin Greene:** Senior Software Engineer<br/>
-**Gary Turovsky:** Senior Software Engineer<br/>
+**Gary Turovsky:** Senior Software Engineer Emeritus<br/>
 **Jonathan Freeman:** Senior Software Engineer<br/>
 
 ### Instructions for setting up this sample project
@@ -58,7 +58,7 @@ You should now be able to access elasticsearch on your machine from a web browse
 
 #### Stay up-to-date
 
-As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have 
+As mentioned, we may be altering the vagrant configuration up until the time of the presentation, so make sure you have
 the latest changes by doing the following from your host terminal:
 
 ```

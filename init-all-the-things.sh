@@ -35,4 +35,4 @@ wait_for_http_port 9000
 docker-compose stop
 
 # Download all the sample data we will play around with
-./load-sample-data.sh
+./download-sample-files.sh

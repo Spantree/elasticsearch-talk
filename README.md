@@ -105,7 +105,7 @@ Once you're done with the tutorial, you can remove the Docker containers and sam
 ```bash
 docker-compose stop
 docker-compose rm -f
-docker volume ls -qf dangling=true | xargs -r docker volume rm
+docker volume ls -qf dangling=true | xargs docker volume rm
 rm data/*
 ```
 

@@ -26,6 +26,7 @@ discovery:
           - elastic1
       multicast:
         enabled: false
+    minimum_master_nodes: 2
 repositories:
   url:
     allowed_urls: ["https://elasticsearch-sample-data.s3.amazonaws.com/*"]

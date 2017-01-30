@@ -1,21 +1,23 @@
+/*jshint strict:false, unused: false */
+/*globals angular, console, document, MathJax */
 
-/*var app = angular.module('presentation',[]);
+var app = angular.module('presentation',[]);
 
-app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $timeout) {
+app.controller( 'InvertedIndexController', function ($scope, $filter, $sce, $timeout) {
 
     var orderBy = $filter('orderBy');
     var number = $filter('number');
 
     $scope.documents = {
-        "0":'work it harder make it better',
-        "1":'do it faster makes us stronger',
-        "2":'more than ever hour after',
+        '0':'work it harder make it better',
+        '1':'do it faster makes us stronger',
+        '2':'more than ever hour after',
     };
 
     $scope.documentCount = null;
 
     $scope.documentsHtml = {};
-    $scope.invIndexMap = {}
+    $scope.invIndexMap = {};
     $scope.invIndex = [];
     $scope.searchQuery = '';
     $scope.searchWords = [];
@@ -26,21 +28,22 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
     $scope.tab = 'tfidf';
 
     $scope.resetHighlighting = function() {
-        for(docKey in $scope.documents) {
+        for(var docKey in $scope.documents) {
             $scope.documentsHtml[docKey] = $sce.trustAsHtml($scope.documents[docKey]);
         }
-    }
+    };
 
     $scope.resetHighlighting();
 
     $scope.getCosSimFormula = function(docKey) {
+        var number = $filter('number');
         var dotProductTerms = [];
         var docLenTerms = [];
         var queryLenTerms = [];
 
-        var wordScores = $scope.tfidfScores[docKey]
+        var wordScores = $scope.tfidfScores[docKey];
 
-        for(wordIx in $scope.searchWords) {
+        for(var wordIx in $scope.searchWords) {
             var wordKey = $scope.searchWords[wordIx];
             var score = wordScores[wordKey];
 
@@ -56,9 +59,9 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
         var docLen = 0;
         var queryLen = 0;
 
-        var wordScores = $scope.tfidfScores[docKey]
+        var wordScores = $scope.tfidfScores[docKey];
 
-        for(wordIx in $scope.searchWords) {
+        for(var wordIx in $scope.searchWords) {
             var wordKey = $scope.searchWords[wordIx];
             var score = wordScores[wordKey];
 
@@ -67,7 +70,7 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
             queryLen++;
         }
 
-        var cosSimScore =  dotProductValue
+        var cosSimScore =  dotProductValue;
 
         if(docLen > 0) {
             cosSimScore = cosSimScore / ( Math.sqrt(docLen) * Math.sqrt(queryLen) );
@@ -76,34 +79,35 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
             return 0;
         }
 
-    }
+    };
 
     $scope.updateQuery = function() {
         if( Object.keys($scope.invIndexMap).length === 0) {
             $scope.buildInvIndex();
-            $scope.documentCount = Object.keys($scope.documents).length;
         }
 
         console.log($scope.searchQuery);
         $scope.searchWords = $scope.searchQuery.trim().split(' ');
 
         $scope.documentFrequencies = {};
-        $scope.termFrequencies = {}
+        $scope.termFrequencies = {};
 
-        for(wordIx in $scope.searchWords) {
-            var word = $scope.searchWords[wordIx];
+        var word;
+        var docKey;
+        for(var wordIx in $scope.searchWords) {
+            word = $scope.searchWords[wordIx];
 
             if($scope.invIndexMap[word] !== undefined) {
-                $scope.documentFrequencies[word] = Object.keys($scope.invIndexMap[word]['documents']).length;
+                $scope.documentFrequencies[word] = Object.keys($scope.invIndexMap[word].documents).length;
 
                 for(docKey in $scope.documents) {
 
-                    if($scope.termFrequencies[docKey] == undefined) {
+                    if($scope.termFrequencies[docKey] === undefined) {
                         $scope.termFrequencies[docKey] = {};
                     }
 
-                    if($scope.invIndexMap[word]['documents'][docKey] !== undefined) {
-                        $scope.termFrequencies[docKey][word] = Object.keys($scope.invIndexMap[word]['documents'][docKey]).length;
+                    if($scope.invIndexMap[word].documents[docKey] !== undefined) {
+                        $scope.termFrequencies[docKey][word] = Object.keys($scope.invIndexMap[word].documents[docKey]).length;
                     } else {
                         $scope.termFrequencies[docKey][word] = 0;
                     }
@@ -112,7 +116,7 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
                 $scope.documentFrequencies[word] = 0;
 
                 for(docKey in $scope.documents) {
-                    if($scope.termFrequencies[docKey] == undefined) {
+                    if($scope.termFrequencies[docKey] === undefined) {
                         $scope.termFrequencies[docKey] = {};
                     }
 
@@ -126,9 +130,8 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
 
         for(docKey in $scope.documents) {
             $scope.tfidfScores[docKey] = {};
-
             for(wordIx in $scope.searchWords) {
-                var word = $scope.searchWords[wordIx];
+                word = $scope.searchWords[wordIx];
 
                 if($scope.documentFrequencies[word] === 0) {
                     $scope.tfidfScores[docKey][word] = 0;
@@ -141,32 +144,34 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
     };
 
     $scope.updateMathJax = function() {
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    }
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+    };
 
     $scope.highlight = function(word) {
         $scope.resetHighlighting();
 
         var wordLocations = $scope.invIndexMap[word];
 
-        for(docKey in wordLocations.documents) {
+        for(var docKey in wordLocations.documents) {
            var doc = $scope.documents[docKey].trim().split(' ');
-           var wordIndices = wordLocations['documents'][docKey]
+           var wordIndices = wordLocations.documents[docKey];
 
-           for(ix in wordIndices) {
+           for(var ix in wordIndices) {
                 var wordIx = wordIndices[ix];
-                words[wordIx] = "<em class=\"text-primary\">" + words[wordIx] + "</em>"
+                doc[wordIx] = '<em class="text-primary">' + doc[wordIx] + '</em>';
            }
 
-           var newDoc = words.join(' ');
+           var newDoc = doc.join(' ');
 
            $scope.documentsHtml[docKey] = $sce.trustAsHtml(newDoc);
         }
     };
 
     $scope.buildInvIndex = function() {
+        var orderBy = $filter('orderBy');
 
         $scope.invIndexMap = {};
+        $scope.documentCount = Object.keys($scope.documents).length;
         for(var docIx in $scope.documents) {
             var doc = $scope.documents[docIx];
             doc = doc.trim();
@@ -181,16 +186,16 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
                     };
                 }
 
-                if($scope.invIndexMap[word]['documents'] === undefined || $scope.invIndexMap[word]['documents'] === null) {
-                    $scope.invIndexMap[word]['documents'] = {};
+                if($scope.invIndexMap[word].documents === undefined || $scope.invIndexMap[word].documents === null) {
+                    $scope.invIndexMap[word].documents = {};
                 }
 
-                if($scope.invIndexMap[word]['documents'][docIx] === undefined || $scope.invIndexMap[word]['documents'][docIx] === null) {
-                    $scope.invIndexMap[word]['documents'][docIx] = [];
+                if($scope.invIndexMap[word].documents[docIx] === undefined || $scope.invIndexMap[word].documents[docIx] === null) {
+                    $scope.invIndexMap[word].documents[docIx] = [];
                 }
 
-                $scope.invIndexMap[word]['documentsLength'] = Object.keys($scope.invIndexMap[word].documents).length;
-                $scope.invIndexMap[word]['documents'][docIx].push(wordIx);
+                $scope.invIndexMap[word].documentsLength = Object.keys($scope.invIndexMap[word].documents).length;
+                $scope.invIndexMap[word].documents[docIx].push(wordIx);
             }
         }
 
@@ -208,21 +213,21 @@ app.controller( "InvertedIndexController", function ($scope, $filter, $sce, $tim
 });
 
 // Copied from http://stackoverflow.com/a/16646667 and then slightly modified
-app.directive("mathjaxBind", function() {
+app.directive('mathjaxBind', function() {
     return {
-        restrict: "A",
-        controller: ["$scope", "$element", "$attrs",
+        restrict: 'A',
+        controller: ['$scope', '$element', '$attrs',
             function($scope, $element, $attrs) {
                 $scope.$watch(
                     function() {
                         return $element.attr( $attrs.$attr.mathjaxBind);
                     },
                     function(texExpression) {
-                        var texScript = angular.element("<script type='math/tex'>")
-                            .html(texExpression ? texExpression :  "");
-                        $element.html("");
+                        var texScript = angular.element('<script type="math/tex">')
+                            .html(texExpression ? texExpression :  '');
+                        $element.html('');
                         $element.append(texScript);
-                        MathJax.Hub.Queue(["Reprocess", MathJax.Hub, $element[0]]);
+                        MathJax.Hub.Queue(['Reprocess', MathJax.Hub, $element[0]]);
                     }
                 );
         }]
@@ -231,7 +236,7 @@ app.directive("mathjaxBind", function() {
 
 var svg = null;
 
-function init(e) {
+function init() {
     angular.bootstrap(document, ['presentation']);
 }
 
@@ -241,4 +246,4 @@ function onShow(e) {
 
 document.addEventListener( 'ix-illustration-show', onShow, false );
 document.addEventListener( 'tfidf-illustration-show', onShow, false );
-*/
+

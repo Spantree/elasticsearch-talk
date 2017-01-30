@@ -1,45 +1,50 @@
 .ix-illustration .document-panel {
-	height: 500px; 
-	overflow-y: scroll; 
-	padding: 30px;
+    height: 500px;
+    overflow-y: scroll;
+    padding: 30px;
+    color: #555
 }
 
 .ix-illustration .document-panel-item {
-	padding-bottom: 5px; 
-	height: 100px; 
+    padding-bottom: 5px;
+    height: 100px;
 }
 
 .ix-illustration .document-panel-item span {
-	font-size: 14pt;
+    font-size: 14pt;
 }
 
 .ix-illustration .document-item {
-	font-size: 18pt; 
-	line-height: 20pt; 
-	font-weight: bold; 
-	height: 60px; 
+    font-size: 18pt;
+    line-height: 28pt;
+    font-weight: bold;
+    height: 60px;
+}
+
+.ix-illustration .document-item em {
+    background-color: #ddd;
 }
 
 .ix-illustration .radio-inline {
-	font-size: 50%; 
-	line-height: 100%; 
-	padding-right: 10px;
+    font-size: 50%;
+    line-height: 100%;
+    padding-right: 10px;
 }
 
 .ix-illustration .checkbox-inline {
-	font-size: 50%; 
-	line-height: 100%;
+    font-size: 50%;
+    line-height: 100%;
 }
 
 .ix-illustration table {
-	font-size: 70%;
+    font-size: 70%;
 }
 
 .ix-illustration table .entry-highlighted {
-	cursor: pointer; 
-	font-weight: bold;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .ix-illustration button {
-	margin-top: 30px;
+    margin-top: 30px;
 }

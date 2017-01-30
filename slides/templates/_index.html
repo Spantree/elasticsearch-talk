@@ -13,8 +13,11 @@
 
         <link rel="icon" href="/images/elastic-favicon.ico" type="image/x-icon">
 
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="css/ix-illustration.css">
 
         <link rel="stylesheet" href="css/theme.css" id="theme">
 
@@ -68,6 +71,7 @@
         <script src="bower_components/reveal.js/plugin/markdown/marked.js"></script>
         <script src="js/markdown-customizations.js"></script>
         <script src="bower_components/packery/dist/packery.pkgd.min.js"></script>
+        <script src="bower_components/jquery/jquery.js"></script>
         <script>
           // Override links with these protocols to point to the appropriate services
           window.mdProtocols = {
@@ -109,9 +113,28 @@
               gutter: 7
             });
           });
+
+        function onSlideChange(e) {
+            var currentSlide = e.currentSlide;
+            var illustrations = $(currentSlide).find('[class*=illustration]');
+
+            for( var i = 0, len = illustrations.length; i < len; i++ ) {
+                var illustration = illustrations[i];
+
+                var eventName = $(illustration).attr('data-illustration') + "-show"
+
+                var event = document.createEvent( "HTMLEvents", 1, 2 );
+                event.initEvent( eventName, true, true );
+                document.dispatchEvent( event );
+
+            }
+        }
+
+        document.addEventListener( 'slidechanged', onSlideChange, false );
         </script>
 
         <script src="bower_components/angularjs/angular.min.js"></script>
+        <script src="js/ix-illustration.js"></script>
 
     </body>
 

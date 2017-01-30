@@ -39,7 +39,7 @@ GET /divvy/trip/_search
 
 # Get extended statistics for trip duration.
 #
-GET /divvy/trip/
+GET /divvy/trip/_search
 {
   "aggs": {
     "trip_duration_stats": {

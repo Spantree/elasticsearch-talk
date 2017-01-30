@@ -63,7 +63,7 @@ PUT /suggestions/suggestion/_mapping
             "name" : { "type" : "string" },
             "suggest" : {
               "type" : "completion",
-              "index_analyzer" : "simple",
+              "analyzer" : "simple",
               "search_analyzer" : "simple",
               "payloads" : true
             }

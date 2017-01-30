@@ -13,26 +13,28 @@
 
 ### Kopf
 
-* A simple web administration tool written in AngularJS
-* [Link](elasticsearch://_plugin/kopf/)
+* A simple web administration tool written in AngularJS.
+* [Kopf](elasticsearch://_plugin/kopf/)
 
 ---
 
 ### Sense
 
-* Sense gives you autocomplete in queries
+* An IDE (with autocomplete) for running Elasticsearch queries against the REST API.
+
+[Sense](sense://)
 
 ---
 
 ### More
 
-* [Inquisitor](inquisitor://#/analyzers) - Explore how Elasticsearch processes
-* [Marvel](kibana://app/marvel) - Explore stats on your cluster
-* [Kibana](kibana://app/kibana) - Make sense of your logs
+* [Inquisitor](inquisitor://#/analyzers) - Explore how Elasticsearch processes strings
+* [Marvel](kibana://app/marvel) - Monitor the health of your cluster
+* [Kibana](kibana://app/kibana) - Visualize your logs
 
 ---
 
 ### API Examples
 
 * Executed with Sense
-* [Getting Started with Sense](sense://getting-started.sense#L2)
+* [Get Started with Sense](sense://getting-started.sense#L2)

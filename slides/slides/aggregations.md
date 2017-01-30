@@ -12,10 +12,10 @@
 ### Buckets
 
 * **Terms** - Break up the data based on text / keywords
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,L5)
+* [Terms Aggregations Examples](sense://aggregations.sense)
 
 * **Histograms** - Define an interval to break up the data
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.7)
+* [Histogram Examples](sense://aggregations.sense#L115)
 
 ---
 
@@ -23,19 +23,15 @@
 
 * Bucket by defined ranges
 
-[API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.6)
+[Range Bucket Examples](sense://aggregations.sense#L88)
 
 ---
 
 ### Metrics - Statistics
 
 * **Stats** - Common statistics for your data
-
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.2)
-
 * **Extended Stats** - More statistics for your data
-
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.3)
+* [Statistics Examples](sense://aggregations.sense#L24)
 
 ---
 
@@ -43,35 +39,34 @@
 
 * Approximate, not exact
 * Still incredibly good
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.4)
+* [Percentiles Examples](sense://aggregations.sense#L48)
 
 ---
 
 ### Aggregations as a User Experience
 
+* [Accelerate77 Example](http://accelerate77.spantree.net)
+
 ---
 
 ### Terms Facets
+
 * Enable visual filters
 * Better inform choices
 
 ---
 
 ### Top Hits
+
 * Meld two types of products
 * Create Google Ads-esque design with one query
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.9)
+
+* [Top Hits Example](sense://aggregations.sense#L147)
 
 ---
 
-### Subaggregations
+### Sub-aggregations
 
 * Enables processing of several different facets in memory
 * Enables complex graphs and visualizations
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#07-aggregations,S7.10)
-
----
-
-### Visualization in Practice
-
-* [Divvy Data Dashboard](images/divvy-data-dashboard.png)
+* [Sub-aggregations Example](sense://aggregations.sense#L182)

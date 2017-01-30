@@ -99,7 +99,7 @@ Preprocess a character stream before being passed to a tokenizer
 
 Methods of splitting up a field value into tokens
 
-[Example](http://estalk.spantree.local:9200/_plugin/inquisitor/#/tokenizers)
+[Example](inquisitor://#/tokenizers)
 
 ---
 
@@ -107,7 +107,7 @@ Methods of splitting up a field value into tokens
 
 Modify tokens by adding, removing or changing their values
 
-[Example](http://estalk.spantree.local:9200/_plugin/inquisitor/#/analyzers)
+[Example](inquisitor://#/analyzers)
 
 ---
 

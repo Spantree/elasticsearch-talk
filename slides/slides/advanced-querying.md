@@ -4,10 +4,11 @@
 
 ### Pagination
 
-* Most cases use from / to
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#05-pagination,L1)
+* Most cases use `size` and `from`
+* [Simple Paging](sense://paging-and-sorting.sense#L4)
+
 * Option of using a cursor
-* [API Example](http://estalk.spantree.local:9200/_plugin/marvel/sense/#05-pagination,S5.3)
+* [Paging with a Scroll ID](sense://paging-and-sorting.sense#L41)
 
 ---
 
@@ -15,7 +16,7 @@
 
 * Sort most fields by ascending or descending
 
-[API Example](http://es1.local:9200/_plugin/marvel/sense/#06-sorting,L1)
+[Basic Sorting](sense://paging-and-sorting.sense#L72)
 
 ---
 
@@ -24,4 +25,4 @@
 * Tokenizers affect sorting as well
 * Need to make sure you are sorting on the right field
 
-[API Example](http://es1.local:9200/_plugin/marvel/sense/#06-sorting,S6.4)
+[Sorting String Fields](sense://paging-and-sorting.sense#L131)

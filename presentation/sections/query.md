@@ -23,24 +23,24 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 <table>
 <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
 
-<tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr> 
-<tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr> 
-<tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr> 
-<tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr> 
-<tr><td>    ids </td><td>indices  </td><td>  match all </td><tr> 
-<tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr> 
+<tr><td> boosting  </td><td> common terms </td><td nowrap> constant score </td><tr>
+<tr><td>  dis max  </td><td>filtered  </td><td> fuzzy like this </td><tr>
+<tr><td>  fuzzy like this field </td><td> function score </td><td> fuzzy </td><tr>
+<tr><td>  geoshape </td><td>has child  </td><td>has parent </td><tr>
+<tr><td>    ids </td><td>indices  </td><td>  match all </td><tr>
+<tr><td>  more like this </td><td>  more like this field  </td><td> nested </td><tr>
 <tr><td>   prefix </td><td> query_string   </td><td>  simple query </td><tr>
-<tr><td>    range</td><td> regexp   </td><td> span first </td><tr> 
-<tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr> 
-<tr><td>     span or  </td><td> span term  </td><td> term </td><tr> 
-<tr><td>   terms </td><td> top children  </td><td> wildcard</td><tr> 
-<tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr> 
+<tr><td>    range</td><td> regexp   </td><td> span first </td><tr>
+<tr><td>      span multi term  </td><td> span near  </td><td> span not </td><tr>
+<tr><td>     span or  </td><td> span term  </td><td> term </td><tr>
+<tr><td>   terms </td><td> top children  </td><td> wildcard</td><tr>
+<tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr>
 </table>
 
 
 ### Search Demos
 
-[API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api)
+[Searching Exercises](sense://searching.sense)
 
 
 ### How is it so fast?
@@ -48,8 +48,12 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 
 
 ### Inverted index
-<div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
-  <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
+
+<div
+  class="row ix-illustration"
+  data-illustration="ix-illustration"
+  ng-controller="InvertedIndexController">
+  <div ng-include src="sections/js/templates/_invindex.html"></div>
 </div>
 
 
@@ -72,7 +76,7 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 * **term frequency ($tf$)** number of times a term occurs in a particular document
-* **document frequency ($df$)** number of all documents a term occurs in 
+* **document frequency ($df$)** number of all documents a term occurs in
 * **inverse document frequency ($idf$)** is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
 
 
@@ -133,4 +137,4 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 
 ### Filtering Demos
 
-[API Examples](http://esdemo.local:9200/_plugin/marvel/sense/#03-search-api,S3.14)
+[API Examples](sense://searching.sense#L81)

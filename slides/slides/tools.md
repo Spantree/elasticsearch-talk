@@ -4,9 +4,9 @@
 
 ### Preseeded Elasticsearch Indices
 
-* **freebase/film** - Detailed list of films from freebase.com
-* **divvy/trip** - Rides from Divvy at last year's data challenge
-* **wikipedia/locations** - Chicago locations from wikipedia
+* **Freebase Film Index** - Detailed list of 137K films from freebase.com
+* **Divvy Rides & Stations** - Rides and station information from Divvy 2013 data challenge
+* **Wikipedia Points of Interest** - Small sample of Chicago points of interest from Wikipedia
 * Kibana / Marvel data
 
 ---
@@ -14,7 +14,7 @@
 ### Kopf
 
 * A simple web administration tool written in AngularJS
-* [Link](http://estalk.spantree.local:9200/_plugin/head/)
+* [Link](elasticsearch://_plugin/kopf/)
 
 ---
 
@@ -26,14 +26,13 @@
 
 ### More
 
-* [Inquisitor](http://estalk.spantree.local:9200/_plugin/inquisitor/#/analyzers) - Explore how Elasticsearch processes
-* [Marvel](http://estalk.spantree.local:9200/_plugin/marvel/kibana/index.html#/dashboard/file/marvel.overview.json) - Explore stats on your cluster
-* [Kibana](http://kibana.local) - Make sense of your logs
+* [Inquisitor](inquisitor://#/analyzers) - Explore how Elasticsearch processes
+* [Marvel](kibana://app/marvel) - Explore stats on your cluster
+* [Kibana](kibana://app/kibana) - Make sense of your logs
 
 ---
 
 ### API Examples
 
 * Executed with Sense
-* Available in Markdown
-* [Link](http://estalk.spantree.local:9200/_plugin/marvel/sense/#01-getting-started,L1)
+* [Getting Started with Sense](sense://getting-started.sense#L2)

@@ -32,7 +32,7 @@ module.exports = (grunt) ->
             jshint:
                 files: ['js/*.js']
                 tasks: ['jshint']
-        
+
             sass:
                 files: ['css/source/theme.scss']
                 tasks: ['sass']
@@ -42,7 +42,7 @@ module.exports = (grunt) ->
             theme:
                 files:
                     'css/theme.css': 'css/source/theme.scss'
-        
+
         connect:
 
             livereload:
@@ -89,7 +89,7 @@ module.exports = (grunt) ->
                     filter: 'isFile'
                 }]
 
-        
+
         buildcontrol:
 
             options:
@@ -101,7 +101,7 @@ module.exports = (grunt) ->
                 options:
                     remote: '<%= pkg.repository.url %>'
                     branch: 'gh-pages'
-        
+
 
 
     # Load all grunt tasks.
@@ -115,6 +115,10 @@ module.exports = (grunt) ->
             slides = grunt.file.readJSON 'slides/list.json'
 
             html = grunt.template.process indexTemplate, data:
+                elasticsearchUrl: process.env.ELASTICSEARCH_URL || 'http://localhost:9200'
+                kibanaUrl: process.env.KIBANA_URL || 'http://localhost:5601'
+                inquisitorUrl: process.env.INQUISITOR_URL || 'http://localhost:9400'
+                exercisesUrl: process.env.EXERCISES_URL || 'http://localhost:9500'
                 slides:
                     slides
                 section: (slide) ->
@@ -145,13 +149,13 @@ module.exports = (grunt) ->
             'copy'
         ]
 
-    
+
     grunt.registerTask 'deploy',
         'Deploy to Github Pages', [
             'dist'
             'buildcontrol'
         ]
-    
+
 
     # Define default task.
     grunt.registerTask 'default', [

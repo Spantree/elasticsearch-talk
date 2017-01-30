@@ -5,13 +5,13 @@
 ### Search API
 
 ```bash
-curl -XGET http://estalk.spantree.local:9200/wikipedia/_search?q=about:lake
+curl -XGET http://localhost:9200/wikipedia/_search?q=about:lake
 ```
 
 or
 
 ```bash
-curl -XPOST "http://estalk.spantree.local:9200/wikipedia/_search" -d '{
+curl -XPOST "http://localhost:9200/wikipedia/_search" -d '{
   "query" : {
     "term" : { "about" : "lake" }
   }
@@ -45,7 +45,7 @@ curl -XPOST "http://estalk.spantree.local:9200/wikipedia/_search" -d '{
 
 ### Search Demos
 
-[API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#03-search-api)
+[API Examples](sense://searching.sense)
 
 ---
 
@@ -122,7 +122,7 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 ---
 
 ### Queries vs Filters
-
+<!-- TODO: Fix this slide as it's confusing -->
 ![Ornaments](images/querying_vs_filtering.svg)
 
 ---
@@ -156,4 +156,4 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 
 ### Filtering Demos
 
-[API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#03-search-api,S3.14)
+[Filtering Examples](sense://searching.sense#L81)

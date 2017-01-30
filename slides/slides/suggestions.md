@@ -28,7 +28,7 @@
 ---
 
 ### Term suggester
-[Term API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.1)
+[Term Suggester Examples](sense://suggestions.sense)
 
 ---
 
@@ -42,7 +42,7 @@
 ---
 
 ### Phrase suggester
-[Phrase API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.2)
+[Phrase API Examples](sense://suggestions.sense#L17)
 
 ---
 
@@ -60,10 +60,7 @@
 * Allows fuzzy queries
 * Suggestions can have payloads
 
----
-
-### Completion suggester
-[Completion API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.3)
+[Completion Suggester Examples](sense://suggestions.sense#L49)
 
 ---
 
@@ -72,10 +69,7 @@
 * Define special completion field in mapping
 * Maintain completions by category or geolocation
 
----
-
-### Context suggester
-[Context API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#10-suggesters,S10.9)
+[Context Suggester Examples](sense://suggestions.sense#L127)
 
 ---
 
@@ -86,4 +80,5 @@
 ---
 
 ### More like this
-[MLT API Examples](http://estalk.spantree.local:9200/_plugin/marvel/sense/#09-more-like-this)
+
+[More Like This Example](sense://more-like-this.sense)

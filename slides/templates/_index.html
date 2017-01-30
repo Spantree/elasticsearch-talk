@@ -4,18 +4,19 @@
     <head>
         <meta charset="utf-8">
 
-        <title>Elasticsearch</title>
+        <title>Slides for Elasticsearch Tutorial</title>
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
+        <link rel="icon" href="/images/elastic-favicon.ico" type="image/x-icon">
+
         <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="css/theme.css" id="theme">
-
 
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="bower_components/highlightjs/styles/monokai-sublime.css">
@@ -59,26 +60,17 @@
         <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
         <script src="bower_components/reveal.js/js/reveal.js"></script>
         <script src="bower_components/reveal.js/plugin/markdown/marked.js"></script>
+        <script src="js/markdown-customizations.js"></script>
         <script src="bower_components/packery/dist/packery.pkgd.min.js"></script>
         <script>
-          marked.Renderer.prototype.image = function(href, title, text) {
-            var split = href.split('#');
-            var classes = split[1] ? split[1].replace(/[\s,]/, " ") : '';
-            var href = split[0];
-            var out = '<img src="' + href + '" alt="' + text + '"';
-            if (title) {
-              out += ' title="' + title + '"';
-            }
-            if (classes) {
-              out += ' class="' + classes + '"';
-            }
-            out += this.options.xhtml ? '/>' : '>';
-            return out;
+          // Override links with these protocols to point to the appropriate services
+          window.mdProtocols = {
+            "sense://": "<%= kibanaUrl %>/app/sense?load_from=<%= exercisesUrl %>/",
+            "elasticsearch://": "<%= elasticsearchUrl %>/",
+            "kibana://": "<%= kibanaUrl %>/",
+            "inquisitor://": "<%= inquisitorUrl %>/"
           }
-          var mdRenderer = new marked.Renderer();
 
-          // Full list of configuration options available at:
-          // https://github.com/hakimel/reveal.js#configuration
           Reveal.initialize({
             controls: true,
             progress: true,
@@ -87,9 +79,9 @@
 
             transition: 'fade', // none/fade/slide/convex/concave/zoom
 
-            markdown: {
+            marked: {
               smartypants: true,
-              renderer: mdRenderer,
+
             },
 
             // Optional reveal.js plugins

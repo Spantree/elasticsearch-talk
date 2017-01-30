@@ -1,5 +1,5 @@
 {
-    "esnext": true,
+    "esnext": false,
     "bitwise": true,
     "camelcase": true,
     "curly": true,

@@ -38,11 +38,55 @@ cd elasticsearch-talk
 ./init-all-the-things.sh
 ```
 
+Note: Our reveal.js-based slide deck downloads a good chunk of the internet to fulfill its NPM dependencies. Unfortunately, downloads can sometimes get stuck. If you find yourself staring a screen for over 10 minutes with a message `Waiting for port 9000 to be open`, cancel out of the process by hitting `Ctrl-C` and try `./init-all-the-things.sh` again. You can also open another Terminal tab to the same folder and run `docker-compose logs -f` to see what's going on with the containers running in the background of this script.
+
 #### Dance!
 
-That's it.  That's all there is to it.
+That's it. That's all there is to it.
 
-You should now be able to access elasticsearch on your machine from a web browser at `http://localhost:9200`
+You should now be able to access a multitude of services on your machine from a web browser:
+
+[Elasticsearch](http://localhost:9200)
+
+The HTTP interface for interacting with Elasticsearch
+
+![Elasticsearch Screenshot](images/elasticsearch-screenshot.png)
+
+[Kibana](http://localhost:5601)
+
+The dashboard and UI portal for Elasticsearch
+
+![Kibana Screenshot](images/kibana-screenshot.png)
+
+[Sense](http://localhost:5601/app/sense)
+
+A web-based IDE for messing with Elasticsearch queries.
+
+![Sense Screenshot](images/sense-screenshot.png)
+
+[Inquisitor](http://localhost:9400)
+
+A interactive debugging tool that shows how analyzers and tokenizers workshop
+
+![Inquisitor Screenshot](images/inquisitor-screenshot.png)
+
+[Kopf](http://localhost:9200/_plugin/kopf)
+
+A status and realtime control panel for Elasticsearch clusters.
+
+![Kopf Screenshot](images/kopf-screenshot.png)
+
+[Marvel](http://localhost:5601/app/marvel)
+
+A monitoring system to track the health and performance of your cluster over time
+
+![Marvel Screenshot](images/marvel-screenshot.png)
+
+[Slide Deck](http://localhost:9000)
+
+The slides that go along with the tutorial. If you'd like us to see us present this tutorial live, please contact `info@spantree.net`.
+
+![Slide Deck Screenshot](images/slides-screenshot.png)
 
 <!-- ![esdemo in a web browser](images/esdemo-web-browser.gif) -->
 

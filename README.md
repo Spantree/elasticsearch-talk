@@ -30,7 +30,9 @@ Note: If you're running Docker for Mac, be sure to assign about 4-6GB to your
 Docker engine by clicking on the whale in the Mac status bar, selecting
 "Preferences" and then going to the "Advanced" tab. The more memory, the better.
 
-#### Clone this repository and start Docker Compose
+![Set DFM Memory](images/set-dfm-memory.png)
+
+#### Clone this repository and initialize the containers
 
 ```bash
 git clone --depth 1 https://github.com/Spantree/elasticsearch-talk.git

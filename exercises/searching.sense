@@ -61,7 +61,7 @@ GET /wikipedia/_search
       "query": "theater OR theatre"
     }
   },
-  "fields": ["name", "keywords"],
+  "fields": ["name", "keywords"]
 }
 
 # Search with Lucene boolean syntax. Find both the terms "theater" and

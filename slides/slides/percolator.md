@@ -16,4 +16,4 @@
 *  Create feeds for clients / consumers
 *  Trigger updates to other technology
 
-[API Example](sense://08-percolator.sense?row=1)
+[API Example](sense://percolators.sense)

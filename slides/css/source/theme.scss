@@ -1,0 +1,164 @@
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * Copyright (C) 2015 Hakim El Hattab, http://hakim.se
+ */
+
+ // This file has been copied over from
+ // ../../bower_components/reveal.js/css/theme/source/black.scss
+
+ // See ../../bower_components/reveal.js/css/theme/README.md
+ // for further explanations on how to create a custom reveal.js theme.
+
+// Default mixins and settings -----------------
+@import "../../bower_components/reveal.js/css/theme/template/mixins";
+@import "../../bower_components/reveal.js/css/theme/template/settings";
+@import "flat-ui-colors";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+
+$backgroundColor: $flat-green-sea;
+
+$mainColor: $flat-clouds;
+$headingColor: $flat-clouds;
+
+$mainFontSize: 38px;
+$mainFont: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
+$headingFont: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: normal;
+$headingFontWeight: 500;
+$subheadingFontWeight: 300;
+$mainFontWeight: 100;
+$linkColor: $flat-clouds;
+$linkColorBackground: $flat-midnight-blue;
+$linkColorHover: $flat-clouds;
+$linkColorBackgroundHover: $flat-wet-asphalt;
+$selectionBackgroundColor: $flat-belize-hole;
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #222;
+	}
+}
+
+.reveal {
+  section {
+    img {
+      max-width: 600px;
+      max-height: 500px;
+      background: none;
+      border: 0;
+      &.plain {
+        box-shadow: none;
+        background: none;
+      }
+    }
+    .grid {
+      img {
+        max-width: 200px;
+        max-height: 70px;
+        border: 0;
+        box-shadow: none;
+        background: none;
+        // filter: grayscale(100%);
+      }
+    }
+
+    h1, h2, h3 {
+      font-weight: $headingFontWeight;
+    }
+    h4, h5, h6 {
+      font-weight: $subheadingFontWeight;
+    }
+    p {
+      font-weight: $mainFontWeight;
+    }
+    em {
+      background-color: $flat-amethyst;
+      padding: 0.2em 0.4em;
+    }
+    a {
+      color: $linkColor;
+      background-color: $linkColorBackground;
+      padding: 0.2em 0.4em;
+      font-weight: $mainFontWeight;
+      &:hover {
+        background-color: $linkColorBackgroundHover;
+      }
+      &:after {
+        font-family: FontAwesome;
+        // fa-external-link
+        content: "\f08e";
+        padding-left: 0.5em;
+        font-size: 0.7em;
+      }
+    }
+    ul {
+      list-style: none;
+      text-align: center;
+      margin: 0;
+      padding-top: 1em;
+      li {
+        padding-bottom: 0.5em;
+        font-weight: $mainFontWeight;
+      }
+    }
+    pre {
+      box-shadow: none;
+      code {
+        padding: 15px;
+      }
+    }
+    code {
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;;
+      font-size: 0.9em;
+      background-color: darken($flat-midnight-blue, 10%);
+      color: $flat-clouds;
+      padding: 5px 10px;
+      // .hljs-string {
+      //   color: $flat-peter-river;
+      // }
+      // .hljs-keyword {
+      //   color: $flat-alizarin;
+      // }
+      // .hljs-number {
+      //   color: $flat-amethyst;
+      // }
+      // .hljs-attr {
+      //   color: $flat-alizarin;
+      // }
+    }
+    table {
+      th {
+        font-weight: $headingFontWeight;
+      }
+      td {
+        font-weight: $mainFontWeight;
+      }
+      &.examples {
+        font-size: 0.8em;
+        line-height: 2;
+      }
+    }
+
+    .stuff-we-use {
+      font-size: 0.7em;
+    }
+  }
+
+}
+
+// Theme template ------------------------------
+@import "../../bower_components/reveal.js/css/theme/template/theme";
+// ---------------------------------------------

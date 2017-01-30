@@ -1,25 +1,74 @@
-# Use this config if you want to run everything at once
-
-elasticsearch:
-  image: spantree/elasticsearch-talk-es:latest
-  ports:
-    - "9200:9200"
-    - "9300:9300"
-www:
-  image: spantree/elasticsearch-talk-www:latest
-  ports:
-    - "80:80"
-logstash:
-  image: spantree/logstash-star-wars-kid:latest
-  ports:
-    - "3333:3333"
-    - "9201:9200"
-  environment:
-    ES_HEAP_SIZE: 2g
-  command: "logstash agent --config /etc/logstash/conf.d/logstash.conf"
-kibana:
-  image: bobrik/kibana:4.0.2
-  ports:
-    - "5601:5601"
-  environment:
-    KIBANA_ES_URL: "http://logstash:9200"
+version: '2'
+services:
+  elastic1:
+    extends:
+      file: docker-compose-elasticsearch.yml
+      service: elasticsearch
+    environment:
+      ES_NODENAME: elastic1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  elastic2:
+    extends:
+      file: docker-compose-elasticsearch.yml
+      service: elasticsearch
+    environment:
+      ES_NODENAME: elastic2
+    ports:
+      - "9201:9200"
+      - "9301:9300"
+  elastic3:
+    extends:
+      file: docker-compose-elasticsearch.yml
+      service: elasticsearch
+    environment:
+      ES_NODENAME: elastic3
+    ports:
+      - "9202:9200"
+      - "9302:9300"
+  inquisitor:
+    image: spantree/elasticsearch-inquisitor
+    environment:
+      ELASTICSEARCH_URL: "http://elastic1:9200"
+    ports:
+      - "9400:80"
+  exercises:
+    image: nginx:1.11-alpine
+    volumes:
+      - "./exercises:/usr/share/nginx/html"
+      - "./exercises/nginx:/etc/nginx"
+    ports:
+      - "9500:80"
+  logstash:
+    image: logstash:5
+    volumes:
+      - "./logstash/"
+    ports:
+      - "3333:3333"
+  kibana:
+    build: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: "http://elastic1:9200"
+    volumes:
+      - "./kibana/config:/opt/kibana/config"
+    depends_on:
+      - elastic1
+      - elastic2
+      - elastic3
+  slides:
+    image: spantree/reveal:3.4.0
+    ports:
+      - "9000:9000"
+      - "35729:35729" # to enable live reloading
+    environment:
+      ELASTICSEARCH_URL: http://localhost:9200
+      KIBANA_URL: http://localhost:5601
+      INQUISITOR_URL: http://localhost:9400
+      EXERCISES_URL: http://localhost:9500
+    volumes:
+      - ./slides:/usr/src/slides
+      - /usr/src/slides/node_modules
+      - /usr/src/slides/bower_components

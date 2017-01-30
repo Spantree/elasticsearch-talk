@@ -1,24 +1,28 @@
 ## Querying
 
+---
 
 ### Search API
 
 ```bash
-curl -XGET http://esdemo.local:9200/wikipedia/_search?q=about:lake
+curl -XGET http://localhost:9200/wikipedia/_search?q=about:lake
 ```
 
 or
 
 ```bash
-curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
+curl -XPOST "http://localhost:9200/wikipedia/_search" -d '{
   "query" : {
     "term" : { "about" : "lake" }
   }
 }'
 ```
 
+---
 
 ### Types of Queries
+
+<!-- .slide: style="font-size: 0.7em;" -->
 
 <table>
 <tr><td>match</td><td>multi match </td><td> bool</td><tr>                
@@ -37,33 +41,35 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 <tr><td nowrap>   minimum should match  </td><td nowrap> multi term query rewrite</td><tr>
 </table>
 
+---
 
 ### Search Demos
 
-[Searching Exercises](sense://searching.sense)
+[API Examples](sense://searching.sense)
 
+---
 
 ### How is it so fast?
 * Interesting data structure
 
+---
 
 ### Inverted index
-
-<div
-  class="row ix-illustration"
-  data-illustration="ix-illustration"
-  ng-controller="InvertedIndexController">
-  <div ng-include src="sections/js/templates/_invindex.html"></div>
+<div class="row ix-illustration" data-illustration="ix-illustration" ng-controller="InvertedIndexController">
+  <dv ng-include src="'sections/js/templates/_invindex.html'"></div>
 </div>
 
+---
 
 ### Explaining queries
 
+---
 
 ### How does it know which document is most relevant?
 
 * ...Math?
 
+---
 
 ### Simple scoring
 
@@ -71,6 +77,7 @@ curl -XPOST "http://esdemo.local:9200/wikipedia/_search" -d '{
 * Finds angle between vectors of scores
 * (Cosine similarity)
 
+---
 
 ### Classic example: TF-IDF
 $tf \times idf = tf \times \log{ \frac{N}{df} }$
@@ -79,15 +86,18 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 * **document frequency ($df$)** number of all documents a term occurs in
 * **inverse document frequency ($idf$)** is (usually) $\log{\frac{N}{df}}$, where $N$ is the number of documents in the index
 
+---
 
 ### Scoring demo
 <div class="row tfidf-illustration ix-illustration" data-illustration="tfidf-illustration" ng-controller="InvertedIndexController">
   <dv ng-include src="'sections/js/templates/_scoring.html'"></div>
 </div>
 
+---
 
 ### In Lucene...
 
+---
 
 ### Practical Scoring Function
 $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \times fn)$
@@ -97,6 +107,7 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 * **boost** - boosts value of a term in the query
 * **fn (fieldNorm)** - boosts score when matching shorter fields
 
+---
 
 ### More on scoring
 
@@ -104,14 +115,17 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 * Can rewrite scoring algorithm
 * Can use alternative scoring algorithms (Okapi BM25, etc)
 
+---
 
 ### Filtering
 
+---
 
 ### Queries vs Filters
-
+<!-- TODO: Fix this slide as it's confusing -->
 ![Ornaments](images/querying_vs_filtering.svg)
 
+---
 
 ### Queries vs Filters
 
@@ -121,7 +135,7 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 <th>Filters</th>
 </tr>
 <tr>
-<td>Scored</td>
+<td>Fuzzy</td>
 <td>Boolean</td>
 </tr>
 <tr>
@@ -132,9 +146,14 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 <td>Never cached</td>
 <td>Cacheable</td>
 </tr>
+<tr>
+<td>Scored</td>
+<td>Never scored</td>
+</tr>
 </table>
 
+---
 
 ### Filtering Demos
 
-[API Examples](sense://searching.sense#L81)
+[Filtering Examples](sense://searching.sense#L81)

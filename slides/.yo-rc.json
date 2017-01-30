@@ -1,0 +1,10 @@
+{
+  "generator-reveal": {
+    "presentationTitle": "Elasticsearch",
+    "packageVersion": "2.0.0",
+    "useSass": true,
+    "deployToGithubPages": true,
+    "githubUsername": "Spantree",
+    "githubRepository": "elasticsearch-slides"
+  }
+}

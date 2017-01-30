@@ -43,9 +43,11 @@ services:
   logstash:
     image: logstash:5
     volumes:
-      - "./logstash/"
+      - "./logstash:/config-dir"
+      - "./data:/usr/local/share/data"
     ports:
       - "3333:3333"
+      - "9600:9600"
   kibana:
     build: kibana
     ports:

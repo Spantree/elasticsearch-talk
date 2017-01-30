@@ -42,11 +42,19 @@ cd elasticsearch-talk
 
 Note: Our reveal.js-based slide deck downloads a good chunk of the internet to fulfill its NPM dependencies. Unfortunately, downloads can sometimes get stuck. If you find yourself staring a screen for over 10 minutes with a message `Waiting for port 9000 to be open`, cancel out of the process by hitting `Ctrl-C` and try `./init-all-the-things.sh` again. You can also open another Terminal tab to the same folder and run `docker-compose logs -f` to see what's going on with the containers running in the background of this script.
 
+#### Start your containers
+
+Now that all the containers have been initialized, bring them up with the following command:
+
+```bash
+docker-compose up
+```
+
 #### Dance!
 
 That's it. That's all there is to it.
 
-You should now be able to access a multitude of services on your machine from a web browser:
+Once the containers come up, you should now be able to access a multitude of services on your machine from a web browser:
 
 ## [Elasticsearch](http://localhost:9200)
 

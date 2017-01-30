@@ -21,3 +21,4 @@ www/transform/.gradle
 logstash/.gradle
 logstash/build
 theme.css
+data

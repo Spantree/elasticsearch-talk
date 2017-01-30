@@ -46,43 +46,43 @@ That's it. That's all there is to it.
 
 You should now be able to access a multitude of services on your machine from a web browser:
 
-[Elasticsearch](http://localhost:9200)
+##### [Elasticsearch](http://localhost:9200)
 
 The HTTP interface for interacting with Elasticsearch
 
 ![Elasticsearch Screenshot](images/elasticsearch-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-[Kibana](http://localhost:5601)
+##### [Kibana](http://localhost:5601)
 
 The dashboard and UI portal for Elasticsearch
 
 ![Kibana Screenshot](images/kibana-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-[Sense](http://localhost:5601/app/sense)
+##### [Sense](http://localhost:5601/app/sense)
 
 A web-based IDE for messing with Elasticsearch queries.
 
 ![Sense Screenshot](images/sense-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-[Inquisitor](http://localhost:9400)
+##### [Inquisitor](http://localhost:9400)
 
 A interactive debugging tool that shows how analyzers and tokenizers workshop
 
 ![Inquisitor Screenshot](images/inquisitor-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-[Kopf](http://localhost:9200/_plugin/kopf)
+##### [Kopf](http://localhost:9200/_plugin/kopf)
 
 A status and realtime control panel for Elasticsearch clusters.
 
 ![Kopf Screenshot](images/kopf-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-[Marvel](http://localhost:5601/app/marvel)
+##### [Marvel](http://localhost:5601/app/marvel)
 
 A monitoring system to track the health and performance of your cluster over time
 
 ![Marvel Screenshot](images/marvel-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-[Slide Deck](http://localhost:9000)
+##### [Slide Deck](http://localhost:9000)
 
 The slides that go along with the tutorial. If you'd like us to see us present this tutorial live, please contact `info@spantree.net`.
 

@@ -63,6 +63,10 @@ section.has-light-background {
         box-shadow: none;
         background: none;
       }
+      &.diagram {
+        max-width: 900px;
+        border: 10px solid $flat-silver;
+      }
     }
     .grid {
       img {

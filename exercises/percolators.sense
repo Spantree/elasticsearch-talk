@@ -1,0 +1,92 @@
+# Percolators
+# ===========
+
+# Add a sample document.
+#
+PUT /spantree/team/cedric
+{
+  "drinks": ["Red Bull"]
+}
+
+# Register a percolation query. Percolation queries allow you to
+# search in reverse.  Instead of adding documents and then providing a
+# query, you add queries first and then provide documents to see which
+# queries they match. This is very useful for things like RSS feeds
+# and notification systems.
+#
+# Below are some examples based on a theoretical employee onboarding
+# process at Spantree, where we'd like to be notified if they modify
+# our scheduled amazon orders for various teas.
+#
+# First, we will register a percolator for people who like to drink
+# earl grey.
+#
+PUT /spantree/.percolator/earl_grey
+{
+	"query" : {
+		"match" : {
+			"drinks": "earl grey"
+		}
+	}
+}
+
+# Add Percolator for Russian Caravan.
+#
+PUT /spantree/.percolator/russian_caravan
+{
+	"query" : {
+		"match" : {
+			"drinks": "russian caravan"
+		}
+	}
+}
+
+# Onboard Justin with his drink preferences.
+#
+# TODO: Update Justin's drink preferences
+#
+GET /spantree/people/_percolate
+{
+	"doc" : {
+		"name": "Justin",
+		"drinks": [
+		  "Triple Espresso",
+		  "Green Tea with Brown Rice",
+		  "Coconut Water"
+		]
+	}
+}
+
+# Onboard Kevin with his drink preferences.
+#
+GET /spantree/people/_percolate
+{
+	"doc" : {
+		"name": "Kevin",
+		"drinks": [
+		  "Sodastream Energy",
+		  "Dark Magic Coffee",
+		  "Earl Grey Tea"
+		]
+	}
+}
+
+# Review the earl grey percolator.
+#
+GET /spantree/.percolator/earl_grey
+
+# Onboard Marija with her drink preferences.
+#
+# TODO: Update Marija's drink preferences.
+#
+GET /spantree/people/_percolate
+{
+	"doc": {
+		"name": "Marija",
+		"drinks": [
+		  "Earl Grey Tea",
+		  "Russian Caravan Tea",
+		  "Assam Tea"
+		]
+	}
+}

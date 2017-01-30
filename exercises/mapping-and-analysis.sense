@@ -1,0 +1,717 @@
+# Mapping and Analysis
+# ====================
+
+# Create a new index with explicit mappings.
+#
+POST /simple-example/
+{
+  "mappings": {
+    "locations": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "wikipedia_numeric_id": {
+          "type": "long"
+        },
+        "lastUpdated": {
+          "type": "date"
+        },
+        "coordinates": {
+          "type": "geo_point"
+        }
+      }
+    }
+  }
+}
+
+# Inserting a few documents.
+#
+POST /simple-example/_bulk
+{"index":{"_id":"frontera_grill","_type": "locations"}}
+{"name": "Frontera Grill","keywords": ["restaurants","chicago,illinois"],"about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood.","wikipedia_numeric_id": 7353370,"lastUpdated": "2012-04-30T02:14:41+0000","coordinates": [-87.630806,41.890575]}
+{"index":{"_id":"allerton_hotel","_type": "locations"}}
+{"name": "Allerton Hotel","keywords": ["hotels","chicago,illinois","landmarks","skyscrapers"],"geo_geometry_type": "Point","about": "The Allerton Hotel is a 25-story 360 foot (110 m) hotel skyscraper along the Magnificent Mile in the Near North Side community area of Chicago, Illinois.","wikipedia_numeric_id": 11221483,"coordinates": [-87.6238,41.8952]}
+{"index":{"_id":"lane_technical_college_prep_high_school","_type": "locations"}}
+{"name": "Lane Technical College Prep High School","keywords": ["chicago","public","schools","magnet","illinois","educational","institutions","established","in1908","chicago,illinois"],"about": "Albert G. Lane Technical College Preparatory High School (also known as Lane Tech), is a public, four-year, magnet high school located on the northwest side of Chicago.","wikipedia_numeric_id": 3616501,"lastUpdated": "2012-08-14T07:09:31+0000"}
+
+# Reviewing the Mappings.
+#
+GET /simple-example/_mapping
+
+# Get Elasticsearch to infer an integer type. Elasticsearch will guess
+# the type based on the first use of the field.
+#
+PUT /spantree-mappings/employee/andrea
+{
+  "dogs": 1
+}
+
+# Break inferred types. But if you try to insert a second document
+# with a different type, Elasticsearch will fail.
+
+PUT /spantree-mappings/employee/allie
+{
+  "dogs": ["Kirby"]
+}
+
+# Review name analysis. Elasticsearch exposes an `_analyze` endpoint
+# that will show you how a field value would get tokenized and
+# filtered before going into the index.
+#
+GET /simple-example/_analyze?field=name&text=Lane Tech: College Prep High School
+
+# Add the Chicago History Museum. Let's add a document with a phone
+# number to our index.
+#
+PUT /simple-example/locations/chicago_history_museum
+{
+  "name": "Chicago History Museum",
+  "phone_number": "(312) 642-4600"
+}
+
+# Search for the phone number in a different format. What happens when
+# it doesn't match what we put in?
+#
+GET /simple-example/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "phone_number": "312.642.4600"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Review the mapping for the phone number field.
+#
+GET /simple-example/_mapping
+
+# Analyze the phone number as indexed.
+#
+GET /simple-example/_analyze?field=phone_number&text=(312) 642-4600
+
+# Analyze the phone number as queried.
+#
+GET /simple-example/_analyze?field=phone_number&text=312.642.4600
+
+# Add a better phone number mapping. Let's replace all non-digit
+# characters with nothing.
+POST /wikipedia-better-phone/
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "digits_only": {
+          "type": "pattern_replace",
+          "pattern": "\\D",
+          "replacement": ""
+        }
+      },
+      "analyzer": {
+        "phone_number": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": [
+            "digits_only"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "locations": {
+      "properties": {
+        "phone_number": {
+          "type": "string",
+          "analyzer": "phone_number"
+        }
+      }
+    }
+  }
+}
+
+# Analyze the phone number as indexed again. Hopefully our new
+# mappings helped.
+#
+GET /wikipedia-better-phone/_analyze?field=phone_number&text=(312) 642-4600
+
+# Analyze the phone number as queried again. Let's see if they match.
+#
+GET /wikipedia-better-phone/_analyze?field=phone_number&text=312.642.4600
+
+# Index the Chicago History Museum with the Proper Mappings
+#
+PUT /wikipedia-better-phone/locations/chicago_history_museum
+{
+  "name": "Chicago History Museum",
+  "phone_number": "(312) 642-4600"
+}
+
+# Search for the Chicago History Museum again.
+#
+GET /wikipedia-better-phone/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "phone_number": "312.642.4600"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Add some stemmed fields.
+#
+POST /stemmed-example/
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "stemmed": {
+          "type": "snowball",
+          "language": "English"
+        }
+      },
+      "analyzer": {
+        "stemmed": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "standard",
+            "lowercase",
+            "stemmed"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "analyzer": "stemmed"
+        }
+      }
+    }
+  }
+}
+
+# Test our stemmed field.
+#
+GET /stemmed-example/_analyze?field=description&text=The quick brown fox jumps over the lazy dog.
+
+# Working with Synonyms.
+#
+POST /synonyms-example/
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "first_name_synonyms": {
+          "type": "synonym",
+          "synonyms": [
+            "susan, susie",
+            "ed, edward",
+            "tom, thomas"
+          ]
+        }
+      },
+      "analyzer": {
+        "first_name_synonyms": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "first_name_synonyms"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "author": {
+          "type": "string",
+          "analyzer": "first_name_synonyms"
+        }
+      }
+    }
+  }
+}
+
+# Test out the synonym field.
+#
+GET /synonyms-examples/_analyze?field=author&text=Thomas Jefferson
+
+# Work with Edge NGrams.
+#
+POST /edgengrams-example/
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "edge_left": {
+          "type": "edgeNGram",
+          "side": "front",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "edge_left": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "edge_left"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "title": {
+          "type" : "string",
+          "index_analyzer" : "edge_left",
+          "search_analyzer" : "standard",
+          "include_in_all" : false
+        }
+      }
+    }
+  }
+}
+
+# Test out the edge ngram field.
+#
+GET /edgengrams-example/_analyze?field=title&text=Lorem ipsum dolor
+
+# Put it all together with multi-fields.
+# TODO: Update this to newer syntax.
+#
+POST /multifield-example
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "edge_left": {
+          "type": "edgeNGram",
+          "side": "front",
+          "min_gram": 1,
+          "max_gram": 20
+        },
+        "first_name_synonyms": {
+          "type": "synonym",
+          "synonyms": [
+            "susan, susie",
+            "ed, edward",
+            "tom, thomas"
+          ]
+        },
+        "stemmed": {
+          "type": "snowball",
+          "language": "English"
+        }
+      },
+      "analyzer": {
+        "edge_left": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "edge_left"
+          ],
+          "tokenizer": "standard"
+        },
+        "stemmed": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "stemmed"
+          ],
+          "tokenizer": "standard"
+        },
+        "first_name_synonyms": {
+          "type": "custom",
+          "filter": [
+            "standard",
+            "asciifolding",
+            "lowercase",
+            "stop",
+            "first_name_synonyms"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "essays": {
+      "properties": {
+        "name": {
+          "type": "multi_field",
+          "fields": {
+            "name": {
+              "type": "string",
+              "index": "analyzed"
+            },
+            "edge" : {
+              "type" : "string",
+              "index_analyzer" : "edge_left",
+              "search_analyzer" : "standard",
+              "include_in_all" : false
+            },
+            "stemmed" : {
+              "type" : "string",
+              "analyzer" : "stemmed",
+              "include_in_all" : false
+            }
+          }
+        },
+        "author": {
+          "type": "multi_field",
+          "fields": {
+            "author": {
+              "type": "string",
+              "index": "analyzed"
+            },
+            "edge" : {
+              "type" : "string",
+              "index_analyzer" : "edge_left",
+              "search_analyzer" : "standard",
+              "include_in_all" : false
+            },
+            "stemmed" : {
+              "type" : "string",
+              "analyzer" : "stemmed",
+              "include_in_all" : false
+            },
+            "synonyms": {
+              "type": "string",
+              "index_analyzer" : "first_name_synonyms",
+              "search_analyzer" : "standard",
+              "include_in_all": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# Add an essay to our multi-field index.
+#
+PUT /multifield-example/essays/rights_of_british_america
+{
+  "name": "A Summary View of the Rights of British America",
+  "author": "Thomas Jefferson"
+}
+
+# Include edge ngrams for type-ahead search.
+#
+GET /multifield-example/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "righ",
+            "fields": [
+              "name",
+              "name.edge",
+              "name.stemmed",
+              "author",
+              "author.edge",
+              "author.stemmed",
+              "author.synonyms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "name.edge": {},
+          "name.stemmed": {},
+          "author": {},
+          "author.edge": {},
+          "author.stemmed": {},
+          "author.synonyms": {}
+      }
+  }
+}
+
+# Handle word variations with stemming.
+#
+GET /multifield-example/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "summaries",
+            "fields": [
+              "name",
+              "name.edge",
+              "name.stemmed",
+              "author",
+              "author.edge",
+              "author.stemmed",
+              "author.synonyms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "name.edge": {},
+          "name.stemmed": {},
+          "author": {},
+          "author.edge": {},
+          "author.stemmed": {},
+          "author.synonyms": {}
+      }
+  }
+}
+
+# Find Tom Jefferson with name synonyms.
+#
+GET /multifield-example/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "tom jefferson",
+            "fields": [
+              "name",
+              "name.edge",
+              "name.stemmed",
+              "author",
+              "author.edge",
+              "author.stemmed",
+              "author.synonyms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "name.edge": {},
+          "name.stemmed": {},
+          "author": {},
+          "author.edge": {},
+          "author.stemmed": {},
+          "author.synonyms": {}
+      }
+  }
+}
+
+# Work with inner objects.
+#
+PUT /spantree/employee/allie
+{
+  "name": "Allie Curry",
+  "pets": [
+    {
+      "type": "cat",
+      "name": "starsky"
+    },
+    {
+      "type": "dog",
+      "name": "kirby"
+    }
+  ]
+}
+
+# Explore the limitations of inner objects.
+# TODO: Verify this still works the same way
+#
+GET /spantree/employee/_search
+{
+  "query": {
+    "query_string": {
+      "query": "pets.type:dog pets.name:starsky"
+    }
+  }
+}
+
+# Add a nested type mapping.
+#
+PUT /spantree-nested
+{
+  "mappings": {
+    "employee": {
+      "properties": {
+        "pets": {
+          "type": "nested",
+          "properties": {
+            "type": {"type": "string"},
+            "name": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}
+
+# Add documents with nested types.
+PUT /spantree-nested/employee/allie
+{
+  "name": "Allie Curry",
+  "pets": [
+    {
+      "type": "cat",
+      "name": "starsky"
+    },
+    {
+      "type": "dog",
+      "name": "kirby"
+    }
+  ]
+}
+
+# Query nested types. Nested types treat each inner object almost as
+# if they were a separate document.
+#
+GET /spantree-nested/employee/_search
+{
+  "query": {
+    "nested": {
+      "path": "pets",
+      "query": {
+        "bool": {
+          "must": [
+            {"match": {"pets.type": "dog"}},
+            {"match": {"pets.name": "starsky"}}
+          ]
+        }
+      }
+    }
+  }
+}
+
+# Query nested types with the right values.
+#
+GET /spantree-nested/employee/_search
+{
+  "query": {
+    "nested": {
+      "path": "pets",
+      "query": {
+        "bool": {
+          "must": [
+            {"match": {"pets.type": "cat"}},
+            {"match": {"pets.name": "starsky"}}
+          ]
+        }
+      }
+    }
+  }
+}
+
+# Add a parent-child mapping.
+#
+PUT /spantree-parent-child/
+{
+  "mappings": {
+    "employee": {},
+    "pet": {
+      "_parent": {
+        "type": "employee"
+      }
+    }
+  }
+}
+
+# Add a parent.
+#
+PUT /spantree-parent-child/employee/allie
+{
+  "name": "Allie Curry"
+}
+
+# Add Starsky as a child.
+#
+PUT /spantree-parent-child/pet/starsky?parent=allie
+{
+  "type": "cat",
+  "name": "starsky"
+}
+
+# Add Kirby as a child.
+#
+PUT /spantree-parent-child/pet/kirby?parent=allie
+{
+  "type": "dog",
+  "name": "kirby"
+}
+
+# Find a parent.
+#
+GET /spantree-parent-child/employee/_search
+{
+  "query": {
+    "has_child": {
+      "type": "pet",
+      "query": {
+        "query_string": {
+          "query": "type:dog name:starsky"
+        }
+      }
+    }
+  }
+}
+
+# Find children.
+#
+GET /spantree-parent-child/pet/_search
+{
+  "query": {
+    "has_parent": {
+      "type": "employee",
+      "query": {
+        "query_string": {
+          "query": "curry"
+        }
+      }
+    }
+  }
+}

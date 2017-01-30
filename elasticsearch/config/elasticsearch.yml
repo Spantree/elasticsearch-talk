@@ -1,5 +1,7 @@
 network:
-  bind_host: 0.0.0.0
+  host: _site_
+node:
+  name: ${ES_NODENAME}
 index:
   number_of_replicas: 0
 http:
@@ -10,9 +12,6 @@ cluster:
       cluster_concurrent_rebalance: 2
     balance:
       primary: 1
-marvel:
-  agent:
-    enabled: false
 bootstrap:
   mlockall: true
 indices:
@@ -22,5 +21,10 @@ indices:
 discovery:
   zen:
     ping:
+      unicast:
+        hosts: ["elastic1", "elastic2"]
       multicast:
         enabled: false
+repositories:
+  url:
+    allowed_urls: ["https://elasticsearch-sample-data.s3.amazonaws.com/*"]

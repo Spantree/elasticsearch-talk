@@ -1,0 +1,76 @@
+# Indexing
+# ========
+
+# Index John Doe with an assigned ID.
+#
+POST /spantree/people/
+{
+  "name": "Johnny Noname"
+}
+
+# Find John in the index.
+#
+GET /spantree/_search
+
+# Review automatic mappings. Elasticsearch will automatically guess
+# mappings for new fields.
+GET /spantree/_mapping
+
+# Index Cedric with a known ID.
+#
+PUT /spantree/people/cedric
+{
+  "name": "Cedric Hurst",
+  "title": "Principal"
+}
+
+# Make Sure Cedric is there.
+#
+GET /spantree/people/cedric
+
+# Add more information about Cedric.
+#
+POST /spantree/people/cedric/_update
+{
+  "doc": {
+    "git_commits": 2560
+  }
+}
+
+# Add one more git commit for Cedric.
+#
+POST /spantree/people/cedric/_update
+{
+  "script": "ctx._source.git_commits += 1",
+  "lang": "groovy"
+}
+
+# Upsert Kevin.
+#
+POST /spantree/people/kevin/_update
+{
+  "doc": {
+    "git_commits": 1912
+  },
+  "upsert": {
+    "name": "Kevin Greene",
+    "title": "Senior Software Engineer",
+    "git_commits": 1912
+  }
+}
+
+# Make sure Kevin is still there.
+#
+GET /spantree/people/kevin
+
+# Add everyone else.
+#
+POST /spantree/_bulk
+{"index":{"_id":"gary","_type": "people"}}
+{"name":"Gary Turovsky","title":"Senior Software Engineer","git_commits":  611}
+{"index":{"_id":"jonathan","_type": "people"}}
+{"name":"Jonathan Freeman","title":"Software Engineer","git_commits": 186}
+
+# Review the whole list.
+#
+GET /spantree/_search

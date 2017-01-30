@@ -1,0 +1,97 @@
+body,
+.box {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
+}
+.fa-caret-down {
+    display: none;
+}
+table,
+td,
+th {
+    border: 0px;
+}
+span.shard.shard-primary:before {
+    content: 'P';
+}
+span.shard.shard-primary.shard-started {
+    background-color: #27ae60;
+    color: #ecf0f1;
+    font-weight: 500;
+}
+tr {
+    height: 125px;
+}
+.shard-started:before {
+    content: 'R';
+}
+.shard-started {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-size: 2em;
+    height: 2em;
+    width: 3em;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0.6em 0;
+    border-radius: 5px;
+    border: none;
+    letter-spacing: -0.06em;
+}
+th span.cluster-map-header-index-name:before {}span.cluster-map-header-index-name:before {}span.cluster-map-node-detail:before {}.node-info,
+span.cluster-map-header-index-name {
+    font-size: 2em;
+    line-height: 1.4em;
+    text-align: center;
+    margin: 0;
+}
+.cluster-map-header-cluster-actions {
+    width: 10em;
+}
+span.cluster-map-node-detail {
+    font-size: 1em;
+    font-weight: 100;
+}
+.node-badges {
+    padding-top: 20px;
+    width: 8em;
+}
+i {
+    width: 100px;
+}
+.fa-star,
+.fa-star-o {}.fa-star:after {
+    content: " (Master)";
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
+}
+.fa-star-o:after {
+    content: " (Follower)";
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
+}
+.fa-hdd-o:after {
+    content: " (Data Node)";
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', Helvetica, sans-serif;
+}
+th span.cluster-map-header-index-name {
+    font-size: 2em;
+    line-height: 2em;
+    text-align: center;
+}
+.cluster-map-header-index-alias {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 100;
+}
+.table-header {
+    width: 420px;
+}
+.navbar,
+.cluster-map-header-cluster-actions,
+.node-progress-bar,
+.stat-block,
+.cluster-overview-filter,
+.page-ctrl,
+div[ng-controller="DebugController"] {
+    visibility: hidden;
+}

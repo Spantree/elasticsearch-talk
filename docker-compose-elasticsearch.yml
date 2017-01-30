@@ -1,0 +1,12 @@
+version: '2'
+services:
+  elasticsearch:
+    build: elasticsearch
+    volumes:
+      - "./elasticsearch/config:/usr/share/elasticsearch/config"
+    environment:
+      ES_NODENAME: $HOSTNAME
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1

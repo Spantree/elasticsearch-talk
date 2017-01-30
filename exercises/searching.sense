@@ -1,0 +1,273 @@
+# Searching
+# =========
+
+# Search with a query string. Find the term "college" anywhere in the
+# documents.
+#
+GET /wikipedia/_search
+{
+    "query": {
+      "query_string": {
+          "query": "college"
+        }
+    }
+}
+
+# Search for multiple terms. Find the terms "lake" and "shore"
+# anywhere in the documents.
+#
+GET /wikipedia/_search
+{
+  "query": {
+    "query_string": {
+      "query": "lake shore"
+    }
+  }
+}
+
+# Add minimum should match constraint. Find the terms "lake" and
+# "shore" anywhere in the documents.  Both the terms should be
+# present.
+#
+GET /wikipedia/_search
+{
+  "query": {
+    "query_string": {
+      "query": "lake shore",
+      "minimum_should_match": "100%"
+    }
+  }
+}
+
+# Search against a subset of fields.
+#
+GET /wikipedia/_search
+{
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords"],
+      "query": "theater OR theatre"
+    }
+  }
+}
+
+# Return subset of fields. Return only the name and keywords fields.
+#
+GET /wikipedia/_search
+{
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords"],
+      "query": "theater OR theatre"
+    }
+  },
+  "fields": ["name", "keywords"],
+}
+
+# Search with Lucene boolean syntax. Find both the terms "theater" and
+# "theatre" anywhere in the documents.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords", "description"],
+      "query": "theater AND theatre"
+    }
+  }
+}
+
+# Exclude results. Use the `must_not` clause.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater OR theatre"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "query_string": {
+            "fields": ["name"],
+            "query": "theatre"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Further narrow Results. Add multiple must clauses.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater OR theatre"
+          }
+        },
+        {
+          "query_string": {
+            "query": "pier"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Use a should clause.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "keywords", "description"],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "query_string": {
+            "fields": ["name", "keywords", "description"],
+            "query": "theater OR theatre"
+          }
+        },
+        {
+          "query_string": {
+            "query": "pier"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Highlight matched terms. Search for the term "Chicago" and show
+# where the matches occurred
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "description"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "chicago"
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+      "fields": {
+          "name": {},
+          "description": {}
+      }
+  }
+}
+
+# Explain results. The explain endpoint will expose some of the math
+# behind filtering and scoring.
+#
+GET /wikipedia/locations/chicago_shakespeare_theater/_explain
+{
+    "query": {
+        "query_string": {
+            "fields": [
+                "description"
+            ],
+            "query": "navy^3 pier^2 place^4"
+        }
+    }
+}
+
+# Boost fields. Find the term "theater" anywhere in the documents,
+# boosting matches on name higher than matches on description or
+# about.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "keywords", "about"],
+  "query": {
+    "query_string": {
+      "fields": ["name^2", "keywords^1.5", "about"],
+      "query": "theater",
+      "minimum_should_match": "100%"
+    }
+  }
+}
+
+# Use scripted scoring. Double the score of each document.
+# TODO: Make sure this works in 2.x.
+#
+GET /wikipedia/_search
+{
+  "fields": [
+      "name",
+      "keywords",
+      "about"
+  ],
+  "query": {
+    "function_score": {
+        "query": {
+            "query_string": {
+                "fields": [
+                    "name",
+                    "keywords",
+                    "about"
+                ],
+                "query": "theater",
+                "minimum_should_match": "100%"
+            }
+        },
+        "script_score": {
+          "script": "_score * 2",
+          "lang": "groovy"
+        }
+    }
+  }
+}
+
+# Filter based on terms.
+#
+GET /wikipedia/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "filter": {
+    "term" : {
+      "name" : ["theater", "theatre"]
+    }
+  }
+}
+
+# Filter on geo-distance.
+#
+GET /divvy/station/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "filter": {
+    "geo_distance" : {
+      "distance": "1mi",
+      "location" : {
+        "lat": 41.886732,
+        "lon": -87.655979
+      }
+    }
+  }
+}

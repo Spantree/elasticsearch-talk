@@ -2,7 +2,7 @@
     "template": "logstash-*",
     "settings" : {
         "number_of_shards" : 1,
-        "number_of_replicas" : 0,
+        "number_of_replicas" : 1,
         "index" : {
             "query" : { "default_field" : "@message" },
             "store" : { "compress" : { "stored" : true, "tv": true } }
@@ -18,24 +18,22 @@
     },
     "mappings": {
         "_default_": {
-            "_source": { "compress": true },
             "_all" : {"enabled" : false},
             "dynamic_templates": [
                 {
-                    "string_template" : { 
+                    "string_template" : {
                         "match" : "*",
                         "mapping": { "type": "string", "index": "not_analyzed" },
                         "match_mapping_type" : "string"
-                     } 
+                     }
                  }
              ],
              "properties" : {
-                "@fields": { "type": "object", "dynamic": true, "path": "full" }, 
                 "@message" : { "type" : "string", "index" : "analyzed" },
                 "@source" : { "type" : "string", "index" : "not_analyzed" },
                 "@source_host" : { "type" : "string", "index" : "not_analyzed" },
                 "@source_path" : { "type" : "string", "index" : "not_analyzed" },
-                "@tags": { "type": "string", "index" : "not_analyzed" }, 
+                "@tags": { "type": "string", "index" : "not_analyzed" },
                 "@timestamp" : { "type" : "date", "index" : "not_analyzed" },
                 "@type" : { "type" : "string", "index" : "not_analyzed" },
                 "http_referrer" : { "type": "string", "analyzer": "url_analyzer"},
@@ -43,8 +41,8 @@
                     "properties": {
                         "location": {
                           "type":               "geo_point",
-                          "geohash_prefix":     true, 
-                          "geohash_precision":  "1km" 
+                          "geohash_prefix":     true,
+                          "geohash_precision":  "1km"
                         }
                     }
                 }

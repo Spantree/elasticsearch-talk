@@ -45,13 +45,19 @@ services:
     ports:
       - "9500:80"
   logstash:
-    image: logstash:5
+    image: logstash:2.4
     volumes:
       - "./logstash:/config-dir"
       - "./data:/usr/local/share/data"
+    command: ["logstash", "-f", "/config-dir/logstash.conf"]
     ports:
       - "3333:3333"
+      - "5044:5044"
       - "9600:9600"
+    depends_on:
+      - elastic1
+      - elastic2
+      - elastic3
   kibana:
     build: kibana
     ports:

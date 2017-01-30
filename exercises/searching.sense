@@ -1,12 +1,10 @@
-# Search API
+# Searching
+# =========
 
-## Searching with Query String
-
-Find the term "college" anywhere in the documents
-
-`GET /wikipedia/_search`
-
-```json
+# Search with a query string. Find the term "college" anywhere in the
+# documents.
+#
+GET /wikipedia/_search
 {
     "query": {
       "query_string": {
@@ -14,15 +12,11 @@ Find the term "college" anywhere in the documents
         }
     }
 }
-```
 
-## Searcing for Multiple Terms
-
-Find the terms "lake" and "shore" anywhere in the documents.
-
-`GET /wikipedia/_search`
-
-```json
+# Search for multiple terms. Find the terms "lake" and "shore"
+# anywhere in the documents.
+#
+GET /wikipedia/_search
 {
   "query": {
     "query_string": {
@@ -30,15 +24,12 @@ Find the terms "lake" and "shore" anywhere in the documents.
     }
   }
 }
-```
 
-## Adding Minimum Should Match
-
-Find the terms "lake" and "shore" anywhere in the documents.  Both the terms should be present.
-
-`GET /wikipedia/_search`
-
-```json
+# Add minimum should match constraint. Find the terms "lake" and
+# "shore" anywhere in the documents.  Both the terms should be
+# present.
+#
+GET /wikipedia/_search
 {
   "query": {
     "query_string": {
@@ -47,13 +38,10 @@ Find the terms "lake" and "shore" anywhere in the documents.  Both the terms sho
     }
   }
 }
-```
 
-## Searching a Subset of Fields
-
-`GET /wikipedia/_search`
-
-```json
+# Search against a subset of fields.
+#
+GET /wikipedia/_search
 {
   "query": {
     "query_string": {
@@ -62,33 +50,24 @@ Find the terms "lake" and "shore" anywhere in the documents.  Both the terms sho
     }
   }
 }
-```
 
-## Returning subset of fields
-
-Return only the name and keywords fields.
-
-`GET /wikipedia/_search`
-
-```json
+# Return subset of fields. Return only the name and keywords fields.
+#
+GET /wikipedia/_search
 {
+  "query": {
+    "query_string": {
+      "fields": ["name", "keywords"],
+      "query": "theater OR theatre"
+    }
+  },
   "fields": ["name", "keywords"],
-  "query": {
-    "query_string": {
-      "fields": ["name", "keywords"],
-      "query": "theater OR theatre"
-    }
-  }
 }
-```
 
-## Searching with Boolean Syntax
-
-Find the term "theater" and "theatre" anywhere in the documents.
-
-`GET /wikipedia/_search`
-
-```json
+# Search with Lucene boolean syntax. Find both the terms "theater" and
+# "theatre" anywhere in the documents.
+#
+GET /wikipedia/_search
 {
   "fields": ["name", "keywords", "description"],
   "query": {
@@ -98,13 +77,10 @@ Find the term "theater" and "theatre" anywhere in the documents.
     }
   }
 }
-```
 
-## Excluding Results
-
-`GET /wikipedia/_search`
-
-```json
+# Exclude results. Use the `must_not` clause.
+#
+GET /wikipedia/_search
 {
   "fields": ["name", "keywords", "description"],
   "query": {
@@ -128,13 +104,10 @@ Find the term "theater" and "theatre" anywhere in the documents.
     }
   }
 }
-```
 
-## Narrowing Results
-
-`GET /wikipedia/_search`
-
-```json
+# Further narrow Results. Add multiple must clauses.
+#
+GET /wikipedia/_search
 {
   "fields": ["name", "keywords", "description"],
   "query": {
@@ -155,13 +128,10 @@ Find the term "theater" and "theatre" anywhere in the documents.
     }
   }
 }
-```
 
-## Using Should Clauses
-
-`GET /wikipedia/_search`
-
-```json
+# Use a should clause.
+#
+GET /wikipedia/_search
 {
   "fields": ["name", "keywords", "description"],
   "query": {
@@ -182,15 +152,11 @@ Find the term "theater" and "theatre" anywhere in the documents.
     }
   }
 }
-```
 
-## Highlighting Matched Terms
-
-Search for the term "Chicago" and highlight matches.
-
-`GET /wikipedia/_search`
-
-```json
+# Highlight matched terms. Search for the term "Chicago" and show
+# where the matches occurred
+#
+GET /wikipedia/_search
 {
   "fields": ["name", "description"],
   "query": {
@@ -211,13 +177,11 @@ Search for the term "Chicago" and highlight matches.
       }
   }
 }
-```
 
-## Explaining Results
-
-`GET /wikipedia/locations/chicago_shakespeare_theater/_explain`
-
-```json
+# Explain results. The explain endpoint will expose some of the math
+# behind filtering and scoring.
+#
+GET /wikipedia/locations/chicago_shakespeare_theater/_explain
 {
     "query": {
         "query_string": {
@@ -228,17 +192,12 @@ Search for the term "Chicago" and highlight matches.
         }
     }
 }
-```
 
-## Field Boosting
-
-Find the term "theater" anywhere in the documents,
-boosting matches on name higher than matches on
-description or about.
-
-`GET /wikipedia/_search`
-
-```json
+# Boost fields. Find the term "theater" anywhere in the documents,
+# boosting matches on name higher than matches on description or
+# about.
+#
+GET /wikipedia/_search
 {
   "fields": ["name", "keywords", "about"],
   "query": {
@@ -249,48 +208,41 @@ description or about.
     }
   }
 }
-```
 
-## Scripted scoring
-
-Double the score of each document
-
-`GET /wikipedia/_search`
-
-```json
+# Use scripted scoring. Double the score of each document.
+# TODO: Make sure this works in 2.x.
+#
+GET /wikipedia/_search
 {
-    "fields": [
-        "name",
-        "keywords",
-        "about"
-    ],
-    "query": {
-      "function_score": {
-          "query": {
-              "query_string": {
-                  "fields": [
-                      "name",
-                      "keywords",
-                      "about"
-                  ],
-                  "query": "theater",
-                  "minimum_should_match": "100%"
-              }
-          },
-          "script_score": {
-            "script": "_score * 2",
-            "lang": "groovy"
-          }
-      }
+  "fields": [
+      "name",
+      "keywords",
+      "about"
+  ],
+  "query": {
+    "function_score": {
+        "query": {
+            "query_string": {
+                "fields": [
+                    "name",
+                    "keywords",
+                    "about"
+                ],
+                "query": "theater",
+                "minimum_should_match": "100%"
+            }
+        },
+        "script_score": {
+          "script": "_score * 2",
+          "lang": "groovy"
+        }
     }
+  }
 }
-```
 
-## Term Filtering
-
-`GET /wikipedia/_search`
-
-```json
+# Filter based on terms.
+#
+GET /wikipedia/_search
 {
   "query": {
     "match_all": {}
@@ -301,13 +253,10 @@ Double the score of each document
     }
   }
 }
-```
 
-## Geo-Distance Filtering
-
-`GET /divvy/station/_search`
-
-```json
+# Filter on geo-distance.
+#
+GET /divvy/station/_search
 {
   "query": {
     "match_all": {}
@@ -322,4 +271,3 @@ Double the score of each document
     }
   }
 }
-```

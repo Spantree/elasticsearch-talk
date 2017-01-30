@@ -1,10 +1,9 @@
-# Mapping & Analysis
+# Mapping and Analysis
+# ====================
 
-## Creating a new index with explicit mappings
-
-`POST /wikipedia-mappings-simple/`
-
-```json
+# Create a new index with explicit mappings.
+#
+POST /simple-example/
 {
   "mappings": {
     "locations": {
@@ -28,70 +27,56 @@
     }
   }
 }
-```
 
-## Inserting a Few Documents
-
-`POST /wikipedia-mappings-simple/_bulk`
-
-```json
+# Inserting a few documents.
+#
+POST /simple-example/_bulk
 {"index":{"_id":"frontera_grill","_type": "locations"}}
 {"name": "Frontera Grill","keywords": ["restaurants","chicago,illinois"],"about": "Frontera Grill is a Southwestern restaurant in Chicago, Illinois. It is owned by Rick Bayless. It opened in January 1987 and is located at 445 N. Clark Street in Chicago's River North neighborhood.","wikipedia_numeric_id": 7353370,"lastUpdated": "2012-04-30T02:14:41+0000","coordinates": [-87.630806,41.890575]}
 {"index":{"_id":"allerton_hotel","_type": "locations"}}
 {"name": "Allerton Hotel","keywords": ["hotels","chicago,illinois","landmarks","skyscrapers"],"geo_geometry_type": "Point","about": "The Allerton Hotel is a 25-story 360 foot (110 m) hotel skyscraper along the Magnificent Mile in the Near North Side community area of Chicago, Illinois.","wikipedia_numeric_id": 11221483,"coordinates": [-87.6238,41.8952]}
 {"index":{"_id":"lane_technical_college_prep_high_school","_type": "locations"}}
 {"name": "Lane Technical College Prep High School","keywords": ["chicago","public","schools","magnet","illinois","educational","institutions","established","in1908","chicago,illinois"],"about": "Albert G. Lane Technical College Preparatory High School (also known as Lane Tech), is a public, four-year, magnet high school located on the northwest side of Chicago.","wikipedia_numeric_id": 3616501,"lastUpdated": "2012-08-14T07:09:31+0000"}
-```
 
-## Reviewing the Mappings
+# Reviewing the Mappings.
+#
+GET /simple-example/_mapping
 
-`GET /wikipedia-mappings-simple/_mapping`
-
-## Getting Elasticsearch to infer an integer type
-
-Elasticsearch will guess the type based on the first use of the field
-
-`PUT /spantree-mappings/employee/andrea`
-
-```json
+# Get Elasticsearch to infer an integer type. Elasticsearch will guess
+# the type based on the first use of the field.
+#
+PUT /spantree-mappings/employee/andrea
 {
   "dogs": 1
 }
-```
 
-## Breaking inferred types
+# Break inferred types. But if you try to insert a second document
+# with a different type, Elasticsearch will fail.
 
-But if you try to insert a second document with a different type, Elasticsearch
-will fail.
-
-`PUT /spantree-mappings/employee/allie`
-
-```json
+PUT /spantree-mappings/employee/allie
 {
   "dogs": ["Kirby"]
 }
-```
 
-## Seeing How a Name Value Gets Analyzed
+# Review name analysis. Elasticsearch exposes an `_analyze` endpoint
+# that will show you how a field value would get tokenized and
+# filtered before going into the index.
+#
+GET /simple-example/_analyze?field=name&text=Lane Tech: College Prep High School
 
-`GET /wikipedia-mappings-simple/_analyze?field=name&text=Lane Tech: College Prep High School`
-
-## Adding the Chicago History Museum
-
-`PUT /wikipedia-mappings-simple/locations/chicago_history_museum`
-
-```json
+# Add the Chicago History Museum. Let's add a document with a phone
+# number to our index.
+#
+PUT /simple-example/locations/chicago_history_museum
 {
   "name": "Chicago History Museum",
   "phone_number": "(312) 642-4600"
 }
-```
 
-## Trying to find the phone number in a different format
-
-`GET /wikipedia-mappings-simple/_search`
-
-```json
+# Search for the phone number in a different format. What happens when
+# it doesn't match what we put in?
+#
+GET /simple-example/_search
 {
   "query": {
     "bool": {
@@ -105,25 +90,22 @@ will fail.
     }
   }
 }
-```
 
-## Reviewing the Mapping for Phone Number
+# Review the mapping for the phone number field.
+#
+GET /simple-example/_mapping
 
-`GET /wikipedia-mappings-simple/_mapping`
+# Analyze the phone number as indexed.
+#
+GET /simple-example/_analyze?field=phone_number&text=(312) 642-4600
 
-## Analyzing the Indexed Phone Number
+# Analyze the phone number as queried.
+#
+GET /simple-example/_analyze?field=phone_number&text=312.642.4600
 
-`GET /wikipedia-mappings-simple/_analyze?field=phone_number&text=(312) 642-4600`
-
-## Analyzing the Queried Phone Number
-
-`GET /wikipedia-mappings-simple/_analyze?field=phone_number&text=312.642.4600`
-
-## Adding a Proper Phone Number Mapping
-
-`POST /wikipedia-mappings-phone/`
-
-```json
+# Add a better phone number mapping. Let's replace all non-digit
+# characters with nothing.
+POST /wikipedia-better-phone/
 {
   "settings": {
     "analysis": {
@@ -156,32 +138,27 @@ will fail.
     }
   }
 }
-```
 
-## Analyzing the Indexed Phone Number Again
+# Analyze the phone number as indexed again. Hopefully our new
+# mappings helped.
+#
+GET /wikipedia-better-phone/_analyze?field=phone_number&text=(312) 642-4600
 
-`GET /wikipedia-mappings-phone/_analyze?field=phone_number&text=(312) 642-4600`
+# Analyze the phone number as queried again. Let's see if they match.
+#
+GET /wikipedia-better-phone/_analyze?field=phone_number&text=312.642.4600
 
-## Analyzing the Queried Phone Number Again
-
-`GET /wikipedia-mappings-phone/_analyze?field=phone_number&text=312.642.4600`
-
-## Indexing the Chicago History Museum with the Proper Mappings
-
-`PUT /wikipedia-mappings-phone/locations/chicago_history_museum`
-
-```json
+# Index the Chicago History Museum with the Proper Mappings
+#
+PUT /wikipedia-better-phone/locations/chicago_history_museum
 {
   "name": "Chicago History Museum",
   "phone_number": "(312) 642-4600"
 }
-```
 
-## Searching for the History Museum Again
-
-`GET /wikipedia-mappings-phone/_search`
-
-```json
+# Search for the Chicago History Museum again.
+#
+GET /wikipedia-better-phone/_search
 {
   "query": {
     "bool": {
@@ -195,14 +172,10 @@ will fail.
     }
   }
 }
-```
 
-
-## Stemming
-
-`POST /wikipedia-mappings-stemmed/`
-
-```json
+# Add some stemmed fields.
+#
+POST /stemmed-example/
 {
   "settings": {
     "analysis": {
@@ -236,17 +209,14 @@ will fail.
     }
   }
 }
-```
 
-## Testing Our Stemmed Field
+# Test our stemmed field.
+#
+GET /stemmed-example/_analyze?field=description&text=The quick brown fox jumps over the lazy dog.
 
-`GET /wikipedia-mappings-stemmed/_analyze?field=description&text=Spantree is one of many companies at the Chicago Java Users Group that are looking for great developers.`
-
-## Working with Synonyms
-
-`POST /wikipedia-mappings-synonyms/`
-
-```json
+# Working with Synonyms.
+#
+POST /synonyms-example/
 {
   "settings": {
     "analysis": {
@@ -286,17 +256,14 @@ will fail.
     }
   }
 }
-```
 
-## Testing Out Our Synonym Field
+# Test out the synonym field.
+#
+GET /synonyms-examples/_analyze?field=author&text=Thomas Jefferson
 
-`GET /wikipedia-mappings-synonyms/_analyze?field=author&text=Thomas Jefferson`
-
-## Working with Edge N-Grams
-
-`POST /wikipedia-mappings-edgengrams/`
-
-```json
+# Work with Edge NGrams.
+#
+POST /edgengrams-example/
 {
   "settings": {
     "analysis": {
@@ -335,17 +302,15 @@ will fail.
     }
   }
 }
-```
 
-## Testing Out Our Edge N-Gram Field
+# Test out the edge ngram field.
+#
+GET /edgengrams-example/_analyze?field=title&text=Lorem ipsum dolor
 
-`GET /wikipedia-mappings-edgengrams/_analyze?field=title&text=Lorem ipsum dolor`
-
-## Putting It All Together With Multi-fields
-
-`POST /wikipedia-mappings-multifield`
-
-```json
+# Put it all together with multi-fields.
+# TODO: Update this to newer syntax.
+#
+POST /multifield-example
 {
   "settings": {
     "analysis": {
@@ -459,24 +424,18 @@ will fail.
     }
   }
 }
-```
 
-## Adding an Essay to Our Multi-Field Index
-
-`PUT /wikipedia-mappings-multifield/essays/rights_of_british_america`
-
-```json
+# Add an essay to our multi-field index.
+#
+PUT /multifield-example/essays/rights_of_british_america
 {
   "name": "A Summary View of the Rights of British America",
   "author": "Thomas Jefferson"
 }
-```
 
-## Handling Type-Ahead Searches with Edge N-Grams
-
-`GET /wikipedia-mappings-multifield/_search`
-
-```json
+# Include edge ngrams for type-ahead search.
+#
+GET /multifield-example/_search
 {
   "query": {
     "bool": {
@@ -510,13 +469,10 @@ will fail.
       }
   }
 }
-```
 
-## Handling Word Variations with Stemming
-
-`GET /wikipedia-mappings-multifield/_search`
-
-```json
+# Handle word variations with stemming.
+#
+GET /multifield-example/_search
 {
   "query": {
     "bool": {
@@ -550,13 +506,10 @@ will fail.
       }
   }
 }
-```
 
-## Finding Tom Jefferson with Name Synonyms
-
-`GET /wikipedia-mappings-multifield/_search`
-
-```json
+# Find Tom Jefferson with name synonyms.
+#
+GET /multifield-example/_search
 {
   "query": {
     "bool": {
@@ -590,13 +543,10 @@ will fail.
       }
   }
 }
-```
 
-## Working with inner objects
-
-`PUT /spantree/employee/allie`
-
-```json
+# Work with inner objects.
+#
+PUT /spantree/employee/allie
 {
   "name": "Allie Curry",
   "pets": [
@@ -610,13 +560,11 @@ will fail.
     }
   ]
 }
-```
 
-## Inner objects will flatten properties as a list
-
-`GET /spantree/employee/_search`
-
-```json
+# Explore the limitations of inner objects.
+# TODO: Verify this still works the same way
+#
+GET /spantree/employee/_search
 {
   "query": {
     "query_string": {
@@ -624,13 +572,10 @@ will fail.
     }
   }
 }
-```
 
-## Adding a nested type mapping
-
-`PUT /spantree-nested`
-
-```json
+# Add a nested type mapping.
+#
+PUT /spantree-nested
 {
   "mappings": {
     "employee": {
@@ -646,13 +591,9 @@ will fail.
     }
   }
 }
-```
 
-## Adding documents with nested types
-
-`PUT /spantree-nested/employee/allie`
-
-```json
+# Add documents with nested types.
+PUT /spantree-nested/employee/allie
 {
   "name": "Allie Curry",
   "pets": [
@@ -666,15 +607,11 @@ will fail.
     }
   ]
 }
-```
 
-## Querying nested types
-
-Nested types treat each inner object as if they were a separate doc 
-
-`GET /spantree-nested/employee/_search`
-
-```json
+# Query nested types. Nested types treat each inner object almost as
+# if they were a separate document.
+#
+GET /spantree-nested/employee/_search
 {
   "query": {
     "nested": {
@@ -690,12 +627,10 @@ Nested types treat each inner object as if they were a separate doc
     }
   }
 }
-```
 
-## Querying nested types with the right values
-
-`GET /spantree-nested/employee/_search`
-```json
+# Query nested types with the right values.
+#
+GET /spantree-nested/employee/_search
 {
   "query": {
     "nested": {
@@ -711,13 +646,10 @@ Nested types treat each inner object as if they were a separate doc
     }
   }
 }
-```
 
-## Adding a parent-child mapping
-
-`PUT /spantree-parent-child/`
-
-```json
+# Add a parent-child mapping.
+#
+PUT /spantree-parent-child/
 {
   "mappings": {
     "employee": {},
@@ -728,43 +660,33 @@ Nested types treat each inner object as if they were a separate doc
     }
   }
 }
-```
 
-## Adding a parent
-
-`PUT /spantree-parent-child/employee/allie`
-
-```json
+# Add a parent.
+#
+PUT /spantree-parent-child/employee/allie
 {
   "name": "Allie Curry"
 }
-```
 
-## Adding Starsky as a child
-`PUT /spantree-parent-child/pet/starsky?parent=allie`
-```json
+# Add Starsky as a child.
+#
+PUT /spantree-parent-child/pet/starsky?parent=allie
 {
   "type": "cat",
   "name": "starsky"
 }
-```
 
-## Adding Kirby as a child
-
-`PUT /spantree-parent-child/pet/kirby?parent=allie`
-
-```json
+# Add Kirby as a child.
+#
+PUT /spantree-parent-child/pet/kirby?parent=allie
 {
   "type": "dog",
   "name": "kirby"
 }
-```
 
-## Finding a parent
-
-`GET /spantree-parent-child/employee/_search`
-
-```json
+# Find a parent.
+#
+GET /spantree-parent-child/employee/_search
 {
   "query": {
     "has_child": {
@@ -777,13 +699,10 @@ Nested types treat each inner object as if they were a separate doc
     }
   }
 }
-```
 
-## Finding children
-
-`GET /spantree-parent-child/pet/_search`
-
-```json
+# Find children.
+#
+GET /spantree-parent-child/pet/_search
 {
   "query": {
     "has_parent": {
@@ -796,4 +715,3 @@ Nested types treat each inner object as if they were a separate doc
     }
   }
 }
-```

@@ -1,0 +1,184 @@
+# Paging and Sorting
+# ==================
+
+# Get back more than 10 documents. Specify a search result page size
+# of 20.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "coordinates"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "chicago"
+          }
+        }
+      ]
+    }
+  },
+  "size": 20
+}
+
+# Get back the second page of documents. Specify a search result
+# `from` value.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "coordinates"],
+  "query": {
+    "bool": {
+      "must": [
+        {"query_string": {"query": "chicago"}}
+      ]
+    }
+  },
+  "size": 10,
+  "from": 10
+}
+
+# Start a scan query. For frequently-changing data sets, it is often
+# difficult to keep search results consistent across pages. For
+# example, if a user is sorting results by freshness, a search result
+# once appeared in position 10 may be in position 11 by the time the
+# second page is requested. Elasticsearch has the ability to retain a
+# previously fetched result set via a "scan query".  This is similar
+# to a JDBC cursor.
+#
+# Note: make sure to copy the scroll id from the result because we're
+# going to need it in the next step
+#
+# TODO: Verify this still works the same way
+#
+GET /wikipedia/_search?search_type=scan&scroll=10m&size=10
+{
+  "fields": ["name", "coordinates"],
+  "query": {
+    "bool": {
+      "must": [
+        {"query_string": {"query": "chicago"}}
+      ]
+    }
+  }
+}
+
+## Continue our scan query. Use the field _scroll_id from the above
+## query in the following query. Note: you will have to manually
+## manipulate the query string with the scroll id from the last query.
+#
+GET /_search/scroll?scroll=10m&scroll_id={scroll_id}
+
+# Sort dates chronologically. Sorting documents matching "chicago" by
+# last update time.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "lastUpdated"],
+  "query": {
+    "bool": {
+      "must": [
+        {"query_string": {"query": "chicago"}}
+      ]
+    }
+  },
+  "sort": ["lastUpdated"]
+}
+
+# Sort dates in descending order. Sort documents matching "chicago" by
+# last updated time, most recent first.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "lastUpdated"],
+  "query": {
+    "bool": {
+      "must": [{"query_string": {"query": "chicago"}}]
+    }
+  },
+  "sort": [{"lastUpdated": "desc"}]
+}
+
+# Sort by distance. Find locations matching "chicago" sorted by
+# distance from the Spantree offices.
+#
+GET /wikipedia/_search
+{
+  "fields": ["name", "coordinates"],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "chicago"
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "_geo_distance": {
+        "coordinates": [-87.655979, 41.886732],
+        "order": "asc",
+        "unit": "mi"
+      }
+    }
+  ],
+  "size": 10
+}
+
+# Sort strings the naive way. Sorting on strings is actually a bit
+# trickier. In Lucene, sorts are based on individual terms in the
+# inverted index. Because our name field is tokenized, the first
+# alphabetical token in the field value determines a field's ranking.
+#
+GET /wikipedia/locations/_search
+{
+  "fields": ["name"],
+  "query": {
+    "bool": {
+      "must": [{
+        "query_string": {"query": "academy"}
+      }]
+    }
+  },
+  "sort": ["name"]
+}
+
+# Configure a sort-friendly analyzer. To resolve this issue, we
+# recommend setting up an analyzer specifically for string sorting.
+# We've preconfigured an `alpha_space_only` in the index which uses
+# the `keyword` tokenizer. This analyzer also lowercases and removes
+# any  non-alphanumeric characters so punctuation symbols don't get
+# sorted.
+#
+GET /wikipedia/_settings?name=*.sort*.*
+
+# Store the sortable string in a multi-field. For the name field, we
+# want to do both full-text search and string sorting. So to make sure
+# we can handle both, we configure name to be a multi-field.
+GET /wikipedia/locations/_mapping
+
+# Testing the sortable analyzer. When creating new analyzers, we
+# recommend testing them out using the Analyze API to make sure they
+# work as expected.
+#
+GET /wikipedia/_analyze?field=name.sortable&text=I wanna know what love is; I want you to show me!
+
+# Sort Strings the Right Way. Now that we've done all that, we simply
+# swap out the sort field from the previous query to use
+# `name.sorted`.
+
+GET /wikipedia/locations/_search
+{
+  "fields": ["name"],
+  "query": {
+    "bool": {
+      "must": [{
+        "query_string": {"query": "academy"}
+      }]
+    }
+  },
+  "sort": ["name.sortable"]
+}

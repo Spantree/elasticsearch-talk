@@ -1,0 +1,236 @@
+# Aggregations
+# ============
+
+# Query Divvy trips.
+#
+GET /divvy/trip/_search
+
+# Query Divvy stations
+#
+GET /divvy/station/_search
+
+# Get terms aggregation for gender of rider.
+#
+GET /divvy/trip/_search
+{
+  "aggs": {
+    "genders": {
+      "terms": {
+        "field": "gender"
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get statistics for trip duration.
+#
+GET /divvy/trip/_search
+{
+  "aggs": {
+    "trip_duration_stats": {
+      "stats": {
+        "field": "trip_duration"
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get extended statistics for trip duration.
+#
+GET /divvy/trip/
+{
+  "aggs": {
+    "trip_duration_stats": {
+      "extended_stats": {
+        "field": "trip_duration"
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get trip duration percentiles.
+#
+GET /divvy/trip/_search
+{
+  "aggs": {
+    "trip_length": {
+      "percentiles": {
+        "field": "trip_duration",
+        "percents": [
+          25,
+          50,
+          75
+        ]
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get trip duration stats by gender.
+#
+GET /divvy/trip/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "aggs": {
+    "gender": {
+      "terms": {
+        "field": "gender",
+        "size": 10
+      },
+      "aggs": {
+        "trip_duration_stats": {
+          "stats": {
+            "field": "trip_duration"
+          }
+        }
+      }
+    }
+  },
+  "size": 0
+}
+
+# Aggregate based on distance to Spantree's office.
+#
+GET /divvy/station/_search
+{
+  "aggs": {
+    "spantree_dist": {
+      "geo_distance": {
+        "field": "location",
+        "origin": {
+          "lat": 41.886732,
+          "lon": -87.655979
+        },
+        "unit": "yd",
+        "ranges": [
+          {
+            "to": 300
+          },
+          {
+            "from": 300,
+            "to": 500
+          },
+          {
+            "from": 500,
+            "to": 1000
+          },
+          {
+            "from": 1000,
+            "to": 1500
+          },
+          {
+            "from": 1500,
+            "to": 2000
+          },
+          {
+            "from": 2000
+          }
+        ]
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get trip duration histogram.
+#
+GET /divvy/trip/_search
+{
+  "aggs": {
+    "trip_length": {
+      "histogram": {
+        "field": "trip_duration",
+        "interval": 300,
+        "min_doc_count": 10
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get bike trips over time. We can also create histograms by date.
+#
+GET /divvy/trip/_search
+{
+  "aggs": {
+    "trips_over_time": {
+      "date_histogram": {
+        "field": "start_time",
+        "interval": "week"
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get oldest two movies by genre.
+#
+GET /freebase/film/_search
+{
+  "aggs": {
+    "top_genres": {
+      "terms": {
+        "field": "genre",
+        "size": 10
+      },
+      "aggs": {
+        "top_genre_hits": {
+          "top_hits": {
+            "sort": [
+              {
+                "initial_release_date": {
+                  "order": "asc"
+                }
+              }
+            ],
+            "_source": {
+              "include": [
+                "name",
+                "initial_release_date"
+              ]
+            },
+            "size": 2
+          }
+        }
+      }
+    }
+  },
+  "size": 0
+}
+
+# Get top 3 directors by genre
+#
+GET /freebase/film/_search
+{
+  "aggs": {
+    "top_genres": {
+      "terms": {
+        "field": "genre",
+        "size": 10
+      },
+      "aggs": {
+        "top_directors": {
+          "terms": {
+            "field": "directed_by.raw",
+            "size": 3
+          }
+        }
+      }
+    }
+  },
+  "size": 0
+}
+
+# TODO: Add value count example
+# TODO: Add geo bounds example
+# TODO: Add geo centroid example
+# TODO: Add geo hash grid example
+# TODO: Add moving average example
+# TODO: Add global aggregation example
+# TODO: Add nested aggregation example

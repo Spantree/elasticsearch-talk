@@ -4,9 +4,7 @@
 .name
 .idea
 *.iml
-data/divvy/trips.in
-data/bulk/divvy_bulk_update.json
-*.sense
+data
 transform/build
 transform/.gradle
 estalk-precise-vbox-x86_64.box
@@ -21,4 +19,3 @@ www/transform/.gradle
 logstash/.gradle
 logstash/build
 theme.css
-data

@@ -1,10 +1,10 @@
-# Suggesters
+# Suggestions
+# ===========
 
-## Term suggester
-
-`POST /wikipedia/_suggest `
-
-```json
+# Build a term suggester. These provide suggestions based on
+# Levenshtein (edit) distance.
+#
+POST /wikipedia/_suggest
 {
   "term_suggestion": {
     "text": "buildng",
@@ -13,13 +13,12 @@
     }
   }
 }
-```
 
-## Phrase suggester
-
-`POST /wikipedia/_suggest `
-
-```json
+# Build a phrase suggester. These add additional logic on top of term
+# suggesters to return entire corrected phrases based on a sequence
+# of words in the corpus (ngrams).
+#
+POST /wikipedia/_suggest
 {
   "text": "high risk buildng",
   "simple_phrase": {
@@ -46,22 +45,23 @@
     }
   }
 }
-```
 
-## Create completion suggestions index
+# Create a completion suggester index. Completion suggesters provide
+# autocomplete/search-as-you-type functionality. In some ways, this is
+# similar to functionality you'd get with edge ngrams, but completion
+# suggesters use faster in-memory data structures and also allow you
+# to assign weights and priorities to different options.
+#
+PUT /suggestions
 
-`PUT /suggestions `
-
-## Create completion suggestion mapping
-
-`PUT /suggestions/suggestion/_mapping `
-
-```json
+# Create completion suggestion mapping.
+#
+PUT /suggestions/suggestion/_mapping
 {
   "suggestion" : {
         "properties" : {
             "name" : { "type" : "string" },
-            "suggest" : { 
+            "suggest" : {
               "type" : "completion",
               "index_analyzer" : "simple",
               "search_analyzer" : "simple",
@@ -70,13 +70,10 @@
         }
     }
 }
-```
 
-## Create completion suggestion 1
-
-`PUT /suggestions/suggestion/1 `
-
-```json
+# Create a completion suggestion for Cedric
+#
+PUT /suggestions/suggestion/1
 {
     "name" : "Cedric Hurst",
     "suggest" : {
@@ -86,13 +83,10 @@
         "weight" : 37
     }
 }
-```
 
-## Create completion suggestion 2
-
-`PUT /suggestions/suggestion/2 `
-
-```json
+# Create a completion suggestion for Kevin.
+#
+PUT /suggestions/suggestion/2
 {
     "name" : "Kevin Greene",
     "suggest" : {
@@ -102,13 +96,10 @@
         "weight" : 101
     }
 }
-```
 
-## Get completion suggestion
-
-`POST /suggestions/_suggest `
-
-```json
+# Get a completion suggestion.
+#
+POST /suggestions/_suggest
 {
   "completion_suggestion": {
     "text": "software",
@@ -117,13 +108,10 @@
     }
   }
 }
-```
 
-## Get fuzzy completion suggestion
-
-`POST /suggestions/_suggest `
-
-```json
+# Get a fuzzy completion suggestion.
+#
+POST /suggestions/_suggest
 {
   "completion_suggestion": {
     "text": "mchgan",
@@ -135,13 +123,14 @@
     }
   }
 }
-```
 
-## Create context suggestion type
-
-`PUT suggestions/conference/_mapping `
-
-```json
+# Create a context suggester. Completion suggesters are awesome but
+# oftentimes they can be a little too broad and generic. Let's say you
+# were building an employee search database for a global corporation.
+# You may want to boost suggestions for people who work in your same
+# country or office. Context suggesters allow you to combine the two.
+#
+PUT /suggestions/conference/_mapping
 {
     "conference": {
         "properties": {
@@ -162,46 +151,40 @@
         }
     }
 }
-```
 
-## Create Chicago Coder Conference 2015 context suggestion
-
-`PUT suggestions/conference/1`
-
-```json
+## Create GOTO Chicago conference suggestion
+#
+PUT /suggestions/conference/goto_chicago
 {
-    "name": "Chicago Coder Conference 2015",
+    "name": "GOTO Chicago",
     "suggestion": {
         "input": [
             "goto",
             "chicago",
             "tech conference"
         ],
-        "output": "Chicago Coder Conference 2015",
+        "output": "GOTO Chicago",
         "context": {
             "location": {
-                "lat": 41.8337329,
-                "lon": -87.7321555
+                "lat": 41.8927539,
+                "lon": -87.6191727
             }
         }
     }
 }
-```
 
-## Create Strangeloop 2014 context suggestion
-
-`PUT suggestions/conference/2`
-
-```json
+# Create Strangeloop context suggestion
+#
+PUT /suggestions/conference/strangeloop
 {
-    "name": "Strangeloop 2014",
+    "name": "Strangeloop Conference",
     "suggestion": {
         "input": [
             "strange",
             "loop",
             "tech conference"
         ],
-        "output": "Strangeloop 2014",
+        "output": "Strangeloop Conference",
         "context": {
             "location": {
                 "lat": 38.6537065,
@@ -210,13 +193,10 @@
         }
     }
 }
-```
 
-## Suggest nearby
-
-`POST suggestions/_suggest`
-
-```json
+# Suggest nearby nerdy things when in St Louis.
+#
+POST suggestions/_suggest
 {
     "context_suggestion": {
         "text": "tech",
@@ -232,4 +212,3 @@
         }
     }
 }
-```

@@ -22,7 +22,8 @@ discovery:
   zen:
     ping:
       unicast:
-        hosts: ["elastic1", "elastic2"]
+        hosts:
+          - elastic1
       multicast:
         enabled: false
 repositories:

@@ -18,6 +18,8 @@ services:
     ports:
       - "9201:9200"
       - "9301:9300"
+    depends_on:
+      - elastic1
   elastic3:
     extends:
       file: docker-compose-elasticsearch.yml
@@ -27,6 +29,8 @@ services:
     ports:
       - "9202:9200"
       - "9302:9300"
+    depends_on:
+      - elastic1
   inquisitor:
     image: spantree/elasticsearch-inquisitor
     environment:

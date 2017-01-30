@@ -259,7 +259,7 @@ POST /synonyms-example/
 
 # Test out the synonym field.
 #
-GET /synonyms-examples/_analyze?field=author&text=Thomas Jefferson
+GET /synonyms-example/_analyze?field=author&text=Thomas Jefferson
 
 # Work with Edge NGrams.
 #
@@ -294,7 +294,7 @@ POST /edgengrams-example/
       "properties": {
         "title": {
           "type" : "string",
-          "index_analyzer" : "edge_left",
+          "analyzer" : "edge_left",
           "search_analyzer" : "standard",
           "include_in_all" : false
         }
@@ -383,7 +383,7 @@ POST /multifield-example
             },
             "edge" : {
               "type" : "string",
-              "index_analyzer" : "edge_left",
+              "analyzer" : "edge_left",
               "search_analyzer" : "standard",
               "include_in_all" : false
             },
@@ -403,7 +403,7 @@ POST /multifield-example
             },
             "edge" : {
               "type" : "string",
-              "index_analyzer" : "edge_left",
+              "analyzer" : "edge_left",
               "search_analyzer" : "standard",
               "include_in_all" : false
             },
@@ -414,7 +414,7 @@ POST /multifield-example
             },
             "synonyms": {
               "type": "string",
-              "index_analyzer" : "first_name_synonyms",
+              "analyzer" : "first_name_synonyms",
               "search_analyzer" : "standard",
               "include_in_all": false
             }

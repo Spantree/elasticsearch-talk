@@ -7,7 +7,7 @@ wait_for_http_port() {
   port=$1
   while ! curl --output /dev/null --silent --head --fail http://localhost:$port; do
     sleep 5
-    echo -n Waiting for port $port to be open, sleeping 5 seconds.
+    echo Waiting for port $port to be open, sleeping 5 seconds.
   done
 }
 

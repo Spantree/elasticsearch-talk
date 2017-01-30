@@ -115,13 +115,7 @@ Modify tokens by adding, removing or changing their values
 
 A chain of character filters, tokenizers and token filters
 
-![Analysis phases](images/analysis-chain.svg)
-
----
-
-### Analyzing at query and index time
-
-![Mapping and analysis](images/mapping-analysis.svg)
+![Analysis Chain](images/diagrams/analysis-chain-with-background.png#diagram)
 
 ---
 
@@ -155,4 +149,4 @@ One or more nodes sharing data and workload
 
 ### A physical view
 
-![A physical view](images/sharding-replica.svg)
+![A physical view](images/diagrams/cluster-topology.png#diagram)

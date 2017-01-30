@@ -122,7 +122,7 @@
 
 ### Automatic shard balancing
 
-![Analysis phases](images/sharding-replica.svg)
+![Analysis phases](images/diagrams/cluster-topology.png#diagram)
 
 ---
 

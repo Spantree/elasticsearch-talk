@@ -244,11 +244,13 @@ GET /wikipedia/_search
 GET /wikipedia/_search
 {
   "query": {
-    "match_all": {}
-  },
-  "filter": {
-    "term" : {
-      "name" : ["theater", "theatre"]
+    "constant_score": {
+      "filter": {
+        "terms": {
+          "name":  ["theater", "theatre"]
+        }
+      },
+      "boost": 1.2
     }
   }
 }

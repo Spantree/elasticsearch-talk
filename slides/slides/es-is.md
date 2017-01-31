@@ -22,6 +22,12 @@
 
 ---
 
+### Powered by Lucene
+
+![Lucene Logo](images/lucene.png#plain)
+
+---
+
 ### Distributed and Fault Tolerant
 
 ![Node Failure](images/screenshots/kopf-node-failure.png#screenshot)

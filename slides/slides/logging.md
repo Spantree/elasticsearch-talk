@@ -1,8 +1,9 @@
-## Log Aggregation with the ELK Stack
+## Log Aggregation with Elastic Stack
 
 * Elasticsearch
 * Logstash
 * Kibana
+* Beats
 
 ---
 
@@ -24,16 +25,15 @@ Provide a low-maintenance toolchain
 
 ### How can we meet these goals?
 
-Use an agent to tail log files, parse them into a uniform format, and ship them "somewhere else.""
+Use an agent to tail log files, parse them into a uniform format, and ship them "somewhere else."
 
-<table>
-  <tr>
-    <td style="vertical-align: middle;">![Logstash](images/logstash.png)</td>
-    <td style="vertical-align: middle;"><img src="images/fluentd.png" alt="Fluentd" style="width: 500px;"/></td>
-    <td style="vertical-align: middle;">![Rsyslog](images/rsyslog.png)</td>
-    <td style="vertical-align: middle;">![Flume](images/flume.png)</td>
-  </tr>
-</table>
+<div class="grid" style="width: 900px;">
+![Beats](images/logos/beats.png#plain)
+![Logstash](images/logstash.png#plain)
+![Fluentd](images/fluentd.png#plain) <!-- .element style="width: 500px;" -->
+![Rsyslog](images/rsyslog.png#plain)
+![Flume](images/flume.png#plain)
+</div>
 
 ---
 
@@ -41,7 +41,7 @@ Use an agent to tail log files, parse them into a uniform format, and ship them 
 
 Make that "somewhere else" be Elasticsearch, and use its powerful query and aggregation API to gain insights from events.
 
-![Elasticsearch](images/elasticsearch.png)
+![Elasticsearch](images/elastic.png#plain)
 
 ---
 
@@ -55,15 +55,39 @@ Develop a composable dashboard and data visualization tool to help us make sense
 
 ### What does this look like?
 
-![ELK Flow](images/elk-flow.png)
+![ELK Flow](images/diagrams/beats-logstash-es-flow.png#plain)
+
+---
+
+### Beats in a Nutshell
+
+* Written in Golang
+* Designed to install at the edge of your logging events
+* Supports many different inputs and outputs
+* Supports limited enrichment
+
+---
+
+### Filebeat Config
+
+```yaml
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /var/log/*.log
+output.elasticsearch:
+  hosts: ["elastic1:9200"]
+```
 
 ---
 
 ### Logstash in a Nutshell
 
-* Java-based agent that runs in the background, mostly tailing log files
+* JVM agent that runs in the background
+* Also supports many inputs
 * Uses a configuration format called `grok` to parse log files
-* Ships logging events in batch to an "output", usually Elasticsearch
+* Ships logging events in batch to an "output" (often Elasticsearch)
+* Not very fast (because JRuby)
 
 ---
 
@@ -88,7 +112,7 @@ filter {
 }
 output {
   elasticsearch {
-    host => "es.somewhereelse.local"
+    host => "elastic1"
     port => 9300
   }
 }
@@ -117,9 +141,9 @@ output {
 
 ---
 
-### Elasticsearch
+### Elasticsearch 5.0
 
-We already know about Elasticsearch (woo!)
+* Coming Soon (or now)... [Ingest Nodes](https://www.elastic.co/guide/en/elasticsearch/reference/master/ingest.html)
 
 ---
 

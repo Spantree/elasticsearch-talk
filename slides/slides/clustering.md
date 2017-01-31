@@ -101,11 +101,11 @@
 
 ### Elasticsearch connections
 
-* **Recovery (2)** - Index recovery
-* **Bulk (3)** - Bulk operations
-* **Reg (6)** - Normal queries
-* **State (1)** - Cluster state read/write
-* **Ping (1)** - Detecting missing nodes
+* **Recovery (2).** Index recovery
+* **Bulk (3).** Bulk operations
+* **Reg (6).** Normal queries
+* **State (1).** Cluster state read/write
+* **Ping (1).** - Detecting missing nodes
 
 ---
 
@@ -113,10 +113,6 @@
 
 * HTTP
 * Port 9200
-
----
-
-### Balancing load
 
 ---
 
@@ -134,30 +130,18 @@
 ---
 
 ### Routing
-
----
-
-### Hashing a document to its location
 * **```shard = hash(id) % number_of_primary_shards```**
 * Customizable
 
 ---
 
-### Servicing queries
-
----
-
 ### Servicing a search query
-![Query phases](images/query-steps.svg)
-
----
-
-### Split brain
+![Query phases](images/diagrams/query-request-data-flow.jpeg#diagram)
 
 ---
 
 ### Split brain problem
-![Query phases](images/split-brain.svg)
+![Split Brain](images/diagrams/split-brain.jpeg#diagram)
 
 ---
 
@@ -167,10 +151,6 @@
 ```
 discovery.zen.minimum_master_nodes: 2 #(n/2)+1
 ```
-
----
-
-### High load
 
 ---
 
@@ -193,7 +173,7 @@ node.data: false
 
 ---
 
-* Client-only data nodes
+### Client-only data nodes
 
 ```
 node.master: false ## or node.client: true

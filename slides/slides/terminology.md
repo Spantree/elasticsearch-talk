@@ -4,29 +4,27 @@
 
 ### Document
 
-* A JSON object
-* Smallest searchable unit
-* Self-contained
-* Hierarchical
+* A record, unit of search
+* Represented as JSON
+* The thing returned in search results
+* Not quite a row, but similar
 
 ---
 
 ### What a document looks like
 
 ```json
+
 {
-  "_index": "index_name",
-  "_type": "document_type",
-  "_id": 1337,
-  "_source": {
-    "field0": 777,
-    "field1": "value",
-    "field2": ["value1","value2","value3"],
-    "field3": {
-      "subfield0":"value1",
-      "subfield1":"value2"
-    }
-  }
+  "name": "Wells Community Academy High School",
+  "wikipedia_numeric_id": 10907332,
+  "keywords": ["schools", "chicago", "public"],
+  "about": "Wells Community Academy High School is...",
+  "lastUpdated": "2012-08-08T07:45:13+0000",
+  "coordinates": [
+    -87.667915,
+    41.899246
+  ]
 }
 ```
 
@@ -36,48 +34,51 @@
 
 <table class="examples col-3">
   <tr>
-    <td>String</td>
-    <td>Integer (&#42;)</td>
-    <td>Long (&#42;)</td>
+    <td>string</td>
+    <td>long</td>
+    <td>integer</td>
   </tr>
   <tr>
-    <td>Float (&#42;)</td>
-    <td>Double (&#42;)</td>
-    <td>Boolean</td>
+    <td>short</td>
+    <td>byte</td>
+    <td>double</td>
   </tr>
   <tr>
-
-  <tr>
-    <td>Date (&#42;)</td>
-    <td>Geopoint (&#42;)</td>
-    <td>Geoshape</td>
+    <td>float</td>
+    <td>date</td>
+    <td>boolean</td>
   </tr>
   <tr>
-    <td>IP</td>
-    <td>Attachment</td>
-    <td>Object</td>
+    <td>binary</td>
+    <td>type</td>
+    <td>object</td>
   </tr>
   <tr>
-    <td colspan="3" style="font-size: 0.8em;">
-      (&#42;) Numbers and dates are stored as tries.
-    </td>
+    <td>nested</td>
+    <td>geo_point</td>
+    <td>geo_shape</td>
   </tr>
-</tr>
+  <tr>
+    <td>ip</td>
+    <td>completion</td>
+  </tr>
+</table>
 
 ---
 
 ### Field
 
-* The "keys" in a JSON document
-* Has a type
-* Analyzed based on the defined mapping
+* A typed slot in a document for storing and retrieving values
+* Can store multiple values and nested values
+* Any field value for a document is optional
+* Not quite a column, but similar
 
 ---
 
-### Mapping types
+### Types
 
-* Logical grouping of documents
-* Mappings specify the structure of a document
+* Logical grouping of documents in an index
+* All documents in a given type have the same fields (but they're all optional)
 
 ---
 
@@ -91,13 +92,14 @@ Individual words or pieces of text indexed by Elasticsearch, for example:
 
 ### Character filters
 
-Preprocess a character stream before being passed to a tokenizer
+* Preprocess a character stream before being passed to a tokenizer
+* Can only remove or replace single characters at a time
 
 ---
 
 ### Tokenizers
 
-Methods of splitting up a field value into tokens
+Split phrases into words
 
 [Example](inquisitor://#/tokenizers)
 
@@ -121,15 +123,17 @@ A chain of character filters, tokenizers and token filters
 
 ### Index
 
-* Siloed containers for mapping types
-* Physically isolated in separate files on disk
-* You can search across indices
+* A collection of documents managed as a unit
+* Physically isolated in separate files on disk (segments)
+* Similar to a database, but not quite
+* Elasticsearch allows you to search across indices
 
 ---
 
 ### Node
 
-An instance of Elasticsearch
+* An running instance of Elasticsearch
+* Can be master, client or data node (or any combination)
 
 ---
 

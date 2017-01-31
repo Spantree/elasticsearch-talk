@@ -11,6 +11,63 @@
 
 ---
 
+### X-Pack Security
+
+* Protects data from unauthorized Users
+
+* Use built-in native authentication or integrate with other authentication systems (i.e. LDAP, Active Directory, build a custom realm)
+
+* Allows permissions to be defined through Users and Roles
+* Previously known as Shield
+
+---
+
+### X-Pack Security
+
+* Create a PUT/POST request to add a Role
+
+```json
+POST /_xpack/security/role/my_admin_role
+{
+  "cluster": ["all"],
+  "indices": [
+    {
+      "names": [ "index1", "index2" ],
+      "privileges": ["all"],
+      "field_security" : { // optional
+        "grant" : [ "title", "body" ]
+      },
+      "query": "{\"match\": {\"title\": \"foo\"}}" // optional
+    }
+  ],
+  "run_as": [ "other_user" ], // optional
+  "metadata" : { // optional
+    "version" : 1
+  }
+}
+```
+
+---
+
+### X-Pack Security
+
+* Create a PUT/POST request to add a User
+
+```json
+POST /_xpack/security/user/jacknich
+{
+  "password" : "j@rV1s",
+  "roles" : [ "admin", "other_role1" ],
+  "full_name" : "Jack Nicholson",
+  "email" : "jacknich@example.com",
+  "metadata" : {
+    "intelligence" : 7
+  }
+}
+```
+
+---
+
 ### Scripting
 
 * Elasticsearch provides robust scripting support

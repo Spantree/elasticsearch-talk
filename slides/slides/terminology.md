@@ -85,7 +85,7 @@
 
 Individual words or pieces of text indexed by Elasticsearch, for example:
 
-`the` `quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog`
+`quick` `brown` `fox` `jumped` `over` `the` `lazy` `dog` <!-- .element style="font-size: 0.9em;" -->
 
 ---
 

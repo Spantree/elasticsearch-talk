@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-body document-panel">
       <span> Documents </span>
-      <div ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
+      <div class="document-list" ng-model="documentsHtml" ng-repeat="(docKey, doc) in documentsHtml">
           <div class="document-panel-item">
               <span>{{docKey}}</span>
               <div ng-bind-html="doc" class="form-control document-item">
@@ -18,7 +18,7 @@
 <div class="col-md-7">
   <div class="panel panel-default">
     <div class="panel-body document-panel">
-      <table class="table">
+      <table class="table inverted-index">
         <tr>
           <th>
             Word

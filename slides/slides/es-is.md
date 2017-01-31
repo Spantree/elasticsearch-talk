@@ -46,6 +46,6 @@
 
 ---
 
-### ...And Real-Time Analytics
+### ...and Real-Time Analytics
 
 ![Kibana](images/screenshots/kibana-screenshot.png)

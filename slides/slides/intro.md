@@ -8,9 +8,9 @@
 
 ---
 
-### More about Spantree
+### Who We Are
 
-![Spantree Team](images/team.jpg#plain)
+![Spantree Team](images/team.jpg#diagram)
 
 ---
 
@@ -66,5 +66,3 @@ This tutorial is free and open source.
 http://github.com/Spantree/elasticsearch-talk
 
 We will jump out of the slide deck quite often.
-
-This workshop is always changing.

@@ -159,6 +159,48 @@ section.has-light-background {
     .stuff-we-use {
       font-size: 0.7em;
     }
+
+    .ix-illustration {
+      em {
+        font-style: normal;
+        background-color: $flat-amethyst;
+        color: $flat-clouds;
+        padding: 0;
+      }
+
+      .document-item {
+        font-weight: $mainFontWeight;
+      }
+
+      .document-panel {
+        border-radius: 0;
+        background-color: $flat-clouds;
+
+        .form-control {
+          background-color: $flat-clouds;
+        }
+      }
+
+      .inverted-index {
+        font-size: 0.5em;
+      }
+
+      .document-list {
+        overflow: none;
+      }
+
+      .btn {
+        margin-top: 1.5em;
+        border-radius: 0;
+        font-size: 0.6em;
+        font-weight: $subheadingFontWeight;
+        border: none;
+      }
+
+      .btn-success {
+        background-color: $flat-emerald;
+      }
+    }
   }
 
 }

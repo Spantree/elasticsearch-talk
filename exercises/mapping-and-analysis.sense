@@ -308,7 +308,6 @@ POST /edgengrams-example/
 GET /edgengrams-example/_analyze?field=title&text=Lorem ipsum dolor
 
 # Put it all together with multi-fields.
-# TODO: Update this to newer syntax.
 #
 POST /multifield-example
 {
@@ -375,12 +374,8 @@ POST /multifield-example
     "essays": {
       "properties": {
         "name": {
-          "type": "multi_field",
+          "type": "string",
           "fields": {
-            "name": {
-              "type": "string",
-              "index": "analyzed"
-            },
             "edge" : {
               "type" : "string",
               "analyzer" : "edge_left",
@@ -395,12 +390,8 @@ POST /multifield-example
           }
         },
         "author": {
-          "type": "multi_field",
+          "type": "string",
           "fields": {
-            "author": {
-              "type": "string",
-              "index": "analyzed"
-            },
             "edge" : {
               "type" : "string",
               "analyzer" : "edge_left",
@@ -562,7 +553,6 @@ PUT /spantree/employee/allie
 }
 
 # Explore the limitations of inner objects.
-# TODO: Verify this still works the same way
 #
 GET /spantree/employee/_search
 {

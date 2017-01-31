@@ -227,10 +227,9 @@ GET /freebase/film/_search
   "size": 0
 }
 
-# TODO: Add value count example
-# TODO: Add geo bounds example
-# TODO: Add geo centroid example
-# TODO: Add geo hash grid example
-# TODO: Add moving average example
-# TODO: Add global aggregation example
-# TODO: Add nested aggregation example
+# TODO: Value Counts
+# TODO: Geo bounds example
+# TODO: Geo centroid example
+# TODO: Geo hash grid example
+# TODO: Moving average example
+# TODO: Nested aggregation example

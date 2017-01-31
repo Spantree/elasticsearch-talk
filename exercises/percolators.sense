@@ -43,7 +43,6 @@ PUT /spantree/.percolator/russian_caravan
 
 # Onboard Justin with his drink preferences.
 #
-# TODO: Update Justin's drink preferences
 #
 GET /spantree/people/_percolate
 {
@@ -77,7 +76,6 @@ GET /spantree/.percolator/earl_grey
 
 # Onboard Marija with her drink preferences.
 #
-# TODO: Update Marija's drink preferences.
 #
 GET /spantree/people/_percolate
 {

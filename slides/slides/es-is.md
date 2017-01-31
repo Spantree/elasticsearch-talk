@@ -6,8 +6,6 @@
 
 ![ApacheBench Results](images/screenshots/ab-results.png#screenshot)
 
-<!--TODO: Annotate with what the screenshot actually says-->
-
 ---
 
 ### Highly Configurable

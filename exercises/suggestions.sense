@@ -77,7 +77,7 @@ PUT /suggestions/suggestion/1
 {
     "name" : "Cedric Hurst",
     "suggest" : {
-        "input": [ "Cedster", "The Ced", "C-Man", "Hurst the Not So First", "Software Engineer" ],
+        "input": [ "Cedster", "The Ced", "C-Man", "That guy from that one meetup", "Software Engineer" ],
         "output": "Cedric",
         "payload" : { "title" : "Principal" },
         "weight" : 37

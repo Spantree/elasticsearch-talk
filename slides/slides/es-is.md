@@ -4,7 +4,7 @@
 
 ### Wicked Fast
 
-![ApacheBench Results](images/ab-results.png)
+![ApacheBench Results](images/screenshots/ab-results.png#screenshot)
 
 <!--TODO: Annotate with what the screenshot actually says-->
 
@@ -12,34 +12,34 @@
 
 ### Highly Configurable
 
-![HEAD Configuration](images/es-configurable.png)
+![Kopf Screenshot](images/screenshots/kopf-screenshot.png#screenshot)
 
 ---
 
 ### Free and Open Source
 
-![ES Github Repo](images/es-github.png)
+![ES Github Repo](images/screenshots/elasticsearch-github.png#screenshot)
 
 ---
 
 ### Distributed and Fault Tolerant
 
-![ES Github Repo](images/es-karmi.png)
+![Node Failure](images/screenshots/kopf-node-failure.png#screenshot)
 
 ---
 
 ### Good at Handling Lots of Data
 
-![ES Github Big Data](images/es-big-data-github.png)
+![ES Github Big Data](images/es-big-data-github.png#screenshot)
 
 ---
 
 ### ...Also Works With Unstructured Data
 
-![ES Hamlet](images/es-shakespeare-json.png)
+![ES Hamlet](images/es-shakespeare-json.png#screenshot)
 
 ---
 
 ### ...And Real-Time Analytics
 
-![Kibana](images/kibana-4-waxy-dashboard.png)
+![Kibana](images/screenshots/kibana-screenshot.png)

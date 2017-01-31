@@ -61,13 +61,9 @@ curl -XPOST "http://localhost:9200/wikipedia/_search" -d '{
 
 ---
 
-### Explaining queries
+### How does it know what's most relevant?
 
----
-
-### How does it know which document is most relevant?
-
-* ...Math?
+Math!
 
 ---
 
@@ -125,6 +121,12 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 
 * Modified via boosting
 * Can rewrite scoring algorithm
+
+---
+
+### Numeric Tries
+
+![Numeric Trie Diagram](images/diagrams/numeric-trie.png#diagram) <!-- .element style="width: 600px;" -->
 
 ---
 

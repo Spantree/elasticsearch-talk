@@ -95,7 +95,7 @@ $tf \times idf = tf \times \log{ \frac{N}{df} }$
 
 ---
 
-### In Lucene...
+### That last slide was a lie
 
 ---
 
@@ -109,21 +109,26 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 
 ---
 
+### That last slide was also a lie
+
+---
+
+![BM25 Formula](images/diagrams/bm25-formula.png)
+
+---
+
+![BM25 Calculation](images/diagrams/bm25-calculation.png)
+
+---
+
 ### More on scoring
 
 * Modified via boosting
 * Can rewrite scoring algorithm
-* Can use alternative scoring algorithms (Okapi BM25, etc)
 
 ---
 
 ### Filtering
-
----
-
-### Queries vs Filters
-<!-- TODO: Fix this slide as it's confusing -->
-![Ornaments](images/querying_vs_filtering.svg)
 
 ---
 
@@ -156,4 +161,4 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 
 ### Filtering Demos
 
-[Filtering Examples](sense://searching.sense#L81)
+[Filtering Examples](sense://searching.sense#L244)

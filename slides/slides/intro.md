@@ -14,49 +14,57 @@
 
 ---
 
-### Sorts of things we work on
+### Who we work with
 
 <div class="grid">
-![Arena](images/arena.png)
-![Chicago.com](images/chicagocom.png)
-![Chicago Cubs](images/chicago-cubs.png)
-![Doejo](images/doejo.png)
-![Datascope](images/datascope.png)
-![GoHealth](images/gohealth.png)
-![High School Cube](images/highschoolcube.png)
+![Arena](images/arena.png#white-box)
+![Chicago Cubs](images/cubs.png) <!-- .element style="max-height: 100px;" -->
+![Chicago Sun-Times](images/chicago-sun-times.png)
+![Chicago.com](images/chicagocom.png#white-box)
 ![Conference Scheduling Solutions](images/conference-solutions.png)
+![CRN.com](images/crn.png)
+![Datascope](images/datascope.png)
+![DeNa](images/dena.png)
+![Doejo](images/doejo.png#white-box)
+![GoHealth](images/gohealth.png)
+![Healthgrades](images/healthgrades.png)
+![High School Cube](images/highschoolcube.png#white-box)
+![Humio](images/humio.svg)
 ![MileIQ](images/mileiq.png)
 ![Mozilla Foundation](images/mozilla.svg)
-![Northwestern Medicine](images/northwestern-medicine.png)
+![Northwestern Medicine](images/northwestern-medicine.png#white-box)
 ![Panera](images/panera-bread.png)
-![DeNa](images/dena.png)
-![Reverb.com](images/reverb.png)
 ![Raise](images/raise.png)
-![Rocketmiles](images/rocketmiles.png)
-![CRN.com](images/crn.png)
-![Wrapports](images/wrapports.png)
+![Reverb.com](images/reverb.png)
+![Rocketmiles](images/rocketmiles.png#white-box)
+![Yello](images/yello.png)
 </div>
 
 ---
 
-### Stuff we use
+### What We Use
 
 <!-- .slide: class="stuff-we-use" -->
 
 * **Cloud Platforms.** AWS, Google Cloud, Heroku.
-* **Devops Tooling.** Docker, Kubernetes, Mesos, Chef, Ansible.
+* **Systems Orchestration.** Docker, Kubernetes, Mesos, Terraform, Chef, Ansible.
 * **Continuous Delivery.** Jenkins, CircleCI, Spinnaker.
-* **Frontend Languages.** EcmaScript 6, Clojurescript, Elm.
+* **Frontend Languages.** EcmaScript 6, Clojurescript, Coffeescript, Elm.
 * **Frontend Frameworks.** React, Angular, Backbone, Reframe.
-* **Backend Languages.** Java, Scala, Clojure, Groovy, Kotlin, Golang, Elixir.
+* **Backend Languages.** Java, Scala, Clojure, Groovy, Python, Kotlin, Go, Elixir.
 * **Backend Frameworks.** Spring Boot, Grails, Akka, Compojure, Phoenix.
 * **Testing Frameworks.** Spock, Geb, Gatling, Selenium.
-* **Databases.** PostgreSQL, Mongo, Elasticsearch, Neo4J, Dynamo, Redshift, Redis.
+* **Databases.** PostgreSQL, Mongo, *Elasticsearch,* Neo4J, Dynamo, Redshift, Redis. <!-- .element style="font-style: normal !important;" -->
+* **Machine Learning.** Spark, Hadoop, Drools, Optaplanner.
 
 ---
 
 ### How this talk will work
 
-This presentation is also free and open source.
+This tutorial is free and open source.
 
 http://github.com/Spantree/elasticsearch-talk
+
+We will jump out of the slide deck quite often.
+
+This workshop is always changing.

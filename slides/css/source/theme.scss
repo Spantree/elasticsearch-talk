@@ -70,12 +70,12 @@ section.has-light-background {
     }
     .grid {
       img {
-        max-width: 200px;
-        max-height: 70px;
+        max-width: 220px;
+        max-height: 90px;
         border: 0;
         box-shadow: none;
         background: none;
-        // filter: grayscale(100%);
+        padding: 3px;
       }
     }
 

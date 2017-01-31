@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Tutorial</title>
+    <link rel="icon" href="elastic-favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <div class="container">
+      <!-- <h1>Useful Links</h1> -->
+      <div class="useful-links">
+        <a href="http://localhost:9000" target="slides">Slides</a>
+        <a href="http://localhost:9200" target="elasticsearch">Elasticsearch</a>
+        <a href="http://localhost:5601/app/sense" target="sense">Sense</a>
+        <a href="http://localhost:9200/_plugin/kopf" target="kopf">Kopf</a>
+        <a href="http://localhost:5601/app/sense" target="marvel">Marvel</a>
+        <a href="http://localhost:5601/app/kibana" target="kibana">Kibana</a>
+        <a href="http://localhost:9400" target="inquistor">Inquisitor</a>
+      </div>
+      <h1>Exercises</h1>
+      <ol>
+        <!-- Pattern: `\d+\. \[([\w\s]+)]\(([\w\s\-\.]+)\)`, Replacement: `<li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/$2">$1</a></li>` -->
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/getting-started.sense" target="sense">Getting Started</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/indexing.sense" target="sense">Indexing</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/searching.sense" target="sense">Searching</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/mapping-and-analysis.sense" target="sense">Mapping and Analysis</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/paging-and-sorting.sense" target="sense">Paging and Sorting</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/aggregations.sense" target="sense">Aggregations</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/percolators.sense" target="sense">Percolators</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/more-like-this.sense" target="sense">More Like This</a></li>
+        <li><a href="http://localhost:5601/app/sense?load_from=http://localhost:9500/suggestions.sense" target="sense">Suggestions</a></li>
+      </ol>
+    </div>
+
+  </body>
+</html>

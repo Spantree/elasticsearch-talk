@@ -71,7 +71,7 @@ services:
       - elastic2
       - elastic3
   slides:
-    image: spantree/reveal:3.4.0
+    build: slides
     ports:
       - "9000:9000"
       - "35729:35729" # to enable live reloading
@@ -81,6 +81,4 @@ services:
       INQUISITOR_URL: http://localhost:9400
       EXERCISES_URL: http://localhost:9500
     volumes:
-      - ./slides:/usr/src/slides
-      - /usr/src/slides/node_modules
-      - /usr/src/slides/bower_components
+      - ./slides/slides:/usr/src/slides/slides

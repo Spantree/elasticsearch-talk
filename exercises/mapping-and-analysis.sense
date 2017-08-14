@@ -683,7 +683,7 @@ GET /spantree-parent-child/employee/_search
       "type": "pet",
       "query": {
         "query_string": {
-          "query": "type:dog name:starsky"
+          "query": "type:dog AND name:starsky"
         }
       }
     }

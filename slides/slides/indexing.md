@@ -46,7 +46,7 @@ You can also add/remove/update documents in bulk using the Bulk API. This is rec
 * Refresh intervals control how often newly indexed data is made available for search
 * New segments are created in the file system on each refresh
 * Smaller segments eventually merged with bigger ones
-* Segments are replicated between primaries and masters
+* Segments are replicated between primaries and replicas
 * Queries can be run as sync (default), primary only or async
 
 ---

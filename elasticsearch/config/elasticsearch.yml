@@ -2,18 +2,14 @@ network:
   host: _site_
 node:
   name: ${ES_NODENAME}
-index:
-  number_of_replicas: 0
 http:
   max_content_length: 500mb
 cluster:
   routing:
     allocation:
       cluster_concurrent_rebalance: 2
-    balance:
-      primary: 1
 bootstrap:
-  mlockall: true
+  memory_lock: true
 indices:
   fielddata:
     cache:
@@ -24,8 +20,6 @@ discovery:
       unicast:
         hosts:
           - elastic1
-      multicast:
-        enabled: false
     minimum_master_nodes: 2
 repositories:
   url:
@@ -35,13 +29,8 @@ script:
     groovy:
       inline:
         aggs: true
-        mapping: true
         search: true
         update: true
-        plugin: true
-      indexed:
-        aggs: true
-        mapping: true
-        search: true
-        update: true
-        plugin: true
+xpack.security.authc:
+  anonymous:
+    roles: superuser

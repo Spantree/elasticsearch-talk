@@ -67,7 +67,7 @@ services:
     environment:
       ELASTICSEARCH_URL: "http://elastic1:9200"
     volumes:
-      - "./kibana/config:/usr/share/kibana/config"
+      - "./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml"
     depends_on:
       - elastic1
       - elastic2

@@ -75,7 +75,7 @@ services:
   slides:
     build: slides
     ports:
-      - "9000:9000"
+      - "9001:9000"
       - "35729:35729" # to enable live reloading
     environment:
       ELASTICSEARCH_URL: http://localhost:9200

@@ -11,30 +11,29 @@
 
 ---
 
-### Kopf
+### Cerebro
 
-* A simple web administration tool written in AngularJS.
-* [Kopf](elasticsearch://_plugin/kopf/)
+* A simple web administration tool written using Scala, Play Framework, AngularJS and Bootstrap.
+* [cerebro](cerebro://)
 
 ---
 
-### Sense
+### Console
 
 * An IDE (with autocomplete) for running Elasticsearch queries against the REST API.
 
-[Sense](sense://)
+[Console](console://indexing.sense)
 
 ---
 
 ### More
 
-* [Inquisitor](inquisitor://#/analyzers) - Explore how Elasticsearch processes strings
-* [Marvel](kibana://app/marvel) - Monitor the health of your cluster
-* [Kibana](kibana://app/kibana) - Visualize your logs
+* [Monitoring](kibana://app/monitoring) - Monitor the health of your cluster
+* [LogTrail](kibana://app/logtrail) - Visualize your logs
 
 ---
 
 ### API Examples
 
-* Executed with Sense
-* [Get Started with Sense](sense://getting-started.sense#L2)
+* Executed with Console
+* [Get Started with Console](console://getting-started.sense#L2)

@@ -10,7 +10,7 @@
 
 ### Highly Configurable
 
-![Kopf Screenshot](images/screenshots/kopf-screenshot.png#screenshot)
+![Cerebro Screenshot](images/screenshots/cerebro-screenshot.png#screenshot)
 
 ---
 
@@ -28,7 +28,7 @@
 
 ### Distributed and Fault Tolerant
 
-![Node Failure](images/screenshots/kopf-node-failure.png#screenshot)
+![Node Failure](images/screenshots/cerebro-node-failure.png#screenshot)
 
 ---
 

@@ -120,6 +120,7 @@ module.exports = (grunt) ->
                 kibanaUrl: process.env.KIBANA_URL || 'http://localhost:5601'
                 inquisitorUrl: process.env.INQUISITOR_URL || 'http://localhost:9400'
                 exercisesUrl: process.env.EXERCISES_URL || 'http://localhost:9500'
+                cerebroUrl: process.env.CEREBRO_URL || 'http://localhost:9000'
                 slides:
                     slides
                 section: (slide) ->

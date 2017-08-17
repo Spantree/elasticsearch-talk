@@ -75,10 +75,10 @@
         <script>
           // Override links with these protocols to point to the appropriate services
           window.mdProtocols = {
-            "sense://": "<%= kibanaUrl %>/app/sense?load_from=<%= exercisesUrl %>/",
+            "console://": "<%= kibanaUrl %>/app/kibana#/dev_tools/console?load_from=<%= exercisesUrl %>/",
             "elasticsearch://": "<%= elasticsearchUrl %>/",
             "kibana://": "<%= kibanaUrl %>/",
-            "inquisitor://": "<%= inquisitorUrl %>/"
+            "cerebro://": "<%= cerebroUrl %>/"
           }
 
           Reveal.initialize({

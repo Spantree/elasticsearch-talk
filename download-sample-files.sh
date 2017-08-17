@@ -12,11 +12,11 @@ GZ_URLS="\
 "
 
 NORMAL_URLS="\
-  https://raw.githubusercontent.com/elastic/examples/master/ElasticStack_apache/apache_logs \
+  https://github.com/elastic/examples/raw/master/Common%20Data%20Formats/apache_logs/apache_logs \
   https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD
-  https://raw.githubusercontent.com/elastic/examples/master/ElasticStack_nyc_traffic_accidents/nyc_collision_logstash.conf \
-  https://raw.githubusercontent.com/elastic/examples/master/ElasticStack_nyc_traffic_accidents/nyc_collision_template.json \
-  https://raw.githubusercontent.com/elastic/examples/master/ElasticStack_nyc_traffic_accidents/nyc_collision_kibana.json \
+  https://raw.githubusercontent.com/elastic/examples/master/Exploring%20Public%20Datasets/nyc_traffic_accidents/nyc_collision_logstash.conf \
+  https://raw.githubusercontent.com/elastic/examples/master/Exploring%20Public%20Datasets/nyc_traffic_accidents/nyc_collision_template.json \
+  https://raw.githubusercontent.com/elastic/examples/master/Exploring%20Public%20Datasets/nyc_traffic_accidents/nyc_collision_kibana.json \
 "
 
 mkdir -p data

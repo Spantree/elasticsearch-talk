@@ -14,7 +14,7 @@
 ### Cerebro
 
 * A simple web administration tool written using Scala, Play Framework, AngularJS and Bootstrap.
-* [cerebro](cerebro://)
+* [Cerebro](cerebro://)
 
 ---
 

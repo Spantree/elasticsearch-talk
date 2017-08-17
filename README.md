@@ -40,7 +40,7 @@ cd elasticsearch-talk
 ./init-all-the-things.sh
 ```
 
-Note: Our reveal.js-based slide deck downloads a good chunk of the internet to fulfill its NPM dependencies. Unfortunately, downloads can sometimes get stuck. If you find yourself staring a screen for over 10 minutes with a message `Waiting for port 9000 to be open`, cancel out of the process by hitting `Ctrl-C` and try `./init-all-the-things.sh` again. You can also open another Terminal tab to the same folder and run `docker-compose logs -f` to see what's going on with the containers running in the background of this script.
+Note: Our reveal.js-based slide deck downloads a good chunk of the internet to fulfill its NPM dependencies. Unfortunately, downloads can sometimes get stuck. If you find yourself staring a screen for over 10 minutes with a message `Waiting for port 9001 to be open`, cancel out of the process by hitting `Ctrl-C` and try `./init-all-the-things.sh` again. You can also open another Terminal tab to the same folder and run `docker-compose logs -f` to see what's going on with the containers running in the background of this script.
 
 #### Start your containers
 
@@ -64,35 +64,34 @@ The HTTP interface for interacting with Elasticsearch
 
 ## [Kibana](http://localhost:5601)
 
-The dashboard and UI portal for Elasticsearch
+The dashboard and UI portal for Elasticsearch.
+
+### Sign in to Kibana using the default user credentials:
+
+**username:** elastic<br/>
+**password:** changeme<br/>
 
 ![Kibana Screenshot](images/kibana-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-### [Sense](http://localhost:5601/app/sense)
+### [Dev Tools](http://localhost:5601/app/kibana#/dev_tools/console?_g=())
 
-A web-based IDE for messing with Elasticsearch queries.
+A web-based IDE for messing with Elasticsearch queries and interact with your data.
 
-![Sense Screenshot](images/sense-screenshot.png)  <!-- .element style="max-width: 400px;" -->
+![Dev Tools](images/devtools-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-### [Inquisitor](http://localhost:9400)
+### [Monitoring](http://localhost:5601/app/monitoring#/elasticsearch)
 
-A interactive debugging tool that shows how analyzers and tokenizers workshop
+A monitoring system to track the health and performance of your cluster over time.
 
-![Inquisitor Screenshot](images/inquisitor-screenshot.png)  <!-- .element style="max-width: 400px;" -->
+![Monitoring Screenshot](images/monitoring-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-### [Kopf](http://localhost:9200/_plugin/kopf)
+## [Cerebro](http://localhost:9000)
 
 A status and realtime control panel for Elasticsearch clusters.
 
-![Kopf Screenshot](images/kopf-screenshot.png)  <!-- .element style="max-width: 400px;" -->
+![Cerebro Screenshot](images/cerebro-screenshot.png)  <!-- .element style="max-width: 400px;" -->
 
-### [Marvel](http://localhost:5601/app/marvel)
-
-A monitoring system to track the health and performance of your cluster over time
-
-![Marvel Screenshot](images/marvel-screenshot.png)  <!-- .element style="max-width: 400px;" -->
-
-### [Slide Deck](http://localhost:9000)
+## [Slide Deck](http://localhost:9001)
 
 The slides that go along with the tutorial. If you'd like us to see us present this tutorial live, please contact `info@spantree.net`.
 

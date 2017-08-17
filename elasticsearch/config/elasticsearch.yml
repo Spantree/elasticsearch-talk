@@ -33,5 +33,5 @@ script:
         update: true
 xpack.security.authc:
   anonymous:
-    roles: superuser, kibana_user
+    roles: superuser
     authz_exception: false

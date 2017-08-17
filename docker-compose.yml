@@ -40,6 +40,8 @@ services:
       - "9500:80"
   cerebro:
     image: yannart/cerebro:0.6.6
+    volumes:
+      - "./cerebro/application.conf:/opt/cerebro/conf/application.conf"
     ports:
       - "9000:9000"
     depends_on:

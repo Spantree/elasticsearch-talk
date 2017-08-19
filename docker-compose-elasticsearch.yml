@@ -3,7 +3,8 @@ services:
   elasticsearch:
     build: elasticsearch
     volumes:
-      - "./elasticsearch/config:/usr/share/elasticsearch/config"
+      - "./elasticsearch/config/analysis:/usr/share/elasticsearch/config/analysis"
+      - "./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
     environment:
       ES_NODENAME: $HOSTNAME
     ulimits:

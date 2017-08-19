@@ -5,10 +5,10 @@
 ### Pagination
 
 * Most cases use `size` and `from`
-* [Simple Paging](sense://paging-and-sorting.sense#L4)
+* [Simple Paging](console://paging-and-sorting.sense#L4)
 
 * Option of using a cursor
-* [Paging with a Scroll ID](sense://paging-and-sorting.sense#L41)
+* [Paging with a Scroll ID](console://paging-and-sorting.sense#L41)
 
 ---
 
@@ -16,7 +16,7 @@
 
 * Sort most fields by ascending or descending
 
-[Basic Sorting](sense://paging-and-sorting.sense#L72)
+[Basic Sorting](console://paging-and-sorting.sense#L72)
 
 ---
 
@@ -25,4 +25,4 @@
 * Tokenizers affect sorting as well
 * Need to make sure you are sorting on the right field
 
-[Sorting String Fields](sense://paging-and-sorting.sense#L131)
+[Sorting String Fields](console://paging-and-sorting.sense#L131)

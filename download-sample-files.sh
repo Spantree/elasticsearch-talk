@@ -8,7 +8,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 GZ_URLS="\
   https://s3.amazonaws.com/elasticsearch-sample-data/enron_messages.jsonl.gz \
-  http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz \
+  http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz \
 "
 
 NORMAL_URLS="\

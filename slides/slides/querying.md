@@ -132,7 +132,7 @@ curl -XPOST "http://localhost:9200/wikipedia/_search" -d '{
 
 ### Search Demos
 
-[API Examples](sense://searching.sense)
+[API Examples](console://searching.sense)
 
 ---
 
@@ -256,4 +256,4 @@ $s = coord \times \sum_{t} (qn \times boost \times idf) \times (tf \times idf \t
 
 ### Filtering Demos
 
-[Filtering Examples](sense://searching.sense#L244)
+[Filtering Examples](console://searching.sense#L244)

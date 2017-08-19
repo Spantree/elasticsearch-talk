@@ -53,6 +53,8 @@ services:
     volumes:
       - "./logstash:/config-dir"
       - "./data:/usr/local/share/data"
+    environment:
+      XPACK_MONITORING_ELASTICSEARCH_URL: "http://elastic1:9200"
     command: ["logstash", "-f", "/config-dir/logstash.conf"]
     ports:
       - "3333:3333"

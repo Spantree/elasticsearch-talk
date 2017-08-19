@@ -63,6 +63,6 @@
 
 This tutorial is free and open source.
 
-http://github.com/Spantree/elasticsearch-talk
+http://github.com/Spantree/elasticsearch-talk/tree/v5.5
 
 We will jump out of the slide deck quite often.

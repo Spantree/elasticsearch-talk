@@ -13,7 +13,7 @@ curl -XPUT 'http://localhost:9200/wikipedia/location/1' -d '{
 }'
 ```
 
-[Basic Indexing](sense://indexing.sense)
+[Basic Indexing](console://indexing.sense)
 
 ---
 
@@ -21,7 +21,7 @@ curl -XPUT 'http://localhost:9200/wikipedia/location/1' -d '{
 
 Elasticsearch will guess the mappings for new fields it hasn't seen before
 
-[Automatic Mappings in Action](sense://indexing.sense#L15)
+[Automatic Mappings in Action](console://indexing.sense#L15)
 
 ---
 
@@ -29,7 +29,7 @@ Elasticsearch will guess the mappings for new fields it hasn't seen before
 
 You can also update a document via script or "upsert"
 
-[Update Examples](sense://indexing.sense#L31)
+[Update Examples](console://indexing.sense#L31)
 
 ---
 
@@ -37,7 +37,7 @@ You can also update a document via script or "upsert"
 
 You can also add/remove/update documents in bulk using the Bulk API. This is recommended for batch updates
 
-[Bulk API Examples](sense://indexing.sense#L66)
+[Bulk API Examples](console://indexing.sense#L66)
 
 ---
 

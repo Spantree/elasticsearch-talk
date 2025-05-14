@@ -61,7 +61,7 @@ GET /wikipedia/_search
       "query": "theater OR theatre"
     }
   },
-  "fields": ["name", "keywords"]
+  "_source": ["name", "keywords"]
 }
 
 # Search with Lucene boolean syntax. Find both the terms "theater" and
@@ -69,7 +69,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "keywords", "description"],
+  "_source": ["name", "keywords", "description"],
   "query": {
     "query_string": {
       "fields": ["name", "keywords", "description"],
@@ -82,7 +82,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "keywords", "description"],
+  "_source": ["name", "keywords", "description"],
   "query": {
     "bool": {
       "must": [
@@ -109,7 +109,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "keywords", "description"],
+  "_source": ["name", "keywords", "description"],
   "query": {
     "bool": {
       "must": [
@@ -133,7 +133,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "keywords", "description"],
+  "_source": ["name", "keywords", "description"],
   "query": {
     "bool": {
       "should": [
@@ -158,7 +158,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "description"],
+  "_source": ["name", "description"],
   "query": {
     "bool": {
       "must": [
@@ -181,7 +181,7 @@ GET /wikipedia/_search
 # Explain results. The explain endpoint will expose some of the math
 # behind filtering and scoring.
 #
-GET /wikipedia/locations/chicago_shakespeare_theater/_explain
+GET /wikipedia/_doc/chicago_shakespeare_theater/_explain
 {
     "query": {
         "query_string": {
@@ -199,7 +199,7 @@ GET /wikipedia/locations/chicago_shakespeare_theater/_explain
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "keywords", "about"],
+  "_source": ["name", "keywords", "about"],
   "query": {
     "query_string": {
       "fields": ["name^2", "keywords^1.5", "about"],
@@ -213,7 +213,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": [
+  "_source": [
       "name",
       "keywords",
       "about"
@@ -232,8 +232,9 @@ GET /wikipedia/_search
             }
         },
         "script_score": {
-          "script": "_score * 2",
-          "lang": "groovy"
+          "script": {
+            "source": "_score * 2"
+          }
         }
     }
   }
@@ -257,18 +258,26 @@ GET /wikipedia/_search
 
 # Filter on geo-distance.
 #
-GET /divvy/station/_search
+GET /divvy/_search
 {
   "query": {
-    "match_all": {}
-  },
-  "filter": {
-    "geo_distance" : {
-      "distance": "1mi",
-      "location" : {
-        "lat": 41.886732,
-        "lon": -87.655979
-      }
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "_index": "divvy"
+          }
+        },
+        {
+          "geo_distance": {
+            "distance": "1mi",
+            "location": {
+              "lat": 41.886732,
+              "lon": -87.655979
+            }
+          }
+        }
+      ]
     }
   }
 }

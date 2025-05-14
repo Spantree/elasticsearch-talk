@@ -6,7 +6,7 @@
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "coordinates"],
+  "_source": ["name", "coordinates"],
   "query": {
     "bool": {
       "must": [
@@ -26,7 +26,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "coordinates"],
+  "_source": ["name", "coordinates"],
   "query": {
     "bool": {
       "must": [
@@ -38,41 +38,71 @@ GET /wikipedia/_search
   "from": 10
 }
 
-# Start a scan query. For frequently-changing data sets, it is often
+# Start a point in time query. For frequently-changing data sets, it is often
 # difficult to keep search results consistent across pages. For
 # example, if a user is sorting results by freshness, a search result
 # once appeared in position 10 may be in position 11 by the time the
 # second page is requested. Elasticsearch has the ability to retain a
-# previously fetched result set via a "scan query".  This is similar
-# to a JDBC cursor.
+# previously fetched result set.
 #
-# Note: make sure to copy the scroll id from the result because we're
+# Note: make sure to copy the pit id from the result because we're
 # going to need it in the next step
 #
-GET /wikipedia/_search?search_type=scan&scroll=10m&size=10
+POST /wikipedia/_pit?keep_alive=10m
+
+# Now use the pit id in a search request
+#
+GET /_search
 {
-  "fields": ["name", "coordinates"],
+  "pit": {
+    "id": "YOUR_PIT_ID",
+    "keep_alive": "10m"
+  },
+  "_source": ["name", "coordinates"],
   "query": {
     "bool": {
       "must": [
         {"query_string": {"query": "chicago"}}
       ]
     }
-  }
+  },
+  "size": 10
 }
 
-## Continue our scan query. Use the field _scroll_id from the above
-## query in the following query. Note: you will have to manually
-## manipulate the query string with the scroll id from the last query.
+# Access the next page using search_after
 #
-GET /_search/scroll?scroll=10m&scroll_id={scroll_id}
+GET /_search
+{
+  "pit": {
+    "id": "YOUR_PIT_ID",
+    "keep_alive": "10m"
+  },
+  "_source": ["name", "coordinates"],
+  "query": {
+    "bool": {
+      "must": [
+        {"query_string": {"query": "chicago"}}
+      ]
+    }
+  },
+  "size": 10,
+  "search_after": [YOUR_SORT_VALUES],
+  "sort": [{"_score": "desc"}, {"_id": "asc"}]
+}
+
+# Clean up the PIT when done
+#
+DELETE /_pit
+{
+  "id": "YOUR_PIT_ID"
+}
 
 # Sort dates chronologically. Sorting documents matching "chicago" by
 # last update time.
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "lastUpdated"],
+  "_source": ["name", "lastUpdated"],
   "query": {
     "bool": {
       "must": [
@@ -88,7 +118,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "lastUpdated"],
+  "_source": ["name", "lastUpdated"],
   "query": {
     "bool": {
       "must": [{"query_string": {"query": "chicago"}}]
@@ -102,7 +132,7 @@ GET /wikipedia/_search
 #
 GET /wikipedia/_search
 {
-  "fields": ["name", "coordinates"],
+  "_source": ["name", "coordinates"],
   "query": {
     "bool": {
       "must": [
@@ -131,9 +161,9 @@ GET /wikipedia/_search
 # inverted index. Because our name field is tokenized, the first
 # alphabetical token in the field value determines a field's ranking.
 #
-GET /wikipedia/locations/_search
+GET /wikipedia/_search
 {
-  "fields": ["name"],
+  "_source": ["name"],
   "query": {
     "bool": {
       "must": [{
@@ -156,21 +186,25 @@ GET /wikipedia/_settings?name=*.sort*.*
 # Store the sortable string in a multi-field. For the name field, we
 # want to do both full-text search and string sorting. So to make sure
 # we can handle both, we configure name to be a multi-field.
-GET /wikipedia/locations/_mapping
+GET /wikipedia/_mapping
 
 # Testing the sortable analyzer. When creating new analyzers, we
 # recommend testing them out using the Analyze API to make sure they
 # work as expected.
 #
-GET /wikipedia/_analyze?field=name.sortable&text=I wanna know what love is; I want you to show me!
+GET /wikipedia/_analyze
+{
+  "field": "name.sortable",
+  "text": "I wanna know what love is; I want you to show me!"
+}
 
 # Sort Strings the Right Way. Now that we've done all that, we simply
 # swap out the sort field from the previous query to use
-# `name.sorted`.
+# `name.sortable`.
 
-GET /wikipedia/locations/_search
+GET /wikipedia/_search
 {
-  "fields": ["name"],
+  "_source": ["name"],
   "query": {
     "bool": {
       "must": [{

@@ -16,7 +16,6 @@ POST /wikipedia/_search
         "like" : [
         {
             "_index" : "wikipedia",
-            "_type" : "locations",
             "_id" : "northwestern_university_settlement_house"
         }
         ],
@@ -31,14 +30,13 @@ POST /wikipedia/_search
 # query.
 POST /wikipedia/_search
 {
-  "fields" : ["about"],
+  "_source" : ["about"],
   "query": {
     "more_like_this" : {
         "fields" : ["name", "about", "description"],
         "like" : [
         {
             "_index" : "wikipedia",
-            "_type" : "locations",
             "_id" : "northwestern_university_settlement_house"
         }
         ],

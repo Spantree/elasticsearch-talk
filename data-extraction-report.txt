@@ -1,0 +1,12 @@
+Data Extraction Report
+====================
+
+Successfully extracted:
+total 792864
+-rw-r--r--@ 1 rmdemp  staff   349M May 14 15:28 divvy.jsonl
+-rw-r--r--@ 1 rmdemp  staff    34M May 14 15:28 divvy.jsonl.gz
+-rw-r--r--@ 1 rmdemp  staff   145K May 14 15:29 wikipedia.jsonl
+-rw-r--r--@ 1 rmdemp  staff    38K May 14 15:29 wikipedia.jsonl.gz
+
+Freebase index status:
+The freebase index could not be loaded because it requires a synonyms file at /usr/share/elasticsearch/config/analysis/first_name.synonyms.txt which is missing in our container setup.

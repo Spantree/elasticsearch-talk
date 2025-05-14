@@ -4,12 +4,14 @@
 # Build a term suggester. These provide suggestions based on
 # Levenshtein (edit) distance.
 #
-POST /wikipedia/_suggest
+POST /wikipedia/_search
 {
-  "term_suggestion": {
-    "text": "buildng",
-    "term": {
-      "field": "description"
+  "suggest": {
+    "term_suggestion": {
+      "text": "buildng",
+      "term": {
+        "field": "description"
+      }
     }
   }
 }
@@ -18,30 +20,32 @@ POST /wikipedia/_suggest
 # suggesters to return entire corrected phrases based on a sequence
 # of words in the corpus (ngrams).
 #
-POST /wikipedia/_suggest
+POST /wikipedia/_search
 {
-  "text": "high risk buildng",
-  "simple_phrase": {
-    "phrase": {
-      "field": "description",
-      "gram_size": 2,
-      "real_word_error_likelihood": 0.95,
-      "confidence": 1,
-      "max_errors": 100,
-      "size": 1,
-      "analyzer": "standard",
-      "shard_size": 5,
-      "direct_generator": [
-        {
-          "field": "description",
-          "suggest_mode": "popular",
-          "max_edits": 2,
-          "min_word_len": 4,
-          "max_inspections": 5,
-          "min_doc_freq": 0,
-          "max_term_freq": 0
-        }
-      ]
+  "suggest": {
+    "simple_phrase": {
+      "text": "high risk buildng",
+      "phrase": {
+        "field": "description",
+        "gram_size": 2,
+        "real_word_error_likelihood": 0.95,
+        "confidence": 1,
+        "max_errors": 100,
+        "size": 1,
+        "analyzer": "standard",
+        "shard_size": 5,
+        "direct_generator": [
+          {
+            "field": "description",
+            "suggest_mode": "popular",
+            "max_edits": 2,
+            "min_word_len": 4,
+            "max_inspections": 5,
+            "min_doc_freq": 0,
+            "max_term_freq": 0
+          }
+        ]
+      }
     }
   }
 }
@@ -53,72 +57,72 @@ POST /wikipedia/_suggest
 # to assign weights and priorities to different options.
 #
 PUT /suggestions
-
-# Create completion suggestion mapping.
-#
-PUT /suggestions/suggestion/_mapping
 {
-  "suggestion" : {
-        "properties" : {
-            "name" : { "type" : "string" },
-            "suggest" : {
-              "type" : "completion",
-              "analyzer" : "simple",
-              "search_analyzer" : "simple",
-              "payloads" : true
-            }
-        }
+  "mappings": {
+    "properties": {
+      "name": { 
+        "type": "text" 
+      },
+      "suggest": {
+        "type": "completion",
+        "analyzer": "simple",
+        "search_analyzer": "simple",
+        "preserve_position_increments": true
+      }
     }
+  }
 }
 
 # Create a completion suggestion for Cedric
 #
-PUT /suggestions/suggestion/1
+PUT /suggestions/_doc/1
 {
-    "name" : "Cedric Hurst",
-    "suggest" : {
-        "input": [ "Cedster", "The Ced", "C-Man", "That guy from that one meetup", "Software Engineer" ],
-        "output": "Cedric",
-        "payload" : { "title" : "Principal" },
-        "weight" : 37
-    }
+  "name": "Cedric Hurst",
+  "suggest": {
+    "input": [ "Cedster", "The Ced", "C-Man", "That guy from that one meetup", "Software Engineer" ],
+    "weight": 37
+  },
+  "title": "Principal"
 }
 
 # Create a completion suggestion for Kevin.
 #
-PUT /suggestions/suggestion/2
+PUT /suggestions/_doc/2
 {
-    "name" : "Kevin Greene",
-    "suggest" : {
-        "input": [ "Kev", "KG", "Greene", "Michigan", "Software Engineer" ],
-        "output": "Kevin",
-        "payload" : { "title" : "Senior Software Engineer" },
-        "weight" : 101
-    }
+  "name": "Kevin Greene",
+  "suggest": {
+    "input": [ "Kev", "KG", "Greene", "Michigan", "Software Engineer" ],
+    "weight": 101
+  },
+  "title": "Senior Software Engineer"
 }
 
 # Get a completion suggestion.
 #
-POST /suggestions/_suggest
+POST /suggestions/_search
 {
-  "completion_suggestion": {
-    "text": "software",
-    "completion": {
-      "field": "suggest"
+  "suggest": {
+    "completion_suggestion": {
+      "prefix": "software",
+      "completion": {
+        "field": "suggest"
+      }
     }
   }
 }
 
 # Get a fuzzy completion suggestion.
 #
-POST /suggestions/_suggest
+POST /suggestions/_search
 {
-  "completion_suggestion": {
-    "text": "mchgan",
-    "completion": {
-      "field": "suggest",
-      "fuzzy" : {
-        "fuzziness" : 2
+  "suggest": {
+    "completion_suggestion": {
+      "prefix": "mchgan",
+      "completion": {
+        "field": "suggest",
+        "fuzzy": {
+          "fuzziness": 2
+        }
       }
     }
   }
@@ -130,85 +134,84 @@ POST /suggestions/_suggest
 # You may want to boost suggestions for people who work in your same
 # country or office. Context suggesters allow you to combine the two.
 #
-PUT /suggestions/conference/_mapping
+PUT /suggestions
 {
-    "conference": {
-        "properties": {
-            "name": {
-                "type": "string"
-            },
-            "suggestion": {
-                "type": "completion",
-                "context": {
-                    "location": {
-                        "type": "geo",
-                        "precision": "500km",
-                        "neighbors": true,
-                        "default": "u33"
-                    }
-                }
-            }
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "suggestion": {
+        "type": "completion",
+        "contexts": {
+          "location": {
+            "type": "geo",
+            "precision": "500km",
+            "neighbors": true
+          }
         }
+      }
     }
+  }
 }
 
 ## Create GOTO Chicago conference suggestion
 #
-PUT /suggestions/conference/goto_chicago
+PUT /suggestions/_doc/goto_chicago
 {
-    "name": "GOTO Chicago",
-    "suggestion": {
-        "input": [
-            "goto",
-            "chicago",
-            "tech conference"
-        ],
-        "output": "GOTO Chicago",
-        "context": {
-            "location": {
-                "lat": 41.8927539,
-                "lon": -87.6191727
-            }
-        }
+  "name": "GOTO Chicago",
+  "suggestion": {
+    "input": [
+      "goto",
+      "chicago",
+      "tech conference"
+    ],
+    "contexts": {
+      "location": {
+        "lat": 41.8927539,
+        "lon": -87.6191727
+      }
     }
+  }
 }
 
 # Create Strangeloop context suggestion
 #
-PUT /suggestions/conference/strangeloop
+PUT /suggestions/_doc/strangeloop
 {
-    "name": "Strangeloop Conference",
-    "suggestion": {
-        "input": [
-            "strange",
-            "loop",
-            "tech conference"
-        ],
-        "output": "Strangeloop Conference",
-        "context": {
-            "location": {
-                "lat": 38.6537065,
-                "lon": -90.2477908
-            }
-        }
+  "name": "Strangeloop Conference",
+  "suggestion": {
+    "input": [
+      "strange",
+      "loop",
+      "tech conference"
+    ],
+    "contexts": {
+      "location": {
+        "lat": 38.6537065,
+        "lon": -90.2477908
+      }
     }
+  }
 }
 
 # Suggest nearby nerdy things when in St Louis.
 #
-POST suggestions/_suggest
+POST suggestions/_search
 {
+  "suggest": {
     "context_suggestion": {
-        "text": "tech",
-        "completion": {
-            "field": "suggestion",
-            "size": 10,
-            "context": {
-                "location": {
-                    "lat": 39.626072,
-                    "lon": -90.0769822
-                }
-            }
+      "prefix": "tech",
+      "completion": {
+        "field": "suggestion",
+        "size": 10,
+        "contexts": {
+          "location": {
+            "lat": 39.626072,
+            "lon": -90.0769822
+          }
         }
+      }
     }
+  }
 }

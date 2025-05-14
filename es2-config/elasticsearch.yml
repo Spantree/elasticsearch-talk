@@ -1,0 +1,40 @@
+network:
+  host: 0.0.0.0
+node:
+  name: ${ES_NODENAME}
+index:
+  number_of_replicas: 0
+http:
+  max_content_length: 500mb
+bootstrap:
+  mlockall: true
+indices:
+  fielddata:
+    cache:
+      size: 25%
+discovery:
+  zen:
+    ping:
+      unicast:
+        hosts: ["localhost"]
+      multicast:
+        enabled: false
+    minimum_master_nodes: 1
+repositories:
+  url:
+    allowed_urls: ["https://elasticsearch-sample-data.s3.amazonaws.com/*"]
+script:
+  engine:
+    groovy:
+      inline:
+        aggs: true
+        mapping: true
+        search: true
+        update: true
+        plugin: true
+      indexed:
+        aggs: true
+        mapping: true
+        search: true
+        update: true
+        plugin: true 

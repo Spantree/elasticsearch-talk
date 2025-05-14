@@ -3,7 +3,7 @@
 
 # Index John Doe with an assigned ID.
 #
-POST /spantree/people/
+POST /spantree/_doc/
 {
   "name": "Johnny Noname"
 }
@@ -18,7 +18,7 @@ GET /spantree/_mapping
 
 # Index Cedric with a known ID.
 #
-PUT /spantree/people/cedric
+PUT /spantree/_doc/cedric
 {
   "name": "Cedric Hurst",
   "title": "Principal"
@@ -26,11 +26,11 @@ PUT /spantree/people/cedric
 
 # Make Sure Cedric is there.
 #
-GET /spantree/people/cedric
+GET /spantree/_doc/cedric
 
 # Add more information about Cedric.
 #
-POST /spantree/people/cedric/_update
+POST /spantree/_update/cedric
 {
   "doc": {
     "git_commits": 2560
@@ -39,15 +39,16 @@ POST /spantree/people/cedric/_update
 
 # Add one more git commit for Cedric.
 #
-POST /spantree/people/cedric/_update
+POST /spantree/_update/cedric
 {
-  "script": "ctx._source.git_commits += 1",
-  "lang": "groovy"
+  "script": {
+    "source": "ctx._source.git_commits += 1"
+  }
 }
 
 # Upsert Kevin.
 #
-POST /spantree/people/kevin/_update
+POST /spantree/_update/kevin
 {
   "doc": {
     "git_commits": 1912
@@ -61,14 +62,14 @@ POST /spantree/people/kevin/_update
 
 # Make sure Kevin is still there.
 #
-GET /spantree/people/kevin
+GET /spantree/_doc/kevin
 
 # Add everyone else.
 #
 POST /spantree/_bulk
-{"index":{"_id":"gary","_type": "people"}}
+{"index":{"_id":"gary"}}
 {"name":"Gary Turovsky","title":"Senior Software Engineer","git_commits":  611}
-{"index":{"_id":"jonathan","_type": "people"}}
+{"index":{"_id":"jonathan"}}
 {"name":"Jonathan Freeman","title":"Software Engineer","git_commits": 186}
 
 # Review the whole list.

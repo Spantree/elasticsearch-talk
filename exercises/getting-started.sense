@@ -7,12 +7,12 @@
 GET /
 
 # Index a single document. Now, we will insert a single document
-# into Elasticsearch. Note that we don't need to create an index or
-# type, it gets created automatically if it doesn't already exist.
+# into Elasticsearch. Note that we don't need to create an index
+# as it gets created automatically if it doesn't already exist.
 # Elasticsearch will also try to guess the types for document fields
 # based on the initial JSON payload.
 #
-PUT /getting-started/locations/frontera_grill
+PUT /getting-started/_doc/frontera_grill
 {
     "name": "Frontera Grill",
     "url": "http://en.wikipedia.org/wiki/Frontera_Grill",
@@ -27,7 +27,7 @@ PUT /getting-started/locations/frontera_grill
 # Fetch our document. You can retrieve a single document by its ID
 # with a simple HTTP GET request.
 #
-GET /getting-started/locations/frontera_grill
+GET /getting-started/_doc/frontera_grill
 
 # Finding all documents. We can also execute a request to get all
 # documents in this index.  At this point, there should only be one.
@@ -35,6 +35,6 @@ GET /getting-started/locations/frontera_grill
 GET /getting-started/_search
 
 # Review the mappings. We can also peek at the mappings Elasticsearch
-# automatically generated for the location document type.
+# automatically generated for the index.
 #
-GET /getting-started/locations/_mapping
+GET /getting-started/_mapping

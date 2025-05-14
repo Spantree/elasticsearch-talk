@@ -3,7 +3,7 @@
 
 # Add a sample document.
 #
-PUT /spantree/team/cedric
+PUT /spantree/_doc/cedric
 {
   "drinks": ["Red Bull"]
 }
@@ -18,73 +18,101 @@ PUT /spantree/team/cedric
 # process at Spantree, where we'd like to be notified if they modify
 # our scheduled amazon orders for various teas.
 #
-# First, we will register a percolator for people who like to drink
-# earl grey.
+# First, we'll create a percolator mapping
 #
-PUT /spantree/.percolator/earl_grey
+PUT /percolate_queries
 {
-	"query" : {
-		"match" : {
-			"drinks": "earl grey"
-		}
-	}
+  "mappings": {
+    "properties": {
+      "query": {
+        "type": "percolator"
+      },
+      "drinks": {
+        "type": "keyword"
+      }
+    }
+  }
+}
+
+# Register a percolator for people who like to drink earl grey.
+#
+PUT /percolate_queries/_doc/earl_grey
+{
+  "query": {
+    "match": {
+      "drinks": "earl grey"
+    }
+  }
 }
 
 # Add Percolator for Russian Caravan.
 #
-PUT /spantree/.percolator/russian_caravan
+PUT /percolate_queries/_doc/russian_caravan
 {
-	"query" : {
-		"match" : {
-			"drinks": "russian caravan"
-		}
-	}
+  "query": {
+    "match": {
+      "drinks": "russian caravan"
+    }
+  }
 }
 
 # Onboard Justin with his drink preferences.
 #
-#
-GET /spantree/people/_percolate
+GET /percolate_queries/_search
 {
-	"doc" : {
-		"name": "Justin",
-		"drinks": [
-		  "Triple Espresso",
-		  "Green Tea with Brown Rice",
-		  "Coconut Water"
-		]
-	}
+  "query": {
+    "percolate": {
+      "field": "query",
+      "document": {
+        "name": "Justin",
+        "drinks": [
+          "Triple Espresso",
+          "Green Tea with Brown Rice",
+          "Coconut Water"
+        ]
+      }
+    }
+  }
 }
 
 # Onboard Kevin with his drink preferences.
 #
-GET /spantree/people/_percolate
+GET /percolate_queries/_search
 {
-	"doc" : {
-		"name": "Kevin",
-		"drinks": [
-		  "Sodastream Energy",
-		  "Dark Magic Coffee",
-		  "Earl Grey Tea"
-		]
-	}
+  "query": {
+    "percolate": {
+      "field": "query",
+      "document": {
+        "name": "Kevin",
+        "drinks": [
+          "Sodastream Energy",
+          "Dark Magic Coffee",
+          "Earl Grey Tea"
+        ]
+      }
+    }
+  }
 }
 
 # Review the earl grey percolator.
 #
-GET /spantree/.percolator/earl_grey
+GET /percolate_queries/_doc/earl_grey
 
 # Onboard Marija with her drink preferences.
 #
-#
-GET /spantree/people/_percolate
+GET /percolate_queries/_search
 {
-	"doc": {
-		"name": "Marija",
-		"drinks": [
-		  "Earl Grey Tea",
-		  "Russian Caravan Tea",
-		  "Assam Tea"
-		]
-	}
+  "query": {
+    "percolate": {
+      "field": "query",
+      "document": {
+        "name": "Marija",
+        "drinks": [
+          "Earl Grey Tea",
+          "Russian Caravan Tea",
+          "Assam Tea"
+        ]
+      }
+    }
+  }
 }

@@ -3,16 +3,35 @@
 
 # Query Divvy trips.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
+{
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  }
+}
 
 # Query Divvy stations
 #
-GET /divvy/station/_search
+GET /divvy/_search
+{
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  }
+}
 
 # Get terms aggregation for gender of rider.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "genders": {
       "terms": {
@@ -25,8 +44,13 @@ GET /divvy/trip/_search
 
 # Get statistics for trip duration.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "trip_duration_stats": {
       "stats": {
@@ -39,8 +63,13 @@ GET /divvy/trip/_search
 
 # Get extended statistics for trip duration.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "trip_duration_stats": {
       "extended_stats": {
@@ -53,8 +82,13 @@ GET /divvy/trip/_search
 
 # Get trip duration percentiles.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "trip_length": {
       "percentiles": {
@@ -72,10 +106,12 @@ GET /divvy/trip/_search
 
 # Get trip duration stats by gender.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
   "query": {
-    "match_all": {}
+    "term": {
+      "_index": "divvy"
+    }
   },
   "aggs": {
     "gender": {
@@ -97,8 +133,13 @@ GET /divvy/trip/_search
 
 # Aggregate based on distance to Spantree's office.
 #
-GET /divvy/station/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "spantree_dist": {
       "geo_distance": {
@@ -140,8 +181,13 @@ GET /divvy/station/_search
 
 # Get trip duration histogram.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "trip_length": {
       "histogram": {
@@ -156,13 +202,18 @@ GET /divvy/trip/_search
 
 # Get bike trips over time. We can also create histograms by date.
 #
-GET /divvy/trip/_search
+GET /divvy/_search
 {
+  "query": {
+    "term": {
+      "_index": "divvy"
+    }
+  },
   "aggs": {
     "trips_over_time": {
       "date_histogram": {
         "field": "start_time",
-        "interval": "week"
+        "fixed_interval": "week"
       }
     }
   },
@@ -171,8 +222,13 @@ GET /divvy/trip/_search
 
 # Get oldest two movies by genre.
 #
-GET /freebase/film/_search
+GET /freebase/_search
 {
+  "query": {
+    "term": {
+      "_index": "freebase"
+    }
+  },
   "aggs": {
     "top_genres": {
       "terms": {
@@ -190,7 +246,7 @@ GET /freebase/film/_search
               }
             ],
             "_source": {
-              "include": [
+              "includes": [
                 "name",
                 "initial_release_date"
               ]
@@ -206,8 +262,13 @@ GET /freebase/film/_search
 
 # Get top 3 directors by genre
 #
-GET /freebase/film/_search
+GET /freebase/_search
 {
+  "query": {
+    "term": {
+      "_index": "freebase"
+    }
+  },
   "aggs": {
     "top_genres": {
       "terms": {
@@ -217,7 +278,7 @@ GET /freebase/film/_search
       "aggs": {
         "top_directors": {
           "terms": {
-            "field": "directed_by.raw",
+            "field": "directed_by.keyword",
             "size": 3
           }
         }
